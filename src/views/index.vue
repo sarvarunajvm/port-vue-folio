@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <core-navigation />
     <core-drawer />
     <core-view />
   </v-app>
@@ -10,6 +11,7 @@ export default {
 
   components: {
     CoreDrawer: () => import("./components/core/Drawer"),
+    CoreNavigation:()=>import("./components/core/NavBar"),
     CoreView: () => import("./components/core/View"),
   },
 

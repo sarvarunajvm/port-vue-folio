@@ -41,6 +41,7 @@ const options = {
       //   customProperties: undefined,
       //   minifyTheme: undefined,
       //   themeCache: undefined,
+      customProperties: true,
     },
     // themes: {
     //   light: {
