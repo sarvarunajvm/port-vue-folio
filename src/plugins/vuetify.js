@@ -26,7 +26,7 @@ const options = {
     },
   },
   icons: {
-    iconfont: "md",
+    iconfont: "mdi",
   },
   lang: {
     t: (key, ...params) => VueI18n.t(key, params),
