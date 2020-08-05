@@ -1,22 +1,18 @@
 <template>
   <div v-if="showNav">
-    <v-app-bar
-      color="primary"
-      absolute
-      dense
-      app
-      bottom
-      elevation="12"
-      elevate-on-scroll
-      scroll-target="#scrolling-techniques-7"
-      floating
-      fixed
-    >
+    <v-bottom-navigation
+    fixed
+    background-color="primary"
+    color="secondary"
+    hide-on-scroll
+    light
+    app
+  >
+    <v-btn @click="openDrawer" class="mx-2" fab dark small>
+      <v-icon>mdi-menu-up-outline</v-icon>
+    </v-btn>
 
-          <v-btn @click="openDrawer" icon color="secondary">
-            <v-icon>mdi-menu-up-outline</v-icon>
-          </v-btn>
-    </v-app-bar>
+  </v-bottom-navigation>
   </div>
 </template>
 <script>

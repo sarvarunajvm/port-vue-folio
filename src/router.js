@@ -5,10 +5,11 @@ Vue.use(Router)
 
 export default new Router({
   //mode: 'hash',
+  mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/home',
       component: () => import('@/views/index.vue'),
       children: [
         // Home
@@ -29,7 +30,18 @@ export default new Router({
           path: '/experience',
           component: () => import('@/views/pages/About.vue'),
         },
+        //Skills
+        {
+          name: 'Skills',
+          path: '/skills',
+          component: () => import('@/views/pages/Skills.vue'),
+        },
       ],
+    },
+    {
+      name: 'UnderConstruction',
+      path: '/',
+      component: () => import('@/views/404.vue'),
     },
   ],
 })

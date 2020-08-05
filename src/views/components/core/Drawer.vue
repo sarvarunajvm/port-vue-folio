@@ -5,7 +5,6 @@
       v-model="drawer"
       :mini-variant.sync="mini"
       mini-variant-width="64"
-      :expand-on-hover="expandOnHover"
       mobile-breakpoint="600"
       app
       bottom
@@ -62,7 +61,6 @@ export default {
     return {
       drawer: true,
       mini: false,
-      expandOnHover: false,
       model: null,
       items: [
         { title: "About Me", icon: "mdi-account-tie-outline", link: "about" },
@@ -92,14 +90,11 @@ export default {
       console.log(this.$vuetify);
       if (this.$vuetify.breakpoint.name === "sm") {
         this.mini = true;
-        this.expandOnHover = true;
       } else if (this.$vuetify.breakpoint.name === "xs") {
         this.mini = false;
-        this.expandOnHover = false;
         bus.$emit("nav", true);
       } else {
         this.mini = false;
-        this.expandOnHover = false;
         bus.$emit("nav", false);
       }
     },

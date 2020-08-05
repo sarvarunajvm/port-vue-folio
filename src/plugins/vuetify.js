@@ -1,5 +1,5 @@
 import Vue from "vue";
-import Vuetify from "vuetify/lib";
+import Vuetify from 'vuetify/lib/framework'
 import "material-design-icons-iconfont/dist/material-design-icons.css"; // Ensure you are using css-loader
 import VueI18n from "vue-i18n";
 import { preset } from 'vue-cli-plugin-vuetify-preset-reply/preset'
