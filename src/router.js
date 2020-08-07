@@ -7,8 +7,7 @@ export default new Router({
   //mode: 'hash',
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [
-    {
+  routes: [{
       path: '/home',
       component: () => import('@/views/index.vue'),
       children: [
@@ -35,6 +34,12 @@ export default new Router({
           name: 'Skills',
           path: '/skills',
           component: () => import('@/views/pages/Skills.vue'),
+        },
+        //Contact
+        {
+          name: 'Contact',
+          path: '/contact',
+          component: () => import('@/views/pages/Contact.vue'),
         },
       ],
     },

@@ -1,4 +1,5 @@
 <template>
+<v-container id="home" tag="section" fluid class="fill-height">
     <v-row>
         <v-col>
             
@@ -7,6 +8,7 @@
             </v-img>
         </v-col>
     </v-row>
+    </v-container>
 </template>
 <script>
 export default {

@@ -13,25 +13,29 @@
       color="primary"
     >
       <v-list color="secondary">
-        <v-list-item class="px-2">
+        <v-list-item class="justify-center">
           <v-list-item-avatar>
             <v-img
               src="https://avatars.dicebear.com/api/avataaars/Saravana.svg?top[]=hat&facialHair[]=fancy&facialHairColor[]=blonde&clothes[]=hoodie&clothesColor[]=red&clothesColor[]=white&eyes[]=happy&eyebrow[]=raised&mouth[]=tongue&skin[]=light"
             ></v-img>
           </v-list-item-avatar>
         </v-list-item>
+      </v-list>
 
-        <v-list-item class="d-none d-xs-block d-sm-none d-md-flex d-lg-block">
+      <v-list color="secondary">
+        <v-list-item class="d-none d-xs-block d-sm-none d-md-flex d-lg-block justify-center">
           <v-list-item-content>
-            <v-list-item-title class="title">Saravanan Kalimuthu</v-list-item-title>
+            <v-list-item-title class="font-weight-bold text-h6">Saravanan Kalimuthu</v-list-item-title>
             <v-list-item-subtitle>Full Stack Developer</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
       </v-list>
 
+      
+
       <v-divider></v-divider>
 
-      <v-list dense rounded>
+      <v-list dense>
         <v-list-item-group light v-model="model" active-class="border">
           <v-list-item
             v-for="(item, i) in items"
