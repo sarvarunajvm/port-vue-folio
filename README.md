@@ -1,5 +1,9 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/16836a63-e089-4efe-9e56-7c330fdeb594/deploy-status)](https://app.netlify.com/sites/saravarunajvm/deploys)
 
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
 # vue-portfolio
 
 ## Project setup

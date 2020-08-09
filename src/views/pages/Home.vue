@@ -2,68 +2,30 @@
   <v-container id="home" tag="section" fluid class="fill-height">
     <v-row class="fill-height" align="center" justify="center" align-content="center">
       <v-col align-self="center">
-        <!-- //Normal screen -->
-        <v-img contain src="../../assets/first.jpg">
-          <v-row
-            class="fill-height d-none d-sm-flex"
-            align="end"
-            justify="end"
-            align-content="center"
-          >
-            <v-col cols="8" align-self="center">
+        <v-row class="pa-5 mt-12" no-gutters align="center" justify="center" align-content="center">
+          <v-col v-for="(snip,index) in snips" cols="12" sm="6" md="3" lg="3" xl="3" :key="index">
+            <div
+              class="d-block d-flex-column justify-center align-center align-self-center text-center"
+            >
               <div>
-                <v-row align="center" justify="center" align-content="center">
-                  <v-col cols="9">
-                    <div class="d-flex flex-column pt-2 border-radius">
-                      <p
-                        class="font-weight-bold text-left text--primary text-lg-h1 text-md-h1"
-                      >OOP'S</p>
-                    </div>
-                  </v-col>
-                </v-row>
-                <v-row align="center" justify="center" align-content="center">
-                  <v-col cols="9">
-                    <p
-                      class="text--primary text-left text-lg-h6 text-md-h6 text-sm-body-2"
-                    >
-                      Yup that's right am the person who fix the problem that you don't know you have,
-                      in a way you don't understand .
-                    </p>
-                  </v-col>
-                </v-row>
+                <v-icon color="primary" size="120">{{snip.icon}}</v-icon>
               </div>
-            </v-col>
-          </v-row>
-        </v-img>
-        <!-- mobile Only -->
-        <v-row
-          class="d-flex d-sm-none"
-          align="end"
-          justify="end"
-          align-content="center"
-        >
-          <v-col cols="12" align-self="center">
-            <v-card color="secondary">
-              <v-row align="center" justify="center" align-content="center">
-                <v-col cols="9">
-                  <div class="d-flex flex-column pt-2 border-radius">
-                    <p
-                      class="font-weight-bold text-left text--primary text-h1"
-                    >OOP'S</p>
-                  </div>
-                </v-col>
-              </v-row>
-              <v-row align="center" justify="center" align-content="center">
-                <v-col cols="9">
-                  <p
-                    class="text--primary text-left text-h6"
-                  >
-                    Yup that's right am the person who fix the problem that you don't know you have,
-                    in a way you don't understand .
-                  </p>
-                </v-col>
-              </v-row>
-            </v-card>
+              <div>
+                <p class="text-decoration-overline font-weight-medium">{{snip.message}}</p>
+              </div>
+            </div>
+          </v-col>
+        </v-row>
+        <v-row class="pa-5 mt-12"  no-gutters align="center" justify="center" align-content="center">
+          <v-col cols="12" sm="6" md="6" lg="6" xl="6" class="pa-2">
+            <p class="text-h3">
+              👋 I’m Saravanan, nice to meet you. Please take a look around!
+            </p>
+          </v-col>
+          <v-col cols="12" sm="6" md="6" lg="6" xl="6">
+            <p>
+              I am passionate about building excellent software that improves the lives of those around me. I specialize in creating software for clients ranging from individuals and small-businesses all the way to large enterprise corporations. What would you do if you had a software expert available at your fingertips?
+            </p>
           </v-col>
         </v-row>
       </v-col>
@@ -73,7 +35,12 @@
 <script>
 export default {
   data: () => ({
-    showNav: false,
+    snips: [
+      { message: "World Class Apps", icon: "mdi-diamond-stone" },
+      { message: "Tailored To Needs", icon: "mdi-format-paint" },
+      { message: "Pixel-Perfect Code", icon: "mdi-ruler-square" },
+      { message: "Built With Love", icon: "mdi-heart-outline" },
+    ],
   }),
 };
 </script>
