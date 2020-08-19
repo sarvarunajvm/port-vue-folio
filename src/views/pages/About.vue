@@ -56,8 +56,19 @@
           </v-col>
         </v-row>
         <!-- Planner -->
-        <v-row class="mt-12" no-gutters align="center" justify="center" align-content="center">
-          <v-col align-self="center" v-for="(snip,index) in snips" cols="12" xl="4" lg="4" md="4" :key="index">
+        <v-row align="center" justify="center" align-content="center" no-gutters>
+          <p class="text--primary text-h3 my-5 py-5 px-3">The Way I🚶‍♂️</p>
+        </v-row>
+        <v-row class="mt-6" no-gutters align="center" justify="center" align-content="center">
+          <v-col
+            align-self="center"
+            v-for="(snip,index) in snips"
+            cols="12"
+            xl="4"
+            lg="4"
+            md="4"
+            :key="index"
+          >
             <v-card tile hover ripple>
               <v-container>
                 <v-row no-gutters align="center" justify="center" align-content="center">
