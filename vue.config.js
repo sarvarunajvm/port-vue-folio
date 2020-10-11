@@ -45,23 +45,23 @@ module.exports = {
     disableHostCheck: true
   },
   // The configuration is higher than that of css loader in chainWebpack
-  css: {
-    // Whether to enable foo.module.css
-    modules: false,
-    // Whether to use the css separation plug-in ExtractTextPlugin and load it in a separate style file instead of using the <style> Method inline to html In file
-    extract: true,
-    // Whether to build style map or not, false will improve the construction speed
-    sourceMap: false,
-    // css preset configuration item
-    // loaderOptions: {
-    //   css: {
-    //     // options here will be passed to css-loader
-    //   },
-    //   postcss: {
-    //     // options here will be passed to postcss-loader
-    //   }
-    // }
-  },
+  // css: {
+  //   // Whether to enable foo.module.css
+  //   requireModuleExtension: false,
+  //   // Whether to use the css separation plug-in ExtractTextPlugin and load it in a separate style file instead of using the <style> Method inline to html In file
+  //   extract: true,
+  //   // Whether to build style map or not, false will improve the construction speed
+  //   sourceMap: false,
+  //   // css preset configuration item
+  //   // loaderOptions: {
+  //   //   css: {
+  //   //     // options here will be passed to css-loader
+  //   //   },
+  //   //   postcss: {
+  //   //     // options here will be passed to postcss-loader
+  //   //   }
+  //   // }
+  // },
   // Enable multiprocess processing babel compilation at build time
   parallel: require('os').cpus().length > 1
   // pluginOption: {

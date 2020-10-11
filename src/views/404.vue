@@ -8,9 +8,10 @@
               <v-col cols="10">
                 <div>
                   <p class="text-h3 text-center my-0 py-0">Comming Soon...</p>
-                  <p
-                    class="text-overline text-center my-0 py-0"
-                  >Website is currently undergoing development.Should be up shortly.</p>
+                  <p class="text-overline text-center my-0 py-0">
+                    Website is currently undergoing development.Should be up
+                    shortly.
+                  </p>
                 </div>
               </v-col>
             </v-row>
@@ -35,13 +36,7 @@
             </v-row>
           </v-col>
         </v-row>
-        <v-dialog
-          content-class="custom-class"
-          persistent
-          v-model="dialog"
-          max-width="50vw"
-          width="300"
-        >
+        <v-dialog persistent v-model="dialog" max-width="50vw" width="300">
           <v-card tile hover height="300" width="300" max-height="90vh" max-width="50vw">
             <waiter />
           </v-card>
@@ -69,10 +64,4 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-@import "../scss/variables.scss";
-
-.custom-class {
-  border-radius: $border-radius-root;
-}
-</style>
+<style lang="scss" scoped></style>
