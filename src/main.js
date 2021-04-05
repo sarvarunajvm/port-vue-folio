@@ -1,16 +1,17 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VuePageTransition from 'vue-page-transition'
-import VueAnimated from '@codekraft-studio/vue-animated'
 import vuetify from './plugins/vuetify';
 import router from './router';
+import VueTyperPlugin from 'vue-typer'
+
 
 
 Vue.config.productionTip = false
 
 export const bus = new Vue();
 Vue.use(VuePageTransition)
-Vue.use(VueAnimated)
+Vue.use(VueTyperPlugin)
 
 new Vue({
   router,

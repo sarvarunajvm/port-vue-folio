@@ -1,6 +1,7 @@
 <template>
   <v-card class="mx-auto">
     <v-navigation-drawer
+      color="accent" 
       id="navigation-drawer"
       v-model="drawer"
       :mini-variant.sync="mini"
@@ -8,52 +9,53 @@
       mobile-breakpoint="600"
       app
       bottom
-      right
       light
-      color="primary"
     >
-      <v-list color="secondary">
-        <v-list-item class="justify-center">
-          <v-list-item-avatar>
-            <v-img
-              src="https://avatars.dicebear.com/api/avataaars/Saravana.svg?top[]=hat&facialHair[]=fancy&facialHairColor[]=blonde&clothes[]=hoodie&clothesColor[]=red&clothesColor[]=white&eyes[]=happy&eyebrow[]=raised&mouth[]=tongue&skin[]=light"
-            ></v-img>
-          </v-list-item-avatar>
-        </v-list-item>
-      </v-list>
-
-      <v-list color="secondary">
-        <v-list-item class="d-none d-xs-block d-sm-none d-md-flex d-lg-block justify-center">
-          <v-list-item-content>
-            <v-list-item-title class="font-weight-bold text-h6">Saravanan Kalimuthu</v-list-item-title>
-            <v-list-item-subtitle>Full Stack Developer</v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-
-      
-
-      <v-divider></v-divider>
-
-      <v-list dense>
-        <v-list-item-group light v-model="model" active-class="border">
-          <v-list-item
-            v-for="(item, i) in items"
-            :key="i"
-            :to="item.link"
-            exact
-            exact-active-class="border"
-          >
-            <v-list-item-icon>
+      <v-spacer> </v-spacer>
+      <v-row class="mt-12" justify="center">
+        <v-avatar size="164">
+          <v-img
+            src="https://avatars.dicebear.com/api/avataaars/Saravana.svg?top[]=hat&facialHair[]=fancy&facialHairColor[]=blonde&clothes[]=hoodie&clothesColor[]=red&clothesColor[]=white&eyes[]=happy&eyebrow[]=raised&mouth[]=tongue&skin[]=light"
+          ></v-img>
+        </v-avatar>
+      </v-row>
+      <v-row justify="center">
+        <v-list rounded>
+          <v-list-item-group light v-model="selected" active-class="border">
+            <v-list-item
+              v-for="(item, i) in items"
+              :key="i"
+              :to="item.link"
+              exact
+              exact-active-class="border"
+            >
+            <v-list-item-icon v-if="mini">
               <v-icon v-text="item.icon"></v-icon>
             </v-list-item-icon>
+              <v-list-item-content v-else>
+                <v-list-item-title v-text="item.title"></v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </v-row>
 
-            <v-list-item-content>
-              <v-list-item-title v-text="item.title"></v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
+      <template v-slot:append>
+        <v-row justify="center">
+          <v-icon
+          class="pa-5"
+            color="primary"
+            x-large
+            @click="$vuetify.theme.dark = !$vuetify.theme.dark"
+          >
+            {{
+              $vuetify.theme.dark
+                ? "mdi-weather-sunny-off"
+                : "mdi-weather-sunny"
+            }}
+          </v-icon>
+        </v-row>
+      </template>
     </v-navigation-drawer>
   </v-card>
 </template>
@@ -63,21 +65,21 @@ import { bus } from "../../../main";
 export default {
   data() {
     return {
+      selected:0,
       drawer: true,
       mini: false,
-      model: null,
       items: [
-        { title: "About Me", icon: "mdi-account-tie-outline", link: "about" },
+        { title: "About Me", icon: "mdi-account-tie-outline", link: "home" },
         { title: "Experience", icon: "mdi-chart-line", link: "experience" },
         { title: "Projects", icon: "mdi-view-list-outline", link: "projects" },
         { title: "Skills", icon: "mdi-chart-bar", link: "skills" },
         { title: "Education", icon: "mdi-school-outline", link: "education" },
-        { title: "Contact", icon: "mdi-contacts-outline", link: "contact" },
         { title: "Resume", icon: "mdi-clipboard-text-outline", link: "resume" },
       ],
       right: null,
     };
   },
+
   beforeDestroy() {
     if (typeof window !== "undefined") {
       window.removeEventListener("resize", this.onResize, { passive: true });
@@ -114,7 +116,5 @@ export default {
 .border {
   color: var(--v-primary-base);
   background-color: var(--v-secondary-base);
-  /* color: black;
-  background-color: coral; */
 }
 </style>

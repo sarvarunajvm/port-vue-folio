@@ -2,14 +2,14 @@
   <div v-if="showNav">
     <v-bottom-navigation
     fixed
-    background-color="primary"
-    color="secondary"
+    background-color="secondary"
+    color="primary"
     hide-on-scroll
     light
     app
   >
-    <v-btn @click="openDrawer" class="mx-2" fab dark small>
-      <v-icon>mdi-menu-up-outline</v-icon>
+    <v-btn @click="openDrawer" class="mx-2" fab small>
+      <v-icon color="primary">mdi-menu-up-outline</v-icon>
     </v-btn>
 
   </v-bottom-navigation>

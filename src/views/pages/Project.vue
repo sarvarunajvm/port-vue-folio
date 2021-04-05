@@ -3,7 +3,7 @@
     <v-row class="fill-height" align="center" justify="center" align-content="center">
       <v-col cols="12" align-self="center">
         <v-row align="center" justify="center" align-content="center" no-gutters>
-          <p class="text--primary text-h2 my-0 py-1 px-3">Lets See Some Of My 👨‍💻</p>
+          <p class="text--primary text-h2 my-0 py-1 px-3">Lets See Some Of My 🔨</p>
         </v-row>
         <v-row v-for="(snip,index) in snips" align="center" justify="center" align-content="center" no-gutters :key="index">
           <v-card outlined width="80vw" max-width="80vw" max-height="30vh" class="mx-auto my-10">

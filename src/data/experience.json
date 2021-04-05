@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "designation": "Software Engineer",
+    "company": "AssetPulse, LLC",
+    "period": "October 2019 - Present",
+    "points": [
+      {
+        "id": 1,
+        "value": "->Hands-on experience in Spring-Web, Spring-JPA, Rest-Api's, WebSockets, Gradle, NPM."
+      },
+      {
+        "id": 2,
+        "value": " -> Involved in re-architecture of the existing product."
+      },
+      {
+        "id": 3,
+        "value": "-> Integrating and implementing third-party libraries such as VlcJ, Lombok, JEasy."
+      },
+      {
+        "id": 4,
+        "value": " -> Wrote Junit efficiently can cover up to 96% of the lines."
+      },
+      {
+        "id": 5,
+        "value": "-> Doing peer-level code review to reduce the code redundancy and improve performance."
+      },
+      {
+        "id": 6,
+        "value": "-> Having a deep understanding and the importance of code quality,<br/> continuously using the SonarQube to reduce cognitive complexity and code smell."
+      },
+      {
+        "id": 7,
+        "value": "-> Solved many challenging problems and added intuitive and smart features."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "designation": "Software Developer",
+    "company": "Wellspring Software Labs",
+    "period": "Feb 2018 - Sep 2019",
+    "points": [
+      {
+        "id": 1,
+        "value": "-> Proficiently implemented Design patterns, data structures, and algorithms."
+      },
+      {
+        "id": 2,
+        "value": "-> Developed many features using only core java and service locator design pattern."
+      },
+      {
+        "id": 3,
+        "value": "-> Involved in design and development for validating/save master data."
+      },
+      {
+        "id": 4,
+        "value": " -> Involved in process improvements."
+      },
+      {
+        "id": 5,
+        "value": "-> Involved in writing tests to log metrics for performance improvements."
+      },
+      {
+        "id": 6,
+        "value": "-> Worte and delivered code on time with 92% of efficiency."
+      },
+      {
+        "id": 7,
+        "value": "-> Worked in China(Shenzhen) for 2 months and provided deployment support."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "designation": "Software Engineer",
+    "company": "CoreNett Limited",
+    "period": "Jun 2016 - Dec 2017",
+    "points": [
+      {
+        "id": 1,
+        "value": "-> Involved in the design and implementation using  Java, <br/> J2EE 1.4[Servlets, JSP, EJB, DAO, Action] JavaScript1.2, HTML, CSS."
+      },
+      {
+        "id": 2,
+        "value": "-> Implement the change requests, along with the application development."
+      },
+      {
+        "id": 3,
+        "value": "-> Individually worked on Operations Module. It’s used for ASM, TSO, <br/> Distributor, Retailer, Transaction, and Registration."
+      },
+      {
+        "id": 4,
+        "value": " -> Also individually worked on the Reports and Map module too. <br/> It Contains reports on every master programs."
+      },
+      {
+        "id": 5,
+        "value": "-> Involved in Unit testing."
+      }
+    ]
+  }
+]
