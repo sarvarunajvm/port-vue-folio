@@ -5,31 +5,38 @@
     "points": [
       {
         "id": 1,
-        "value": "mdi-language-java"
+        "value": "mdi-language-java",
+        "name":"Java"
       },
       {
         "id": 2,
-        "value": "mdi-language-javascript"
+        "value": "mdi-language-javascript",
+        "name":"JavaScript"
       },
       {
         "id": 3,
-        "value": "mdi-code-json"
+        "value": "mdi-code-json",
+        "name":"JSON"
       },
       {
         "id": 4,
-        "value": "mdi-xml"
+        "value": "mdi-xml",
+        "name":"XML"
       },
       {
         "id": 5,
-        "value": "mdi-language-python"
+        "value": "mdi-language-python",
+        "name":"Python"
       },
       {
         "id": 6,
-        "value": "mdi-language-html5"
+        "value": "mdi-language-html5",
+        "name":"HTML5"
       },
       {
         "id": 7,
-        "value": "mdi-language-css3"
+        "value": "mdi-language-css3",
+        "name":"CSS"
       }
     ]
   },
@@ -39,27 +46,34 @@
     "points": [
       {
         "id": 1,
-        "value": "mdi-leaf"
+        "value": "mdi-leaf",
+        "name":"Spring"
       },
       {
         "id": 2,
-        "value": "mdi-database"
+        "value": "mdi-database",
+        "name":"JPA"
       },
       {
         "id": 3,
-        "value": "mdi-vuejs"
+        "value": "mdi-vuejs",
+        "name":"Vue"
+      
       },
       {
         "id": 4,
-        "value": "mdi-vuetify"
+        "value": "mdi-vuetify",
+        "name":"Vuetify"
       },
       {
         "id": 5,
-        "value": "mdi-numeric-5-circle"
+        "value": "mdi-numeric-5-circle",
+        "name":"Junit5"
       },
       {
         "id":6,
-        "value":"mdi-nodejs"
+        "value":"mdi-nodejs",
+        "name":"NodeJS"
       }
     ]
   },
@@ -69,15 +83,18 @@
     "points": [
       {
         "id": 1,
-        "value": "mdi-elephant"
+        "value": "mdi-elephant",
+        "name":"Gradle"
       },
       {
         "id": 2,
-        "value": "mdi-npm"
+        "value": "mdi-npm",
+        "name":"NPM"
       },
       {
         "id": 3,
-        "value": "mdi-feather"
+        "value": "mdi-feather",
+        "name":"Maven"
       }
     ]
   },
@@ -87,15 +104,18 @@
     "points": [
       {
         "id": 1,
-        "value": "mdi-git"
+        "value": "mdi-git",
+        "name":"Git"
       },
       {
         "id": 2,
-        "value": "mdi-github"
+        "value": "mdi-github",
+        "name":"GitHub"
       },
       {
         "id": 3,
-        "value": "mdi-gitlab"
+        "value": "mdi-gitlab",
+        "name":"GitLab"
       }
     ]
   },
@@ -105,23 +125,28 @@
     "points": [
       {
         "id": 1,
-        "value": "mdi-alpha-o-box-outline"
+        "value": "mdi-alpha-o-box-outline",
+        "name":"Oracle"
       },
       {
         "id": 2,
-        "value": "mdi-alpha-h-box-outline"
+        "value": "mdi-alpha-h-box-outline",
+        "name":"H2"
       },
       {
         "id": 3,
-        "value": "mdi-evernote"
+        "value": "mdi-evernote",
+        "name":"PostgreSQl"
       },
       {
         "id": 4,
-        "value": "mdi-decagram"
+        "value": "mdi-decagram",
+        "name":"MYSQL"
       },
           {
         "id": 5,
-        "value": "mdi-alpha-s-box-outline"
+        "value": "mdi-alpha-s-box-outline",
+        "name":"SQLite"
       }
     ]
   },
@@ -131,23 +156,28 @@
     "points": [
       {
         "id": 1,
-        "value": "mdi-microsoft-windows"
+        "value": "mdi-microsoft-windows",
+        "name":"Windows"
       },
       {
         "id": 2,
-        "value": "mdi-microsoft-visual-studio-code"
+        "value": "mdi-microsoft-visual-studio-code",
+        "name":"VSCode"
       },
       {
         "id": 3,
-        "value": "mdi-ubuntu"
+        "value": "mdi-ubuntu",
+        "name":"Linux"
       },
       {
         "id": 4,
-        "value": "mdi-alpha-j-box-outline"
+        "value": "mdi-alpha-j-box-outline",
+        "name":"IntelliJ"
       },
           {
         "id": 5,
-        "value": "mdi-alpha-e-box-outline"
+        "value": "mdi-alpha-e-box-outline",
+        "name":"Eclipse"
       }
     ]
   }

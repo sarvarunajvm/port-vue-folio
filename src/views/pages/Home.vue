@@ -17,7 +17,7 @@
           <v-row class="ma-5">
             <v-col cols="12" class="ma-5">
               <v-row align="center" justify="center" align-content="center">
-                <p class="text-h1 primary--text pr-4">Saravanan</p>
+                <p class="text-h1 accent--text pr-4">Saravanan</p>
                 <p class="text-h1 tertiary--text">Kalimuthu</p></v-row
               >
               <v-row align="center" justify="center" align-content="center">
@@ -96,6 +96,6 @@ export default {
 </script>
 <style>
 .vue-typer .custom.char {
-  color: var(--v-accent-base);
+  color: var(--v-primary-base);
 }
 </style>

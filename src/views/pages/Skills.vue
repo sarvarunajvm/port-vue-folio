@@ -12,7 +12,7 @@
           <v-row class="ma-5">
             <v-col cols="12" class="ma-5">
               <v-row align="center" justify="center">
-                <p class="text-h2 primary--text pr-4">
+                <p class="text-h2 accent--text pr-4">
                   🤔 LETS SEE WHAT I GOT!
                 </p>
               </v-row>
@@ -25,7 +25,7 @@
                   outlined
                   width="60vw"
                   max-width="60vw"
-                  class="mx-5 my-2"
+                  class="mx-5 my-2 overflow-y-auto"
                 >
                   <v-card-title>
                     {{ skill.title }}
@@ -37,15 +37,17 @@
                       align-content="center"
                     >
                       <v-col class="ma-5 pa-0 d-flex justify-center">
-                        <v-icon
-                          class="mx-auto"
-                          color="tertiary"
-                          x-large
+                        <v-chip
+                          class="mx-auto "
+                          color="primary"
                           v-for="point in skill.points"
                           :key="point.id"
                         >
-                          {{ point.value }}
-                        </v-icon>
+                          <v-icon left>
+                            {{ point.value }}
+                          </v-icon>
+                          {{ point.name }}
+                        </v-chip>
                       </v-col>
                     </v-row>
                   </v-card-text>
