@@ -2,7 +2,7 @@
   <v-card outlined class="mx-auto mt-6">
     <v-container fluid>
       <v-row no-gutters>
-        <span class="text-h5 grey--text font-weight-light text--darken-2">{{title}}</span>
+        <span class="myFont h5 grey--text font-weight-light text--darken-2">{{title}}</span>
       </v-row>
       <v-divider class="mb-5"></v-divider>
       <v-row v-for="(cardItem,index) in cardItems" :key="index" no-gutters>

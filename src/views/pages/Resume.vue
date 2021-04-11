@@ -12,7 +12,7 @@
           <v-row class="ma-5">
             <v-col cols="12" class="ma-5">
               <v-row align="center" justify="center">
-                <p class="text-h2 accent--text pr-4">📄 Resume</p>
+                <p class="myFont h2 accent--text pr-4">📄 Resume</p>
               </v-row>
               <v-row>
                 <v-img

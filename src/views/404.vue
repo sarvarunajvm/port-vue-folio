@@ -7,8 +7,8 @@
             <v-row align="center" justify="center" align-content="center">
               <v-col cols="10">
                 <div>
-                  <p class="text-h3 text-center my-0 py-0">Comming Soon...</p>
-                  <p class="text-overline text-center my-0 py-0">
+                  <p class="myFont h2 text-center my-0 py-0">Comming Soon...</p>
+                  <p class="myFont ovrline text-center my-0 py-0">
                     Website is currently undergoing development.Should be up
                     shortly.
                   </p>
