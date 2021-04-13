@@ -1,11 +1,5 @@
 <template>
-  <v-container
-    class="pa-0 ma-0 background"
-    id="Resume"
-    tag="section"
-    fluid
-    fill-height
-  >
+  <v-container class="pa-0 ma-0 background" id="Resume" tag="section" fluid fill-height>
     <v-row align="center" justify="center" align-content="center">
       <v-col cols="auto" align-self="center">
         <div class="d-flex flex-column justify-center">
@@ -14,15 +8,26 @@
               <v-row align="center" justify="center">
                 <p class="myFont h2 accent--text pr-4">📄 Resume</p>
               </v-row>
+              <v-row class="pa-2" align="center" justify="end" align-content="center">
+                <v-fab-transition>
+                  <v-btn
+                    @click="downloadPDf"
+                    color="primary"
+                      elevation="2"
+
+                    fab
+                    large
+                    bottom
+                    right
+                    class="v-btn--example"
+                  >
+                    <v-icon>mdi-download</v-icon>
+                    <a href="../../assets/Resume.pdf" download></a>
+                  </v-btn>
+                </v-fab-transition>
+              </v-row>
               <v-row>
-                <v-img
-                  lazy-src="../../assets/1.jpg"
-                  src="../../assets/1.jpg"
-                ></v-img>
-                <v-img
-                  lazy-src="../../assets/2.jpg"
-                  src="../../assets/2.jpg"
-                ></v-img>
+                <v-img lazy-src="../../assets/Resume.gif" src="../../assets/Resume.gif"></v-img>
               </v-row>
             </v-col>
           </v-row>
@@ -33,9 +38,26 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  data: () => ({
-  }),
+  data: () => ({}),
+  methods: {
+    downloadPDf() {
+      axios
+        .get("/files/Resume.pdf", {
+          responseType: "blob" //important
+        })
+        .then(response => {
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement("a");
+          let fname = "Saravanan Resume.pdf";
+          link.href = url;
+          link.setAttribute("download", fname);
+          document.body.appendChild(link);
+          link.click();
+        });
+    }
+  }
 };
 </script>
 <style></style>
