@@ -47,7 +47,7 @@
           @click="$vuetify.theme.dark = !$vuetify.theme.dark"
         >
           {{
-            $vuetify.theme.dark ? "mdi-weather-sunny-off" : "mdi-weather-sunny"
+            $vuetify.theme.dark ? "mdi-weather-sunny" : "mdi-weather-night"
           }}
         </v-icon>
       </v-row>

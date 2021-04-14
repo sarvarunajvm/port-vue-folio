@@ -24,12 +24,11 @@
                   <v-btn
                     tile
                     block
-                    color="secondary"
-                    class="text--primary"
+                    color="primary"
                     max-height="36px"
                     @click="loadAndMove"
                   >
-                    <v-icon color="primary" left>mdi-eye</v-icon>Take a Peek.
+                    <v-icon left>mdi-eye</v-icon>Take a Peek.
                   </v-btn>
                 </div>
               </v-col>
