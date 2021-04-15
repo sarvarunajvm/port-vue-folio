@@ -1,7 +1,7 @@
 module.exports = {
   //option
   //Basic path
-  publicPath : process.env.NODE_ENV === 'production' ? './' : '/',
+  publicPath : process.env.NODE_ENV === 'production' ? '/port-vue-folio' : '/',
   //Output directory at build time
   outputDir : 'dist',
   //Set directory for static resources
