@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b1e1a4ffddff424e8682f847c5a5a01a)](https://app.codacy.com/gh/sarvarunajvm/port-vue-folio?utm_source=github.com&utm_medium=referral&utm_content=sarvarunajvm/port-vue-folio&utm_campaign=Badge_Grade_Settings)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/16836a63-e089-4efe-9e56-7c330fdeb594/deploy-status)](https://app.netlify.com/sites/saravarunajvm/deploys)
 
 
