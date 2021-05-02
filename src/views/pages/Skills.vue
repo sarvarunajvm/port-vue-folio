@@ -18,7 +18,7 @@
               </v-row>
               <v-row
                 class="my-5 d-flex flex-column flex-md-row"
-                v-for="skill in skills"
+                v-for="skill in skillsList"
                 :key="skill.id"
               >
                 <v-card
@@ -65,7 +65,7 @@
 import skills from "../../data/skills.json";
 export default {
   data: () => ({
-    skills: skills,
+    skillsList: skills,
   }),
 };
 </script>

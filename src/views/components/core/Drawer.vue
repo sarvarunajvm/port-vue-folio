@@ -88,7 +88,6 @@ export default {
 
   methods: {
     onResize() {
-      console.log(this.$vuetify);
       if (this.$vuetify.breakpoint.name === "sm") {
         this.mini = true;
       } else if (this.$vuetify.breakpoint.name === "xs") {

@@ -78,7 +78,6 @@ export default {
           var ind = 0;
           response.data.forEach(element => {
             if (element.public === true) {
-              console.log(element);
               let snip = {};
               let files = element.files[Object.keys(element.files)[0]];
 
@@ -89,18 +88,16 @@ export default {
               let layoutEle = JSON.parse(
                 JSON.stringify(self.sample[Math.floor(Math.random() * 10)])
               );
-              console.log(ind, layoutEle);
               layoutEle.y = ind * 5;
               layoutEle.i = ind.toString();
               layoutEle.snip = snip;
-              console.log(ind, layoutEle);
               self.layout.push(layoutEle);
               ind++;
             }
           });
         })
         .catch(function(error) {
-          console.log(error);
+          console.error(error);
         })
         .then(function() {
           // always executed

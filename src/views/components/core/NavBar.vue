@@ -24,7 +24,6 @@ export default {
   }),
   beforeMount() {
     bus.$on("nav", (status) => {
-      console.log(status);
       this.$data.showNav = status;
     });
   },

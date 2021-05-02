@@ -1,13 +1,13 @@
 module.exports = {
   //option
   //Basic path
-  publicPath : process.env.NODE_ENV === 'production' ? '/port-vue-folio' : '/',
+  publicPath : process.env.NODE_ENV === "production" ? "/port-vue-folio" : "/",
   //Output directory at build time
-  outputDir : 'dist',
+  outputDir : "dist",
   //Set directory for static resources
-  assetsDir: 'static',
+  assetsDir: "static",
   //Output path of html
-  indexPath: 'index.html',
+  indexPath: "index.html",
   //File name hash
   filenameHashing: true,
   //Whether to use it when saving`eslint-loader`Inspection
@@ -26,14 +26,14 @@ module.exports = {
   integrity: false,
   // Configure the webpack dev server behavior.
   devServer: {
-    //open: process.platform === 'darwin',
-    //host: '0.0.0.0',
+    //open: process.platform === "darwin",
+    //host: "0.0.0.0",
     //port: 8080,
     //https: false,
     //hotOnly: false,
     // See https://github.com/vuejs/vue-docs-zh-cn/blob/master/vue-cli/cli-service.md#Configuration agent
     //proxy: {
-      // '/api': {
+      // "/api": {
       //   target: `http://58.251.218.38:8280`,
       //   changeOrigin: true,
       //   secure: false,
@@ -63,13 +63,13 @@ module.exports = {
   //   // }
   // },
   // Enable multiprocess processing babel compilation at build time
-  parallel: require('os').cpus().length > 1
+  parallel: require("os").cpus().length > 1
   // pluginOption: {
   //   i18n: {
-  //     locale: 'en',
-  //     fallbackLocale: 'en',
-  //     localeDir: 'locales',
+  //     locale: "en",
+  //     fallbackLocale: "en",
+  //     localeDir: "locales",
   //     enableInSFC: false,
   //   },
   // }
-}
+};
