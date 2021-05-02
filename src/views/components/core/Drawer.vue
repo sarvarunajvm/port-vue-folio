@@ -109,7 +109,7 @@ export default {
 </script>
 <style scoped>
 .border {
-  color: var(--v-primary-base);
-  background-color: var(--v-secondary-base);
+  color: var(--v-background-base);
+  background-color: var(--v-tertiary-base);
 }
 </style>

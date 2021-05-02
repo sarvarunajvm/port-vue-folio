@@ -52,8 +52,13 @@ export default new Router({
     },
     {
       name: "UnderConstruction",
-      path: "/",
+      path: "*",
       component: () => import("@/views/404.vue"),
+    },
+    {
+      name: "Start",
+      path: "/",
+      component: () => import("@/views/Start.vue"),
     },
   ],
 });

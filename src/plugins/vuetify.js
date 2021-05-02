@@ -3,6 +3,7 @@ import Vuetify from 'vuetify/lib/framework'
 import "material-design-icons-iconfont/dist/material-design-icons.css"; // Ensure you are using css-loader
 import VueI18n from "vue-i18n";
 
+
 Vue.use(Vuetify);
 Vue.use(VueI18n);
 Vuetify.config.silent = true

@@ -53,10 +53,10 @@
               </v-row>
               <v-row align="center" justify="center" align-content="center" class="mt-8 pr-6">
                 <v-col class="ma-5 pa-0 d-flex justify-center">
-                  <v-icon class="mx-auto" color="tertiary" x-large>mdi-linkedin</v-icon>
-                  <v-icon class="mx-auto" color="tertiary" x-large>mdi-github</v-icon>
-                  <v-icon class="mx-auto" color="tertiary" x-large>mdi-stack-overflow</v-icon>
-                  <v-icon class="mx-auto" color="tertiary" x-large>mdi-dev-to</v-icon>
+                  <v-icon @click="popup('https://www.linkedin.com/in/saravanan-kalimuthu-01a0a9113')" class="mx-auto" color="tertiary" x-large>mdi-linkedin</v-icon>
+                  <v-icon @click="popup('https://github.com/sarvarunajvm')" class="mx-auto" color="tertiary" x-large>mdi-github</v-icon>
+                  <v-icon @click="popup('https://stackoverflow.com/users/12595188/saravanan-kalimuthu?tab=profile')" class="mx-auto" color="tertiary" x-large>mdi-stack-overflow</v-icon>
+                  <v-icon @click="popup('https://dev.to/sarvarunajvm')" class="mx-auto" color="tertiary" x-large>mdi-dev-to</v-icon>
                 </v-col>
               </v-row>
             </v-col>
@@ -68,7 +68,12 @@
 </template>
 <script>
 export default {
-  data: () => ({})
+  data: () => ({}),
+  methods:{
+    popup(url) {
+      window.open(url, '_blank');
+    }
+  }
 };
 </script>
 <style>

@@ -13,6 +13,7 @@
     "core-js": "^3.10.0",
     "vue": "^2.6.12",
     "vue-embed-gist": "^1.2.0",
+    "vue-grid-layout": "^2.3.12",
     "vue-i18n": "^8.24.2",
     "vue-page-transition": "^0.2.2",
     "vue-router": "^3.5.1",

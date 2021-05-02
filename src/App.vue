@@ -98,4 +98,10 @@ html {
   letter-spacing: 0.1666666667em !important;
   text-transform: uppercase !important;
 }
+.hdline {
+    font-size: 1.5rem !important;
+    font-weight: 700;
+    line-height: 2rem;
+    letter-spacing: initial !important;
+}
 </style>
