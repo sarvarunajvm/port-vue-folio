@@ -44,7 +44,7 @@ export default {
   methods: {
     downloadPDf() {
       axios
-        .get("/files/Resume.pdf", {
+        .get("/port-vue-folio/files/Resume.pdf", {
           responseType: "blob" //important
         })
         .then(response => {
