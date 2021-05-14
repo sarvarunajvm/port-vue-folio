@@ -1,3 +1,5 @@
+[![Deploy to Github Pages](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/gh-pages-deploy.yml/badge.svg?branch=master&event=deployment)](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/gh-pages-deploy.yml)
+
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b1e1a4ffddff424e8682f847c5a5a01a)](https://app.codacy.com/gh/sarvarunajvm/port-vue-folio?utm_source=github.com&utm_medium=referral&utm_content=sarvarunajvm/port-vue-folio&utm_campaign=Badge_Grade_Settings)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
