@@ -43,7 +43,7 @@
 import GistCard from "../../components/GistCard.vue";
 import { GridLayout, GridItem } from "vue-grid-layout";
 import axios from "axios";
-import about from "../../data/about.json";
+import aboutJson from "../../data/about.json";
 export default {
   components: {
     GridLayout,
@@ -51,7 +51,7 @@ export default {
     GistCard,
   },
   data: () => ({
-    about: about,
+    about: aboutJson,
     dialog: false,
     sample: [
       { x: 2, y: 0, w: 6, h: 6 },

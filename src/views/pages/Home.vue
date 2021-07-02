@@ -73,10 +73,10 @@
   </v-container>
 </template>
 <script>
-import about from "../../data/about.json";
+import aboutJson from "../../data/about.json";
 export default {
   data: () => ({
-    about: about,
+    about: aboutJson,
   }),
   computed: {
     mailto() {
