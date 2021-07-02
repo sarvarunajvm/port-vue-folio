@@ -100,9 +100,6 @@ export default {
         })
         .catch(function (error) {
           console.error(error);
-        })
-        .then(function () {
-          // always executed
         });
     },
   },

@@ -36,10 +36,10 @@
 </template>
 
 <script>
-import educations from "../../data/education.json";
+import educationJson from "../../data/education.json";
 export default {
   data: () => ({
-    educations: educations,
+    educations: educationJson,
   }),
 };
 </script>

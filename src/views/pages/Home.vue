@@ -85,7 +85,7 @@ export default {
   },
   methods: {
     popup(url) {
-      window.open(url, "_blank");
+      window.open(url);
     },
   },
 };
