@@ -43,25 +43,27 @@
 import GistCard from "../../components/GistCard.vue";
 import { GridLayout, GridItem } from "vue-grid-layout";
 import axios from "axios";
+import about from "../../data/about.json";
 export default {
   components: {
     GridLayout,
     GridItem,
-    GistCard
+    GistCard,
   },
   data: () => ({
+    about: about,
     dialog: false,
     sample: [
-      { x: 2, y: 0, w: 6, h: 6},
-      { x: 2, y: 0, w: 6, h: 6},
-      { x: 2, y: 0, w: 6, h: 6},
-      { x: 2, y: 0, w: 6, h: 6},
-      { x: 2, y: 0, w: 6, h: 6},
-      { x: 2, y: 0, w: 6, h: 6},
-      { x: 2, y: 0, w: 6, h: 6},
-      { x: 2, y: 0, w: 6, h: 6},
-      { x: 2, y: 0, w: 6, h: 6},
-      { x: 2, y: 0, w: 6, h: 6}
+      { x: 2, y: 0, w: 6, h: 6 },
+      { x: 2, y: 0, w: 6, h: 6 },
+      { x: 2, y: 0, w: 6, h: 6 },
+      { x: 2, y: 0, w: 6, h: 6 },
+      { x: 2, y: 0, w: 6, h: 6 },
+      { x: 2, y: 0, w: 6, h: 6 },
+      { x: 2, y: 0, w: 6, h: 6 },
+      { x: 2, y: 0, w: 6, h: 6 },
+      { x: 2, y: 0, w: 6, h: 6 },
+      { x: 2, y: 0, w: 6, h: 6 },
     ],
     layout: [],
     draggable: true,
@@ -73,10 +75,10 @@ export default {
       var self = this;
 
       axios
-        .get("https://api.github.com/users/sarvarunajvm/gists")
-        .then(function(response) {
+        .get("https://api.github.com/users/" + self.about.username + "/gists")
+        .then(function (response) {
           var ind = 0;
-          response.data.forEach(element => {
+          response.data.forEach((element) => {
             if (element.public === true) {
               let snip = {};
               let files = element.files[Object.keys(element.files)[0]];
@@ -96,17 +98,17 @@ export default {
             }
           });
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.error(error);
         })
-        .then(function() {
+        .then(function () {
           // always executed
         });
-    }
+    },
   },
   created() {
     this.getGistInfos();
-  }
+  },
 };
 </script>
 <style scoped>

@@ -1,15 +1,13 @@
 <template>
   <v-card color="accent" class="mx-auto" :width="getWidth" :height="getHeight" outlined>
     <v-card-text>
-      <v-card-title class="background--text h6 myFont mb-1">
-        {{item.title}}
-      </v-card-title>
-          <v-list-item three-line>
-      <v-list-item-content>
-        <div class="tertiary--text ovrline mb-4">{{item.language}}</div>
-        <v-list-item-subtitle class="background--text myFont body2">{{item.description}}</v-list-item-subtitle>
-      </v-list-item-content>
-    </v-list-item>
+      <v-card-title class="background--text h6 myFont mb-1">{{item.title}}</v-card-title>
+      <v-list-item three-line>
+        <v-list-item-content>
+          <div class="tertiary--text ovrline mb-4">{{item.language}}</div>
+          <v-list-item-subtitle class="background--text myFont body2">{{item.description}}</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
     </v-card-text>
 
     <v-card-actions>
@@ -47,21 +45,21 @@ export default {
   props: {
     item: Object,
     height: Number,
-    width: Number
+    width: Number,
   },
   components: {
-    VueEmbedGist
+    VueEmbedGist,
   },
-  computed:{
-    getWidth(){
+  computed: {
+    getWidth() {
       return this.width * 180;
     },
-    getHeight(){
+    getHeight() {
       return this.height * 50;
     },
   },
   data: () => ({
-    dialog: false
-  })
+    dialog: false,
+  }),
 };
 </script>

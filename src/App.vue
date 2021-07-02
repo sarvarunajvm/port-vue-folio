@@ -18,7 +18,7 @@ html {
   width: 0px;
   background: transparent; /* make scrollbar transparent */
 }
-#app{
+#app {
   font-family: "Kanit" !important;
 }
 .myFont {
@@ -99,9 +99,9 @@ html {
   text-transform: uppercase !important;
 }
 .hdline {
-    font-size: 1.5rem !important;
-    font-weight: 700;
-    line-height: 2rem;
-    letter-spacing: initial !important;
+  font-size: 1.5rem !important;
+  font-weight: 700;
+  line-height: 2rem;
+  letter-spacing: initial !important;
 }
 </style>

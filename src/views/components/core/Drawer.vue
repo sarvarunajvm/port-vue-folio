@@ -47,7 +47,7 @@
           @click="$vuetify.theme.dark = !$vuetify.theme.dark"
         >
           {{
-            $vuetify.theme.dark ? "mdi-weather-sunny" : "mdi-weather-night"
+          $vuetify.theme.dark ? "mdi-weather-sunny" : "mdi-weather-night"
           }}
         </v-icon>
       </v-row>
@@ -69,9 +69,9 @@ export default {
         { title: "Projects", icon: "mdi-view-list-outline", link: "projects" },
         { title: "Skills", icon: "mdi-chart-bar", link: "skills" },
         { title: "Education", icon: "mdi-school-outline", link: "education" },
-        { title: "Resume", icon: "mdi-clipboard-text-outline", link: "resume" }
+        { title: "Resume", icon: "mdi-clipboard-text-outline", link: "resume" },
       ],
-      right: null
+      right: null,
     };
   },
 
@@ -97,13 +97,13 @@ export default {
         this.mini = false;
         bus.$emit("nav", false);
       }
-    }
+    },
   },
   beforeMount() {
     bus.$on("drawer", () => {
       this.$data.drawer = !this.$data.drawer;
     });
-  }
+  },
 };
 </script>
 <style scoped>

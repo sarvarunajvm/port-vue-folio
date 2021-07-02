@@ -12,12 +12,11 @@ export default {
   components: {
     CoreDrawer: () => import("./components/core/Drawer"),
     CoreNavigation: () => import("./components/core/NavBar"),
-    CoreView: () => import("./components/core/View")
+    CoreView: () => import("./components/core/View"),
   },
 
-  data: () => ({})
+  data: () => ({}),
 };
 </script>
 <style>
-
 </style>

@@ -3,37 +3,37 @@
     <v-row align="center" align-content="center" justify="center">
       <v-col cols="6" sm="6" md="4" lg="4" xl="3" align-self="center">
         <div>
-            <div class="loading">
-          <div class="finger finger-1">
-            <div class="finger-item">
-              <span></span>
-              <i></i>
+          <div class="loading">
+            <div class="finger finger-1">
+              <div class="finger-item">
+                <span></span>
+                <i></i>
+              </div>
+            </div>
+            <div class="finger finger-2">
+              <div class="finger-item">
+                <span></span>
+                <i></i>
+              </div>
+            </div>
+            <div class="finger finger-3">
+              <div class="finger-item">
+                <span></span>
+                <i></i>
+              </div>
+            </div>
+            <div class="finger finger-4">
+              <div class="finger-item">
+                <span></span>
+                <i></i>
+              </div>
+            </div>
+            <div class="last-finger">
+              <div class="last-finger-item">
+                <i></i>
+              </div>
             </div>
           </div>
-          <div class="finger finger-2">
-            <div class="finger-item">
-              <span></span>
-              <i></i>
-            </div>
-          </div>
-          <div class="finger finger-3">
-            <div class="finger-item">
-              <span></span>
-              <i></i>
-            </div>
-          </div>
-          <div class="finger finger-4">
-            <div class="finger-item">
-              <span></span>
-              <i></i>
-            </div>
-          </div>
-          <div class="last-finger">
-            <div class="last-finger-item">
-              <i></i>
-            </div>
-          </div>
-        </div>
         </div>
       </v-col>
     </v-row>

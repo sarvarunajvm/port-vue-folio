@@ -3,7 +3,6 @@ import Vuetify from "vuetify/lib/framework";
 import "material-design-icons-iconfont/dist/material-design-icons.css"; // Ensure you are using css-loader
 import VueI18n from "vue-i18n";
 
-
 Vue.use(Vuetify);
 Vue.use(VueI18n);
 Vuetify.config.silent = true;
@@ -41,7 +40,7 @@ const options = {
     },
     themes: {
       light: {
-        background:"#fffffe",
+        background: "#fffffe",
         primary: "#3da9fc",
         secondary: "#90b4ce",
         tertiary: "#ef4565",
@@ -53,7 +52,7 @@ const options = {
         warning: "#FB8C00",
       },
       dark: {
-        background:"#16161a",
+        background: "#16161a",
         primary: "#7f5af0",
         secondary: "#72757e",
         tertiary: "#2cb67d",

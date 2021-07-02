@@ -6,37 +6,37 @@
       {
         "id": 1,
         "value": "mdi-language-java",
-        "name":"Java"
+        "name": "Java"
       },
       {
         "id": 2,
         "value": "mdi-language-javascript",
-        "name":"JavaScript"
+        "name": "JavaScript"
       },
       {
         "id": 3,
         "value": "mdi-code-json",
-        "name":"JSON"
+        "name": "JSON"
       },
       {
         "id": 4,
         "value": "mdi-xml",
-        "name":"XML"
+        "name": "XML"
       },
       {
         "id": 5,
         "value": "mdi-language-python",
-        "name":"Python"
+        "name": "Python"
       },
       {
         "id": 6,
         "value": "mdi-language-html5",
-        "name":"HTML5"
+        "name": "HTML5"
       },
       {
         "id": 7,
         "value": "mdi-language-css3",
-        "name":"CSS"
+        "name": "CSS"
       }
     ]
   },
@@ -47,33 +47,32 @@
       {
         "id": 1,
         "value": "mdi-leaf",
-        "name":"Spring"
+        "name": "Spring"
       },
       {
         "id": 2,
         "value": "mdi-database",
-        "name":"JPA"
+        "name": "JPA"
       },
       {
         "id": 3,
         "value": "mdi-vuejs",
-        "name":"Vue"
-      
+        "name": "Vue"
       },
       {
         "id": 4,
         "value": "mdi-vuetify",
-        "name":"Vuetify"
+        "name": "Vuetify"
       },
       {
         "id": 5,
         "value": "mdi-numeric-5-circle",
-        "name":"Junit5"
+        "name": "Junit5"
       },
       {
-        "id":6,
-        "value":"mdi-nodejs",
-        "name":"NodeJS"
+        "id": 6,
+        "value": "mdi-nodejs",
+        "name": "NodeJS"
       }
     ]
   },
@@ -84,17 +83,17 @@
       {
         "id": 1,
         "value": "mdi-elephant",
-        "name":"Gradle"
+        "name": "Gradle"
       },
       {
         "id": 2,
         "value": "mdi-npm",
-        "name":"NPM"
+        "name": "NPM"
       },
       {
         "id": 3,
         "value": "mdi-feather",
-        "name":"Maven"
+        "name": "Maven"
       }
     ]
   },
@@ -105,17 +104,17 @@
       {
         "id": 1,
         "value": "mdi-git",
-        "name":"Git"
+        "name": "Git"
       },
       {
         "id": 2,
         "value": "mdi-github",
-        "name":"GitHub"
+        "name": "GitHub"
       },
       {
         "id": 3,
         "value": "mdi-gitlab",
-        "name":"GitLab"
+        "name": "GitLab"
       }
     ]
   },
@@ -126,27 +125,27 @@
       {
         "id": 1,
         "value": "mdi-alpha-o-box-outline",
-        "name":"Oracle"
+        "name": "Oracle"
       },
       {
         "id": 2,
         "value": "mdi-alpha-h-box-outline",
-        "name":"H2"
+        "name": "H2"
       },
       {
         "id": 3,
         "value": "mdi-evernote",
-        "name":"PostgreSQl"
+        "name": "PostgreSQl"
       },
       {
         "id": 4,
         "value": "mdi-decagram",
-        "name":"MYSQL"
+        "name": "MYSQL"
       },
-          {
+      {
         "id": 5,
         "value": "mdi-alpha-s-box-outline",
-        "name":"SQLite"
+        "name": "SQLite"
       }
     ]
   },
@@ -157,27 +156,27 @@
       {
         "id": 1,
         "value": "mdi-microsoft-windows",
-        "name":"Windows"
+        "name": "Windows"
       },
       {
         "id": 2,
         "value": "mdi-microsoft-visual-studio-code",
-        "name":"VSCode"
+        "name": "VSCode"
       },
       {
         "id": 3,
         "value": "mdi-ubuntu",
-        "name":"Linux"
+        "name": "Linux"
       },
       {
         "id": 4,
         "value": "mdi-alpha-j-box-outline",
-        "name":"IntelliJ"
+        "name": "IntelliJ"
       },
-          {
+      {
         "id": 5,
         "value": "mdi-alpha-e-box-outline",
-        "name":"Eclipse"
+        "name": "Eclipse"
       }
     ]
   }

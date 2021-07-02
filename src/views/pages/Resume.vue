@@ -13,8 +13,7 @@
                   <v-btn
                     @click="downloadPDf"
                     color="primary"
-                      elevation="2"
-
+                    elevation="2"
                     fab
                     large
                     bottom
@@ -45,9 +44,9 @@ export default {
     downloadPDf() {
       axios
         .get("/port-vue-folio/files/Resume.pdf", {
-          responseType: "blob" //important
+          responseType: "blob", //important
         })
-        .then(response => {
+        .then((response) => {
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement("a");
           let fname = "Saravanan Resume.pdf";
@@ -56,8 +55,8 @@ export default {
           document.body.appendChild(link);
           link.click();
         });
-    }
-  }
+    },
+  },
 };
 </script>
 <style></style>

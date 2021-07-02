@@ -14,10 +14,10 @@
 <script>
 export default {
   data: () => ({
-    dialog: false
+    dialog: false,
   }),
   components: {
-    Waiter: () => import("../components/Waiter")
+    Waiter: () => import("../components/Waiter"),
   },
   methods: {
     loadAndMove() {
@@ -26,11 +26,11 @@ export default {
         this.$data.dialog = false;
         this.$router.push("home");
       }, 5000);
-    }
+    },
   },
   mounted() {
     this.loadAndMove();
-  }
+  },
 };
 </script>
 <style lang="scss" scoped></style>

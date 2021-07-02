@@ -6,18 +6,14 @@
           <v-row class="ma-5">
             <v-col cols="12" class="ma-5">
               <v-row align="center" justify="center" align-content="center">
-                <p class="myFont h1 accent--text pr-4">Saravanan</p>
-                <p class="myFont h1 tertiary--text">Kalimuthu</p>
+                <p class="myFont h1 accent--text pr-4">{{about.firstname}}</p>
+                <p class="myFont h1 tertiary--text">{{about.lastname}}</p>
               </v-row>
               <v-row align="center" justify="center" align-content="center">
                 <p>
                   <vue-typer
                     class="myFont h3"
-                    :text="[
-                      'Java Developer',
-                      'Software Engineer',
-                      'Code Enthusiast!',
-                    ]"
+                    :text="about.titles"
                     :repeat="Infinity"
                     :shuffle="true"
                     initial-action="erasing"
@@ -32,31 +28,41 @@
                 </p>
               </v-row>
               <v-row align="center" justify="center" align-content="center">
-                <p class="myFont h5 secondary--text pr-5">👽 Martian</p>
-                <p class="myFont h5 secondary--text pr-5">📱 +91 979-087-0737</p>
-                <a
-                  class="myFont h5 pb-5"
-                  href="mailto:sathishdaywalker@outlook.com"
-                >sathishdaywalker@outlook.com</a>
+                <p class="myFont h5 secondary--text pr-5">{{about.nickname}}</p>
+                <p class="myFont h5 secondary--text pr-5">{{about.phone}}</p>
+                <a class="myFont h5 pb-5" :href="mailto">{{about.email}}</a>
               </v-row>
               <v-row align="center" justify="center" align-content="center">
                 <v-col cols="12" sm="12" md="9" lg="8" xl="8">
-                  <p class="text-center myFont body2 secondary--text pr-4">
-                    4+ years experienced as a Java developer highly skilled in
-                    planning, documentation, and testing across the complete
-                    development life of a product ensure smooth product
-                    development.Adept at identifying bugs and prescribing
-                    solutions to increase the efficiency of a product. And an
-                    active open-source contributor in github.
-                  </p>
+                  <p class="text-center myFont body2 secondary--text pr-4">{{about.summary}}</p>
                 </v-col>
               </v-row>
               <v-row align="center" justify="center" align-content="center" class="mt-8 pr-6">
                 <v-col class="ma-5 pa-0 d-flex justify-center">
-                  <v-icon @click="popup('https://www.linkedin.com/in/saravanan-kalimuthu-01a0a9113')" class="mx-auto" color="tertiary" x-large>mdi-linkedin</v-icon>
-                  <v-icon @click="popup('https://github.com/sarvarunajvm')" class="mx-auto" color="tertiary" x-large>mdi-github</v-icon>
-                  <v-icon @click="popup('https://stackoverflow.com/users/12595188/saravanan-kalimuthu?tab=profile')" class="mx-auto" color="tertiary" x-large>mdi-stack-overflow</v-icon>
-                  <v-icon @click="popup('https://dev.to/sarvarunajvm')" class="mx-auto" color="tertiary" x-large>mdi-dev-to</v-icon>
+                  <v-icon
+                    @click="popup(about.social.linkedin)"
+                    class="mx-auto"
+                    color="tertiary"
+                    x-large
+                  >mdi-linkedin</v-icon>
+                  <v-icon
+                    @click="popup(about.social.github)"
+                    class="mx-auto"
+                    color="tertiary"
+                    x-large
+                  >mdi-github</v-icon>
+                  <v-icon
+                    @click="popup(about.social.stackoverflow)"
+                    class="mx-auto"
+                    color="tertiary"
+                    x-large
+                  >mdi-stack-overflow</v-icon>
+                  <v-icon
+                    @click="popup(about.social.devto)"
+                    class="mx-auto"
+                    color="tertiary"
+                    x-large
+                  >mdi-dev-to</v-icon>
                 </v-col>
               </v-row>
             </v-col>
@@ -67,13 +73,21 @@
   </v-container>
 </template>
 <script>
+import about from "../../data/about.json";
 export default {
-  data: () => ({}),
-  methods:{
+  data: () => ({
+    about: about,
+  }),
+  computed: {
+    mailto() {
+      return "mailto:" + this.about.email;
+    },
+  },
+  methods: {
     popup(url) {
-      window.open(url, '_blank');
-    }
-  }
+      window.open(url, "_blank");
+    },
+  },
 };
 </script>
 <style>

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  export default {
-    name: 'CoreView',
-  }
+export default {
+  name: "CoreView",
+};
 </script>

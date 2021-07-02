@@ -1,11 +1,5 @@
 <template>
-  <v-container
-    class="pa-0 ma-0 background"
-    id="education"
-    tag="section"
-    fluid
-    fill-height
-  >
+  <v-container class="pa-0 ma-0 background" id="education" tag="section" fluid fill-height>
     <v-row align="center" justify="center" align-content="center">
       <v-col cols="auto" align-self="center">
         <div class="d-flex flex-column justify-center">

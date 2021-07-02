@@ -21,13 +21,7 @@
             <v-row justify="center" align="center" align-content="center">
               <v-col cols="6" sm="6" md="4" lg="4" xl="3" align-self="center">
                 <div class="my-5 text-center">
-                  <v-btn
-                    tile
-                    block
-                    color="primary"
-                    max-height="36px"
-                    @click="loadAndMove"
-                  >
+                  <v-btn tile block color="primary" max-height="36px" @click="loadAndMove">
                     <v-icon left>mdi-eye</v-icon>Take a Peek.
                   </v-btn>
                 </div>
