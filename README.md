@@ -4,7 +4,7 @@ Hi! I'm a **Fellow Developer** and i designed this in such a way everyonce can u
 
 ## Files you need to change/modify
 > Note: Please  do not change the file name
-- [ ] Pork the respository.
+- [ ] Fork the respository.
 - [ ] Change the Resume.pdf in public/files. 
 - [ ] Change the Resume.gif in src/assets.
 - [ ] Change the me.jpg in src/assets.
