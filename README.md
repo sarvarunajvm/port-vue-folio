@@ -2,6 +2,12 @@
 
 Hi! I'm a **Fellow Developer** and i designed this in such a way everyonce can use. If you want to use this portfolio please follow the below steps and enjoy. And if you want any help please feel free to contact me.
 
+## ScreenShots
+### Dark Theme
+![Dark](images/Dark.png)
+### Light Theme
+![Light](images/Light.png)
+
 ## Files you need to change/modify
 > Note: Please  do not change the file name
 - [ ] Fork the respository.
