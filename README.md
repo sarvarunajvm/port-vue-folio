@@ -10,28 +10,28 @@ Hi! I'm a **Fellow Developer** and i designed this in such a way everyonce can u
 
 ## Files you need to change/modify
 > Note: Please  do not change the file name
-- [ ] Fork the respository.
-- [ ] Change the Resume.pdf in public/files. 
-- [ ] Change the Resume.gif in src/assets.
-- [ ] Change the me.jpg in src/assets.
-- [ ] Change the necessory details in json in src/data folders.
+- [x] Fork the respository.
+- [x] Change the Resume.pdf in public/files. 
+- [x] Change the Resume.gif in src/assets.
+- [x] Change the me.jpg in src/assets.
+- [x] Change the necessory details in json in src/data folders.
 
 ## Project setup
-```
-npm install
-```
+
+> npm install
+
 ### Compiles and hot-reloads for development
-```
-npm run serve
-```
+
+> npm run serve
+
 ### Compiles and minifies for production
-```
-npm run build
-```
+
+> npm run build
+
 ### Lints and fixes files
-```
-npm run lint
-```
+
+> npm run lint
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
@@ -40,5 +40,3 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b1e1a4ffddff424e8682f847c5a5a01a)](https://app.codacy.com/gh/sarvarunajvm/port-vue-folio?utm_source=github.com&utm_medium=referral&utm_content=sarvarunajvm/port-vue-folio&utm_campaign=Badge_Grade_Settings)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-  
