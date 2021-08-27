@@ -9,7 +9,8 @@ Hi! I'm a **Fellow Developer** and i designed this in such a way everyonce can u
 ![Light](images/Light.png)
 
 ## Files you need to change/modify
-> Note: Please  do not change the file name
+> Note: Please do not change the file name
+
 - [x] Fork the respository.
 - [x] Change the Resume.pdf in public/files. 
 - [x] Change the Resume.gif in src/assets.
