@@ -9,7 +9,7 @@
     "deploy": "node scripts/gh-pages-deploy.js"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.3",
     "core-js": "^3.17.2",
     "vue": "^2.6.14",
     "vue-embed-gist": "^1.2.0",
