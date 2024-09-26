@@ -14,7 +14,7 @@
     "vue": "^3.4.35",
     "vue-embed-gist": "^1.2.0",
     "vue-grid-layout": "^2.3.12",
-    "vue-i18n": "^8.28.2",
+    "vue-i18n": "^9.14.1",
     "vue-page-transition": "^0.2.2",
     "vue-router": "^3.5.3",
     "vue-typer": "^1.2.0",
