@@ -1,0 +1,318 @@
+// Liquid Glass Theme Variables
+:root {
+  // Light theme glass variables
+  --glass-bg-light: rgba(255, 255, 255, 0.25);
+  --glass-bg-light-strong: rgba(255, 255, 255, 0.4);
+  --glass-border-light: rgba(255, 255, 255, 0.3);
+  --glass-shadow-light: rgba(31, 38, 135, 0.37);
+  --glass-backdrop-light: rgba(255, 255, 255, 0.1);
+  
+  // Dark theme glass variables
+  --glass-bg-dark: rgba(16, 16, 16, 0.25);
+  --glass-bg-dark-strong: rgba(16, 16, 16, 0.4);
+  --glass-border-dark: rgba(255, 255, 255, 0.1);
+  --glass-shadow-dark: rgba(0, 0, 0, 0.5);
+  --glass-backdrop-dark: rgba(0, 0, 0, 0.1);
+  
+  // Animated background gradients
+  --gradient-light-1: linear-gradient(45deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+  --gradient-light-2: linear-gradient(45deg, #a8edea 0%, #fed6e3 100%);
+  --gradient-light-3: linear-gradient(45deg, #d299c2 0%, #fef9d7 100%);
+  
+  --gradient-dark-1: linear-gradient(45deg, #2d1b69 0%, #11998e 100%);
+  --gradient-dark-2: linear-gradient(45deg, #1a2a6c 0%, #b21f1f 50%, #fdbb2d 100%);
+  --gradient-dark-3: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+  
+  // Animation variables
+  --glass-animation-duration: 0.3s;
+  --glass-animation-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Glass effect mixins
+@mixin glass-effect($theme: 'light') {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 16px;
+  border: 1px solid;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--glass-animation-duration) var(--glass-animation-easing);
+  
+  @if $theme == 'light' {
+    background: var(--glass-bg-light);
+    border-color: var(--glass-border-light);
+    box-shadow: 0 8px 32px var(--glass-shadow-light);
+  } @else {
+    background: var(--glass-bg-dark);
+    border-color: var(--glass-border-dark);
+    box-shadow: 0 8px 32px var(--glass-shadow-dark);
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask-composite: xor;
+    pointer-events: none;
+  }
+  
+  &:hover {
+    transform: translateY(-2px);
+    @if $theme == 'light' {
+      background: var(--glass-bg-light-strong);
+      box-shadow: 0 12px 40px var(--glass-shadow-light);
+    } @else {
+      background: var(--glass-bg-dark-strong);
+      box-shadow: 0 12px 40px var(--glass-shadow-dark);
+    }
+  }
+}
+
+@mixin glass-card($theme: 'light') {
+  @include glass-effect($theme);
+  padding: 24px;
+  margin: 16px 0;
+  
+  &.glass-card-small {
+    padding: 16px;
+    border-radius: 12px;
+  }
+  
+  &.glass-card-large {
+    padding: 32px;
+    border-radius: 20px;
+  }
+}
+
+@mixin glass-button($theme: 'light') {
+  @include glass-effect($theme);
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all var(--glass-animation-duration) var(--glass-animation-easing);
+  
+  &:hover {
+    transform: translateY(-1px) scale(1.02);
+  }
+  
+  &:active {
+    transform: translateY(0) scale(0.98);
+  }
+}
+
+// Animated background for body
+.glass-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.6;
+  
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  &::before {
+    background: var(--gradient-light-1);
+    animation-delay: -3s;
+  }
+  
+  &::after {
+    background: var(--gradient-light-2);
+    animation-delay: -1s;
+    opacity: 0.7;
+  }
+  
+  &.dark-mode {
+    &::before {
+      background: var(--gradient-dark-1);
+    }
+    
+    &::after {
+      background: var(--gradient-dark-2);
+    }
+  }
+}
+
+// Floating animation
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 0.8;
+  }
+}
+
+// Shimmer effect for loading states
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.glass-shimmer {
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0) 0%, 
+    rgba(255, 255, 255, 0.2) 50%, 
+    rgba(255, 255, 255, 0) 100%);
+  background-size: 468px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+// Glass navigation
+.glass-nav {
+  @include glass-effect('light');
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 8px 16px;
+  border-radius: 50px;
+  
+  &.dark-mode {
+    @include glass-effect('dark');
+  }
+}
+
+// Glass sidebar
+.glass-sidebar {
+  @include glass-effect('light');
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 280px;
+  z-index: 999;
+  
+  &.dark-mode {
+    @include glass-effect('dark');
+  }
+}
+
+// Glass modal
+.glass-modal {
+  @include glass-effect('light');
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1100;
+  min-width: 400px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  
+  &.dark-mode {
+    @include glass-effect('dark');
+  }
+}
+
+// Glass text effects
+.glass-text {
+  background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+  
+  &.dark-mode {
+    background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+// Utility classes
+.glass-card-light {
+  @include glass-card('light');
+}
+
+.glass-card-dark {
+  @include glass-card('dark');
+}
+
+.glass-button-light {
+  @include glass-button('light');
+}
+
+.glass-button-dark {
+  @include glass-button('dark');
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .glass-nav {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    transform: none;
+  }
+  
+  .glass-sidebar {
+    width: 100%;
+    transform: translateX(-100%);
+    transition: transform var(--glass-animation-duration) var(--glass-animation-easing);
+    
+    &.open {
+      transform: translateX(0);
+    }
+  }
+  
+  .glass-modal {
+    min-width: 300px;
+    margin: 20px;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    transform: none;
+    width: auto;
+    height: auto;
+  }
+}
+
+// Glass theme transitions
+.glass-theme-transition {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Blur effects for better glass appearance
+.glass-blur-light {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.glass-blur-medium {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.glass-blur-heavy {
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}

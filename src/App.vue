@@ -1,15 +1,35 @@
 <template>
-  <vue-page-transition name="fade-in-up">
-    <router-view />
-  </vue-page-transition>
+  <div id="app">
+    <!-- Glass Background -->
+    <div class="glass-background"></div>
+    
+    <!-- Theme Toggle -->
+    <theme-toggle />
+    
+    <!-- Main Content -->
+    <vue-page-transition name="fade-in-up">
+      <router-view />
+    </vue-page-transition>
+  </div>
 </template>
 
 <script>
+import ThemeToggle from '@/components/ThemeToggle.vue'
+
 export default {
   name: "App",
+  components: {
+    ThemeToggle
+  },
+  mounted() {
+    // Apply glass theme styles to body
+    document.body.classList.add('glass-theme-transition')
+  }
 };
 </script>
-<style>
+<style lang="scss">
+@import '@/assets/styles/glass-theme.scss';
+
 html {
   overflow: scroll;
   overflow-x: hidden;
@@ -20,6 +40,56 @@ html {
 }
 #app {
   font-family: "Kanit" !important;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Glass Background Styles */
+.glass-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.6;
+  
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  &::before {
+    background: var(--gradient-light-1);
+    animation-delay: -3s;
+  }
+  
+  &::after {
+    background: var(--gradient-light-2);
+    animation-delay: -1s;
+    opacity: 0.7;
+  }
+  
+  &.dark-mode {
+    &::before {
+      background: var(--gradient-dark-1);
+    }
+    
+    &::after {
+      background: var(--gradient-dark-2);
+    }
+  }
+}
+
+/* Global glass theme transitions */
+.glass-theme-transition * {
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .myFont {
   font-family: "Kanit" !important;

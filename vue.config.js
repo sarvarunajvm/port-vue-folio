@@ -10,7 +10,7 @@ module.exports = {
   //File name hash
   filenameHashing: true,
   //Whether to use it when saving`eslint-loader`Inspection
-  lintOnSave: true,
+  lintOnSave: false,
   //Use full build with in browser editor
   runtimeCompiler: false,
   //  Babel loader will skip node modules dependency by default.
@@ -23,7 +23,7 @@ module.exports = {
   integrity: false,
   // Configure the webpack dev server behavior.
   devServer: {
-    disableHostCheck: true,
+    allowedHosts: "all",
   },
   parallel: require("os").cpus().length > 1,
 };
