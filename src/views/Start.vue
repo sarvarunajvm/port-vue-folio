@@ -17,7 +17,7 @@ export default {
     dialog: false,
   }),
   components: {
-    Waiter: () => import("../components/Waiter"),
+    Waiter: () => import("../components/Waiter.vue"),
   },
   methods: {
     loadAndMove() {
