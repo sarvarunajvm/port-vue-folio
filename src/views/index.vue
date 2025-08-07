@@ -10,9 +10,9 @@ export default {
   name: "CoreIndex",
 
   components: {
-    CoreDrawer: () => import("./components/core/Drawer"),
-    CoreNavigation: () => import("./components/core/NavBar"),
-    CoreView: () => import("./components/core/View"),
+    CoreDrawer: () => import("./components/core/Drawer.vue"),
+    CoreNavigation: () => import("./components/core/NavBar.vue"),
+    CoreView: () => import("./components/core/View.vue"),
   },
 
   data: () => ({}),
