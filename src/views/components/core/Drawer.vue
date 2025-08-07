@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { ref, inject, onMounted, onUnmounted, onBeforeUnmount } from 'vue'
+import { ref, inject, onMounted, onBeforeUnmount } from 'vue'
 import { useDisplay } from 'vuetify'
 import GlassCard from '@/components/GlassCard.vue'
 
