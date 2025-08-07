@@ -13,7 +13,7 @@
         </div>
         <div>
           <grid-layout
-            :layout.sync="layout"
+            v-model:layout="layout"
             :col-num="6"
             :row-height="50"
             :is-draggable="draggable"
