@@ -34,7 +34,8 @@
     "execa": "^5.1.1",
     "sass": "^1.89.2",
     "sass-loader": "^16.0.5",
-    "vite-plugin-vuetify": "^2.1.1"
+    "vite-plugin-vuetify": "^2.1.1",
+    "vue-eslint-parser": "^10.2.0"
   },
   "browserslist": [
     "> 1%",
