@@ -99,7 +99,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/glass-theme.scss';
+@use '@/assets/styles/glass-theme.scss';
 
 .glass-button {
   position: relative;

@@ -28,7 +28,7 @@ export default {
 };
 </script>
 <style lang="scss">
-@import '@/assets/styles/glass-theme.scss';
+@use '@/assets/styles/glass-theme.scss';
 
 html {
   overflow: scroll;

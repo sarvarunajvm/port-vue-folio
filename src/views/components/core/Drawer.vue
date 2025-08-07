@@ -110,7 +110,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/glass-theme.scss';
+@use '@/assets/styles/glass-theme.scss' as glass;
 
 .glass-drawer {
   backdrop-filter: blur(20px) !important;
@@ -149,7 +149,7 @@ export default {
   background: transparent !important;
   
   .glass-nav-item {
-    @include glass-effect('light');
+    @include glass.glass-effect('light');
     margin: 8px 0;
     border-radius: 12px;
     padding: 12px 16px;
@@ -173,7 +173,7 @@ export default {
 }
 
 :global(.theme-dark) .glass-nav-list .glass-nav-item {
-  @include glass-effect('dark');
+  @include glass.glass-effect('dark');
   
   &.v-list-item--active {
     background: rgba(127, 90, 240, 0.2) !important;
