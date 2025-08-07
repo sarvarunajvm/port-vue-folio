@@ -6,7 +6,7 @@ module.exports = {
     es2022: true
   },
   extends: [
-    'plugin:vue/vue3-essential',
+    'plugin:vue/essential',
     'eslint:recommended'
   ],
   parserOptions: {
@@ -20,5 +20,10 @@ module.exports = {
     'vue/multi-word-component-names': 'off',
     'no-unused-vars': 'warn',
     'vue/no-unused-components': 'warn'
-  }
+  },
+  ignorePatterns: [
+    'node_modules/',
+    'dist/',
+    'build/'
+  ]
 }
