@@ -1,30 +1,24 @@
-import js from '@eslint/js'
-import pluginVue from 'eslint-plugin-vue'
-
-export default [
-  {
-    ignores: ['node_modules/**', 'dist/**', 'build/**']
+module.exports = {
+  root: true,
+  env: {
+    node: true,
+    browser: true,
+    es2022: true
   },
-  js.configs.recommended,
-  ...pluginVue.configs['flat/essential'],
-  {
-    languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-      globals: {
-        process: 'readonly',
-        console: 'readonly',
-        window: 'readonly',
-        document: 'readonly',
-        localStorage: 'readonly',
-        setTimeout: 'readonly'
-      }
-    },
-    rules: {
-      'no-unused-vars': 'warn',
-      'no-console': 'off',
-      'vue/multi-word-component-names': 'off',
-      'vue/no-unused-components': 'warn'
-    }
+  extends: [
+    'plugin:vue/vue3-essential',
+    'eslint:recommended'
+  ],
+  parserOptions: {
+    parser: '@babel/eslint-parser',
+    requireConfigFile: false,
+    sourceType: 'module'
+  },
+  rules: {
+    'no-console': 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'vue/multi-word-component-names': 'off',
+    'no-unused-vars': 'warn',
+    'vue/no-unused-components': 'warn'
   }
-]
+}
