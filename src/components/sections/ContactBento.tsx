@@ -1,14 +1,26 @@
 import React, { useState } from 'react';
+
+import { motion } from 'framer-motion';
+import {
+  Clock,
+  Code2,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  MessageSquare,
+  Phone,
+  Send,
+} from 'lucide-react';
+
 import { personalInfo } from '../../data/about';
-import { BentoGrid, BentoCard } from '../BentoGrid';
-import { Mail, Phone, Github, Linkedin, Code2, Send, MapPin, Clock, MessageSquare } from 'lucide-react';
 
 export const ContactBento: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -23,165 +35,182 @@ export const ContactBento: React.FC = () => {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
   return (
-    <div className="w-full">
-      <div className="text-center mb-8">
-        <p className="text-lg" style={{ color: 'var(--muted)' }}>
-          Let's discuss your next project
-        </p>
-      </div>
+    <div className="fixed inset-0 overflow-hidden flex items-center justify-center p-4 md:p-6 lg:p-8">
+      <div className="w-full h-full max-w-[1600px] flex flex-col">
+        <div className="text-center mb-4">
+          <p className="text-lg" style={{ color: 'var(--muted)' }}>
+            Let's discuss your next project
+          </p>
+        </div>
 
-        <BentoGrid>
-          {/* Contact Form - Large Card */}
-          <BentoCard size="large" delay={0.1}>
-            <div className="h-full">
-              <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                <MessageSquare size={20} />
-                Send Message
-              </h3>
-              
-              <form onSubmit={handleSubmit} className="space-y-3">
-                <div className="grid grid-cols-2 gap-3">
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="soft-surface-sm px-4 py-3 rounded-lg bg-transparent focus-ring"
-                    placeholder="Your Name"
-                  />
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="soft-surface-sm px-4 py-3 rounded-lg bg-transparent focus-ring"
-                    placeholder="your.email@example.com"
-                  />
-                </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-full">
+          {/* Contact Form - Left Side */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="soft-surface rounded-2xl p-8 h-full flex flex-col"
+          >
+            <h3 className="text-2xl font-semibold mb-6 flex items-center gap-3">
+              <MessageSquare size={24} />
+              Send Message
+            </h3>
 
+            <form onSubmit={handleSubmit} className="flex-1 flex flex-col space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input
                   type="text"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  className="w-full soft-surface-sm px-4 py-3 rounded-lg bg-transparent focus-ring"
-                  placeholder="Subject"
-                />
-
-                <textarea
-                  name="message"
-                  value={formData.message}
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
                   required
-                  rows={4}
-                  className="w-full soft-surface-sm px-4 py-3 rounded-lg bg-transparent focus-ring resize-none"
-                  placeholder="Your message..."
+                  className="soft-surface-sm px-5 py-4 rounded-lg bg-transparent focus-ring text-base"
+                  placeholder="Your Name"
                 />
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="soft-surface-sm px-5 py-4 rounded-lg bg-transparent focus-ring text-base"
+                  placeholder="your.email@example.com"
+                />
+              </div>
 
-                <button
-                  type="submit"
-                  className="w-full soft-surface px-4 py-3 font-medium rounded-lg soft-hover soft-press focus-ring inline-flex items-center justify-center gap-2"
-                >
-                  <Send size={18} />
-                  Send Message
-                </button>
-              </form>
+              <input
+                type="text"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                className="w-full soft-surface-sm px-5 py-4 rounded-lg bg-transparent focus-ring text-base"
+                placeholder="Subject"
+              />
+
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                className="w-full flex-1 soft-surface-sm px-5 py-4 rounded-lg bg-transparent focus-ring resize-none text-base"
+                placeholder="Your message..."
+              />
+
+              <button
+                type="submit"
+                className="w-full soft-surface px-6 py-4 font-medium rounded-lg soft-hover soft-press focus-ring inline-flex items-center justify-center gap-2 text-base"
+              >
+                <Send size={20} />
+                Send Message
+              </button>
+            </form>
+          </motion.div>
+
+          {/* Contact Information - Right Side */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="soft-surface rounded-2xl p-8 h-full flex flex-col"
+          >
+            <h3 className="text-2xl font-semibold mb-6">Get in Touch</h3>
+
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Email */}
+              <a
+                href={`mailto:${personalInfo.email}`}
+                className="soft-surface-sm p-6 rounded-xl soft-hover group flex flex-col justify-center"
+              >
+                <Mail
+                  className="w-12 h-12 mb-3 group-hover:scale-110 transition-transform"
+                  style={{ color: 'var(--muted)' }}
+                />
+                <p className="font-medium mb-1">Email</p>
+                <p className="text-sm" style={{ color: 'var(--muted)' }}>
+                  {personalInfo.email}
+                </p>
+              </a>
+
+              {/* Phone */}
+              <div className="soft-surface-sm p-6 rounded-xl flex flex-col justify-center">
+                <Phone className="w-12 h-12 mb-3" style={{ color: 'var(--muted)' }} />
+                <p className="font-medium mb-1">Phone</p>
+                <p className="text-sm" style={{ color: 'var(--muted)' }}>
+                  {personalInfo.phone}
+                </p>
+              </div>
+
+              {/* Location */}
+              <div className="soft-surface-sm p-6 rounded-xl flex flex-col justify-center">
+                <MapPin className="w-12 h-12 mb-3" style={{ color: 'var(--muted)' }} />
+                <p className="font-medium mb-1">Location</p>
+                <p className="text-sm" style={{ color: 'var(--muted)' }}>
+                  Chennai, India
+                </p>
+              </div>
+
+              {/* Response Time */}
+              <div className="soft-surface-sm p-6 rounded-xl flex flex-col justify-center">
+                <Clock className="w-12 h-12 mb-3" style={{ color: 'var(--muted)' }} />
+                <p className="font-medium mb-1">Response Time</p>
+                <p className="text-sm" style={{ color: 'var(--muted)' }}>
+                  Within 24 hours
+                </p>
+              </div>
             </div>
-          </BentoCard>
 
-          {/* Email Card */}
-          <BentoCard size="medium" delay={0.2}>
-            <a
-              href={`mailto:${personalInfo.email}`}
-              className="h-full flex flex-col justify-center soft-hover group"
-            >
-              <Mail className="w-10 h-10 mb-3 group-hover:scale-110 transition-transform" style={{ color: 'var(--muted)' }} />
-              <p className="text-sm font-medium mb-1">Email</p>
-              <p className="text-xs" style={{ color: 'var(--muted)' }}>{personalInfo.email}</p>
-            </a>
-          </BentoCard>
-
-          {/* Phone Card */}
-          <BentoCard size="small" delay={0.3}>
-            <div className="h-full flex flex-col justify-center">
-              <Phone className="w-8 h-8 mb-2" style={{ color: 'var(--muted)' }} />
-              <p className="text-sm font-medium mb-1">Phone</p>
-              <p className="text-xs" style={{ color: 'var(--muted)' }}>{personalInfo.phone}</p>
-            </div>
-          </BentoCard>
-
-          {/* Response Time Card */}
-          <BentoCard size="small" delay={0.4}>
-            <div className="h-full flex flex-col justify-center items-center text-center">
-              <Clock className="w-8 h-8 mb-2" style={{ color: 'var(--muted)' }} />
-              <p className="text-lg font-bold">24h</p>
-              <p className="text-xs" style={{ color: 'var(--muted)' }}>Avg. Response</p>
-            </div>
-          </BentoCard>
-
-          {/* Social Links Card */}
-          <BentoCard size="medium" delay={0.5}>
-            <div className="h-full">
-              <h4 className="font-semibold mb-3">Connect on Social</h4>
-              <div className="grid grid-cols-2 gap-2">
+            {/* Social Links */}
+            <div className="mt-6">
+              <h4 className="font-semibold mb-4">Connect on Social</h4>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <a
                   href={personalInfo.social.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="soft-surface-sm p-2 rounded-lg flex items-center gap-2 soft-hover soft-press focus-ring"
+                  className="soft-surface-sm p-4 rounded-lg flex flex-col items-center gap-2 soft-hover soft-press focus-ring"
                 >
-                  <Github size={16} />
+                  <Github size={24} />
                   <span className="text-xs">GitHub</span>
                 </a>
                 <a
                   href={personalInfo.social.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="soft-surface-sm p-2 rounded-lg flex items-center gap-2 soft-hover soft-press focus-ring"
+                  className="soft-surface-sm p-4 rounded-lg flex flex-col items-center gap-2 soft-hover soft-press focus-ring"
                 >
-                  <Linkedin size={16} />
+                  <Linkedin size={24} />
                   <span className="text-xs">LinkedIn</span>
                 </a>
                 <a
                   href={personalInfo.social.stackoverflow}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="soft-surface-sm p-2 rounded-lg flex items-center gap-2 soft-hover soft-press focus-ring"
+                  className="soft-surface-sm p-4 rounded-lg flex flex-col items-center gap-2 soft-hover soft-press focus-ring"
                 >
-                  <Code2 size={16} />
+                  <Code2 size={24} />
                   <span className="text-xs">Stack</span>
                 </a>
                 <a
                   href={personalInfo.social.devto}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="soft-surface-sm p-2 rounded-lg flex items-center gap-2 soft-hover soft-press focus-ring"
+                  className="soft-surface-sm p-4 rounded-lg flex flex-col items-center gap-2 soft-hover soft-press focus-ring"
                 >
-                  <Code2 size={16} />
+                  <Code2 size={24} />
                   <span className="text-xs">Dev.to</span>
                 </a>
               </div>
             </div>
-          </BentoCard>
-
-          {/* Location Card */}
-          <BentoCard size="small" delay={0.6}>
-            <div className="h-full flex flex-col justify-center items-center text-center">
-              <MapPin className="w-8 h-8 mb-2" style={{ color: 'var(--muted)' }} />
-              <p className="text-sm font-medium">Chennai</p>
-              <p className="text-xs" style={{ color: 'var(--muted)' }}>India</p>
-            </div>
-          </BentoCard>
-        </BentoGrid>
+          </motion.div>
+        </div>
+      </div>
     </div>
   );
 };
