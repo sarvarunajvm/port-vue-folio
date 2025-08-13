@@ -23,12 +23,12 @@ export const Hero: React.FC = () => {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 soft-surface rounded-full opacity-10 animate-pulse-soft" />
       </div>
 
-      <div className="container relative z-10">
+      <div className="container relative z-10 px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center"
+          className="text-center max-w-5xl mx-auto"
         >
           {/* Name */}
           <motion.h1
@@ -52,7 +52,8 @@ export const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="text-xl md:text-2xl text-muted"
+              className="text-xl md:text-2xl"
+              style={{ color: 'var(--muted)' }}
             >
               {personalInfo.titles[titleIndex]}
             </motion.p>
@@ -60,7 +61,8 @@ export const Hero: React.FC = () => {
 
           {/* Summary */}
           <motion.p
-            className="max-w-2xl mx-auto text-lg mb-12 text-muted leading-relaxed"
+            className="max-w-2xl mx-auto text-lg mb-12 leading-relaxed"
+            style={{ color: 'var(--muted)' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}

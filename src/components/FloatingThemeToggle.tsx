@@ -1,0 +1,34 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Moon, Sun } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
+
+export const FloatingThemeToggle: React.FC = () => {
+  const { theme, toggleTheme } = useTheme();
+
+  return (
+    <motion.button
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 0.5, type: 'spring', stiffness: 260, damping: 20 }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      onClick={toggleTheme}
+      className="fixed bottom-6 right-6 z-50 soft-surface p-4 rounded-full soft-hover soft-press focus-ring"
+      aria-label="Toggle theme"
+      title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+    >
+      <motion.div
+        initial={false}
+        animate={{ rotate: theme === 'dark' ? 180 : 0 }}
+        transition={{ duration: 0.3 }}
+      >
+        {theme === 'light' ? (
+          <Moon size={24} className="text-current" />
+        ) : (
+          <Sun size={24} className="text-current" />
+        )}
+      </motion.div>
+    </motion.button>
+  );
+};

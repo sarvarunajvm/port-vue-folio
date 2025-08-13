@@ -37,13 +37,14 @@ export const Header: React.FC = () => {
   return (
     <motion.header
       className={`fixed top-0 left-0 right-0 z-50 transition-all ${
-        isScrolled ? 'backdrop-blur-md' : ''
+        isScrolled ? 'backdrop-blur-md bg-opacity-90' : ''
       }`}
+      style={{ backgroundColor: isScrolled ? 'var(--bg)' : 'transparent' }}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className={`container mx-auto px-4 ${isScrolled ? 'py-4' : 'py-6'}`}>
+      <div className={`container mx-auto px-4 max-w-7xl ${isScrolled ? 'py-3' : 'py-4'}`}>
         <nav className={`soft-surface px-6 py-4 flex items-center justify-between ${
           isScrolled ? 'soft-surface-sm' : ''
         }`}>
