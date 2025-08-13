@@ -1,45 +1,161 @@
-# Port-Vue-Folio
+# Portfolio - Saravanan Kalimuthu
 
-Hi! I'm a **Fellow Developer** and i designed this in such a way everyonce can use. If you want to use this portfolio please follow the below steps and enjoy. And if you want any help please feel free to contact me.
+A modern, single-page React portfolio featuring a Neomorphic Soft UI design system with monochrome aesthetics. Built with React 18, TypeScript, Vite, and HeroUI components.
 
-## ScreenShots
-### Dark Theme
-![Dark](images/Dark.png)
-### Light Theme
-![Light](images/Light.png)
+## 🎨 Design Features
 
-## Files you need to change/modify
-> Note: Please do not change the file name
+- **Neomorphic Soft UI**: Elegant raised/inset surfaces with gentle shadows and highlights
+- **Monochrome Palette**: Professional black/white/grey color scheme
+- **Dark/Light Theme**: Automatic theme detection with manual toggle
+- **Bitcount Grid Single Font**: Unique typography (font files required)
+- **Smooth Animations**: Subtle, realistic animations with reduced motion support
+- **Fully Responsive**: Optimized for all devices (360px to 1440px+)
 
-- [x] Fork the respository.
-- [x] Change the Resume.pdf in public/files. 
-- [x] Change the Resume.gif in src/assets.
-- [x] Change the me.jpg in src/assets.
-- [x] Change the necessory details in json in src/data folders.
+## 🚀 Tech Stack
 
-## Project setup
+- **Framework**: React 18 with TypeScript
+- **Build Tool**: Vite
+- **UI Library**: HeroUI Components
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Testing**: Vitest + Testing Library
+- **Linting**: ESLint + Prettier
+- **CI/CD**: GitHub Actions
 
-> npm install
+## 📦 Installation
 
-### Compiles and hot-reloads for development
+1. Clone the repository:
+```bash
+git clone https://github.com/sarvarunajvm/port-vue-folio.git
+cd port-vue-folio
+```
 
-> npm run serve
+2. Install dependencies:
+```bash
+npm install
+```
 
-### Compiles and minifies for production
+3. Add Bitcount Grid Single font files (optional):
+   - Place `.woff` and `.woff2` files in `/public/fonts/bitcount/`
+   - Falls back to Inter/system fonts if not available
 
-> npm run build
+## 🛠️ Available Scripts
 
-### Lints and fixes files
+```bash
+# Development
+npm run dev           # Start dev server at http://localhost:5173
 
-> npm run lint
+# Build & Preview
+npm run build         # Build for production
+npm run preview       # Preview production build
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# Testing
+npm test             # Run tests once
+npm run test:watch   # Run tests in watch mode
+npm run test:ui      # Open Vitest UI
+npm run test:coverage # Generate coverage report
 
-[![Deploy to Github Pages](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/gh-pages-deploy.yml/badge.svg?branch=master)](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/gh-pages-deploy.yml)
+# Code Quality
+npm run lint         # Run ESLint
+npm run format       # Format with Prettier
+npm run format:check # Check formatting
 
-[![CodeQL](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/codeql-analysis.yml)
+# Deployment
+npm run deploy       # Build and prepare for deployment
+```
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b1e1a4ffddff424e8682f847c5a5a01a)](https://app.codacy.com/gh/sarvarunajvm/port-vue-folio?utm_source=github.com&utm_medium=referral&utm_content=sarvarunajvm/port-vue-folio&utm_campaign=Badge_Grade_Settings)
+## 🎯 Key Features
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+### Sections
+- **Hero**: Dynamic title rotation, social links, smooth scroll CTA
+- **Projects**: Open source contributions with hover effects
+- **Experience**: Professional timeline with impact metrics
+- **Skills**: Categorized technical skills grid
+- **About**: Personal info and education background
+- **Contact**: Contact form with social links
+
+### Accessibility
+- WCAG AA compliant contrast ratios
+- Focus ring indicators for keyboard navigation
+- Semantic HTML and ARIA labels
+- Reduced motion support
+
+### Performance
+- Lighthouse scores ≥90 for Performance, Best Practices, SEO, and Accessibility
+- Code splitting for optimal bundle sizes
+- Lazy loading for improved initial load
+
+## 🌐 Deployment
+
+### GitHub Pages
+
+The project is configured for automatic deployment to GitHub Pages:
+
+1. Push to `master` branch triggers deployment
+2. Site available at: https://sarvarunajvm.github.io/port-vue-folio/
+
+### Manual Deployment
+
+For other platforms (Vercel, Netlify):
+
+1. Build the project:
+```bash
+npm run build
+```
+
+2. Deploy the `dist` folder to your hosting service
+
+## 📁 Project Structure
+
+```
+port-vue-folio/
+├── src/
+│   ├── components/       # React components
+│   │   ├── sections/     # Page sections
+│   │   └── __tests__/    # Component tests
+│   ├── contexts/         # React contexts (Theme)
+│   ├── data/            # TypeScript data files
+│   ├── styles/          # Global CSS
+│   └── test/            # Test setup
+├── public/
+│   └── fonts/           # Font files
+├── .github/
+│   └── workflows/       # CI/CD pipelines
+└── dist/               # Production build
+```
+
+## 🎨 Theming
+
+The portfolio uses CSS custom properties for theming:
+
+```css
+/* Light Theme (default) */
+--bg: #f2f3f5;
+--surface: #f7f8fa;
+--fg: #0a0a0a;
+--muted: #6b7280;
+
+/* Dark Theme */
+--bg: #0e0f11;
+--surface: #121316;
+--fg: #f5f5f5;
+--muted: #9ca3af;
+```
+
+## 📝 License
+
+This project is open source. Feel free to use it as inspiration for your own portfolio.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📧 Contact
+
+- Email: sathishdaywalker@outlook.com
+- GitHub: [@sarvarunajvm](https://github.com/sarvarunajvm)
+- LinkedIn: [Saravanan Kalimuthu](https://www.linkedin.com/in/saravanan-kalimuthu-01a0a9113)
+
+---
+
+Built with React, TypeScript, and HeroUI

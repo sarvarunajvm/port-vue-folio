@@ -1,22 +1,37 @@
-.DS_Store
-node_modules
-/dist
-
-# local env files
-.env.local
-.env.*.local
-
-# Log files
+# Logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
 
 # Editor directories and files
+.vscode/*
+!.vscode/extensions.json
 .idea
-.vscode
+.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Test coverage
+coverage
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Bitcount Grid Single font files (proprietary)
+public/fonts/bitcount/*.woff
+public/fonts/bitcount/*.woff2
+!public/fonts/bitcount/README.md

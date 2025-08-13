@@ -1,45 +1,58 @@
 {
-  "name": "vue-portfolio",
-  "version": "0.1.0",
+  "name": "port-vue-folio",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "deploy": "node scripts/gh-pages-deploy.js"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview --port 5173",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "prepare": "husky",
+    "deploy": "npm run build && echo 'Ready for deployment'"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{js,jsx,json,css,md}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
-    "@mdi/font": "^7.4.47",
-    "axios": "^1.10.0",
-    "core-js": "^3.44.0",
-    "mitt": "^3.0.1",
-    "vue": "^3.5.17",
-    "vue-embed-gist": "^1.2.0",
-    "vue-grid-layout": "^2.4.0",
-    "vue-i18n": "^11.1.10",
-    "vue-page-transition": "^0.2.2",
-    "vue-router": "^4.5.1",
-    "vue-typer": "^1.2.0",
-    "vuetify": "^3.9.2"
+    "@heroui/react": "^2.8.2",
+    "framer-motion": "^12.23.12",
+    "lucide-react": "^0.539.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.26.0",
-    "@eslint/js": "^9.31.0",
-    "@vue/cli-plugin-babel": "^5.0.8",
-    "@vue/cli-plugin-eslint": "^5.0.8",
-    "@vue/cli-service": "^5.0.8",
-    "@vue/compiler-sfc": "^3.5.17",
-    "eslint": "^8.0.0",
-    "eslint-plugin-vue": "^10.3.0",
-    "execa": "^5.1.1",
-    "sass": "^1.89.2",
-    "sass-loader": "^16.0.5",
-    "vite-plugin-vuetify": "^2.1.1",
-    "vue-eslint-parser": "^10.2.0"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not dead"
-  ]
+    "@testing-library/jest-dom": "^6.6.4",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitest/ui": "^3.2.4",
+    "eslint": "^8.56.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "husky": "^9.1.7",
+    "jsdom": "^26.1.0",
+    "lint-staged": "^16.1.5",
+    "prettier": "^3.6.2",
+    "typescript": "^5.2.2",
+    "vite": "^5.1.0",
+    "vitest": "^3.2.4"
+  }
 }
