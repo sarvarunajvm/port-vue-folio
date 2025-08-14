@@ -30,19 +30,59 @@ jobs:
           cache: npm
           cache-dependency-path: package-lock.json
 
-      # npm occasionally crashes in CI with "Exit handler never called".
-      # We disable Husky in CI and add a small retry.
-      - name: Install dependencies
+      # Work around npm "Exit handler never called!" by using a stable npm version
+      - name: Stabilize npm
+        run: |
+          set -eux
+          npm --version
+          npm i -g npm@10.7.0
+          npm --version
+
+      - name: Install dependencies (robust)
         env:
-          HUSKY: "0"
+          HUSKY: "0"         # skip husky prepare in CI
+          CI: "true"
         run: |
           set -euxo pipefail
+
+          npm config set fund false
+          npm config set audit false
+          npm config set progress false
+
+          success=""
           for i in 1 2 3; do
-            npm ci --no-audit --no-fund && break
-            echo "npm ci failed (attempt $i). Retrying in 10s..."
-            sleep 10
+            echo "Attempt $i: npm ci"
+            # npm sometimes "succeeds" with that bug; never trust exit code alone
+            (npm ci --no-audit --no-fund || true)
+
+            # verify modules actually exist
+            if [ -f node_modules/react/package.json ] && [ -f node_modules/react-dom/package.json ]; then
+              echo "Dependencies present after npm ci"
+              success="yes"
+              break
+            fi
+
+            echo "npm ci did not complete correctly; trying npm install..."
+            (npm install --no-audit --no-fund --legacy-peer-deps || true)
+
+            if [ -f node_modules/react/package.json ] && [ -f node_modules/react-dom/package.json ]; then
+              echo "Dependencies present after npm install"
+              success="yes"
+              break
+            fi
+
+            echo "Cleaning cache and retrying..."
+            rm -rf node_modules
+            npm cache clean --force
+            sleep 8
           done
-          # sanity check that key deps are present
+
+          if [ -z "$success" ]; then
+            echo "Dependency installation failed after retries."
+            exit 1
+          fi
+
+          # final sanity check via Node resolver
           node -e "require.resolve('react'); require.resolve('react-dom'); require.resolve('vite'); require.resolve('@vitejs/plugin-react')"
 
       - name: Build
@@ -51,7 +91,7 @@ jobs:
           BASE_URL: /port-vue-folio/
         run: |
           npm run build
-          # SPA 404 fallback so client-side routes work on GitHub Pages
+          # SPA fallback for client-side routes
           cp dist/index.html dist/404.html
 
       - name: Setup Pages

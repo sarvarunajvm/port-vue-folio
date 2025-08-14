@@ -5,18 +5,6 @@
 
 /* Global CSS with Neomorphic Soft UI design tokens */
 
-/* Font Face for Bitcount Grid Single */
-@font-face {
-  font-family: 'Bitcount Grid Single';
-  src:
-    url('/fonts/bitcount/BitcountGridSingle.woff2') format('woff2'),
-    url('/fonts/bitcount/BitcountGridSingle.woff') format('woff');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-  font-feature-settings: normal;
-}
-
 /* CSS Variables / Design Tokens */
 :root {
   /* Base monochrome palette */

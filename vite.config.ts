@@ -1,10 +1,9 @@
 // vite.config.ts
-import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  // Prefer env override, else default by mode
   base: process.env.BASE_URL ?? (mode === 'production' ? '/port-vue-folio/' : '/'),
   build: {
     outDir: 'dist',
@@ -19,4 +18,4 @@ export default defineConfig(({ mode }) => ({
       },
     },
   },
-}));
+}))
