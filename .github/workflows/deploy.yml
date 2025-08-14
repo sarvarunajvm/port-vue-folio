@@ -11,8 +11,8 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
-  cancel-in-progress: false
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -20,29 +20,39 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
+          cache: npm
+          cache-dependency-path: package-lock.json
 
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
+      # npm occasionally crashes in CI with "Exit handler never called".
+      # We disable Husky in CI and add a small retry.
       - name: Install dependencies
+        env:
+          HUSKY: "0"
         run: |
-          npm cache clean --force
-          npm install --legacy-peer-deps
+          set -euxo pipefail
+          for i in 1 2 3; do
+            npm ci --no-audit --no-fund && break
+            echo "npm ci failed (attempt $i). Retrying in 10s..."
+            sleep 10
+          done
+          # sanity check that key deps are present
+          node -e "require.resolve('react'); require.resolve('react-dom'); require.resolve('vite'); require.resolve('@vitejs/plugin-react')"
 
       - name: Build
-        run: npm run build --if-present || npx vite build
         env:
+          NODE_ENV: production
           BASE_URL: /port-vue-folio/
+        run: |
+          npm run build
+          # SPA 404 fallback so client-side routes work on GitHub Pages
+          cp dist/index.html dist/404.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -50,7 +60,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist
+          path: dist
 
   deploy:
     environment:
