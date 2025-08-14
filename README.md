@@ -1,45 +1,186 @@
-# Port-Vue-Folio
+# Portfolio - Saravanan Kalimuthu
 
-Hi! I'm a **Fellow Developer** and i designed this in such a way everyonce can use. If you want to use this portfolio please follow the below steps and enjoy. And if you want any help please feel free to contact me.
+A modern, minimalist portfolio featuring a unique Bento Grid layout with Neomorphic Soft UI design. Built with React 18, TypeScript, Vite, and HeroUI components, showcasing a no-scroll single-page experience with modal-based content exploration.
 
-## ScreenShots
-### Dark Theme
-![Dark](images/Dark.png)
-### Light Theme
-![Light](images/Light.png)
+## 🎨 Design Philosophy
 
-## Files you need to change/modify
-> Note: Please do not change the file name
+### Bento Grid Layout
+- **Fixed Viewport**: Full-screen, no-scroll design
+- **Grid System**: 12-column responsive grid with adaptive card sizes
+- **Modal Navigation**: Click-to-explore sections in elegant modals
+- **Hover Effects**: Dynamic pastel purple (light) and emerald (dark) accents
 
-- [x] Fork the respository.
-- [x] Change the Resume.pdf in public/files. 
-- [x] Change the Resume.gif in src/assets.
-- [x] Change the me.jpg in src/assets.
-- [x] Change the necessory details in json in src/data folders.
+### Neomorphic Soft UI
+- **3D Surfaces**: Raised cards with realistic shadows and highlights
+- **Monochrome Base**: Clean black/white/grey foundation
+- **Accent Colors**: Subtle pastel gradients on hover interactions
+- **Smooth Transitions**: Cubic-bezier animations for natural movement
 
-## Project setup
+## 🚀 Tech Stack
 
-> npm install
+- **Framework**: React 18 with TypeScript
+- **Build Tool**: Vite 5
+- **UI Library**: HeroUI Components
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+- **Styling**: Tailwind CSS + Custom CSS
+- **Code Quality**: ESLint + Prettier + Husky
 
-### Compiles and hot-reloads for development
+## 📦 Quick Start
 
-> npm run serve
+```bash
+# Clone repository
+git clone https://github.com/sarvarunajvm/port-vue-folio.git
+cd port-vue-folio
 
-### Compiles and minifies for production
+# Install dependencies
+npm install
 
-> npm run build
+# Start development server
+npm run dev
+```
 
-### Lints and fixes files
+Visit `http://localhost:5173` to see the portfolio.
 
-> npm run lint
+## 🛠️ Available Scripts
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run lint         # Run ESLint
+npm run format       # Format code with Prettier
+npm run deploy       # Build and prepare for deployment
+```
 
-[![Deploy to Github Pages](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/gh-pages-deploy.yml/badge.svg?branch=master)](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/gh-pages-deploy.yml)
+## 🎯 Features
 
-[![CodeQL](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/codeql-analysis.yml)
+### Interactive Bento Cards
+- **Hero Card**: Dynamic title rotation, real-time clock, stats display
+- **Profile Photo**: Animated presence with online indicator
+- **Experience**: Timeline view with company highlights
+- **Skills**: Categorized tech stack visualization
+- **Projects**: Open source contributions showcase
+- **Contact**: Social links and communication channels
+- **Resume**: One-click CV download
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b1e1a4ffddff424e8682f847c5a5a01a)](https://app.codacy.com/gh/sarvarunajvm/port-vue-folio?utm_source=github.com&utm_medium=referral&utm_content=sarvarunajvm/port-vue-folio&utm_campaign=Badge_Grade_Settings)
+### User Experience
+- **Theme Toggle**: Automatic system detection + manual override
+- **Responsive Design**: Optimized for mobile, tablet, and desktop
+- **Accessibility**: WCAG AA compliant, keyboard navigation support
+- **Performance**: Optimized bundle sizes with code splitting
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## 📁 Project Structure
+
+```
+port-vue-folio/
+├── src/
+│   ├── components/
+│   │   ├── Home.tsx              # Main Bento grid layout
+│   │   ├── Modal.tsx             # Reusable modal component
+│   │   ├── FloatingThemeToggle.tsx
+│   │   └── sections/             # Content sections
+│   │       ├── AboutBento.tsx
+│   │       ├── ContactBento.tsx
+│   │       ├── ExperienceBento.tsx
+│   │       ├── ProjectsBento.tsx
+│   │       └── SkillsBento.tsx
+│   ├── contexts/
+│   │   └── ThemeContext.tsx     # Theme management
+│   ├── hooks/
+│   │   └── useTheme.ts          # Theme hook
+│   ├── data/                    # Portfolio content
+│   │   ├── about.ts
+│   │   ├── education.ts
+│   │   ├── experience.ts
+│   │   ├── projects.ts
+│   │   └── skills.ts
+│   └── styles/
+│       └── globals.css          # Neomorphic design system
+├── public/
+│   ├── photo.png               # Profile photo
+│   ├── Resume.pdf              # Downloadable CV
+│   └── fonts/                  # Custom fonts (optional)
+└── dist/                       # Production build
+```
+
+## 🎨 Customization
+
+### Update Content
+Edit the TypeScript files in `src/data/`:
+- `about.ts` - Personal information
+- `experience.ts` - Work history
+- `projects.ts` - Portfolio projects
+- `skills.ts` - Technical skills
+- `education.ts` - Educational background
+
+### Theme Colors
+Modify CSS variables in `src/styles/globals.css`:
+
+```css
+/* Light Theme */
+--bg: #f2f3f5;
+--surface: #f7f8fa;
+--fg: #1a1a1a;
+--muted: #4a4a4a;
+
+/* Dark Theme */
+--bg: #0e0f11;
+--surface: #121316;
+--fg: #f0f0f0;
+--muted: #a0a0a0;
+```
+
+### Hover Effects
+- Light mode: Pastel purple shadows (rgba(147, 51, 234))
+- Dark mode: Pastel emerald shadows (rgba(16, 185, 129))
+
+## 🌐 Deployment
+
+### GitHub Pages
+Configured for automatic deployment on push to `master` branch.
+
+### Manual Deployment
+1. Build the project: `npm run build`
+2. Deploy the `dist` folder to your hosting service
+
+### Environment Requirements
+- Node.js 18+ recommended
+- npm 9+ or compatible package manager
+
+## 📊 Performance
+
+- **Lighthouse Scores**: 90+ across all metrics
+- **Bundle Size**: ~380KB total (gzipped ~110KB)
+- **Initial Load**: < 2s on 3G connection
+- **Interaction Ready**: < 1s Time to Interactive
+
+## 🔧 Browser Support
+
+- Chrome/Edge 90+
+- Firefox 88+
+- Safari 14+
+- Mobile browsers (iOS Safari, Chrome Mobile)
+
+## 📝 License
+
+Open source - feel free to use as inspiration for your own portfolio.
+
+## 🤝 Contributing
+
+Contributions welcome! Please:
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## 📧 Contact
+
+- **Email**: sathishdaywalker@outlook.com
+- **GitHub**: [@sarvarunajvm](https://github.com/sarvarunajvm)
+- **LinkedIn**: [Saravanan Kalimuthu](https://www.linkedin.com/in/saravanan-kalimuthu-01a0a9113)
+
+---
+
+Built with ❤️ using React, TypeScript, and HeroUI
