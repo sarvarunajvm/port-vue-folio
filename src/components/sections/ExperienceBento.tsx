@@ -51,7 +51,7 @@ export const ExperienceBento: React.FC = () => {
           >
             <div className="flex items-start justify-between mb-2 sm:mb-3">
               <div className="flex items-start gap-2 sm:gap-3">
-                <div className="soft-surface-sm p-2 sm:p-2.5 md:p-3 rounded-lg bg-gradient-to-br from-violet-500/10 to-purple-500/10">
+                <div className="p-2 sm:p-2.5 md:p-3 rounded-lg bg-gradient-to-br from-violet-500/20 to-purple-500/20">
                   <CreditCard size={20} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
                 </div>
                 <div>
@@ -185,7 +185,7 @@ export const ExperienceBento: React.FC = () => {
                 className="col-span-2 soft-surface rounded-lg md:rounded-2xl p-2.5 sm:p-3 flex flex-col"
               >
                 <div className="flex items-start gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
-                  <div className="soft-surface-sm p-1.5 sm:p-2 rounded-lg bg-gradient-to-br from-blue-500/10 to-indigo-500/10">
+                  <div className="p-1.5 sm:p-2 rounded-lg bg-gradient-to-br from-blue-500/20 to-indigo-500/20">
                     <Icon size={16} className="sm:w-[18px] sm:h-[18px]" />
                   </div>
                   <div className="flex-1">
