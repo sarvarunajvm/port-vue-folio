@@ -62,45 +62,105 @@ export const SkillsBento: React.FC = () => {
   const other = skillsData.find((c) => c.id === 'other');
 
   return (
-    <div className="fixed inset-0 overflow-hidden flex items-center justify-center p-4 md:p-6 lg:p-8">
-      <div className="w-full h-full max-w-[1600px] flex flex-col">
-        <div className="text-center mb-2">
-          <p className="text-lg" style={{ color: 'var(--muted)' }}>
+    <div className="w-full h-full flex flex-col">
+      <div className="w-full h-full flex flex-col">
+        <div className="text-center mb-1 sm:mb-2">
+          <p
+            className="text-base sm:text-lg md:text-xl font-medium"
+            style={{ color: 'var(--muted)' }}
+          >
             Full-stack expertise across modern technologies
           </p>
         </div>
 
         <div
-          className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 flex-1"
-          style={{ gridTemplateRows: '1fr 1fr' }}
+          className="grid grid-cols-6 gap-1 sm:gap-1.5 md:gap-2 flex-1"
+          style={{ gridTemplateRows: 'auto 1fr 1fr' }}
         >
-          {/* Backend - Large Card */}
+          {/* Full Width Summary Card - First Row */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="col-span-6 soft-surface rounded-xl md:rounded-2xl lg:rounded-3xl p-1.5 sm:p-2 md:p-2.5"
+          >
+            <div className="flex flex-row items-center justify-around gap-2 sm:gap-3 md:gap-4">
+              <div className="flex items-center gap-1 sm:gap-1.5">
+                <div className="inline-flex p-1.5 rounded-md bg-gradient-to-br from-yellow-500/10 to-amber-500/10">
+                  <Icons.Award className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <div className="flex sm:items-baseline sm:gap-1">
+                  <p className="text-sm sm:text-base md:text-lg font-bold">50+</p>
+                  <p
+                    className="text-[10px] sm:text-xs md:text-sm font-medium"
+                    style={{ color: 'var(--muted)' }}
+                  >
+                    Technologies
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-1 sm:gap-1.5">
+                <div className="inline-flex p-1.5 rounded-md bg-gradient-to-br from-green-500/10 to-emerald-500/10">
+                  <Icons.TrendingUp className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <div className="flex sm:items-baseline sm:gap-1">
+                  <p className="text-sm sm:text-base md:text-lg font-bold">8+</p>
+                  <p
+                    className="text-[10px] sm:text-xs md:text-sm font-medium"
+                    style={{ color: 'var(--muted)' }}
+                  >
+                    Years Experience
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-1 sm:gap-1.5">
+                <div className="inline-flex p-1.5 rounded-md bg-gradient-to-br from-purple-500/10 to-pink-500/10">
+                  <Icons.Zap className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                <div className="flex sm:items-baseline sm:gap-1">
+                  <p className="text-sm sm:text-base md:text-lg font-bold">Full Stack</p>
+                  <p
+                    className="text-[10px] sm:text-xs md:text-sm font-medium"
+                    style={{ color: 'var(--muted)' }}
+                  >
+                    Development
+                  </p>
+                </div>
+              </div>
+              <p className="text-[10px] sm:text-xs md:text-sm font-medium hidden lg:block">
+                Continuously learning and evolving
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Backend - Second Row */}
           {backend && (
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="col-span-2 md:col-span-2 lg:col-span-3 row-span-1 soft-surface rounded-2xl p-3 flex flex-col"
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="col-span-2 soft-surface rounded-xl md:rounded-2xl lg:rounded-3xl p-3 sm:p-4 md:p-6 flex flex-col"
             >
-              <h3 className="text-base font-bold mb-2 flex items-center gap-2">
-                <Icons.Server size={18} />
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold md:font-bold mb-3 sm:mb-4 flex items-center gap-2 sm:gap-3">
+                <div className="inline-flex p-1.5 rounded-md bg-gradient-to-br from-blue-500/10 to-indigo-500/10">
+                  <Icons.Server className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
                 {backend.title}
               </h3>
 
-              <div className="flex-1 grid grid-cols-4 gap-1 overflow-hidden">
+              <div className="flex-1 grid grid-cols-4 gap-2 sm:gap-3 md:gap-4 overflow-hidden">
                 {backend.skills.map((skill) => {
                   const Icon = getIcon(skill.icon);
 
                   return (
                     <div
                       key={skill.id}
-                      className="soft-surface-sm p-1 rounded soft-hover group flex flex-col items-center justify-center transition-all"
+                      className="soft-surface-sm p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl soft-hover group flex flex-col items-center justify-center transition-all"
                     >
-                      <Icon
-                        size={14}
-                        className="text-muted group-hover:text-current transition-colors"
-                      />
-                      <span className="text-[10px] font-medium text-center truncate w-full">
+                      <div className="p-1.5 rounded-md bg-gradient-to-br from-violet-500/20 to-purple-500/20 mb-1">
+                        <Icon className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
+                      </div>
+                      <span className="text-[9px] sm:text-[10px] md:text-xs font-medium text-center truncate w-full">
                         {skill.name}
                       </span>
                     </div>
@@ -110,33 +170,34 @@ export const SkillsBento: React.FC = () => {
             </motion.div>
           )}
 
-          {/* Frontend - Large Card */}
+          {/* Frontend - Second Row */}
           {frontend && (
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="col-span-2 md:col-span-2 lg:col-span-3 row-span-1 soft-surface rounded-2xl p-3 flex flex-col"
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="col-span-2 soft-surface rounded-xl md:rounded-2xl lg:rounded-3xl p-3 sm:p-4 md:p-6 flex flex-col"
             >
-              <h3 className="text-base font-bold mb-2 flex items-center gap-2">
-                <Icons.Monitor size={18} />
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold md:font-bold mb-3 sm:mb-4 flex items-center gap-2 sm:gap-3">
+                <div className="inline-flex p-1.5 rounded-md bg-gradient-to-br from-cyan-500/10 to-blue-500/10">
+                  <Icons.Monitor className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
                 {frontend.title}
               </h3>
 
-              <div className="flex-1 grid grid-cols-4 gap-1 overflow-hidden">
+              <div className="flex-1 grid grid-cols-4 gap-2 sm:gap-3 md:gap-4 overflow-hidden">
                 {frontend.skills.map((skill) => {
                   const Icon = getIcon(skill.icon);
 
                   return (
                     <div
                       key={skill.id}
-                      className="soft-surface-sm p-1 rounded soft-hover group flex flex-col items-center justify-center transition-all"
+                      className="soft-surface-sm p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl soft-hover group flex flex-col items-center justify-center transition-all"
                     >
-                      <Icon
-                        size={14}
-                        className="text-muted group-hover:text-current transition-colors"
-                      />
-                      <span className="text-[10px] font-medium text-center truncate w-full">
+                      <div className="p-1.5 rounded-md bg-gradient-to-br from-blue-500/20 to-indigo-500/20 mb-1">
+                        <Icon className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
+                      </div>
+                      <span className="text-[9px] sm:text-[10px] md:text-xs font-medium text-center truncate w-full">
                         {skill.name}
                       </span>
                     </div>
@@ -146,67 +207,36 @@ export const SkillsBento: React.FC = () => {
             </motion.div>
           )}
 
-          {/* Databases */}
-          {databases && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="col-span-2 md:col-span-2 lg:col-span-2 row-span-1 soft-surface rounded-2xl p-3 flex flex-col"
-            >
-              <h3 className="text-base font-bold mb-3 flex items-center gap-2">
-                <Icons.Database size={20} />
-                {databases.title}
-              </h3>
-
-              <div className="grid grid-cols-2 gap-2">
-                {databases.skills.map((skill) => {
-                  const Icon = getIcon(skill.icon);
-
-                  return (
-                    <div
-                      key={skill.id}
-                      className="soft-surface-sm p-2 rounded-lg soft-hover group flex items-center gap-2 transition-all"
-                    >
-                      <Icon
-                        size={16}
-                        className="text-muted group-hover:text-current transition-colors flex-shrink-0"
-                      />
-                      <span className="text-xs font-medium truncate">{skill.name}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </motion.div>
-          )}
-
-          {/* DevOps */}
+          {/* DevOps - Second Row */}
           {devops && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="col-span-2 md:col-span-2 lg:col-span-2 row-span-1 soft-surface rounded-2xl p-3 flex flex-col"
+              className="col-span-2 soft-surface rounded-xl md:rounded-2xl lg:rounded-3xl p-3 sm:p-4 md:p-6 flex flex-col"
             >
-              <h3 className="text-base font-bold mb-3 flex items-center gap-2">
-                <Icons.Cloud size={20} />
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold md:font-bold mb-3 sm:mb-4 flex items-center gap-2 sm:gap-3">
+                <div className="inline-flex p-1.5 rounded-md bg-gradient-to-br from-violet-500/10 to-purple-500/10">
+                  <Icons.Cloud className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
                 {devops.title}
               </h3>
 
-              <div className="grid grid-cols-2 gap-2">
+              <div className="flex-1 grid grid-cols-4 gap-2 sm:gap-3 md:gap-4 overflow-hidden">
                 {devops.skills.map((skill) => {
                   const Icon = getIcon(skill.icon);
 
                   return (
                     <div
                       key={skill.id}
-                      className="soft-surface-sm p-2 rounded-lg soft-hover group flex items-center gap-2 transition-all"
+                      className="soft-surface-sm p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl soft-hover group flex flex-col items-center justify-center transition-all"
                     >
-                      <Icon
-                        size={16}
-                        className="text-muted group-hover:text-current transition-colors flex-shrink-0"
-                      />
-                      <span className="text-xs font-medium truncate">{skill.name}</span>
+                      <div className="p-1.5 rounded-md bg-gradient-to-br from-blue-500/20 to-indigo-500/20 mb-1">
+                        <Icon className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
+                      </div>
+                      <span className="text-[9px] sm:text-[10px] md:text-xs font-medium text-center truncate w-full">
+                        {skill.name}
+                      </span>
                     </div>
                   );
                 })}
@@ -214,33 +244,73 @@ export const SkillsBento: React.FC = () => {
             </motion.div>
           )}
 
-          {/* Version Control */}
-          {versionControl && (
+          {/* Databases - Third Row */}
+          {databases && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="col-span-1 md:col-span-2 lg:col-span-1 row-span-1 soft-surface rounded-2xl p-3 flex flex-col"
+              className="col-span-2 soft-surface rounded-xl md:rounded-2xl lg:rounded-3xl p-3 sm:p-4 md:p-6 flex flex-col"
             >
-              <h3 className="text-base font-bold mb-3 flex items-center gap-2">
-                <Icons.GitBranch size={18} />
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold md:font-bold mb-3 sm:mb-4 flex items-center gap-2 sm:gap-3">
+                <div className="inline-flex p-1.5 rounded-md bg-gradient-to-br from-emerald-500/10 to-green-500/10">
+                  <Icons.Database className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
+                {databases.title}
+              </h3>
+
+              <div className="flex-1 grid grid-cols-4 gap-2 sm:gap-3 md:gap-4 overflow-hidden">
+                {databases.skills.map((skill) => {
+                  const Icon = getIcon(skill.icon);
+
+                  return (
+                    <div
+                      key={skill.id}
+                      className="soft-surface-sm p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl soft-hover group flex flex-col items-center justify-center transition-all"
+                    >
+                      <div className="p-1.5 rounded-md bg-gradient-to-br from-blue-500/20 to-indigo-500/20 mb-1">
+                        <Icon className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
+                      </div>
+                      <span className="text-[9px] sm:text-[10px] md:text-xs font-medium text-center truncate w-full">
+                        {skill.name}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          )}
+
+          {/* Version Control - Third Row */}
+          {versionControl && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="col-span-2 soft-surface rounded-xl md:rounded-2xl lg:rounded-3xl p-3 sm:p-4 md:p-6 flex flex-col"
+            >
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold md:font-bold mb-3 sm:mb-4 flex items-center gap-2 sm:gap-3">
+                <div className="inline-flex p-1.5 rounded-md bg-gradient-to-br from-orange-500/10 to-red-500/10">
+                  <Icons.GitBranch className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
                 {versionControl.title}
               </h3>
 
-              <div className="flex-1 space-y-2">
+              <div className="flex-1 grid grid-cols-4 gap-2 sm:gap-3 md:gap-4 overflow-hidden">
                 {versionControl.skills.map((skill) => {
                   const Icon = getIcon(skill.icon);
 
                   return (
                     <div
                       key={skill.id}
-                      className="soft-surface-sm p-2 rounded-lg soft-hover group flex items-center gap-2 transition-all"
+                      className="soft-surface-sm p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl soft-hover group flex flex-col items-center justify-center transition-all"
                     >
-                      <Icon
-                        size={14}
-                        className="text-muted group-hover:text-current transition-colors flex-shrink-0"
-                      />
-                      <span className="text-xs font-medium">{skill.name}</span>
+                      <div className="p-1.5 rounded-md bg-gradient-to-br from-blue-500/20 to-indigo-500/20 mb-1">
+                        <Icon className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
+                      </div>
+                      <span className="text-[9px] sm:text-[10px] md:text-xs font-medium text-center truncate w-full">
+                        {skill.name}
+                      </span>
                     </div>
                   );
                 })}
@@ -248,33 +318,36 @@ export const SkillsBento: React.FC = () => {
             </motion.div>
           )}
 
-          {/* Other Tools */}
+          {/* Other Tools - Third Row */}
           {other && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="col-span-1 md:col-span-2 lg:col-span-1 row-span-1 soft-surface rounded-2xl p-3 flex flex-col"
+              transition={{ duration: 0.5, delay: 0.7 }}
+              className="col-span-2 soft-surface rounded-xl md:rounded-2xl lg:rounded-3xl p-3 sm:p-4 md:p-6 flex flex-col"
             >
-              <h3 className="text-base font-bold mb-3 flex items-center gap-2">
-                <Icons.Wrench size={18} />
+              <h3 className="text-sm sm:text-base md:text-lg font-semibold md:font-bold mb-3 sm:mb-4 flex items-center gap-2 sm:gap-3">
+                <div className="inline-flex p-1.5 rounded-md bg-gradient-to-br from-pink-500/10 to-rose-500/10">
+                  <Icons.Wrench className="w-4 h-4 sm:w-5 sm:h-5" />
+                </div>
                 {other.title}
               </h3>
 
-              <div className="flex-1 space-y-2">
+              <div className="flex-1 grid grid-cols-4 gap-2 sm:gap-3 md:gap-4 overflow-hidden">
                 {other.skills.map((skill) => {
                   const Icon = getIcon(skill.icon);
 
                   return (
                     <div
                       key={skill.id}
-                      className="soft-surface-sm p-2 rounded-lg soft-hover group flex items-center gap-2 transition-all"
+                      className="soft-surface-sm p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl soft-hover group flex flex-col items-center justify-center transition-all"
                     >
-                      <Icon
-                        size={14}
-                        className="text-muted group-hover:text-current transition-colors flex-shrink-0"
-                      />
-                      <span className="text-xs font-medium">{skill.name}</span>
+                      <div className="p-1.5 rounded-md bg-gradient-to-br from-blue-500/20 to-indigo-500/20 mb-1">
+                        <Icon className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5" />
+                      </div>
+                      <span className="text-[9px] sm:text-[10px] md:text-xs font-medium text-center truncate w-full">
+                        {skill.name}
+                      </span>
                     </div>
                   );
                 })}
@@ -282,45 +355,6 @@ export const SkillsBento: React.FC = () => {
             </motion.div>
           )}
         </div>
-
-        {/* Full Width Summary Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          className="w-full soft-surface rounded-xl p-3 mt-2"
-        >
-          <div className="flex items-center justify-around">
-            <div className="flex items-center gap-2">
-              <Icons.Award className="w-8 h-8" style={{ color: 'var(--muted)' }} />
-              <div>
-                <p className="text-xl font-bold">50+</p>
-                <p className="text-[10px]" style={{ color: 'var(--muted)' }}>
-                  Technologies
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <Icons.TrendingUp className="w-8 h-8" style={{ color: 'var(--muted)' }} />
-              <div>
-                <p className="text-xl font-bold">8+</p>
-                <p className="text-[10px]" style={{ color: 'var(--muted)' }}>
-                  Years Experience
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2">
-              <Icons.Zap className="w-8 h-8" style={{ color: 'var(--muted)' }} />
-              <div>
-                <p className="text-xl font-bold">Full Stack</p>
-                <p className="text-[10px]" style={{ color: 'var(--muted)' }}>
-                  Development
-                </p>
-              </div>
-            </div>
-            <p className="text-xs hidden lg:block">Continuously learning and evolving</p>
-          </div>
-        </motion.div>
       </div>
     </div>
   );

@@ -42,10 +42,13 @@ export const ContactBento: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 overflow-hidden flex items-center justify-center p-4 md:p-6 lg:p-8">
-      <div className="w-full h-full max-w-[1600px] flex flex-col">
-        <div className="text-center mb-4">
-          <p className="text-lg" style={{ color: 'var(--muted)' }}>
+    <div className="w-full">
+      <div className="w-full max-w-[1600px] mx-auto">
+        <div className="text-center mb-3 md:mb-4">
+          <p
+            className="text-sm sm:text-base md:text-lg font-medium"
+            style={{ color: 'var(--muted)' }}
+          >
             Let's discuss your next project
           </p>
         </div>
@@ -56,10 +59,12 @@ export const ContactBento: React.FC = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="soft-surface rounded-2xl p-8 h-full flex flex-col"
+            className="soft-surface soft-hover rounded-lg md:rounded-xl lg:rounded-2xl p-3 sm:p-4 md:p-5 lg:p-6 flex flex-col h-full"
           >
             <h3 className="text-2xl font-semibold mb-6 flex items-center gap-3">
-              <MessageSquare size={24} />
+              <div className="inline-flex p-2 rounded-lg bg-gradient-to-br from-cyan-500/10 to-blue-500/10">
+                <MessageSquare size={20} />
+              </div>
               Send Message
             </h3>
 
@@ -71,7 +76,7 @@ export const ContactBento: React.FC = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="soft-surface-sm px-5 py-4 rounded-lg bg-transparent focus-ring text-base"
+                  className="soft-surface-sm px-3 py-2.5 sm:px-4 sm:py-3 md:px-5 md:py-4 rounded-lg bg-transparent focus-ring text-sm sm:text-base font-medium"
                   placeholder="Your Name"
                 />
                 <input
@@ -80,7 +85,7 @@ export const ContactBento: React.FC = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="soft-surface-sm px-5 py-4 rounded-lg bg-transparent focus-ring text-base"
+                  className="soft-surface-sm px-3 py-2.5 sm:px-4 sm:py-3 md:px-5 md:py-4 rounded-lg bg-transparent focus-ring text-sm sm:text-base font-medium"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -107,7 +112,9 @@ export const ContactBento: React.FC = () => {
                 type="submit"
                 className="w-full soft-surface px-6 py-4 font-medium rounded-lg soft-hover soft-press focus-ring inline-flex items-center justify-center gap-2 text-base"
               >
-                <Send size={20} />
+                <div className="inline-flex p-1.5 rounded-md bg-gradient-to-br from-green-500/10 to-emerald-500/10">
+                  <Send size={16} />
+                </div>
                 Send Message
               </button>
             </form>
@@ -118,7 +125,7 @@ export const ContactBento: React.FC = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="soft-surface rounded-2xl p-8 h-full flex flex-col"
+            className="soft-surface soft-hover rounded-lg md:rounded-xl lg:rounded-2xl p-3 sm:p-4 md:p-5 lg:p-6 flex flex-col h-full"
           >
             <h3 className="text-2xl font-semibold mb-6">Get in Touch</h3>
 
@@ -128,39 +135,44 @@ export const ContactBento: React.FC = () => {
                 href={`mailto:${personalInfo.email}`}
                 className="soft-surface-sm p-6 rounded-xl soft-hover group flex flex-col justify-center"
               >
-                <Mail
-                  className="w-12 h-12 mb-3 group-hover:scale-110 transition-transform"
-                  style={{ color: 'var(--muted)' }}
-                />
+                <div className="inline-flex p-3 rounded-lg mb-3 bg-gradient-to-br from-red-500/10 to-pink-500/10 mx-auto group-hover:scale-110 transition-transform">
+                  <Mail className="w-8 h-8" />
+                </div>
                 <p className="font-medium mb-1">Email</p>
-                <p className="text-sm" style={{ color: 'var(--muted)' }}>
+                <p className="text-xs sm:text-sm font-medium" style={{ color: 'var(--muted)' }}>
                   {personalInfo.email}
                 </p>
               </a>
 
               {/* Phone */}
-              <div className="soft-surface-sm p-6 rounded-xl flex flex-col justify-center">
-                <Phone className="w-12 h-12 mb-3" style={{ color: 'var(--muted)' }} />
+              <div className="soft-surface-sm p-4 sm:p-5 md:p-6 rounded-lg md:rounded-xl flex flex-col justify-center">
+                <div className="inline-flex p-3 rounded-lg mb-3 bg-gradient-to-br from-teal-500/10 to-cyan-500/10 mx-auto">
+                  <Phone className="w-8 h-8" />
+                </div>
                 <p className="font-medium mb-1">Phone</p>
-                <p className="text-sm" style={{ color: 'var(--muted)' }}>
+                <p className="text-xs sm:text-sm font-medium" style={{ color: 'var(--muted)' }}>
                   {personalInfo.phone}
                 </p>
               </div>
 
               {/* Location */}
-              <div className="soft-surface-sm p-6 rounded-xl flex flex-col justify-center">
-                <MapPin className="w-12 h-12 mb-3" style={{ color: 'var(--muted)' }} />
+              <div className="soft-surface-sm p-4 sm:p-5 md:p-6 rounded-lg md:rounded-xl flex flex-col justify-center">
+                <div className="inline-flex p-3 rounded-lg mb-3 bg-gradient-to-br from-orange-500/10 to-amber-500/10 mx-auto">
+                  <MapPin className="w-8 h-8" />
+                </div>
                 <p className="font-medium mb-1">Location</p>
-                <p className="text-sm" style={{ color: 'var(--muted)' }}>
+                <p className="text-xs sm:text-sm font-medium" style={{ color: 'var(--muted)' }}>
                   Chennai, India
                 </p>
               </div>
 
               {/* Response Time */}
-              <div className="soft-surface-sm p-6 rounded-xl flex flex-col justify-center">
-                <Clock className="w-12 h-12 mb-3" style={{ color: 'var(--muted)' }} />
+              <div className="soft-surface-sm p-4 sm:p-5 md:p-6 rounded-lg md:rounded-xl flex flex-col justify-center">
+                <div className="inline-flex p-3 rounded-lg mb-3 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 mx-auto">
+                  <Clock className="w-8 h-8" />
+                </div>
                 <p className="font-medium mb-1">Response Time</p>
-                <p className="text-sm" style={{ color: 'var(--muted)' }}>
+                <p className="text-xs sm:text-sm font-medium" style={{ color: 'var(--muted)' }}>
                   Within 24 hours
                 </p>
               </div>
@@ -174,37 +186,45 @@ export const ContactBento: React.FC = () => {
                   href={personalInfo.social.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="soft-surface-sm p-4 rounded-lg flex flex-col items-center gap-2 soft-hover soft-press focus-ring"
+                  className="soft-surface-sm p-3 sm:p-4 rounded-lg flex flex-col items-center gap-1 sm:gap-2 soft-hover soft-press focus-ring"
                 >
-                  <Github size={24} />
+                  <div className="inline-flex p-2 rounded-lg bg-gradient-to-br from-gray-500/10 to-slate-500/10">
+                    <Github size={20} />
+                  </div>
                   <span className="text-xs">GitHub</span>
                 </a>
                 <a
                   href={personalInfo.social.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="soft-surface-sm p-4 rounded-lg flex flex-col items-center gap-2 soft-hover soft-press focus-ring"
+                  className="soft-surface-sm p-3 sm:p-4 rounded-lg flex flex-col items-center gap-1 sm:gap-2 soft-hover soft-press focus-ring"
                 >
-                  <Linkedin size={24} />
+                  <div className="inline-flex p-2 rounded-lg bg-gradient-to-br from-blue-500/10 to-sky-500/10">
+                    <Linkedin size={20} />
+                  </div>
                   <span className="text-xs">LinkedIn</span>
                 </a>
                 <a
                   href={personalInfo.social.stackoverflow}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="soft-surface-sm p-4 rounded-lg flex flex-col items-center gap-2 soft-hover soft-press focus-ring"
+                  className="soft-surface-sm p-3 sm:p-4 rounded-lg flex flex-col items-center gap-1 sm:gap-2 soft-hover soft-press focus-ring"
                 >
-                  <Code2 size={24} />
-                  <span className="text-xs">Stack</span>
+                  <div className="inline-flex p-1.5 rounded-lg bg-gradient-to-br from-orange-500/10 to-amber-500/10">
+                    <Code2 size={18} className="sm:w-5 sm:h-5" />
+                  </div>
+                  <span className="text-[10px] sm:text-xs font-medium">Stack</span>
                 </a>
                 <a
                   href={personalInfo.social.devto}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="soft-surface-sm p-4 rounded-lg flex flex-col items-center gap-2 soft-hover soft-press focus-ring"
+                  className="soft-surface-sm p-3 sm:p-4 rounded-lg flex flex-col items-center gap-1 sm:gap-2 soft-hover soft-press focus-ring"
                 >
-                  <Code2 size={24} />
-                  <span className="text-xs">Dev.to</span>
+                  <div className="inline-flex p-1.5 rounded-lg bg-gradient-to-br from-orange-500/10 to-amber-500/10">
+                    <Code2 size={18} className="sm:w-5 sm:h-5" />
+                  </div>
+                  <span className="text-[10px] sm:text-xs font-medium">Dev.to</span>
                 </a>
               </div>
             </div>
