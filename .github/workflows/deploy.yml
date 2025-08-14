@@ -17,81 +17,42 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      CI: "true"
+      HUSKY: "0"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-          cache-dependency-path: package-lock.json
 
-      # Work around npm "Exit handler never called!" by using a stable npm version
-      - name: Stabilize npm
+      - name: Enable pnpm (via corepack)
         run: |
-          set -eux
-          npm --version
-          npm i -g npm@10.7.0
-          npm --version
+          corepack enable
+          corepack prepare pnpm@9.12.0 --activate
+          pnpm --version
 
-      - name: Install dependencies (robust)
-        env:
-          HUSKY: "0"         # skip husky prepare in CI
-          CI: "true"
-        run: |
-          set -euxo pipefail
+      - name: Cache pnpm store
+        uses: actions/cache@v3
+        with:
+          path: ~/.local/share/pnpm/store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml', 'package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
 
-          npm config set fund false
-          npm config set audit false
-          npm config set progress false
-
-          success=""
-          for i in 1 2 3; do
-            echo "Attempt $i: npm ci"
-            # npm sometimes "succeeds" with that bug; never trust exit code alone
-            (npm ci --no-audit --no-fund || true)
-
-            # verify modules actually exist
-            if [ -f node_modules/react/package.json ] && [ -f node_modules/react-dom/package.json ]; then
-              echo "Dependencies present after npm ci"
-              success="yes"
-              break
-            fi
-
-            echo "npm ci did not complete correctly; trying npm install..."
-            (npm install --no-audit --no-fund --legacy-peer-deps || true)
-
-            if [ -f node_modules/react/package.json ] && [ -f node_modules/react-dom/package.json ]; then
-              echo "Dependencies present after npm install"
-              success="yes"
-              break
-            fi
-
-            echo "Cleaning cache and retrying..."
-            rm -rf node_modules
-            npm cache clean --force
-            sleep 8
-          done
-
-          if [ -z "$success" ]; then
-            echo "Dependency installation failed after retries."
-            exit 1
-          fi
-
-          # final sanity check via Node resolver
-          node -e "require.resolve('react'); require.resolve('react-dom'); require.resolve('vite'); require.resolve('@vitejs/plugin-react')"
+      - name: Install dependencies
+        # allow absence of a committed pnpm-lock.yaml on first run
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build
         env:
           NODE_ENV: production
           BASE_URL: /port-vue-folio/
         run: |
-          npm run build
-          # SPA fallback for client-side routes
+          pnpm run build
           cp dist/index.html dist/404.html
 
       - name: Setup Pages
