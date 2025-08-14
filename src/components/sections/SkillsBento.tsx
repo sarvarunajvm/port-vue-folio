@@ -8,7 +8,7 @@ import { skillsData } from '../../data/skills';
 const getIcon = (iconName?: string) => {
   if (!iconName) return Icons.Code2;
 
-  const iconMap: { [key: string]: React.ComponentType<{ size?: number; className?: string }> } = {
+  const iconMap: { [key: string]: typeof Icons.Code2 } = {
     Coffee: Icons.Coffee,
     Leaf: Icons.Leaf,
     Shield: Icons.Shield,

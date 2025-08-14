@@ -17,7 +17,7 @@ import {
 import { experienceData } from '../../data/experience';
 
 const getIcon = (iconName: string) => {
-  const iconMap: { [key: string]: React.ComponentType<{ size?: number }> } = {
+  const iconMap: { [key: string]: typeof Briefcase } = {
     CreditCard,
     TrendingUp,
     Code2,

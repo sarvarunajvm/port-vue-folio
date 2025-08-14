@@ -6,7 +6,7 @@ import { Code2, GitBranch, Network, Package, Star, Users } from 'lucide-react';
 import { projects } from '../../data/projects';
 
 const getIcon = (iconName: string) => {
-  const iconMap: { [key: string]: React.ComponentType<{ size?: number }> } = {
+  const iconMap: { [key: string]: typeof Code2 } = {
     Code2,
     Network,
     Package,
