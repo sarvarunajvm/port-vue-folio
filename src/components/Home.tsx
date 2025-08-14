@@ -91,71 +91,89 @@ export const Home: React.FC = () => {
             </div>
 
             {/* Bottom Stats Section */}
-            <div>
+            <div className="mt-auto">
               {/* Stats Grid with Clock */}
               <div
-                className="grid grid-cols-4 gap-1.5 sm:gap-2 md:gap-3 py-2 md:py-3 border-t"
+                className="grid grid-cols-4 gap-1 sm:gap-1.5 md:gap-2 py-2 md:py-3 border-t"
                 style={{ borderColor: 'var(--muted)', opacity: 0.2 }}
               >
-                <div className="text-center flex flex-col items-center">
-                  <div className="p-2 rounded-lg mb-1 bg-gradient-to-br from-purple-500/20 to-pink-500/20">
-                    <Clock size={16} />
+                <div className="text-center flex flex-col items-center min-w-0">
+                  <div className="p-1 sm:p-1.5 rounded-lg mb-1 bg-gradient-to-br from-purple-500/20 to-pink-500/20">
+                    <Clock size={14} />
                   </div>
-                  <p className="text-sm font-bold font-mono">
+                  <p className="text-xs sm:text-sm font-bold font-mono truncate">
                     {currentTime.toLocaleTimeString('en-US', {
                       hour: '2-digit',
                       minute: '2-digit',
                       hour12: false,
                     })}
                   </p>
-                  <p className="text-xs sm:text-sm font-normal" style={{ color: 'var(--muted)' }}>
+                  <p
+                    className="text-[10px] sm:text-xs font-normal truncate"
+                    style={{ color: 'var(--muted)' }}
+                  >
                     Chennai
                   </p>
                 </div>
-                <div className="text-center flex flex-col items-center">
-                  <div className="p-2 rounded-lg mb-1 bg-gradient-to-br from-emerald-500/20 to-teal-500/20">
-                    <Terminal size={16} />
+                <div className="text-center flex flex-col items-center min-w-0">
+                  <div className="p-1 sm:p-1.5 rounded-lg mb-1 bg-gradient-to-br from-emerald-500/20 to-teal-500/20">
+                    <Terminal size={14} />
                   </div>
-                  <p className="text-sm font-bold">10K+</p>
-                  <p className="text-xs sm:text-sm font-normal" style={{ color: 'var(--muted)' }}>
+                  <p className="text-xs sm:text-sm font-bold truncate">10K+</p>
+                  <p
+                    className="text-[10px] sm:text-xs font-normal truncate"
+                    style={{ color: 'var(--muted)' }}
+                  >
                     Lines
                   </p>
                 </div>
-                <div className="text-center flex flex-col items-center">
-                  <div className="p-2 rounded-lg mb-1 bg-gradient-to-br from-amber-500/20 to-orange-500/20">
-                    <Coffee size={16} />
+                <div className="text-center flex flex-col items-center min-w-0">
+                  <div className="p-1 sm:p-1.5 rounded-lg mb-1 bg-gradient-to-br from-amber-500/20 to-orange-500/20">
+                    <Coffee size={14} />
                   </div>
-                  <p className="text-sm font-bold">∞</p>
-                  <p className="text-xs sm:text-sm font-normal" style={{ color: 'var(--muted)' }}>
+                  <p className="text-xs sm:text-sm font-bold truncate">∞</p>
+                  <p
+                    className="text-[10px] sm:text-xs font-normal truncate"
+                    style={{ color: 'var(--muted)' }}
+                  >
                     Coffee
                   </p>
                 </div>
-                <div className="text-center flex flex-col items-center">
-                  <div className="p-2 rounded-lg mb-1 bg-gradient-to-br from-indigo-500/20 to-purple-500/20">
-                    <Rocket size={16} />
+                <div className="text-center flex flex-col items-center min-w-0">
+                  <div className="p-1 sm:p-1.5 rounded-lg mb-1 bg-gradient-to-br from-indigo-500/20 to-purple-500/20">
+                    <Rocket size={14} />
                   </div>
-                  <p className="text-sm font-bold">3+</p>
-                  <p className="text-xs sm:text-sm font-normal" style={{ color: 'var(--muted)' }}>
+                  <p className="text-xs sm:text-sm font-bold truncate">3+</p>
+                  <p
+                    className="text-[10px] sm:text-xs font-normal truncate"
+                    style={{ color: 'var(--muted)' }}
+                  >
                     Projects
                   </p>
                 </div>
               </div>
 
               {/* Quote Section */}
-              <div className="text-center pt-3 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="inline-flex p-1.5 rounded-md bg-gradient-to-br from-yellow-500/10 to-amber-500/10">
-                    <Sparkles size={12} />
+              <div className="pt-2 md:pt-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <div className="inline-flex p-1 rounded-md bg-gradient-to-br from-yellow-500/10 to-amber-500/10 flex-shrink-0">
+                    <Sparkles size={10} />
                   </div>
-                  <p className="text-sm italic font-normal" style={{ color: 'var(--muted)' }}>
-                    "Building the future, one commit at a time"
+                  <p
+                    className="text-xs sm:text-sm italic font-normal truncate"
+                    style={{ color: 'var(--muted)' }}
+                  >
+                    &quot;Building the future, one commit at a time&quot;
                   </p>
                 </div>
-                <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <span className="text-sm font-normal" style={{ color: 'var(--muted)' }}>
+                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
+                  <span
+                    className="text-xs sm:text-sm font-normal"
+                    style={{ color: 'var(--muted)' }}
+                  >
                     View More
                   </span>
-                  <ChevronRight size={14} />
+                  <ChevronRight size={12} />
                 </div>
               </div>
             </div>
@@ -177,7 +195,7 @@ export const Home: React.FC = () => {
                   </div>
                   {
                     <img
-                      src="/photo.png"
+                      src={`${import.meta.env.BASE_URL}photo.png`}
                       alt={personalInfo.firstname}
                       className="w-full h-full object-cover"
                     />
@@ -272,7 +290,7 @@ export const Home: React.FC = () => {
               </div>
               <h3 className="text-base font-bold mb-1">Contact</h3>
               <p className="text-sm font-normal" style={{ color: 'var(--muted)' }}>
-                Let's connect
+                Let&apos;s connect
               </p>
             </div>
             <div className="flex items-center justify-end opacity-0 group-hover:opacity-100 transition-opacity">
