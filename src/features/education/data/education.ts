@@ -14,38 +14,38 @@ export interface Education {
 export const educationData: Education[] = [
   {
     id: 'mca',
-    degree: 'Master Of Computer Applications',
+    degree: 'MCA',
     college: 'University of Madras',
     period: '2016 - 2019',
     points: [
       {
         id: 'mca-1',
-        value: 'Graduated with 6.48 CGPA.',
+        value: 'Obtained 6.48 CGPA',
       },
       {
         id: 'mca-2',
         value:
-          'Designed and developed a cloud-based service that allows users to authenticate and make their data secure in the cloud using double encryption with the safe key.',
+          'Developed a cloud-based service for secure data storage using double encryption with a safe key',
       },
     ],
   },
   {
     id: 'bca',
-    degree: 'Bachelor Of Computer Applications',
+    degree: 'BCA',
     college: 'Gurunanak College',
     period: '2011 - 2014',
     points: [
       {
         id: 'bca-1',
-        value: 'Graduated with 6.24 CGPA.',
+        value: 'Obtained 6.24 CGPA',
       },
       {
         id: 'bca-2',
-        value: 'Member of the National Honor Society.',
+        value: 'Member of the National Honor Society',
       },
       {
         id: 'bca-3',
-        value: 'Designed and developed a webpage for internal exams.',
+        value: 'Designed a webpage for internal exams',
       },
     ],
   },
