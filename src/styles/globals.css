@@ -115,6 +115,109 @@ body {
   overflow: hidden;
 }
 
+/* Enhanced Neumorphic Pressed Style Utility Classes */
+.neu-pressed {
+  background: var(--surface);
+  box-shadow:
+    inset 6px 6px 12px var(--shadow-strong),
+    inset -6px -6px 12px var(--highlight-med),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.neu-pressed::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  pointer-events: none;
+}
+
+.neu-pressed:hover {
+  box-shadow:
+    inset 4px 4px 8px var(--shadow-strong),
+    inset -4px -4px 8px var(--highlight-med),
+    0 0 20px rgba(147, 51, 234, 0.1);
+  transform: translateY(1px);
+}
+
+.neu-pressed-sm {
+  background: var(--surface);
+  box-shadow:
+    inset 4px 4px 8px var(--shadow-med),
+    inset -4px -4px 8px var(--highlight-med);
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+}
+
+.neu-pressed-lg {
+  background: var(--surface);
+  box-shadow:
+    inset 10px 10px 20px var(--shadow-strong),
+    inset -10px -10px 20px var(--highlight-med),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xl);
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.neu-pressed-lg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+  pointer-events: none;
+}
+
+.neu-pressed-lg:hover {
+  box-shadow:
+    inset 8px 8px 16px var(--shadow-strong),
+    inset -8px -8px 16px var(--highlight-med),
+    0 0 30px rgba(147, 51, 234, 0.15);
+  transform: translateY(2px) scale(0.995);
+}
+
+.neu-pressed-circle {
+  background: var(--surface);
+  box-shadow:
+    inset 5px 5px 10px var(--shadow-med),
+    inset -5px -5px 10px var(--highlight-med),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-full);
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.neu-pressed-circle::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.neu-pressed-inset {
+  background: var(--surface);
+  box-shadow: var(--elevation-inset);
+  border-radius: var(--radius-md);
+  transition: all 0.3s ease;
+}
+
 /* Soft UI Utility Classes */
 .soft-surface {
   background: var(--surface);

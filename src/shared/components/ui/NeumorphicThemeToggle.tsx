@@ -1,0 +1,84 @@
+import React from 'react';
+
+import { motion } from 'framer-motion';
+import { Moon, Sun } from 'lucide-react';
+
+import type { ThemeToggleProps } from '../../types';
+
+const NeumorphicThemeToggle: React.FC<ThemeToggleProps> = ({
+  isDark,
+  onToggle,
+  className = '',
+}) => {
+  return (
+    <button
+      onClick={onToggle}
+      className={`relative w-20 h-10 rounded-full neu-pressed transition-all duration-300 focus-ring ${className}`}
+      aria-label="Toggle theme"
+      title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
+    >
+      {/* Track */}
+      <div className="absolute inset-1 rounded-full overflow-hidden">
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            background: isDark
+              ? 'linear-gradient(to right, #1e293b, #334155)'
+              : 'linear-gradient(to right, #e2e8f0, #cbd5e1)',
+          }}
+          transition={{ duration: 0.3 }}
+        />
+      </div>
+
+      {/* Sliding Thumb */}
+      <motion.div
+        className="absolute top-1 w-8 h-8 rounded-full flex items-center justify-center"
+        animate={{
+          x: isDark ? 40 : 0,
+        }}
+        transition={{
+          type: 'spring',
+          stiffness: 500,
+          damping: 30,
+        }}
+        style={{
+          background: 'var(--surface)',
+          boxShadow: isDark
+            ? '4px 4px 8px rgba(0, 0, 0, 0.5), -2px -2px 4px rgba(255, 255, 255, 0.1)'
+            : '4px 4px 8px rgba(0, 0, 0, 0.15), -2px -2px 4px rgba(255, 255, 255, 0.9)',
+        }}
+      >
+        <motion.div
+          initial={false}
+          animate={{
+            rotate: isDark ? 360 : 0,
+            scale: isDark ? 1 : 0.8,
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          {isDark ? (
+            <Moon size={16} className="text-blue-400" />
+          ) : (
+            <Sun size={16} className="text-yellow-500" />
+          )}
+        </motion.div>
+      </motion.div>
+
+      {/* Icon indicators on the track */}
+      <div className="absolute inset-0 flex items-center justify-between px-2 pointer-events-none">
+        <Sun
+          size={14}
+          className={`transition-opacity duration-300 ${isDark ? 'opacity-30' : 'opacity-0'}`}
+          style={{ color: 'var(--muted)' }}
+        />
+        <Moon
+          size={14}
+          className={`transition-opacity duration-300 ${isDark ? 'opacity-0' : 'opacity-30'}`}
+          style={{ color: 'var(--muted)' }}
+        />
+      </div>
+    </button>
+  );
+};
+
+export default NeumorphicThemeToggle;
