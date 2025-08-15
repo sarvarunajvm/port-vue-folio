@@ -109,16 +109,16 @@ export const Home: React.FC = () => {
 
   return (
     <div
-      className={`fixed inset-0 overflow-hidden flex items-center justify-center ${CONTAINER.PADDING.MOBILE} ${CONTAINER.PADDING.SM} ${CONTAINER.PADDING.MD} ${CONTAINER.PADDING.LG} ${CONTAINER.PADDING.XL}`}
+      className={`fixed inset-0 overflow-hidden md:overflow-hidden overflow-y-auto flex items-start md:items-center justify-center ${CONTAINER.PADDING.MOBILE} ${CONTAINER.PADDING.SM} ${CONTAINER.PADDING.MD} ${CONTAINER.PADDING.LG} ${CONTAINER.PADDING.XL}`}
       style={{ background: 'var(--bg)' }}
     >
       <motion.div
-        className={`w-full max-w-[${CONTAINER.MAX_WIDTH}px] mx-auto flex flex-col justify-center h-full`}
+        className={`w-full max-w-[${CONTAINER.MAX_WIDTH}px] mx-auto flex flex-col justify-start md:justify-center min-h-full md:h-full pt-12 pb-8 md:py-0`}
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        <div className="grid grid-cols-1 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 gap-4 sm:gap-5 md:gap-6 lg:gap-8 pb-20 md:pb-0">
           <HeroSection
             onProfileClick={() => handleModalOpen('about')}
             onResumeDownload={handleResumeDownload}

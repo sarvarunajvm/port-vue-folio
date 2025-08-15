@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useEffect, useState } from 'react';
 
 import { motion } from 'framer-motion';
 import { ChevronRight, MousePointerClick } from 'lucide-react';
@@ -58,6 +58,26 @@ const NavigationCard = memo<NavigationCardProps>(
 
 const UnifiedClickHint = memo<{ badgeColorClass: string; delay: number; hintText?: string }>(
   ({ badgeColorClass, delay, hintText }) => {
+    const [isDark, setIsDark] = useState(false);
+
+    useEffect(() => {
+      // Check if dark mode is active
+      const checkDarkMode = () => {
+        setIsDark(document.documentElement.getAttribute('data-theme') === 'dark');
+      };
+
+      checkDarkMode();
+
+      // Listen for theme changes
+      const observer = new MutationObserver(checkDarkMode);
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme'],
+      });
+
+      return () => observer.disconnect();
+    }, []);
+
     return (
       <>
         <motion.div
@@ -103,9 +123,15 @@ const UnifiedClickHint = memo<{ badgeColorClass: string; delay: number; hintText
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: delay + 0.7, duration: 0.3 }}
         >
-          <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-gradient-to-r from-yellow-500/90 to-amber-500/90 dark:from-gray-500/90 dark:to-gray-400/90 backdrop-blur-sm shadow-sm border border-yellow-400/30 dark:border-gray-400/30">
-            <MousePointerClick className="w-2.5 h-2.5 text-white dark:text-white" />
-            <span className="text-[9px] font-medium text-white dark:text-white whitespace-nowrap">
+          <div
+            className={`flex items-center gap-1 px-2 py-0.5 rounded-full backdrop-blur-sm shadow-sm border ${
+              isDark
+                ? 'bg-gradient-to-r from-slate-400 to-zinc-300 border-slate-400/30'
+                : 'bg-gradient-to-r from-yellow-500/90 to-amber-500/90 border-yellow-400/30'
+            }`}
+          >
+            <MousePointerClick className="w-2.5 h-2.5 hint-pill-icon" />
+            <span className="text-[9px] font-medium whitespace-nowrap hint-pill-text">
               {hintText || 'Click to explore'}
             </span>
           </div>

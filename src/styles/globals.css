@@ -766,3 +766,12 @@ html[data-theme='dark'] .opacity-70 {
 html[data-theme='dark'] .opacity-60 {
   opacity: 0.75; /* Increased from 0.6 for better visibility */
 }
+
+/* Hint pill text styling */
+.hint-pill-text {
+  color: #111827 !important; /* Dark gray/black for both themes */
+}
+
+.hint-pill-icon {
+  color: #111827 !important; /* Dark gray/black for both themes */
+}

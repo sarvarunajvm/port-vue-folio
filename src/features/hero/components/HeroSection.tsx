@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { motion } from 'framer-motion';
 import { Camera, ChevronRight, Download, MousePointerClick } from 'lucide-react';
@@ -9,6 +9,26 @@ import { personalInfo } from '../../about/data/about';
 import TypewriterText from './TypewriterText';
 
 const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownload }) => {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    // Check if dark mode is active
+    const checkDarkMode = () => {
+      setIsDark(document.documentElement.getAttribute('data-theme') === 'dark');
+    };
+
+    checkDarkMode();
+
+    // Listen for theme changes
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
@@ -27,7 +47,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
 
       <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8 items-center">
         {/* Left Column - Photo */}
-        <div className="flex justify-center md:justify-start">
+        <div className="flex flex-col items-center md:block md:justify-start">
           <motion.div
             whileHover={{
               scale: 1.05,
@@ -104,20 +124,47 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
               </motion.div>
             </motion.div>
 
-            {/* Unified Click Hint - Bottom Label */}
+            {/* Desktop Hint - Inside container */}
             <motion.div
-              className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 z-30 pointer-events-none"
+              className="hidden md:flex absolute -bottom-8 left-1/2 transform -translate-x-1/2 z-30 pointer-events-none"
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.3 }}
             >
-              <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-gradient-to-r from-yellow-500/90 to-amber-500/90 dark:from-gray-500/90 dark:to-gray-400/90 backdrop-blur-sm shadow-sm border border-yellow-400/30 dark:border-gray-400/30">
-                <MousePointerClick className="w-2.5 h-2.5 text-white dark:text-white" />
-                <span className="text-[9px] font-medium text-white dark:text-white whitespace-nowrap">
+              <div
+                className={`flex items-center gap-1 px-2 py-0.5 rounded-full backdrop-blur-sm shadow-sm border ${
+                  isDark
+                    ? 'bg-gradient-to-r from-slate-400 to-zinc-300 border-slate-400/30'
+                    : 'bg-gradient-to-r from-yellow-500/90 to-amber-500/90 border-yellow-400/30'
+                }`}
+              >
+                <MousePointerClick className="w-2.5 h-2.5 hint-pill-icon" />
+                <span className="text-[9px] font-medium whitespace-nowrap hint-pill-text">
                   View my profile
                 </span>
               </div>
             </motion.div>
+          </motion.div>
+
+          {/* Mobile Hint - Below image */}
+          <motion.div
+            className="md:hidden mt-2"
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.3 }}
+          >
+            <div
+              className={`flex items-center gap-1 px-2 py-0.5 rounded-full backdrop-blur-sm shadow-sm border ${
+                isDark
+                  ? 'bg-gradient-to-r from-slate-400 to-zinc-300 border-slate-400/30'
+                  : 'bg-gradient-to-r from-yellow-500/90 to-amber-500/90 border-yellow-400/30'
+              }`}
+            >
+              <MousePointerClick className="w-2.5 h-2.5 hint-pill-icon" />
+              <span className="text-[9px] font-medium whitespace-nowrap hint-pill-text">
+                View my profile
+              </span>
+            </div>
           </motion.div>
         </div>
 
