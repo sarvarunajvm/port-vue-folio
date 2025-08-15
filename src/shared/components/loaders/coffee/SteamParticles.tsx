@@ -27,14 +27,16 @@ const SteamParticle: React.FC<SteamParticleProps> = ({ id, delay, isDark }) => {
         scale: [0.5, 1, 1.2, 1.5],
       }}
       transition={{
-        duration: 3,
+        duration: 4,
         delay,
         ease: 'easeOut',
         repeat: Infinity,
       }}
     >
       <div className="relative">
-        <div className={`w-8 h-8 rounded-full bg-gradient-to-t ${colors.steam} backdrop-blur-sm`} />
+        <div
+          className={`w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-t ${colors.steam} backdrop-blur-sm`}
+        />
 
         <motion.div
           className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xs font-mono ${colors.particle} whitespace-nowrap`}

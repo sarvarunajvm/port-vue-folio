@@ -28,19 +28,25 @@ const NeomorphicLoader: React.FC<LoaderProps> = ({ onLoadComplete }) => {
   }, [isDark]);
 
   useEffect(() => {
-    const duration = 3500; // Increased for coffee animation
-    const increment = 100 / (duration / 50);
+    // Total animation duration: 6 seconds for all phases
+    const totalDuration = 6000;
+    const updateInterval = 60; // Update every 60ms for smoother animation
+    const increment = 100 / (totalDuration / updateInterval);
 
     const timer = setInterval(() => {
       setProgress((prev) => {
-        const next = Math.min(prev + increment, 100);
+        const next = prev + increment;
         if (next >= 100) {
           clearInterval(timer);
-          setTimeout(onLoadComplete, 500);
+          // Small delay after reaching 100% to show the complete state
+          setTimeout(() => {
+            onLoadComplete();
+          }, 800);
+          return 100;
         }
         return next;
       });
-    }, 50);
+    }, updateInterval);
 
     return () => clearInterval(timer);
   }, [onLoadComplete]);

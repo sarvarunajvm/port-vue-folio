@@ -35,7 +35,7 @@ const CoffeeLoader: React.FC<CoffeeLoaderProps> = ({ progress, isDark }) => {
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className={`relative w-80 h-80 rounded-3xl ${baseClasses.bg} neu-pressed-lg flex items-center justify-center overflow-hidden`}
+        className={`relative w-96 h-96 md:w-[28rem] md:h-[28rem] lg:w-[32rem] lg:h-[32rem] rounded-3xl ${baseClasses.bg} neu-pressed-lg flex items-center justify-center overflow-hidden`}
       >
         <div className="relative w-full h-full flex items-center justify-center">
           <AnimatePresence mode="wait">
@@ -50,7 +50,7 @@ const CoffeeLoader: React.FC<CoffeeLoaderProps> = ({ progress, isDark }) => {
                   <CoffeeBeanParticle
                     key={`bean-${index}`}
                     id={`bean-${index}`}
-                    delay={index * 0.15}
+                    delay={index * 0.3}
                     isDark={isDark}
                     onAnimationComplete={handleBeanAnimationComplete}
                   />
@@ -94,7 +94,7 @@ const CoffeeLoader: React.FC<CoffeeLoaderProps> = ({ progress, isDark }) => {
                 }}
               >
                 <motion.div
-                  className={`text-6xl mb-4`}
+                  className={`text-7xl md:text-8xl mb-4`}
                   animate={{
                     rotate: [0, 10, -10, 0],
                   }}
@@ -106,7 +106,7 @@ const CoffeeLoader: React.FC<CoffeeLoaderProps> = ({ progress, isDark }) => {
                   ☕
                 </motion.div>
                 <motion.div
-                  className={`text-2xl font-bold bg-gradient-to-r ${
+                  className={`text-3xl md:text-4xl font-bold bg-gradient-to-r ${
                     isDark ? 'from-gray-400 to-gray-300' : 'from-yellow-500 to-amber-500'
                   } bg-clip-text text-transparent`}
                   initial={{ opacity: 0, y: 20 }}
@@ -116,7 +116,7 @@ const CoffeeLoader: React.FC<CoffeeLoaderProps> = ({ progress, isDark }) => {
                   Hello World
                 </motion.div>
                 <motion.div
-                  className={`text-sm ${baseClasses.subtext} font-mono mt-2`}
+                  className={`text-base md:text-lg ${baseClasses.subtext} font-mono mt-2`}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
@@ -136,7 +136,7 @@ const CoffeeLoader: React.FC<CoffeeLoaderProps> = ({ progress, isDark }) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
         >
-          <div className={`text-xs font-mono ${baseClasses.subtext}`}>
+          <div className={`text-sm md:text-base font-mono ${baseClasses.subtext}`}>
             {currentPhase === 'dropping' &&
               `Dropping beans... ${beansDropped}/${COFFEE_BEANS_COUNT}`}
             {currentPhase === 'grinding' && 'Grinding code...'}
@@ -162,12 +162,14 @@ const CoffeeLoader: React.FC<CoffeeLoaderProps> = ({ progress, isDark }) => {
             repeat: Infinity,
             ease: 'easeInOut',
           }}
-          className={`text-2xl font-bold ${baseClasses.text} mb-4`}
+          className={`text-3xl md:text-4xl font-bold ${baseClasses.text} mb-4`}
         >
           Brewing Portfolio
         </motion.h2>
 
-        <div className={`text-sm font-medium ${baseClasses.subtext}`}>{Math.round(progress)}%</div>
+        <div className={`text-lg md:text-xl font-medium ${baseClasses.subtext}`}>
+          {Math.round(progress)}%
+        </div>
       </motion.div>
     </div>
   );

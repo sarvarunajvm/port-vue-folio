@@ -7,7 +7,8 @@ import type { CoffeeCupProps } from './types';
 
 const CoffeeCup: React.FC<CoffeeCupProps> = ({ progress, isDark, isGrinding, isBrewing }) => {
   const colors = isDark ? THEME_COLORS.dark : THEME_COLORS.light;
-  const fillLevel = isBrewing ? Math.min((progress - 50) * 2, 100) : 0;
+  // Calculate fill level based on brewing phase (50-75% of total progress)
+  const fillLevel = isBrewing ? Math.min(Math.max((progress - 50) * 4, 0), 100) : 0;
 
   return (
     <motion.div
@@ -20,7 +21,7 @@ const CoffeeCup: React.FC<CoffeeCupProps> = ({ progress, isDark, isGrinding, isB
       transition={{ duration: 0.5, ease: 'easeOut' }}
     >
       <div
-        className={`relative w-32 h-32 ${isDark ? 'bg-[#0e0f11]' : 'bg-[#f2f3f5]'} rounded-2xl neu-pressed-lg`}
+        className={`relative w-48 h-48 md:w-52 md:h-52 lg:w-56 lg:h-56 ${isDark ? 'bg-[#0e0f11]' : 'bg-[#f2f3f5]'} rounded-2xl neu-pressed-lg`}
       >
         <div className="absolute inset-2">
           <div className="relative w-full h-full">
@@ -83,33 +84,34 @@ const CoffeeCup: React.FC<CoffeeCupProps> = ({ progress, isDark, isGrinding, isB
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <motion.rect
-                    x="30"
-                    y={75 - fillLevel * 0.35}
-                    width="40"
-                    height={fillLevel * 0.35}
-                    fill={`url(#coffeeGradient-${isDark ? 'dark' : 'light'})`}
-                    initial={{ height: 0 }}
-                    animate={{ height: fillLevel * 0.35 }}
-                    transition={{ duration: 0.3, ease: 'easeOut' }}
-                    clipPath="url(#cupClip)"
-                  />
                   <defs>
                     <clipPath id="cupClip">
-                      <path d="M 30 40 L 32 70 Q 32 73 35 73 L 65 73 Q 68 73 68 70 L 70 40 Z" />
+                      <path d="M 25 35 L 30 70 Q 30 75 35 75 L 65 75 Q 70 75 70 70 L 75 35 Z" />
                     </clipPath>
                   </defs>
+
+                  <motion.rect
+                    x="25"
+                    y="35"
+                    width="50"
+                    height="40"
+                    fill={`url(#coffeeGradient-${isDark ? 'dark' : 'light'})`}
+                    initial={{ y: 75 }}
+                    animate={{ y: 75 - fillLevel * 0.4 }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                    clipPath="url(#cupClip)"
+                  />
 
                   {fillLevel > 20 && (
                     <motion.ellipse
                       cx="50"
-                      cy={75 - fillLevel * 0.35}
-                      rx="18"
+                      cy={75 - fillLevel * 0.4}
+                      rx="20"
                       ry="3"
-                      fill={isDark ? '#6b7280' : '#dc2626'}
-                      opacity="0.4"
+                      fill={isDark ? '#6b7280' : '#92400e'}
+                      opacity="0.6"
                       animate={{
-                        rx: [18, 20, 18],
+                        rx: [20, 22, 20],
                         ry: [3, 4, 3],
                       }}
                       transition={{

@@ -39,7 +39,7 @@ const CoffeeBeanParticle: React.FC<CoffeeBeanProps> = ({
         rotate: [0, 180, 360, 540, 720],
       }}
       transition={{
-        duration: 1.5,
+        duration: 2.5,
         delay,
         times: [0, 0.2, 0.5, 0.8, 1],
         ease: [0.32, 0, 0.67, 0],
@@ -47,7 +47,7 @@ const CoffeeBeanParticle: React.FC<CoffeeBeanProps> = ({
       onAnimationComplete={onAnimationComplete}
     >
       <div
-        className={`relative w-8 h-8 rounded-full bg-gradient-to-br ${colors.bean} neu-float shadow-lg`}
+        className={`relative w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-br ${colors.bean} neu-float shadow-lg`}
       >
         <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/20 to-transparent" />
         <div className="absolute top-1 left-1 w-2 h-2 rounded-full bg-white/30" />

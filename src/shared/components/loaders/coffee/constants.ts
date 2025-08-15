@@ -1,11 +1,11 @@
 import type { AnimationConfig } from './types';
 
 export const ANIMATION_CONFIG: AnimationConfig = {
-  beanDropDuration: 800,
-  grindDuration: 600,
-  brewDuration: 800,
-  steamDuration: 1000,
-  totalDuration: 3200,
+  beanDropDuration: 1500,
+  grindDuration: 1200,
+  brewDuration: 1500,
+  steamDuration: 1800,
+  totalDuration: 6000,
 };
 
 export const COFFEE_BEANS_COUNT = 5;
