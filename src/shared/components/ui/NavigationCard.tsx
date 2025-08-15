@@ -1,14 +1,12 @@
 import { memo, useEffect, useState } from 'react';
 
 import { motion } from 'framer-motion';
-import { ChevronRight, MousePointerClick } from 'lucide-react';
 
 import { ANIMATION_DURATION, cardVariants, hoverVariants } from '../../constants/animations';
-import { ICON_SIZES } from '../../constants/layout';
 import type { NavigationCardProps } from '../../types';
 
 const NavigationCard = memo<NavigationCardProps>(
-  ({ icon: Icon, title, subtitle, color, hintText, onClick, delay = 0 }) => {
+  ({ emoji, title, subtitle, color, hintText, onClick, delay = 0 }) => {
     const iconColorClass =
       {
         blue: 'text-[var(--icon-blue)]',
@@ -40,9 +38,9 @@ const NavigationCard = memo<NavigationCardProps>(
           whileHover={hoverVariants.rotate}
           transition={{ duration: ANIMATION_DURATION.NORMAL }}
         >
-          <Icon
-            className={`${iconColorClass} ${ICON_SIZES.SM} ${ICON_SIZES.MD} ${ICON_SIZES.LG} transition-all group-hover:scale-110`}
-          />
+          <span className="text-4xl md:text-5xl lg:text-6xl transition-all group-hover:scale-110">
+            {emoji}
+          </span>
         </motion.div>
 
         <h3
@@ -100,7 +98,7 @@ const UnifiedClickHint = memo<{ badgeColorClass: string; delay: number; hintText
             <div
               className={`${badgeColorClass} w-6 h-6 rounded-full flex items-center justify-center border-2 shadow-lg opacity-90`}
             >
-              <ChevronRight className="w-3 h-3 text-white" strokeWidth={3} />
+              <span className="text-sm text-white">👉</span>
             </div>
             <motion.div
               className={`absolute inset-0 ${badgeColorClass.split(' ')[0]} rounded-full`}
@@ -130,7 +128,7 @@ const UnifiedClickHint = memo<{ badgeColorClass: string; delay: number; hintText
                 : 'bg-gradient-to-r from-orange-600 to-orange-700 border-orange-500/50'
             }`}
           >
-            <MousePointerClick className={`w-4 h-4 ${isDark ? 'text-black' : 'text-white'}`} />
+            <span className={`text-sm ${isDark ? 'text-black' : 'text-white'}`}>👆</span>
             <span
               className={`text-xs font-semibold whitespace-nowrap ${isDark ? 'text-black' : 'text-white'}`}
             >

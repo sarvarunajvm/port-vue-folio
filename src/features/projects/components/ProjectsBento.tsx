@@ -1,17 +1,16 @@
 import React from 'react';
 
 import { motion } from 'framer-motion';
-import { Code2, GitBranch, Network, Package, Star, Users } from 'lucide-react';
 
 import { projects } from '../data/projects';
 
-const getIcon = (iconName: string) => {
-  const iconMap: { [key: string]: typeof Code2 } = {
-    Code2,
-    Network,
-    Package,
+const getEmoji = (iconName?: string) => {
+  const emojiMap: { [key: string]: string } = {
+    Code2: '💻',
+    Network: '🌐',
+    Package: '📦',
   };
-  return iconMap[iconName] || Code2;
+  return emojiMap[iconName || 'Code2'] || '💻';
 };
 
 const ProjectsBento: React.FC = () => {
@@ -41,7 +40,7 @@ const ProjectsBento: React.FC = () => {
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-2 sm:gap-3">
               <div className="inline-flex p-3 rounded-lg bg-gradient-to-br from-blue-500/20 to-indigo-500/20">
-                <Users className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />
+                <span className="text-2xl sm:text-3xl md:text-4xl">👥</span>
               </div>
               <div>
                 <p className="text-2xl sm:text-3xl md:text-4xl font-bold">270+</p>
@@ -52,7 +51,7 @@ const ProjectsBento: React.FC = () => {
             </div>
             <div className="flex items-center gap-2 sm:gap-3">
               <div className="inline-flex p-3 rounded-lg bg-gradient-to-br from-orange-600/20 to-orange-700/20">
-                <Star className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />
+                <span className="text-2xl sm:text-3xl md:text-4xl">⭐</span>
               </div>
               <div>
                 <p className="text-2xl sm:text-3xl md:text-4xl font-bold">15+</p>
@@ -63,7 +62,7 @@ const ProjectsBento: React.FC = () => {
             </div>
             <div className="flex items-center gap-2 sm:gap-3">
               <div className="inline-flex p-3 rounded-lg bg-gradient-to-br from-green-500/20 to-emerald-500/20">
-                <GitBranch className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />
+                <span className="text-2xl sm:text-3xl md:text-4xl">🌿</span>
               </div>
               <div>
                 <p className="text-2xl sm:text-3xl md:text-4xl font-bold">5+</p>
@@ -81,7 +80,7 @@ const ProjectsBento: React.FC = () => {
         {/* Projects Column - Second Column with 3 Projects */}
         <div className="flex flex-col gap-1 sm:gap-1.5 md:gap-2">
           {projects.slice(0, 3).map((project, index) => {
-            const Icon = getIcon(project.icon || 'Code2');
+            const emoji = getEmoji(project.icon);
 
             return (
               <motion.div
@@ -93,7 +92,7 @@ const ProjectsBento: React.FC = () => {
               >
                 <div className="flex items-start gap-2 sm:gap-3 mb-1 sm:mb-2">
                   <div className="p-1.5 sm:p-2 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20">
-                    <Icon size={18} />
+                    <span className="text-lg">{emoji}</span>
                   </div>
                   <div className="flex-1">
                     <h3 className="text-sm sm:text-base md:text-lg font-bold">{project.title}</h3>
@@ -123,7 +122,7 @@ const ProjectsBento: React.FC = () => {
                     rel="noopener noreferrer"
                     className="neu-pressed-sm px-2.5 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-2 text-[10px] sm:text-xs font-semibold soft-hover soft-press focus-ring rounded-lg inline-flex items-center gap-0.5 sm:gap-1"
                   >
-                    <GitBranch size={14} className="sm:w-4 sm:h-4" />
+                    <span className="text-sm">🌿</span>
                     Code
                   </a>
                   {project.npmLink && (
@@ -133,7 +132,7 @@ const ProjectsBento: React.FC = () => {
                       rel="noopener noreferrer"
                       className="neu-pressed-sm px-2.5 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-2 text-[10px] sm:text-xs font-semibold soft-hover soft-press focus-ring rounded-lg inline-flex items-center gap-0.5 sm:gap-1"
                     >
-                      <Package size={14} className="sm:w-4 sm:h-4" />
+                      <span className="text-sm">📦</span>
                       NPM
                     </a>
                   )}

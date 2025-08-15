@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { X } from 'lucide-react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -11,6 +10,23 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const checkDarkMode = () => {
+      setIsDark(document.documentElement.getAttribute('data-theme') === 'dark');
+    };
+
+    checkDarkMode();
+
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+
+    return () => observer.disconnect();
+  }, []);
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -57,11 +73,22 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ delay: 0.1 }}
             onClick={onClose}
-            className="fixed top-2 right-2 sm:top-3 sm:right-3 md:top-4 md:right-4 z-50 p-2 sm:p-2.5 md:p-3 rounded-lg bg-gradient-to-br from-red-500/20 to-pink-500/20 hover:from-red-500/30 hover:to-pink-500/30 transition-all focus-ring"
+            className="fixed top-4 right-4 sm:top-5 sm:right-5 md:top-6 md:right-6 z-50 p-3 rounded-xl neu-pressed-sm transition-all duration-300 group hover:scale-110"
             aria-label="Close modal"
-            style={{ color: 'var(--fg)' }}
+            style={{
+              background: isDark
+                ? 'linear-gradient(135deg, rgba(192, 192, 192, 0.1), rgba(192, 192, 192, 0.05))'
+                : 'linear-gradient(135deg, rgba(184, 115, 51, 0.1), rgba(184, 115, 51, 0.05))',
+            }}
           >
-            <X size={20} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
+            <span
+              className="text-xl transition-colors"
+              style={{
+                color: isDark ? 'var(--accent)' : 'var(--accent)',
+              }}
+            >
+              ✕
+            </span>
           </motion.button>
 
           {/* Title */}
@@ -70,7 +97,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="fixed top-2 left-2 sm:top-3 sm:left-3 md:top-4 md:left-4 text-lg sm:text-xl md:text-2xl font-bold z-50"
+              className="fixed top-4 left-4 sm:top-5 sm:left-5 md:top-6 md:left-6 text-2xl sm:text-3xl md:text-4xl font-bold z-50"
+              style={{
+                color: 'var(--fg)',
+                textShadow: isDark
+                  ? '0 2px 8px rgba(192, 192, 192, 0.2)'
+                  : '0 2px 8px rgba(184, 115, 51, 0.2)',
+              }}
             >
               {title}
             </motion.h2>
@@ -82,7 +115,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.3, delay: 0.1 }}
-            className="w-full h-full overflow-y-auto p-2 pt-10 sm:p-3 sm:pt-12 md:p-4 md:pt-14 lg:p-5 lg:pt-16"
+            className="w-full h-full overflow-y-auto p-4 pt-16 sm:p-6 sm:pt-20 md:p-8 md:pt-24"
+            style={{
+              color: 'var(--fg)',
+              fontSize: '1rem',
+              lineHeight: '1.6',
+            }}
           >
             <div className="w-full h-full">{children}</div>
           </motion.div>

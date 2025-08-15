@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 import { motion } from 'framer-motion';
-import { Camera, ChevronRight, Download, MousePointerClick } from 'lucide-react';
 
 import { portfolioConfig } from '../../../config/portfolio.config';
 import AnimatedCounter from '../../../shared/components/ui/AnimatedCounter';
@@ -9,7 +8,7 @@ import type { HeroSectionProps } from '../../../shared/types';
 import { personalInfo } from '../../about/data/about';
 import TypewriterText from './TypewriterText';
 
-const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownload }) => {
+const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
@@ -72,7 +71,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
 
               {/* Fallback placeholder */}
               <div className="absolute inset-0 bg-gradient-to-br from-gray-300/90 to-gray-400/90 dark:from-gray-600/90 dark:to-gray-700/90 flex items-center justify-center backdrop-blur-sm">
-                <Camera size={60} className="text-gray-500 dark:text-gray-400" />
+                <span className="text-6xl text-gray-500 dark:text-gray-400">📸</span>
               </div>
 
               {/* Actual image */}
@@ -108,10 +107,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
                 }}
               >
                 <div className="bg-[var(--accent)] border-[var(--accent-hover)] w-6 h-6 rounded-full flex items-center justify-center border-2 shadow-lg opacity-90">
-                  <ChevronRight
-                    className="w-3 h-3 text-white dark:text-gray-900 ml-0.5"
-                    strokeWidth={3}
-                  />
+                  <span className="text-sm text-white dark:text-gray-900 ml-0.5">👉</span>
                 </div>
                 <motion.div
                   className="absolute inset-0 bg-[var(--accent)] rounded-full"
@@ -142,7 +138,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
                     : 'bg-gradient-to-r from-orange-600 to-orange-700 border-orange-500/50'
                 }`}
               >
-                <MousePointerClick className={`w-4 h-4 ${isDark ? 'text-black' : 'text-white'}`} />
+                <span className={`text-sm ${isDark ? 'text-black' : 'text-white'}`}>👆</span>
                 <span
                   className={`text-xs font-semibold whitespace-nowrap ${isDark ? 'text-black' : 'text-white'}`}
                 >
@@ -166,7 +162,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
                   : 'bg-gradient-to-r from-orange-600 to-orange-700 border-orange-500/50'
               }`}
             >
-              <MousePointerClick className={`w-4 h-4 ${isDark ? 'text-black' : 'text-white'}`} />
+              <span className={`text-sm ${isDark ? 'text-black' : 'text-white'}`}>👆</span>
               <span
                 className={`text-xs font-semibold whitespace-nowrap ${isDark ? 'text-black' : 'text-white'}`}
               >
@@ -206,18 +202,62 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
             />
           </div>
 
-          {/* Resume Download Button */}
-          <motion.button
-            onClick={onResumeDownload}
-            className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 md:px-4 md:py-2 lg:px-5 lg:py-2.5 neu-pressed-sm rounded-lg hover:scale-105 transition-all group"
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.95 }}
+          {/* Social Links */}
+          <motion.div
+            className="flex items-center justify-center md:justify-start gap-3 mb-3"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.3 }}
           >
-            <Download className="text-[var(--accent)] group-hover:animate-bounce w-4 h-4 md:w-5 md:h-5" />
-            <span className="text-sm md:text-base lg:text-lg font-semibold">
-              {portfolioConfig.sections.resume.title}
-            </span>
-          </motion.button>
+            <motion.a
+              href={personalInfo.social.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 neu-pressed-sm rounded-lg hover:scale-110 transition-all group"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <span className="text-xl text-[var(--icon-purple)] group-hover:text-[var(--accent)]">
+                🐙
+              </span>
+            </motion.a>
+            <motion.a
+              href={personalInfo.social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 neu-pressed-sm rounded-lg hover:scale-110 transition-all group"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <span className="text-xl text-[var(--icon-blue)] group-hover:text-[var(--accent)]">
+                💼
+              </span>
+            </motion.a>
+            <motion.a
+              href={personalInfo.social.stackoverflow}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 neu-pressed-sm rounded-lg hover:scale-110 transition-all group"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <span className="text-xl text-[var(--icon-red)] group-hover:text-[var(--accent)]">
+                📚
+              </span>
+            </motion.a>
+            <motion.a
+              href={personalInfo.social.devto}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2 neu-pressed-sm rounded-lg hover:scale-110 transition-all group"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <span className="text-xl text-[var(--icon-red)] group-hover:text-[var(--accent)]">
+                ≠
+              </span>
+            </motion.a>
+          </motion.div>
 
           {/* Mobile Stats - Compact inline layout */}
           <div className="flex md:hidden gap-2 mt-3 justify-center text-xs">

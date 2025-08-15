@@ -1,14 +1,12 @@
-import { LucideIcon } from 'lucide-react';
-
 export type ModalType = 'about' | 'experience' | 'projects' | 'skills' | 'contact';
 
 export type ColorVariant = 'blue' | 'purple' | 'green' | 'red';
 
 export interface NavigationCardData {
   id: ModalType;
-  icon: LucideIcon;
+  emoji: string;
   color: string;
-  hintIcon?: LucideIcon;
+  hintEmoji?: string;
   hintText?: string;
   title: string;
   subtitle: string;
@@ -16,7 +14,6 @@ export interface NavigationCardData {
 
 export interface HeroSectionProps {
   onProfileClick: () => void;
-  onResumeDownload: () => void;
 }
 
 export interface NavigationCardProps extends Omit<NavigationCardData, 'id'> {

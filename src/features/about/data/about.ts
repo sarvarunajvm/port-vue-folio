@@ -1,5 +1,3 @@
-import { Briefcase, Code, Sparkles, Target } from 'lucide-react';
-
 export interface PersonalInfo {
   firstname: string;
   lastname: string;
@@ -29,7 +27,7 @@ export interface PersonalInfo {
 export interface ExpertiseArea {
   id: string;
   label: string;
-  icon: typeof Briefcase;
+  emoji: string;
   color: string;
 }
 
@@ -64,15 +62,15 @@ export const areasOfExpertise: ExpertiseArea[] = [
   {
     id: 'enterprise',
     label: 'Enterprise Applications',
-    icon: Briefcase,
+    emoji: '💼',
     color: 'text-[var(--icon-blue)]',
   },
-  { id: 'cloud', label: 'Cloud Architecture', icon: Target, color: 'text-[var(--icon-purple)]' },
+  { id: 'cloud', label: 'Cloud Architecture', emoji: '🎯', color: 'text-[var(--icon-purple)]' },
   {
     id: 'opensource',
     label: 'Open Source Contribution',
-    icon: Code,
+    emoji: '💻',
     color: 'text-[var(--icon-green)]',
   },
-  { id: 'problem', label: 'Problem Solving', icon: Sparkles, color: 'text-[var(--icon-red)]' },
+  { id: 'problem', label: 'Problem Solving', emoji: '✨', color: 'text-[var(--icon-red)]' },
 ];

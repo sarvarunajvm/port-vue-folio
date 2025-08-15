@@ -1,7 +1,6 @@
 import React, { Suspense, lazy, useCallback, useMemo, useState } from 'react';
 
 import { motion } from 'framer-motion';
-import { Briefcase, Code2, Coffee, Mail, Rocket, Sparkles } from 'lucide-react';
 
 import { portfolioConfig } from '../config/portfolio.config';
 import { HeroSection } from '../features/hero';
@@ -11,9 +10,7 @@ import { CONTAINER } from '../shared/constants/layout';
 import type { ModalType, NavigationCardData } from '../shared/types';
 
 const AboutBento = lazy(() => import('../features/about').then((m) => ({ default: m.AboutBento })));
-const ContactBento = lazy(() =>
-  import('../features/contact').then((m) => ({ default: m.ContactBento }))
-);
+
 const ExperienceBento = lazy(() =>
   import('../features/experience').then((m) => ({ default: m.ExperienceBento }))
 );
@@ -27,39 +24,39 @@ const SkillsBento = lazy(() =>
 const NAVIGATION_CARDS: NavigationCardData[] = [
   {
     id: 'experience' as ModalType,
-    icon: Briefcase,
+    emoji: '💼',
     color: 'blue',
-    hintIcon: Sparkles,
+    hintEmoji: '✨',
     hintText: 'View my journey',
     title: portfolioConfig.sections.experience.title,
     subtitle: portfolioConfig.sections.experience.subtitle,
   },
   {
     id: 'projects' as ModalType,
-    icon: Rocket,
+    emoji: '🚀',
     color: 'purple',
-    hintIcon: Coffee,
+    hintEmoji: '☕',
     hintText: 'Explore my work',
     title: portfolioConfig.sections.projects.title,
     subtitle: portfolioConfig.sections.projects.subtitle,
   },
   {
     id: 'skills' as ModalType,
-    icon: Code2,
+    emoji: '💻',
     color: 'green',
-    hintIcon: Sparkles,
+    hintEmoji: '✨',
     hintText: 'See my expertise',
     title: portfolioConfig.sections.skills.title,
     subtitle: portfolioConfig.sections.skills.subtitle,
   },
   {
     id: 'contact' as ModalType,
-    icon: Mail,
+    emoji: '📄',
     color: 'red',
-    hintIcon: Mail,
-    hintText: 'Get in touch',
-    title: portfolioConfig.sections.contact.title,
-    subtitle: portfolioConfig.sections.contact.subtitle,
+    hintEmoji: '📥',
+    hintText: 'Download resume',
+    title: 'Download Resume',
+    subtitle: 'Get my latest CV',
   },
 ] as const;
 
@@ -68,7 +65,6 @@ const MODAL_COMPONENTS = {
   experience: ExperienceBento,
   projects: ProjectsBento,
   skills: SkillsBento,
-  contact: ContactBento,
 } as const;
 
 export const Home: React.FC = () => {
@@ -81,16 +77,24 @@ export const Home: React.FC = () => {
     link.click();
   }, []);
 
-  const handleModalOpen = useCallback((modalType: ModalType) => {
-    setOpenModal(modalType);
-  }, []);
+  const handleModalOpen = useCallback(
+    (modalType: ModalType) => {
+      if (modalType === 'contact') {
+        // Handle resume download for contact card
+        handleResumeDownload();
+      } else {
+        setOpenModal(modalType);
+      }
+    },
+    [handleResumeDownload]
+  );
 
   const handleModalClose = useCallback(() => {
     setOpenModal(null);
   }, []);
 
   const renderModal = useMemo(() => {
-    if (!openModal) return null;
+    if (!openModal || openModal === 'contact') return null;
     const Component = MODAL_COMPONENTS[openModal];
     const title =
       openModal === 'about'
@@ -119,10 +123,7 @@ export const Home: React.FC = () => {
         animate="visible"
       >
         <div className="grid grid-cols-1 gap-4 sm:gap-5 md:gap-6 lg:gap-8 pb-20 md:pb-0">
-          <HeroSection
-            onProfileClick={() => handleModalOpen('about')}
-            onResumeDownload={handleResumeDownload}
-          />
+          <HeroSection onProfileClick={() => handleModalOpen('about')} />
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
             {NAVIGATION_CARDS.map((card, index) => (

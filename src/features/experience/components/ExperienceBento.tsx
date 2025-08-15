@@ -1,29 +1,18 @@
 import React from 'react';
 
 import { motion } from 'framer-motion';
-import {
-  ArrowDown,
-  ArrowUp,
-  Briefcase,
-  Calendar,
-  Code2,
-  CreditCard,
-  Minus,
-  Network,
-  Target,
-  TrendingUp,
-} from 'lucide-react';
 
 import { experienceData } from '../data/experience';
 
-const getIcon = (iconName: string) => {
-  const iconMap: { [key: string]: typeof Briefcase } = {
-    CreditCard,
-    TrendingUp,
-    Code2,
-    Network,
+const getEmoji = (iconName?: string) => {
+  const emojiMap: { [key: string]: string } = {
+    CreditCard: '💳',
+    TrendingUp: '📈',
+    Code2: '💻',
+    Network: '🌐',
+    Briefcase: '💼',
   };
-  return iconMap[iconName] || Briefcase;
+  return emojiMap[iconName || 'Briefcase'] || '💼';
 };
 
 const ExperienceBento: React.FC = () => {
@@ -52,7 +41,7 @@ const ExperienceBento: React.FC = () => {
             <div className="flex items-start justify-between mb-2 sm:mb-3">
               <div className="flex items-start gap-2 sm:gap-3">
                 <div className="p-2 sm:p-2.5 md:p-3 rounded-lg bg-gradient-to-br from-violet-500/20 to-purple-500/20">
-                  <CreditCard size={20} className="sm:w-5 sm:h-5 md:w-6 md:h-6" />
+                  <span className="text-xl sm:text-2xl md:text-3xl">💳</span>
                 </div>
                 <div>
                   <h3 className="text-base sm:text-lg md:text-xl font-bold">
@@ -62,7 +51,7 @@ const ExperienceBento: React.FC = () => {
                     {currentJob.company}
                   </p>
                   <div className="flex items-center gap-1 sm:gap-2 mt-0.5 sm:mt-1">
-                    <Calendar size={10} className="sm:w-3 sm:h-3" />
+                    <span className="text-xs">📅</span>
                     <span className="text-[10px] sm:text-xs font-medium">{currentJob.period}</span>
                   </div>
                 </div>
@@ -82,10 +71,7 @@ const ExperienceBento: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-0.5 sm:gap-1">
                 {currentJob.achievements.slice(0, 4).map((achievement, i) => (
                   <div key={i} className="flex items-start gap-0.5 sm:gap-1">
-                    <Target
-                      size={8}
-                      className="mt-0.5 text-green-500 flex-shrink-0 sm:w-2.5 sm:h-2.5"
-                    />
+                    <span className="text-xs text-green-500 flex-shrink-0 mt-0.5">🎯</span>
                     <span className="text-[10px] sm:text-xs font-medium">{achievement}</span>
                   </div>
                 ))}
@@ -100,23 +86,15 @@ const ExperienceBento: React.FC = () => {
                 >
                   <div className="flex items-center justify-center gap-0.5 sm:gap-1">
                     {metric.type === 'increase' && (
-                      <ArrowUp
-                        size={10}
-                        className="text-green-600 dark:text-green-400 sm:w-3 sm:h-3"
-                      />
+                      <span className="text-xs text-green-600 dark:text-green-400">📈</span>
                     )}
                     {metric.type === 'reduction' && (
-                      <ArrowDown
-                        size={10}
-                        className="text-blue-600 dark:text-blue-400 sm:w-3 sm:h-3"
-                      />
+                      <span className="text-xs text-blue-600 dark:text-blue-400">📉</span>
                     )}
                     {metric.type === 'neutral' && (
-                      <Minus
-                        size={10}
-                        className="sm:w-3 sm:h-3"
-                        style={{ color: 'var(--muted)' }}
-                      />
+                      <span className="text-xs" style={{ color: 'var(--muted)' }}>
+                        ➖
+                      </span>
                     )}
                     <span className="font-bold text-xs sm:text-sm">{metric.value}</span>
                   </div>
@@ -163,7 +141,7 @@ const ExperienceBento: React.FC = () => {
             className="col-span-3 neu-pressed rounded-lg md:rounded-2xl p-3 sm:p-4 flex flex-col justify-center items-center text-center"
           >
             <div className="inline-flex p-2.5 rounded-lg mb-1 sm:mb-2 bg-gradient-to-br from-green-500/10 to-emerald-500/10 mx-auto">
-              <Briefcase className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
+              <span className="text-2xl sm:text-3xl md:text-4xl">💼</span>
             </div>
             <p className="text-2xl sm:text-3xl font-bold mb-0.5 sm:mb-1">4</p>
             <p className="text-xs sm:text-sm font-medium" style={{ color: 'var(--muted)' }}>
@@ -174,7 +152,7 @@ const ExperienceBento: React.FC = () => {
 
           {/* Previous Roles - Third Row (3 columns) */}
           {experienceData.slice(1).map((exp, index) => {
-            const Icon = getIcon(exp.icon);
+            const emoji = getEmoji(exp.icon);
 
             return (
               <motion.div
@@ -186,7 +164,7 @@ const ExperienceBento: React.FC = () => {
               >
                 <div className="flex items-start gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
                   <div className="p-1.5 sm:p-2 rounded-lg bg-gradient-to-br from-blue-500/20 to-indigo-500/20">
-                    <Icon size={16} className="sm:w-[18px] sm:h-[18px]" />
+                    <span className="text-lg sm:text-xl">{emoji}</span>
                   </div>
                   <div className="flex-1">
                     <h3 className="font-semibold text-xs sm:text-sm">{exp.designation}</h3>

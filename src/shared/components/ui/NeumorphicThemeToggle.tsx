@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { motion } from 'framer-motion';
-import { Moon, Sun } from 'lucide-react';
 
 import type { ThemeToggleProps } from '../../types';
 
@@ -57,25 +56,27 @@ const NeumorphicThemeToggle: React.FC<ThemeToggleProps> = ({
           transition={{ duration: 0.3 }}
         >
           {isDark ? (
-            <Moon size={16} className="text-[var(--accent)]" />
+            <span className="text-base text-[var(--accent)]">🌙</span>
           ) : (
-            <Sun size={16} className="text-[var(--accent)]" />
+            <span className="text-base text-[var(--accent)]">☀️</span>
           )}
         </motion.div>
       </motion.div>
 
       {/* Icon indicators on the track */}
       <div className="absolute inset-0 flex items-center justify-between px-2 pointer-events-none">
-        <Sun
-          size={14}
-          className={`transition-opacity duration-300 ${isDark ? 'opacity-30' : 'opacity-0'}`}
+        <span
+          className={`text-sm transition-opacity duration-300 ${isDark ? 'opacity-30' : 'opacity-0'}`}
           style={{ color: 'var(--muted)' }}
-        />
-        <Moon
-          size={14}
-          className={`transition-opacity duration-300 ${isDark ? 'opacity-0' : 'opacity-30'}`}
+        >
+          ☀️
+        </span>
+        <span
+          className={`text-sm transition-opacity duration-300 ${isDark ? 'opacity-0' : 'opacity-30'}`}
           style={{ color: 'var(--muted)' }}
-        />
+        >
+          🌙
+        </span>
       </div>
     </button>
   );
