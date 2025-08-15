@@ -133,7 +133,7 @@ const SkillsBento: React.FC = () => {
                   <span className="text-3xl md:text-4xl">{column.emoji}</span>
                 </div>
                 <h3
-                  className="text-lg md:text-xl lg:text-2xl font-bold text-center leading-tight"
+                  className="text-sm md:text-base lg:text-lg font-bold text-center leading-tight"
                   style={{ color: column.color }}
                 >
                   {column.category.title}
@@ -177,10 +177,10 @@ const SkillsBento: React.FC = () => {
                           <span className="text-lg md:text-xl">{emoji}</span>
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="text-base md:text-lg font-medium truncate">
+                          <div className="text-sm md:text-base font-medium truncate">
                             {skill.name}
                           </div>
-                          <div className="text-sm md:text-base opacity-60 capitalize">
+                          <div className="text-xs md:text-sm opacity-60 capitalize">
                             {skill.proficiency}
                           </div>
                         </div>
@@ -198,7 +198,7 @@ const SkillsBento: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="flex flex-wrap justify-center gap-3 md:gap-4 mt-4 md:mt-6 text-sm md:text-base flex-shrink-0"
+          className="flex flex-wrap justify-center gap-3 md:gap-4 mt-4 md:mt-6 text-xs md:text-sm flex-shrink-0"
         >
           <div className="flex items-center gap-1 md:gap-2">
             <div
