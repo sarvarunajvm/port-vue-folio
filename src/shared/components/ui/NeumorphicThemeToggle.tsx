@@ -13,7 +13,7 @@ const NeumorphicThemeToggle: React.FC<ThemeToggleProps> = ({
   return (
     <button
       onClick={onToggle}
-      className={`relative w-20 h-10 rounded-full neu-pressed transition-all duration-300 focus-ring ${className}`}
+      className={`relative w-20 h-10 rounded-full neu-pressed transition-all duration-300 focus-ring hover:shadow-accent ${className}`}
       aria-label="Toggle theme"
       title={`Switch to ${isDark ? 'light' : 'dark'} mode`}
     >
@@ -23,8 +23,8 @@ const NeumorphicThemeToggle: React.FC<ThemeToggleProps> = ({
           className="absolute inset-0"
           animate={{
             background: isDark
-              ? 'linear-gradient(to right, #1e293b, #334155)'
-              : 'linear-gradient(to right, #e2e8f0, #cbd5e1)',
+              ? 'linear-gradient(to right, #404040, #606060)' // Silver-tinted gradient
+              : 'linear-gradient(to right, #FFF4E6, #FFE4B5)', // Gold-tinted gradient
           }}
           transition={{ duration: 0.3 }}
         />
@@ -57,9 +57,9 @@ const NeumorphicThemeToggle: React.FC<ThemeToggleProps> = ({
           transition={{ duration: 0.3 }}
         >
           {isDark ? (
-            <Moon size={16} className="text-blue-400" />
+            <Moon size={16} className="text-[var(--accent)]" />
           ) : (
-            <Sun size={16} className="text-yellow-500" />
+            <Sun size={16} className="text-[var(--accent)]" />
           )}
         </motion.div>
       </motion.div>

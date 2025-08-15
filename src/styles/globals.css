@@ -10,16 +10,28 @@
   /* Base monochrome palette */
   --bg: #f2f3f5; /* soft off-white */
   --surface: #f7f8fa; /* card/button base */
-  --fg: #1a1a1a; /* text - darker for better visibility */
-  --muted: #4a4a4a; /* muted text - darker for better visibility */
+  --fg: #2d2d2d; /* Warmer dark text to complement gold */
+  --muted: #6b5d4f; /* Warm muted brown-gray */
+
+  /* Accent colors */
+  --accent: #ffd700; /* Gold accent for light mode */
+  --accent-hover: #ffa500; /* Darker gold on hover */
+  --accent-soft: #fff4e6; /* Soft gold tint */
+
+  /* Icon colors for light mode */
+  --icon-blue: #4a7c7e; /* Teal-blue to complement gold */
+  --icon-purple: #8b5a8c; /* Muted purple */
+  --icon-green: #5a7a5a; /* Forest green */
+  --icon-red: #b85450; /* Terracotta red */
 
   /* Shadow/Highlight colors for Soft UI */
-  --shadow-weak: rgba(0, 0, 0, 0.06);
-  --shadow-med: rgba(0, 0, 0, 0.1);
-  --shadow-strong: rgba(0, 0, 0, 0.15);
-  --highlight-weak: rgba(255, 255, 255, 0.9);
-  --highlight-med: rgba(255, 255, 255, 0.75);
-  --highlight-strong: rgba(255, 255, 255, 0.6);
+  --shadow-weak: rgba(139, 90, 43, 0.06); /* Warm brown shadow */
+  --shadow-med: rgba(139, 90, 43, 0.1);
+  --shadow-strong: rgba(139, 90, 43, 0.15);
+  --highlight-weak: rgba(255, 248, 220, 0.9); /* Soft gold highlight */
+  --highlight-med: rgba(255, 248, 220, 0.75);
+  --highlight-strong: rgba(255, 248, 220, 0.6);
+  --border-color: rgba(255, 215, 0, 0.2); /* Gold border */
 
   /* Focus ring */
   --focus: #000000;
@@ -64,17 +76,29 @@
 html[data-theme='dark'] {
   --bg: #0e0f11;
   --surface: #121316;
-  --fg: #f0f0f0;
-  --muted: #a0a0a0;
+  --fg: #f5f5f5; /* Increased brightness for better visibility */
+  --muted: #b8b8b8; /* Increased brightness for better visibility */
 
   --shadow-weak: rgba(0, 0, 0, 0.5);
   --shadow-med: rgba(0, 0, 0, 0.65);
   --shadow-strong: rgba(0, 0, 0, 0.8);
-  --highlight-weak: rgba(255, 255, 255, 0.06);
-  --highlight-med: rgba(255, 255, 255, 0.1);
-  --highlight-strong: rgba(255, 255, 255, 0.15);
+  --highlight-weak: rgba(192, 192, 192, 0.08); /* Silver highlight */
+  --highlight-med: rgba(192, 192, 192, 0.12);
+  --highlight-strong: rgba(192, 192, 192, 0.18);
+  --border-color: rgba(192, 192, 192, 0.15); /* Silver border */
 
   --focus: #ffffff;
+
+  /* Accent colors for dark mode */
+  --accent: #c0c0c0; /* Silver accent for dark mode */
+  --accent-hover: #e5e5e5; /* Lighter silver on hover */
+  --accent-soft: #2a2a2a; /* Soft silver tint */
+
+  /* Icon colors for dark mode */
+  --icon-blue: #87ceeb; /* Sky blue to complement silver */
+  --icon-purple: #b19cd9; /* Soft lavender */
+  --icon-green: #98d982; /* Mint green */
+  --icon-red: #ffb6c1; /* Light pink */
 }
 
 /* Reset and Base Styles */
@@ -121,7 +145,7 @@ body {
   box-shadow:
     inset 6px 6px 12px var(--shadow-strong),
     inset -6px -6px 12px var(--highlight-med),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
+    0 0 0 1px var(--border-color);
   border-radius: var(--radius-lg);
   position: relative;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -145,7 +169,7 @@ body {
   box-shadow:
     inset 4px 4px 8px var(--shadow-strong),
     inset -4px -4px 8px var(--highlight-med),
-    0 0 20px rgba(147, 51, 234, 0.1);
+    0 0 20px var(--border-color);
   transform: translateY(1px);
 }
 
@@ -163,7 +187,7 @@ body {
   box-shadow:
     inset 10px 10px 20px var(--shadow-strong),
     inset -10px -10px 20px var(--highlight-med),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
+    0 0 0 1px var(--border-color);
   border-radius: var(--radius-xl);
   position: relative;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -187,7 +211,7 @@ body {
   box-shadow:
     inset 8px 8px 16px var(--shadow-strong),
     inset -8px -8px 16px var(--highlight-med),
-    0 0 30px rgba(147, 51, 234, 0.15);
+    0 0 30px var(--border-color);
   transform: translateY(2px) scale(0.995);
 }
 
@@ -196,7 +220,7 @@ body {
   box-shadow:
     inset 5px 5px 10px var(--shadow-med),
     inset -5px -5px 10px var(--highlight-med),
-    0 0 0 1px rgba(255, 255, 255, 0.08);
+    0 0 0 1px var(--border-color);
   border-radius: var(--radius-full);
   position: relative;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -226,27 +250,30 @@ body {
     -10px -10px 20px var(--highlight-med),
     inset 1px 1px 0 var(--highlight-weak),
     inset -1px -1px 0 var(--shadow-weak);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Light theme soft-surface hover - pastel purple */
+/* Light theme soft-surface hover - gold accent */
 html:not([data-theme='dark']) .soft-surface:hover {
   box-shadow:
-    12px 12px 24px rgba(147, 51, 234, 0.4),
-    -12px -12px 24px rgba(196, 181, 253, 0.3),
-    inset 1px 1px 0 rgba(255, 255, 255, 0.9),
-    inset -1px -1px 0 rgba(147, 51, 234, 0.2);
+    12px 12px 24px rgba(255, 215, 0, 0.25),
+    -12px -12px 24px rgba(255, 245, 186, 0.3),
+    inset 2px 2px 4px rgba(255, 215, 0, 0.1),
+    inset -2px -2px 4px rgba(255, 248, 220, 0.5),
+    0 0 0 1px rgba(255, 215, 0, 0.2);
   transform: translateY(-4px) scale(1.02);
 }
 
-/* Dark theme soft-surface hover - pastel emerald green */
+/* Dark theme soft-surface hover - silver accent */
 html[data-theme='dark'] .soft-surface:hover {
   box-shadow:
-    12px 12px 24px rgba(16, 185, 129, 0.4),
-    -12px -12px 24px rgba(52, 211, 153, 0.25),
-    inset 1px 1px 0 rgba(167, 243, 208, 0.25),
-    inset -1px -1px 0 rgba(0, 0, 0, 0.6);
+    12px 12px 24px rgba(192, 192, 192, 0.2),
+    -12px -12px 24px rgba(229, 229, 229, 0.15),
+    inset 2px 2px 4px rgba(192, 192, 192, 0.08),
+    inset -2px -2px 4px rgba(229, 229, 229, 0.12),
+    0 0 0 1px rgba(192, 192, 192, 0.15);
   transform: translateY(-4px) scale(1.02);
 }
 
@@ -256,25 +283,26 @@ html[data-theme='dark'] .soft-surface:hover {
     6px 6px 12px var(--shadow-med),
     -6px -6px 12px var(--highlight-med),
     inset 1px 1px 0 var(--highlight-weak);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Light theme soft-surface-sm hover - pastel purple */
+/* Light theme soft-surface-sm hover - gold accent */
 html:not([data-theme='dark']) .soft-surface-sm:hover {
   box-shadow:
-    8px 8px 16px rgba(147, 51, 234, 0.35),
-    -8px -8px 16px rgba(196, 181, 253, 0.25),
+    8px 8px 16px rgba(255, 215, 0, 0.2),
+    -8px -8px 16px rgba(255, 245, 186, 0.25),
     inset 1px 1px 0 rgba(255, 255, 255, 0.9);
   transform: translateY(-3px) scale(1.015);
 }
 
-/* Dark theme soft-surface-sm hover - pastel emerald green */
+/* Dark theme soft-surface-sm hover - silver accent */
 html[data-theme='dark'] .soft-surface-sm:hover {
   box-shadow:
-    8px 8px 16px rgba(16, 185, 129, 0.35),
-    -8px -8px 16px rgba(52, 211, 153, 0.2),
-    inset 1px 1px 0 rgba(167, 243, 208, 0.2);
+    8px 8px 16px rgba(192, 192, 192, 0.15),
+    -8px -8px 16px rgba(229, 229, 229, 0.1),
+    inset 1px 1px 0 rgba(229, 229, 229, 0.2);
   transform: translateY(-3px) scale(1.015);
 }
 
@@ -341,9 +369,10 @@ html[data-theme='dark'] .photo-card:hover {
 
 /* Focus Styles */
 .focus-ring:focus-visible {
-  outline: 2px solid var(--focus);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: var(--radius-sm);
+  box-shadow: 0 0 0 4px var(--border-color);
 }
 
 /* Typography */
@@ -358,6 +387,35 @@ h6 {
   margin-bottom: var(--space-md);
   letter-spacing: -0.02em;
   color: var(--fg);
+  position: relative;
+}
+
+/* Subtle accent shimmer for headings */
+h1::after,
+h2::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0;
+  animation: shimmer 3s ease-in-out infinite;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  50% {
+    opacity: 0.1;
+    transform: translateX(100%);
+  }
 }
 
 h1 {
@@ -505,19 +563,21 @@ p {
   gap: var(--space-sm);
 }
 
-/* Light theme button hover - pastel purple */
+/* Light theme button hover - gold accent */
 html:not([data-theme='dark']) .button-base:hover {
   box-shadow:
-    8px 8px 16px rgba(147, 51, 234, 0.35),
-    -8px -8px 16px rgba(196, 181, 253, 0.25);
+    8px 8px 16px rgba(255, 215, 0, 0.2),
+    -8px -8px 16px rgba(255, 245, 186, 0.25),
+    0 0 0 2px rgba(255, 215, 0, 0.15);
   transform: translateY(-2px);
 }
 
-/* Dark theme button hover - pastel emerald green */
+/* Dark theme button hover - silver accent */
 html[data-theme='dark'] .button-base:hover {
   box-shadow:
-    8px 8px 16px rgba(16, 185, 129, 0.35),
-    -8px -8px 16px rgba(52, 211, 153, 0.2);
+    8px 8px 16px rgba(192, 192, 192, 0.15),
+    -8px -8px 16px rgba(229, 229, 229, 0.1),
+    0 0 0 2px rgba(192, 192, 192, 0.1);
   transform: translateY(-2px);
 }
 
@@ -538,25 +598,28 @@ html[data-theme='dark'] .button-base:hover {
     8px 8px 16px var(--shadow-med),
     -8px -8px 16px var(--highlight-med),
     inset 1px 1px 0 var(--highlight-weak);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Light theme card item hover - pastel purple */
+/* Light theme card item hover - gold accent */
 html:not([data-theme='dark']) .card-item:hover {
   box-shadow:
-    10px 10px 20px rgba(147, 51, 234, 0.35),
-    -10px -10px 20px rgba(196, 181, 253, 0.25),
-    inset 1px 1px 0 rgba(255, 255, 255, 0.9);
+    10px 10px 20px rgba(255, 215, 0, 0.2),
+    -10px -10px 20px rgba(255, 245, 186, 0.25),
+    inset 1px 1px 0 rgba(255, 248, 220, 0.9),
+    0 0 0 1px rgba(255, 215, 0, 0.15);
   transform: translateY(-3px) scale(1.01);
 }
 
-/* Dark theme card item hover - pastel emerald green */
+/* Dark theme card item hover - silver accent */
 html[data-theme='dark'] .card-item:hover {
   box-shadow:
-    10px 10px 20px rgba(16, 185, 129, 0.35),
-    -10px -10px 20px rgba(52, 211, 153, 0.2),
-    inset 1px 1px 0 rgba(167, 243, 208, 0.2);
+    10px 10px 20px rgba(192, 192, 192, 0.15),
+    -10px -10px 20px rgba(229, 229, 229, 0.1),
+    inset 1px 1px 0 rgba(229, 229, 229, 0.2),
+    0 0 0 1px rgba(192, 192, 192, 0.1);
   transform: translateY(-3px) scale(1.01);
 }
 
@@ -634,4 +697,72 @@ a:hover {
   b {
     font-variation-settings: 'wght' 600;
   }
+}
+
+/* Accent Styles */
+.accent-text {
+  color: var(--accent);
+  transition: color var(--transition-fast);
+}
+
+.accent-text:hover {
+  color: var(--accent-hover);
+}
+
+.accent-border {
+  border-color: var(--accent);
+}
+
+.accent-bg {
+  background-color: var(--accent);
+}
+
+/* Gold accent for light mode interactive elements */
+html:not([data-theme='dark']) .accent-glow {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+html:not([data-theme='dark']) .accent-glow:hover {
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+/* Silver accent for dark mode interactive elements */
+html[data-theme='dark'] .accent-glow {
+  box-shadow: 0 0 20px rgba(192, 192, 192, 0.3);
+}
+
+html[data-theme='dark'] .accent-glow:hover {
+  box-shadow: 0 0 30px rgba(192, 192, 192, 0.5);
+}
+
+/* Accent shadow on hover */
+html:not([data-theme='dark']) .hover\:shadow-accent:hover {
+  box-shadow:
+    inset 4px 4px 8px var(--shadow-strong),
+    inset -4px -4px 8px var(--highlight-med),
+    0 0 25px rgba(255, 215, 0, 0.2),
+    0 0 0 1px rgba(255, 215, 0, 0.15);
+}
+
+html[data-theme='dark'] .hover\:shadow-accent:hover {
+  box-shadow:
+    inset 4px 4px 8px var(--shadow-strong),
+    inset -4px -4px 8px var(--highlight-med),
+    0 0 25px rgba(192, 192, 192, 0.15),
+    0 0 0 1px rgba(192, 192, 192, 0.1);
+}
+
+/* Update dark mode text contrast */
+html[data-theme='dark'] p,
+html[data-theme='dark'] span,
+html[data-theme='dark'] div {
+  color: var(--fg);
+}
+
+html[data-theme='dark'] .opacity-70 {
+  opacity: 0.85; /* Increased from 0.7 for better visibility */
+}
+
+html[data-theme='dark'] .opacity-60 {
+  opacity: 0.75; /* Increased from 0.6 for better visibility */
 }

@@ -45,13 +45,13 @@ const NeomorphicLoader: React.FC<LoaderProps> = ({ onLoadComplete }) => {
   }, [onLoadComplete]);
 
   const baseClasses = {
-    bg: isDark ? 'bg-gray-900' : 'bg-gray-200',
-    text: isDark ? 'text-gray-100' : 'text-gray-800',
-    subtext: isDark ? 'text-gray-400' : 'text-gray-600',
+    bg: isDark ? 'bg-[#0e0f11]' : 'bg-[#f2f3f5]',
+    text: isDark ? 'text-[var(--fg)]' : 'text-[var(--fg)]',
+    subtext: isDark ? 'text-[var(--muted)]' : 'text-[var(--muted)]',
     progressBg: isDark ? 'bg-gray-800' : 'bg-gray-300',
     progressBar: isDark
-      ? 'bg-gradient-to-r from-blue-500 to-cyan-500'
-      : 'bg-gradient-to-r from-purple-500 to-pink-500',
+      ? 'bg-gradient-to-r from-gray-400 to-gray-300' // Silver gradient
+      : 'bg-gradient-to-r from-yellow-500 to-amber-500', // Gold gradient
   };
 
   return (
@@ -85,17 +85,17 @@ const NeomorphicLoader: React.FC<LoaderProps> = ({ onLoadComplete }) => {
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-                className={`absolute w-48 h-48 rounded-full border-4 border-t-transparent border-purple-500`}
+                className={`absolute w-48 h-48 rounded-full border-4 border-t-transparent ${isDark ? 'border-gray-400' : 'border-yellow-500'}`}
               />
               <motion.div
                 animate={{ rotate: -360 }}
                 transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                className={`absolute w-36 h-36 rounded-full border-4 border-r-transparent border-pink-500`}
+                className={`absolute w-36 h-36 rounded-full border-4 border-r-transparent ${isDark ? 'border-gray-500' : 'border-amber-500'}`}
               />
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 2.5, repeat: Infinity, ease: 'linear' }}
-                className={`absolute w-24 h-24 rounded-full border-4 border-b-transparent border-blue-500`}
+                className={`absolute w-24 h-24 rounded-full border-4 border-b-transparent ${isDark ? 'border-gray-300' : 'border-yellow-600'}`}
               />
             </div>
 
@@ -113,7 +113,7 @@ const NeomorphicLoader: React.FC<LoaderProps> = ({ onLoadComplete }) => {
               className={`relative z-10 w-20 h-20 rounded-2xl ${baseClasses.bg} neu-pressed-sm flex items-center justify-center`}
             >
               <span
-                className={`text-3xl font-bold ${baseClasses.text} bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent`}
+                className={`text-3xl font-bold bg-gradient-to-r ${isDark ? 'from-gray-400 to-gray-300' : 'from-yellow-500 to-amber-500'} bg-clip-text text-transparent`}
               >
                 S
               </span>

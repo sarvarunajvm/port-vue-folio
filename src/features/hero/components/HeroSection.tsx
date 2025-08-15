@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { motion } from 'framer-motion';
-import { Camera, Download } from 'lucide-react';
+import { Camera, ChevronRight, Download, MousePointerClick } from 'lucide-react';
 
 import { portfolioConfig } from '../../../config/portfolio.config';
 import type { HeroSectionProps } from '../../../shared/types';
@@ -29,14 +29,19 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
         {/* Left Column - Photo */}
         <div className="flex justify-center md:justify-start">
           <motion.div
-            whileHover={{ scale: 1.05, rotate: 2 }}
+            whileHover={{
+              scale: 1.05,
+              y: -5,
+              transition: { type: 'spring', stiffness: 300, damping: 20 },
+            }}
+            whileTap={{ scale: 0.95 }}
             onClick={onProfileClick}
             className="cursor-pointer relative"
           >
-            <div className="w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] md:w-[160px] md:h-[160px] lg:w-[200px] lg:h-[200px] xl:w-[240px] xl:h-[240px] neu-pressed-circle overflow-hidden relative group">
+            <div className="w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] md:w-[160px] md:h-[160px] lg:w-[200px] lg:h-[200px] xl:w-[240px] xl:h-[240px] neu-pressed rounded-2xl overflow-hidden relative group transition-all duration-300">
               {/* Animated gradient background */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 opacity-30"
+                className="absolute inset-0 bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 opacity-20 group-hover:opacity-30 transition-opacity duration-300"
                 animate={{
                   backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
                 }}
@@ -53,36 +58,65 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
               <img
                 src={`${import.meta.env.BASE_URL}photo.png`}
                 alt={personalInfo.firstname}
-                className="absolute inset-0 w-full h-full object-contain bg-transparent z-10"
+                className="absolute inset-0 w-full h-full object-cover bg-transparent z-10"
                 onError={(e) => {
                   (e.target as HTMLImageElement).style.display = 'none';
                 }}
               />
 
-              {/* Hover overlay */}
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 z-20 flex items-center justify-center">
-                <span className="opacity-0 group-hover:opacity-100 transition-opacity text-white font-semibold text-sm bg-black/50 px-3 py-1 rounded-full">
-                  View Profile
-                </span>
-              </div>
+              {/* Subtle hover gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20" />
             </div>
 
-            {/* Click indicator - positioned inside for mobile */}
+            {/* Unified Click Hint - Chevron Badge */}
             <motion.div
-              className="absolute bottom-2 left-1/2 transform -translate-x-1/2 lg:hidden z-30"
-              animate={{ opacity: [0.7, 1, 0.7] }}
-              transition={{ duration: 2, repeat: Infinity }}
+              className="absolute -top-2 -right-2 z-30"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.8, duration: 0.3 }}
             >
-              <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-purple-500/30 dark:bg-purple-400/30 text-purple-700 dark:text-purple-300 backdrop-blur-sm">
-                Tap to view
-              </span>
+              <motion.div
+                className="relative"
+                animate={{
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  delay: 0.5,
+                }}
+              >
+                <div className="bg-[var(--accent)] border-[var(--accent-hover)] w-6 h-6 rounded-full flex items-center justify-center border-2 shadow-lg opacity-90">
+                  <ChevronRight className="w-3 h-3 text-white dark:text-gray-900" strokeWidth={3} />
+                </div>
+                <motion.div
+                  className="absolute inset-0 bg-[var(--accent)] rounded-full"
+                  animate={{
+                    scale: [1, 1.5, 1.5],
+                    opacity: [0.7, 0, 0],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    delay: 0.5,
+                  }}
+                />
+              </motion.div>
             </motion.div>
 
-            {/* Desktop hover hint */}
-            <motion.div className="hidden lg:block absolute -bottom-6 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-              <span className="text-xs font-medium px-3 py-1 rounded-full bg-gray-900/90 dark:bg-gray-100/90 text-white dark:text-gray-900 shadow-lg">
-                Click to view profile
-              </span>
+            {/* Unified Click Hint - Bottom Label */}
+            <motion.div
+              className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 z-30 pointer-events-none"
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.3 }}
+            >
+              <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-gradient-to-r from-yellow-500/90 to-amber-500/90 dark:from-gray-500/90 dark:to-gray-400/90 backdrop-blur-sm shadow-sm border border-yellow-400/30 dark:border-gray-400/30">
+                <MousePointerClick className="w-2.5 h-2.5 text-white dark:text-white" />
+                <span className="text-[9px] font-medium text-white dark:text-white whitespace-nowrap">
+                  View my profile
+                </span>
+              </div>
             </motion.div>
           </motion.div>
         </div>
@@ -91,7 +125,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
         <div className="text-center md:text-left">
           {/* Animated name with gradient */}
           <motion.h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black bg-gradient-to-r from-gray-800 to-gray-600 dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent leading-tight mb-3 md:mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black bg-gradient-to-r from-[var(--fg)] to-[var(--muted)] dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent leading-tight mb-3 md:mb-4"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
@@ -109,7 +143,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
           <div className="h-8 md:h-10 lg:h-12 mb-3 md:mb-4">
             <TypewriterText
               texts={personalInfo.titles}
-              className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold text-transparent bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold text-transparent bg-gradient-to-r from-[var(--accent)] to-[var(--accent-hover)] bg-clip-text"
               typingSpeed={100}
               deletingSpeed={50}
               pauseTime={2000}
@@ -123,7 +157,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Download className="text-amber-500 group-hover:animate-bounce w-4 h-4 md:w-5 md:h-5" />
+            <Download className="text-[var(--accent)] group-hover:animate-bounce w-4 h-4 md:w-5 md:h-5" />
             <span className="text-sm md:text-base lg:text-lg font-semibold">
               {portfolioConfig.sections.resume.title}
             </span>
@@ -132,21 +166,21 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
           {/* Mobile Stats - Compact inline layout */}
           <div className="flex md:hidden gap-2 mt-3 justify-center text-xs">
             <div className="flex items-center gap-1">
-              <span className="font-black text-blue-500">
+              <span className="font-black text-[var(--icon-blue)]">
                 {portfolioConfig.stats.yearsOfExperience}+
               </span>
               <span className="opacity-60">Years</span>
             </div>
             <span className="opacity-40">•</span>
             <div className="flex items-center gap-1">
-              <span className="font-black text-purple-500">
+              <span className="font-black text-[var(--icon-purple)]">
                 {portfolioConfig.stats.projectsCompleted}+
               </span>
               <span className="opacity-60">Projects</span>
             </div>
             <span className="opacity-40">•</span>
             <div className="flex items-center gap-1">
-              <span className="font-black text-green-500">
+              <span className="font-black text-[var(--icon-green)]">
                 {portfolioConfig.stats.techStackSize}+
               </span>
               <span className="opacity-60">Tech</span>
@@ -160,7 +194,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
             className="flex items-center gap-2 px-3 py-2 lg:px-4 lg:py-3 rounded-lg neu-pressed-sm"
             whileHover={{ scale: 1.05 }}
           >
-            <div className="text-2xl lg:text-3xl xl:text-4xl font-black bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
+            <div className="text-2xl lg:text-3xl xl:text-4xl font-black text-[var(--icon-blue)]">
               {portfolioConfig.stats.yearsOfExperience}+
             </div>
             <div className="text-xs lg:text-sm opacity-60 font-medium">
@@ -174,7 +208,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
             className="flex items-center gap-2 px-3 py-2 lg:px-4 lg:py-3 rounded-lg neu-pressed-sm"
             whileHover={{ scale: 1.05 }}
           >
-            <div className="text-2xl lg:text-3xl xl:text-4xl font-black bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <div className="text-2xl lg:text-3xl xl:text-4xl font-black text-[var(--icon-purple)]">
               {portfolioConfig.stats.projectsCompleted}+
             </div>
             <div className="text-xs lg:text-sm opacity-60 font-medium">
@@ -188,7 +222,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
             className="flex items-center gap-2 px-3 py-2 lg:px-4 lg:py-3 rounded-lg neu-pressed-sm"
             whileHover={{ scale: 1.05 }}
           >
-            <div className="text-2xl lg:text-3xl xl:text-4xl font-black bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text text-transparent">
+            <div className="text-2xl lg:text-3xl xl:text-4xl font-black text-[var(--icon-green)]">
               {portfolioConfig.stats.techStackSize}+
             </div>
             <div className="text-xs lg:text-sm opacity-60 font-medium">
