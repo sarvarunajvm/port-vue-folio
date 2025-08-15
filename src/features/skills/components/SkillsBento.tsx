@@ -86,7 +86,7 @@ const SkillsBento: React.FC = () => {
           >
             <div className="flex flex-row items-center justify-around gap-2 sm:gap-3 md:gap-4">
               <div className="flex items-center gap-1 sm:gap-1.5">
-                <div className="inline-flex p-1.5 rounded-md bg-gradient-to-br from-yellow-500/10 to-amber-500/10">
+                <div className="inline-flex p-1.5 rounded-md bg-gradient-to-br from-orange-600/10 to-orange-700/10">
                   <Icons.Award className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="flex sm:items-baseline sm:gap-1">

@@ -152,7 +152,7 @@ const CoffeeCup: React.FC<CoffeeCupProps> = ({ progress, isDark, isGrinding, isB
 
         <motion.div
           className={`absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full ${
-            isDark ? 'bg-gray-800' : 'bg-amber-100'
+            isDark ? 'bg-gray-800' : 'bg-orange-100'
           } text-xs font-mono ${colors.particle}`}
           initial={{ opacity: 0, y: 10 }}
           animate={{

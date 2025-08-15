@@ -124,14 +124,16 @@ const UnifiedClickHint = memo<{ badgeColorClass: string; delay: number; hintText
           transition={{ delay: delay + 0.7, duration: 0.3 }}
         >
           <div
-            className={`flex items-center gap-1 px-2 py-0.5 rounded-full backdrop-blur-sm shadow-sm border ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full shadow-lg border-2 ${
               isDark
-                ? 'bg-gradient-to-r from-slate-400 to-zinc-300 border-slate-400/30'
-                : 'bg-gradient-to-r from-yellow-500/90 to-amber-500/90 border-yellow-400/30'
+                ? 'bg-gradient-to-r from-slate-500 to-zinc-400 border-slate-400/50'
+                : 'bg-gradient-to-r from-orange-600 to-orange-700 border-orange-500/50'
             }`}
           >
-            <MousePointerClick className="w-2.5 h-2.5 hint-pill-icon" />
-            <span className="text-[9px] font-medium whitespace-nowrap hint-pill-text">
+            <MousePointerClick className={`w-4 h-4 ${isDark ? 'text-black' : 'text-white'}`} />
+            <span
+              className={`text-xs font-semibold whitespace-nowrap ${isDark ? 'text-black' : 'text-white'}`}
+            >
               {hintText || 'Click to explore'}
             </span>
           </div>

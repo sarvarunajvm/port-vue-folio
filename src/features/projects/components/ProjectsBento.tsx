@@ -51,7 +51,7 @@ const ProjectsBento: React.FC = () => {
               </div>
             </div>
             <div className="flex items-center gap-2 sm:gap-3">
-              <div className="inline-flex p-3 rounded-lg bg-gradient-to-br from-yellow-500/20 to-amber-500/20">
+              <div className="inline-flex p-3 rounded-lg bg-gradient-to-br from-orange-600/20 to-orange-700/20">
                 <Star className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />
               </div>
               <div>

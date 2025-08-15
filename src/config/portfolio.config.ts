@@ -98,7 +98,7 @@ export const portfolioConfig: PortfolioConfig = {
       title: 'Resume',
       subtitle: 'Download',
       icon: 'Download',
-      color: 'amber-500',
+      color: 'orange-700',
     },
   },
 

@@ -107,7 +107,7 @@ const CoffeeLoader: React.FC<CoffeeLoaderProps> = ({ progress, isDark }) => {
                 </motion.div>
                 <motion.div
                   className={`text-3xl md:text-4xl font-bold bg-gradient-to-r ${
-                    isDark ? 'from-gray-400 to-gray-300' : 'from-yellow-500 to-amber-500'
+                    isDark ? 'from-gray-400 to-gray-300' : 'from-orange-700 to-orange-800'
                   } bg-clip-text text-transparent`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -130,7 +130,7 @@ const CoffeeLoader: React.FC<CoffeeLoaderProps> = ({ progress, isDark }) => {
 
         <motion.div
           className={`absolute bottom-8 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full ${
-            isDark ? 'bg-gray-800/50' : 'bg-amber-100/50'
+            isDark ? 'bg-gray-800/50' : 'bg-orange-100/50'
           } backdrop-blur-sm`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -26,10 +26,10 @@ export const PHASE_THRESHOLDS = {
 
 export const THEME_COLORS = {
   light: {
-    bean: 'from-amber-700 to-amber-900',
-    cup: 'from-yellow-500 to-amber-500',
-    steam: 'from-yellow-400/20 to-amber-400/10',
-    particle: 'text-amber-600',
+    bean: 'from-orange-700 to-orange-900',
+    cup: 'from-orange-600 to-orange-700',
+    steam: 'from-orange-400/20 to-orange-500/10',
+    particle: 'text-orange-700',
   },
   dark: {
     bean: 'from-gray-600 to-gray-800',

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Camera, ChevronRight, Download, MousePointerClick } from 'lucide-react';
 
 import { portfolioConfig } from '../../../config/portfolio.config';
+import AnimatedCounter from '../../../shared/components/ui/AnimatedCounter';
 import type { HeroSectionProps } from '../../../shared/types';
 import { personalInfo } from '../../about/data/about';
 import TypewriterText from './TypewriterText';
@@ -129,20 +130,22 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
 
             {/* Desktop Hint - Inside container */}
             <motion.div
-              className="hidden md:flex absolute -bottom-8 left-1/2 transform -translate-x-1/2 z-30 pointer-events-none"
+              className="hidden md:flex absolute -bottom-10 left-1/2 transform -translate-x-1/2 z-30 pointer-events-none"
               initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.3 }}
             >
               <div
-                className={`flex items-center gap-1 px-2 py-0.5 rounded-full backdrop-blur-sm shadow-sm border ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full shadow-lg border-2 ${
                   isDark
-                    ? 'bg-gradient-to-r from-slate-400 to-zinc-300 border-slate-400/30'
-                    : 'bg-gradient-to-r from-yellow-500/90 to-amber-500/90 border-yellow-400/30'
+                    ? 'bg-gradient-to-r from-slate-500 to-zinc-400 border-slate-400/50'
+                    : 'bg-gradient-to-r from-orange-600 to-orange-700 border-orange-500/50'
                 }`}
               >
-                <MousePointerClick className="w-2.5 h-2.5 hint-pill-icon" />
-                <span className="text-[9px] font-medium whitespace-nowrap hint-pill-text">
+                <MousePointerClick className={`w-4 h-4 ${isDark ? 'text-black' : 'text-white'}`} />
+                <span
+                  className={`text-xs font-semibold whitespace-nowrap ${isDark ? 'text-black' : 'text-white'}`}
+                >
                   View my profile
                 </span>
               </div>
@@ -151,20 +154,22 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
 
           {/* Mobile Hint - Below image */}
           <motion.div
-            className="md:hidden mt-2"
+            className="md:hidden mt-3"
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.3 }}
           >
             <div
-              className={`flex items-center gap-1 px-2 py-0.5 rounded-full backdrop-blur-sm shadow-sm border ${
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full shadow-lg border-2 ${
                 isDark
-                  ? 'bg-gradient-to-r from-slate-400 to-zinc-300 border-slate-400/30'
-                  : 'bg-gradient-to-r from-yellow-500/90 to-amber-500/90 border-yellow-400/30'
+                  ? 'bg-gradient-to-r from-slate-500 to-zinc-400 border-slate-400/50'
+                  : 'bg-gradient-to-r from-orange-600 to-orange-700 border-orange-500/50'
               }`}
             >
-              <MousePointerClick className="w-2.5 h-2.5 hint-pill-icon" />
-              <span className="text-[9px] font-medium whitespace-nowrap hint-pill-text">
+              <MousePointerClick className={`w-4 h-4 ${isDark ? 'text-black' : 'text-white'}`} />
+              <span
+                className={`text-xs font-semibold whitespace-nowrap ${isDark ? 'text-black' : 'text-white'}`}
+              >
                 View my profile
               </span>
             </div>
@@ -175,7 +180,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
         <div className="text-center md:text-left">
           {/* Animated name with gradient */}
           <motion.h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black bg-gradient-to-r from-[var(--fg)] to-[var(--muted)] dark:from-gray-100 dark:to-gray-300 bg-clip-text text-transparent leading-tight mb-3 md:mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight mb-3 md:mb-4"
+            style={{ color: isDark ? '#ffffff' : '#000000' }}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
@@ -216,23 +222,32 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
           {/* Mobile Stats - Compact inline layout */}
           <div className="flex md:hidden gap-2 mt-3 justify-center text-xs">
             <div className="flex items-center gap-1">
-              <span className="font-black text-[var(--icon-blue)]">
-                {portfolioConfig.stats.yearsOfExperience}+
-              </span>
+              <AnimatedCounter
+                end={portfolioConfig.stats.yearsOfExperience}
+                suffix="+"
+                duration={2}
+                className="font-black text-[var(--icon-blue)]"
+              />
               <span className="opacity-60">Years</span>
             </div>
             <span className="opacity-40">•</span>
             <div className="flex items-center gap-1">
-              <span className="font-black text-[var(--icon-purple)]">
-                {portfolioConfig.stats.projectsCompleted}+
-              </span>
+              <AnimatedCounter
+                end={portfolioConfig.stats.projectsCompleted}
+                suffix="+"
+                duration={2.5}
+                className="font-black text-[var(--icon-purple)]"
+              />
               <span className="opacity-60">Projects</span>
             </div>
             <span className="opacity-40">•</span>
             <div className="flex items-center gap-1">
-              <span className="font-black text-[var(--icon-green)]">
-                {portfolioConfig.stats.techStackSize}+
-              </span>
+              <AnimatedCounter
+                end={portfolioConfig.stats.techStackSize}
+                suffix="+"
+                duration={3}
+                className="font-black text-[var(--icon-green)]"
+              />
               <span className="opacity-60">Tech</span>
             </div>
           </div>
@@ -244,9 +259,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
             className="flex items-center gap-2 px-3 py-2 lg:px-4 lg:py-3 rounded-lg neu-pressed-sm"
             whileHover={{ scale: 1.05 }}
           >
-            <div className="text-2xl lg:text-3xl xl:text-4xl font-black text-[var(--icon-blue)]">
-              {portfolioConfig.stats.yearsOfExperience}+
-            </div>
+            <AnimatedCounter
+              end={portfolioConfig.stats.yearsOfExperience}
+              suffix="+"
+              duration={2}
+              className="text-2xl lg:text-3xl xl:text-4xl font-black text-[var(--icon-blue)]"
+            />
             <div className="text-xs lg:text-sm opacity-60 font-medium">
               Years
               <br />
@@ -258,9 +276,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
             className="flex items-center gap-2 px-3 py-2 lg:px-4 lg:py-3 rounded-lg neu-pressed-sm"
             whileHover={{ scale: 1.05 }}
           >
-            <div className="text-2xl lg:text-3xl xl:text-4xl font-black text-[var(--icon-purple)]">
-              {portfolioConfig.stats.projectsCompleted}+
-            </div>
+            <AnimatedCounter
+              end={portfolioConfig.stats.projectsCompleted}
+              suffix="+"
+              duration={2.5}
+              className="text-2xl lg:text-3xl xl:text-4xl font-black text-[var(--icon-purple)]"
+            />
             <div className="text-xs lg:text-sm opacity-60 font-medium">
               Completed
               <br />
@@ -272,9 +293,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
             className="flex items-center gap-2 px-3 py-2 lg:px-4 lg:py-3 rounded-lg neu-pressed-sm"
             whileHover={{ scale: 1.05 }}
           >
-            <div className="text-2xl lg:text-3xl xl:text-4xl font-black text-[var(--icon-green)]">
-              {portfolioConfig.stats.techStackSize}+
-            </div>
+            <AnimatedCounter
+              end={portfolioConfig.stats.techStackSize}
+              suffix="+"
+              duration={3}
+              className="text-2xl lg:text-3xl xl:text-4xl font-black text-[var(--icon-green)]"
+            />
             <div className="text-xs lg:text-sm opacity-60 font-medium">
               Tech
               <br />
