@@ -8,7 +8,7 @@ import { ICON_SIZES } from '../../constants/layout';
 import type { NavigationCardProps } from '../../types';
 
 const NavigationCard = memo<NavigationCardProps>(
-  ({ icon: Icon, title, subtitle, color, hintIcon: HintIcon, hintText, onClick, delay = 0 }) => {
+  ({ icon: Icon, title, subtitle, color, hintText, onClick, delay = 0 }) => {
     const iconColorClass =
       {
         blue: 'text-[var(--icon-blue)]',

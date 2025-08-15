@@ -56,7 +56,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
             }}
             whileTap={{ scale: 0.95 }}
             onClick={onProfileClick}
-            className="cursor-pointer relative"
+            className="cursor-pointer relative inline-block"
           >
             <div className="w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] md:w-[160px] md:h-[160px] lg:w-[200px] lg:h-[200px] xl:w-[240px] xl:h-[240px] neu-pressed rounded-2xl overflow-hidden relative group transition-all duration-300">
               {/* Animated gradient background */}
@@ -90,7 +90,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
 
             {/* Unified Click Hint - Chevron Badge */}
             <motion.div
-              className="absolute -top-2 -right-2 z-30"
+              className="absolute -top-1 -right-1 z-30"
               initial={{ opacity: 0, scale: 0 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.8, duration: 0.3 }}
@@ -107,7 +107,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick, onResumeDownl
                 }}
               >
                 <div className="bg-[var(--accent)] border-[var(--accent-hover)] w-6 h-6 rounded-full flex items-center justify-center border-2 shadow-lg opacity-90">
-                  <ChevronRight className="w-3 h-3 text-white dark:text-gray-900" strokeWidth={3} />
+                  <ChevronRight
+                    className="w-3 h-3 text-white dark:text-gray-900 ml-0.5"
+                    strokeWidth={3}
+                  />
                 </div>
                 <motion.div
                   className="absolute inset-0 bg-[var(--accent)] rounded-full"
