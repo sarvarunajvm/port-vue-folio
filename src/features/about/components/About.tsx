@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 import { SPRING_CONFIG, hoverVariants } from '../../../shared/constants/animations';
+import { formatYearsOfExperience } from '../../../shared/utils/experience';
+import { calculateYearsSinceEducation } from '../../../shared/utils/statistics';
 import { educationData, personalInfo } from '../data/about';
 
 const About: React.FC = () => {
@@ -63,7 +65,7 @@ const About: React.FC = () => {
                   >
                     {personalInfo.firstname} {personalInfo.lastname}
                   </h3>
-                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold opacity-85">
+                  <p className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold text-secondary">
                     &ldquo;{personalInfo.nickname}&rdquo; • Software Engineer
                   </p>
                   <div className="flex items-center gap-3 mt-2">
@@ -72,7 +74,7 @@ const About: React.FC = () => {
                         className="w-2 h-2 rounded-full animate-pulse"
                         style={{ backgroundColor: 'var(--icon-green)' }}
                       />
-                      <span className="text-sm md:text-base opacity-85">Available</span>
+                      <span className="text-sm md:text-base text-secondary">Available</span>
                     </div>
                   </div>
                 </div>
@@ -80,9 +82,10 @@ const About: React.FC = () => {
 
               {/* Professional Summary */}
               <div className="mb-4">
-                <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed opacity-85">
-                  Software engineer with 8+ years in Java development and full-stack expertise.
-                  Passionate about building scalable enterprise applications.
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-secondary">
+                  Results-oriented software engineer with {formatYearsOfExperience()} years in Java
+                  development and full-stack expertise. Passionate about building scalable
+                  enterprise applications and contributing to open-source projects.
                 </p>
               </div>
 
@@ -112,8 +115,8 @@ const About: React.FC = () => {
                         <div className="flex items-start gap-2">
                           <span className="text-lg md:text-xl flex-shrink-0 mt-1">📧</span>
                           <div className="flex-1">
-                            <p className="text-sm font-medium opacity-75 mb-1">Email</p>
-                            <p className="text-sm md:text-base font-medium opacity-90 break-all">
+                            <p className="text-sm font-medium text-muted mb-1">Email</p>
+                            <p className="text-sm md:text-base font-medium text-secondary break-all">
                               {personalInfo.email}
                             </p>
                           </div>
@@ -121,8 +124,8 @@ const About: React.FC = () => {
                         <div className="flex items-start gap-2">
                           <span className="text-lg md:text-xl flex-shrink-0 mt-1">📱</span>
                           <div className="flex-1">
-                            <p className="text-sm font-medium opacity-75 mb-1">Phone</p>
-                            <p className="text-sm md:text-base font-medium opacity-90">
+                            <p className="text-sm font-medium text-muted mb-1">Phone</p>
+                            <p className="text-sm md:text-base font-medium text-secondary">
                               {personalInfo.phone}
                             </p>
                           </div>
@@ -130,8 +133,8 @@ const About: React.FC = () => {
                         <div className="flex items-start gap-2">
                           <span className="text-lg md:text-xl flex-shrink-0 mt-1">📍</span>
                           <div className="flex-1">
-                            <p className="text-sm font-medium opacity-75 mb-1">Location</p>
-                            <p className="text-sm md:text-base font-medium opacity-90">
+                            <p className="text-sm font-medium text-muted mb-1">Location</p>
+                            <p className="text-sm md:text-base font-medium text-secondary">
                               Chennai, India
                             </p>
                           </div>
@@ -151,7 +154,7 @@ const About: React.FC = () => {
                         </h4>
                       </div>
                       <div className="flex-1">
-                        <p className="text-sm md:text-base opacity-85 mb-3">
+                        <p className="text-sm md:text-base text-secondary mb-3">
                           Have a project in mind? Let&apos;s connect!
                         </p>
                         <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
@@ -248,18 +251,21 @@ const About: React.FC = () => {
                       {/* Timeline Content */}
                       <div className="flex-1 pb-2">
                         {/* Period Badge */}
-                        <div className="inline-flex items-center px-3 py-1 rounded-full neu-pressed-sm mb-2">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full neu-pressed-sm mb-2">
                           <span
                             className="text-sm md:text-base font-medium"
                             style={{ color: 'var(--accent)' }}
                           >
                             {edu.period}
                           </span>
+                          <span className="text-xs md:text-sm text-muted">
+                            • {calculateYearsSinceEducation(edu.period)}
+                          </span>
                         </div>
 
                         {/* Degree & College */}
                         <h5 className="font-bold text-base md:text-lg mb-2">{edu.degree}</h5>
-                        <p className="text-sm md:text-base opacity-85 mb-3 font-medium">
+                        <p className="text-sm md:text-base text-secondary mb-3 font-medium">
                           {edu.college}
                         </p>
 
@@ -271,7 +277,7 @@ const About: React.FC = () => {
                                 className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0"
                                 style={{ backgroundColor: 'var(--icon-blue)' }}
                               ></div>
-                              <span className="text-sm md:text-base opacity-85 leading-relaxed">
+                              <span className="text-sm md:text-base text-secondary leading-relaxed">
                                 {point.value}
                               </span>
                             </div>

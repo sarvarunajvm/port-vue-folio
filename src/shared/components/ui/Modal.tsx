@@ -73,12 +73,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ delay: 0.1 }}
             onClick={onClose}
-            className="fixed top-4 right-4 sm:top-5 sm:right-5 md:top-6 md:right-6 z-50 p-3 rounded-xl neu-pressed-sm transition-all duration-300 group hover:scale-110"
+            className="fixed top-4 right-4 sm:top-5 sm:right-5 md:top-6 md:right-6 z-50 p-3 rounded-xl transition-all duration-300 group hover:scale-110"
             aria-label="Close modal"
             style={{
-              background: isDark
-                ? 'linear-gradient(135deg, rgba(192, 192, 192, 0.1), rgba(192, 192, 192, 0.05))'
-                : 'linear-gradient(135deg, rgba(184, 115, 51, 0.1), rgba(184, 115, 51, 0.05))',
+              background: 'var(--surface)',
+              boxShadow: isDark
+                ? '4px 4px 8px rgba(0, 0, 0, 0.6), -4px -4px 8px rgba(192, 192, 192, 0.08), inset 1px 1px 2px rgba(192, 192, 192, 0.05)'
+                : '4px 4px 8px rgba(139, 90, 43, 0.12), -4px -4px 8px rgba(244, 232, 225, 0.7), inset 1px 1px 2px rgba(244, 232, 225, 0.5)',
             }}
           >
             <span
@@ -97,9 +98,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="fixed top-4 left-4 sm:top-5 sm:left-5 md:top-6 md:left-6 text-2xl sm:text-3xl md:text-4xl font-bold z-50"
+              className="fixed top-4 left-4 sm:top-5 sm:left-5 md:top-6 md:left-6 text-2xl sm:text-3xl md:text-4xl font-bold z-50 text-primary"
               style={{
-                color: 'var(--fg)',
                 textShadow: isDark
                   ? '0 2px 8px rgba(192, 192, 192, 0.2)'
                   : '0 2px 8px rgba(184, 115, 51, 0.2)',
@@ -115,9 +115,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.3, delay: 0.1 }}
-            className="w-full h-full overflow-y-auto p-4 pt-16 sm:p-6 sm:pt-20 md:p-8 md:pt-24"
+            className="w-full h-full overflow-y-auto p-4 pt-16 sm:p-6 sm:pt-20 md:p-8 md:pt-24 text-primary"
             style={{
-              color: 'var(--fg)',
               fontSize: '1rem',
               lineHeight: '1.6',
             }}

@@ -1,3 +1,6 @@
+import { calculateYearsOfExperience } from '../shared/utils/experience';
+import { calculateTotalProjects, calculateTotalSkills } from '../shared/utils/statistics';
+
 interface SectionConfig {
   title: string;
   subtitle: string;
@@ -59,9 +62,9 @@ export const portfolioConfig: PortfolioConfig = {
   },
 
   stats: {
-    yearsOfExperience: 8,
-    projectsCompleted: 50,
-    techStackSize: 20,
+    yearsOfExperience: calculateYearsOfExperience(),
+    projectsCompleted: calculateTotalProjects(),
+    techStackSize: calculateTotalSkills(),
   },
 
   resume: {

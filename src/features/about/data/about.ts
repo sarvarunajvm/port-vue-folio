@@ -54,7 +54,7 @@ export const personalInfo: PersonalInfo = {
   email: 'sathishdaywalker@outlook.com',
   location: 'Chennai, India',
   summary:
-    'Results-oriented software engineer with over 8 years in Java development, focusing on scalable enterprise applications. Experienced in delivering efficient solutions in fast-paced settings and contributing to open-source projects. Aiming to apply full-stack expertise to foster innovation in a dynamic development team.',
+    'Results-oriented software engineer with extensive experience in Java development, focusing on scalable enterprise applications. Experienced in delivering efficient solutions in fast-paced settings and contributing to open-source projects. Aiming to apply full-stack expertise to foster innovation in a dynamic development team.',
   philosophy: {
     quote: 'Continuous learning is the minimum requirement for success in any field',
     author: 'Brian Tracy',

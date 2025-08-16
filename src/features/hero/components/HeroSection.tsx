@@ -58,7 +58,15 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
             onClick={onProfileClick}
             className="cursor-pointer relative inline-block"
           >
-            <div className="w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] md:w-[160px] md:h-[160px] lg:w-[200px] lg:h-[200px] xl:w-[240px] xl:h-[240px] neu-pressed rounded-2xl overflow-hidden relative group transition-all duration-300">
+            <div
+              className="w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] md:w-[160px] md:h-[160px] lg:w-[200px] lg:h-[200px] xl:w-[240px] xl:h-[240px] rounded-2xl overflow-hidden relative group transition-all duration-500"
+              style={{
+                background: 'var(--surface)',
+                boxShadow: isDark
+                  ? 'inset 8px 8px 16px rgba(0, 0, 0, 0.7), inset -8px -8px 16px rgba(192, 192, 192, 0.1), 0 0 0 1px rgba(192, 192, 192, 0.1)'
+                  : 'inset 8px 8px 16px rgba(139, 90, 43, 0.15), inset -8px -8px 16px rgba(244, 232, 225, 0.8), 0 0 0 1px rgba(184, 115, 51, 0.15)',
+              }}
+            >
               {/* Animated gradient background */}
               <motion.div
                 className="absolute inset-0 bg-gradient-to-br from-purple-400 via-pink-400 to-blue-400 opacity-20 group-hover:opacity-30 transition-opacity duration-300"
@@ -71,7 +79,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
 
               {/* Fallback placeholder */}
               <div className="absolute inset-0 bg-gradient-to-br from-gray-300/90 to-gray-400/90 dark:from-gray-600/90 dark:to-gray-700/90 flex items-center justify-center backdrop-blur-sm">
-                <span className="text-6xl text-gray-500 dark:text-gray-400">📸</span>
+                <span className="text-6xl text-muted">📸</span>
               </div>
 
               {/* Actual image */}
@@ -106,8 +114,23 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
                   delay: 0.5,
                 }}
               >
-                <div className="bg-[var(--accent)] border-[var(--accent-hover)] w-6 h-6 rounded-full flex items-center justify-center border-2 shadow-lg opacity-90">
-                  <span className="text-sm text-white dark:text-gray-900 ml-0.5">👉</span>
+                <div
+                  className="w-6 h-6 rounded-full flex items-center justify-center opacity-95"
+                  style={{
+                    background: isDark
+                      ? 'linear-gradient(135deg, #c0c0c0, #e5e5e5)'
+                      : 'linear-gradient(135deg, #b87333, #cd7f32)',
+                    boxShadow: isDark
+                      ? '2px 2px 4px rgba(0, 0, 0, 0.5), -1px -1px 2px rgba(255, 255, 255, 0.1)'
+                      : '2px 2px 4px rgba(139, 90, 43, 0.3), -1px -1px 2px rgba(255, 255, 255, 0.8)',
+                  }}
+                >
+                  <span
+                    className="text-sm ml-0.5"
+                    style={{ color: isDark ? '#0a0a0a' : '#ffffff' }}
+                  >
+                    👉
+                  </span>
                 </div>
                 <motion.div
                   className="absolute inset-0 bg-[var(--accent)] rounded-full"
@@ -176,8 +199,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
         <div className="text-center md:text-left">
           {/* Animated name with gradient */}
           <motion.h1
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight mb-3 md:mb-4"
-            style={{ color: isDark ? '#ffffff' : '#000000' }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight mb-3 md:mb-4 text-primary"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
@@ -213,7 +235,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
               href={personalInfo.social.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 neu-pressed-sm rounded-lg hover:scale-110 transition-all group"
+              className="p-2.5 rounded-xl hover:scale-110 transition-all duration-300 group"
+              style={{
+                background: 'var(--surface)',
+                boxShadow: isDark
+                  ? '4px 4px 8px rgba(0, 0, 0, 0.6), -4px -4px 8px rgba(192, 192, 192, 0.08)'
+                  : '4px 4px 8px rgba(139, 90, 43, 0.12), -4px -4px 8px rgba(244, 232, 225, 0.7)',
+              }}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -225,7 +253,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
               href={personalInfo.social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 neu-pressed-sm rounded-lg hover:scale-110 transition-all group"
+              className="p-2.5 rounded-xl hover:scale-110 transition-all duration-300 group"
+              style={{
+                background: 'var(--surface)',
+                boxShadow: isDark
+                  ? '4px 4px 8px rgba(0, 0, 0, 0.6), -4px -4px 8px rgba(192, 192, 192, 0.08)'
+                  : '4px 4px 8px rgba(139, 90, 43, 0.12), -4px -4px 8px rgba(244, 232, 225, 0.7)',
+              }}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -237,7 +271,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
               href={personalInfo.social.stackoverflow}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 neu-pressed-sm rounded-lg hover:scale-110 transition-all group"
+              className="p-2.5 rounded-xl hover:scale-110 transition-all duration-300 group"
+              style={{
+                background: 'var(--surface)',
+                boxShadow: isDark
+                  ? '4px 4px 8px rgba(0, 0, 0, 0.6), -4px -4px 8px rgba(192, 192, 192, 0.08)'
+                  : '4px 4px 8px rgba(139, 90, 43, 0.12), -4px -4px 8px rgba(244, 232, 225, 0.7)',
+              }}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -249,7 +289,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
               href={personalInfo.social.devto}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 neu-pressed-sm rounded-lg hover:scale-110 transition-all group"
+              className="p-2.5 rounded-xl hover:scale-110 transition-all duration-300 group"
+              style={{
+                background: 'var(--surface)',
+                boxShadow: isDark
+                  ? '4px 4px 8px rgba(0, 0, 0, 0.6), -4px -4px 8px rgba(192, 192, 192, 0.08)'
+                  : '4px 4px 8px rgba(139, 90, 43, 0.12), -4px -4px 8px rgba(244, 232, 225, 0.7)',
+              }}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -268,9 +314,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
                 duration={2}
                 className="font-black text-[var(--icon-blue)]"
               />
-              <span className="opacity-60">Years</span>
+              <span className="text-muted">Years</span>
             </div>
-            <span className="opacity-40">•</span>
+            <span className="text-disabled">•</span>
             <div className="flex items-center gap-1">
               <AnimatedCounter
                 end={portfolioConfig.stats.projectsCompleted}
@@ -278,9 +324,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
                 duration={2.5}
                 className="font-black text-[var(--icon-purple)]"
               />
-              <span className="opacity-60">Projects</span>
+              <span className="text-muted">Projects</span>
             </div>
-            <span className="opacity-40">•</span>
+            <span className="text-disabled">•</span>
             <div className="flex items-center gap-1">
               <AnimatedCounter
                 end={portfolioConfig.stats.techStackSize}
@@ -288,7 +334,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
                 duration={3}
                 className="font-black text-[var(--icon-green)]"
               />
-              <span className="opacity-60">Tech</span>
+              <span className="text-muted">Tech</span>
             </div>
           </div>
         </div>
@@ -296,8 +342,19 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
         {/* Right Column - Stats (Desktop only) */}
         <div className="hidden md:flex flex-col gap-3 lg:gap-4 items-center md:items-end justify-center">
           <motion.div
-            className="flex items-center gap-2 px-3 py-2 lg:px-4 lg:py-3 rounded-lg neu-pressed-sm"
-            whileHover={{ scale: 1.05 }}
+            className="flex items-center gap-2 px-3 py-2 lg:px-4 lg:py-3 rounded-xl transition-all duration-300"
+            style={{
+              background: 'var(--surface)',
+              boxShadow: isDark
+                ? 'inset 3px 3px 6px rgba(0, 0, 0, 0.5), inset -3px -3px 6px rgba(192, 192, 192, 0.06)'
+                : 'inset 3px 3px 6px rgba(139, 90, 43, 0.1), inset -3px -3px 6px rgba(244, 232, 225, 0.6)',
+            }}
+            whileHover={{
+              scale: 1.05,
+              boxShadow: isDark
+                ? 'inset 4px 4px 8px rgba(0, 0, 0, 0.6), inset -4px -4px 8px rgba(192, 192, 192, 0.08), 0 0 15px rgba(192, 192, 192, 0.1)'
+                : 'inset 4px 4px 8px rgba(139, 90, 43, 0.12), inset -4px -4px 8px rgba(244, 232, 225, 0.7), 0 0 15px rgba(184, 115, 51, 0.15)',
+            }}
           >
             <AnimatedCounter
               end={portfolioConfig.stats.yearsOfExperience}
@@ -305,7 +362,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
               duration={2}
               className="text-2xl lg:text-3xl xl:text-4xl font-black text-[var(--icon-blue)]"
             />
-            <div className="text-xs lg:text-sm opacity-60 font-medium">
+            <div className="text-xs lg:text-sm text-muted font-medium">
               Years
               <br />
               Experience
@@ -313,8 +370,19 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
           </motion.div>
 
           <motion.div
-            className="flex items-center gap-2 px-3 py-2 lg:px-4 lg:py-3 rounded-lg neu-pressed-sm"
-            whileHover={{ scale: 1.05 }}
+            className="flex items-center gap-2 px-3 py-2 lg:px-4 lg:py-3 rounded-xl transition-all duration-300"
+            style={{
+              background: 'var(--surface)',
+              boxShadow: isDark
+                ? 'inset 3px 3px 6px rgba(0, 0, 0, 0.5), inset -3px -3px 6px rgba(192, 192, 192, 0.06)'
+                : 'inset 3px 3px 6px rgba(139, 90, 43, 0.1), inset -3px -3px 6px rgba(244, 232, 225, 0.6)',
+            }}
+            whileHover={{
+              scale: 1.05,
+              boxShadow: isDark
+                ? 'inset 4px 4px 8px rgba(0, 0, 0, 0.6), inset -4px -4px 8px rgba(192, 192, 192, 0.08), 0 0 15px rgba(192, 192, 192, 0.1)'
+                : 'inset 4px 4px 8px rgba(139, 90, 43, 0.12), inset -4px -4px 8px rgba(244, 232, 225, 0.7), 0 0 15px rgba(184, 115, 51, 0.15)',
+            }}
           >
             <AnimatedCounter
               end={portfolioConfig.stats.projectsCompleted}
@@ -322,7 +390,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
               duration={2.5}
               className="text-2xl lg:text-3xl xl:text-4xl font-black text-[var(--icon-purple)]"
             />
-            <div className="text-xs lg:text-sm opacity-60 font-medium">
+            <div className="text-xs lg:text-sm text-muted font-medium">
               Completed
               <br />
               Projects
@@ -330,8 +398,19 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
           </motion.div>
 
           <motion.div
-            className="flex items-center gap-2 px-3 py-2 lg:px-4 lg:py-3 rounded-lg neu-pressed-sm"
-            whileHover={{ scale: 1.05 }}
+            className="flex items-center gap-2 px-3 py-2 lg:px-4 lg:py-3 rounded-xl transition-all duration-300"
+            style={{
+              background: 'var(--surface)',
+              boxShadow: isDark
+                ? 'inset 3px 3px 6px rgba(0, 0, 0, 0.5), inset -3px -3px 6px rgba(192, 192, 192, 0.06)'
+                : 'inset 3px 3px 6px rgba(139, 90, 43, 0.1), inset -3px -3px 6px rgba(244, 232, 225, 0.6)',
+            }}
+            whileHover={{
+              scale: 1.05,
+              boxShadow: isDark
+                ? 'inset 4px 4px 8px rgba(0, 0, 0, 0.6), inset -4px -4px 8px rgba(192, 192, 192, 0.08), 0 0 15px rgba(192, 192, 192, 0.1)'
+                : 'inset 4px 4px 8px rgba(139, 90, 43, 0.12), inset -4px -4px 8px rgba(244, 232, 225, 0.7), 0 0 15px rgba(184, 115, 51, 0.15)',
+            }}
           >
             <AnimatedCounter
               end={portfolioConfig.stats.techStackSize}
@@ -339,7 +418,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
               duration={3}
               className="text-2xl lg:text-3xl xl:text-4xl font-black text-[var(--icon-green)]"
             />
-            <div className="text-xs lg:text-sm opacity-60 font-medium">
+            <div className="text-xs lg:text-sm text-muted font-medium">
               Tech
               <br />
               Stack
