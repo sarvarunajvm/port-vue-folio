@@ -1,13 +1,13 @@
-import React, { Suspense, lazy, useCallback, useMemo, useState } from 'react';
-
+import React, { Suspense, lazy, useCallback, useMemo, useState, memo, useTransition } from 'react';
 import { motion } from 'framer-motion';
-
 import { portfolioConfig } from '../config/portfolio.config';
 import { personalInfo, uiContent } from '../data';
 import { HeroSection } from '../features/hero';
 import { Modal, NavigationCard } from '../shared/components/ui';
 import { containerVariants } from '../shared/constants/animations';
 import { CONTAINER } from '../shared/constants/layout';
+import { usePrefersReducedMotion } from '../shared/hooks';
+import { withPerformance } from '../shared/hoc/withPerformance';
 import type { ModalType, NavigationCardData } from '../shared/types';
 
 const AboutBento = lazy(() => import('../features/about').then((m) => ({ default: m.AboutBento })));
@@ -35,8 +35,27 @@ const MODAL_COMPONENTS = {
   skills: SkillsBento,
 } as const;
 
-export const Home: React.FC = () => {
+// Memoized navigation card component for better performance
+const MemoizedNavigationCard = memo(NavigationCard);
+
+// Loading component for modal content
+const ModalContentLoader = () => (
+  <div className="flex items-center justify-center p-8">
+    <div className="text-center">
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+        className="w-12 h-12 border-4 border-[var(--accent)] border-t-transparent rounded-full mx-auto mb-4"
+      />
+      <p className="text-muted">Loading...</p>
+    </div>
+  </div>
+);
+
+const HomeComponent: React.FC = () => {
   const [openModal, setOpenModal] = useState<ModalType | null>(null);
+  const [, startTransition] = useTransition();
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const handleResumeDownload = useCallback(() => {
     const link = document.createElement('a');
@@ -51,14 +70,19 @@ export const Home: React.FC = () => {
         // Handle resume download for contact card
         handleResumeDownload();
       } else {
-        setOpenModal(modalType);
+        // Use transition for smooth modal opening
+        startTransition(() => {
+          setOpenModal(modalType);
+        });
       }
     },
     [handleResumeDownload]
   );
 
   const handleModalClose = useCallback(() => {
-    setOpenModal(null);
+    startTransition(() => {
+      setOpenModal(null);
+    });
   }, []);
 
   const renderModal = useMemo(() => {
@@ -72,12 +96,15 @@ export const Home: React.FC = () => {
 
     return (
       <Modal key={openModal} isOpen={true} onClose={handleModalClose} title={title}>
-        <Suspense fallback={<div className="flex items-center justify-center p-8">Loading...</div>}>
+        <Suspense fallback={<ModalContentLoader />}>
           <Component />
         </Suspense>
       </Modal>
     );
   }, [openModal, handleModalClose]);
+
+  // Optimize animations based on user preferences
+  const animationVariants = prefersReducedMotion ? {} : containerVariants;
 
   return (
     <div
@@ -86,20 +113,20 @@ export const Home: React.FC = () => {
     >
       <motion.div
         className={`w-full max-w-[${CONTAINER.MAX_WIDTH}px] mx-auto flex flex-col justify-start md:justify-center min-h-full md:h-full pt-12 pb-8 md:py-0`}
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
+        variants={animationVariants}
+        initial={prefersReducedMotion ? false : "hidden"}
+        animate={prefersReducedMotion ? false : "visible"}
       >
         <div className="grid grid-cols-1 gap-4 sm:gap-5 md:gap-6 lg:gap-8 pb-20 md:pb-0">
           <HeroSection onProfileClick={() => handleModalOpen('about')} />
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
             {NAVIGATION_CARDS.map((card, index) => (
-              <NavigationCard
+              <MemoizedNavigationCard
                 key={card.id}
                 {...card}
                 onClick={() => handleModalOpen(card.id)}
-                delay={index * 0.3}
+                delay={prefersReducedMotion ? 0 : index * 0.3}
               />
             ))}
           </div>
@@ -110,3 +137,10 @@ export const Home: React.FC = () => {
     </div>
   );
 };
+
+// Export the performance-enhanced Home component
+export const Home = withPerformance(HomeComponent, {
+  enableProfiling: process.env.NODE_ENV === 'development',
+  memoize: true,
+  warnThreshold: 32,
+});

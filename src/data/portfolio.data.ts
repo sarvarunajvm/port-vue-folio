@@ -153,10 +153,10 @@ export const uiContent = {
 // STATISTICS
 // ============================================
 export const statistics = {
-  yearsOfExperience: 8,
-  projectsCompleted: 15,
-  techStackSize: 50,
-  companiesWorked: 4,
+  yearsOfExperience: 9,
+  projectsCompleted: 25,
+  techStackSize: 65,
+  companiesWorked: 5,
 };
 
 // ============================================

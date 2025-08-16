@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { motion } from 'framer-motion';
 
-import { emojiMappings, experienceData, statistics, uiContent } from '../../../data';
+import { emojiMappings, experienceData, uiContent } from '../../../data';
 import { calculateYearsOfExperience } from '../../../shared/utils/experience';
 import {
   calculateCompanyCount,
@@ -217,7 +217,7 @@ const Experience: React.FC = () => {
 
               {/* Impact Metrics */}
               <div className="grid grid-cols-3 gap-2">
-                {currentJob.impact.slice(0, 3).map((metric) => (
+                {currentJob.impact?.slice(0, 3).map((metric) => (
                   <div
                     key={metric.metric}
                     className="p-3 rounded-lg text-center transition-all duration-300"
