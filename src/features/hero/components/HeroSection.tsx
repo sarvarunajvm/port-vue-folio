@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 
 import { motion } from 'framer-motion';
 
-import { portfolioConfig } from '../../../config/portfolio.config';
+import { personalInfo, statistics, uiContent } from '../../../data';
 import AnimatedCounter from '../../../shared/components/ui/AnimatedCounter';
 import type { HeroSectionProps } from '../../../shared/types';
-import { personalInfo } from '../../about/data/about';
 import TypewriterText from './TypewriterText';
 
 const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
@@ -165,7 +164,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
                 <span
                   className={`text-xs font-semibold whitespace-nowrap ${isDark ? 'text-black' : 'text-white'}`}
                 >
-                  View my profile
+                  {uiContent.navigation.profileHint}
                 </span>
               </div>
             </motion.div>
@@ -309,7 +308,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
           <div className="flex md:hidden gap-2 mt-3 justify-center text-xs">
             <div className="flex items-center gap-1">
               <AnimatedCounter
-                end={portfolioConfig.stats.yearsOfExperience}
+                end={statistics.yearsOfExperience}
                 suffix="+"
                 duration={2}
                 className="font-black text-[var(--icon-blue)]"
@@ -319,7 +318,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
             <span className="text-disabled">•</span>
             <div className="flex items-center gap-1">
               <AnimatedCounter
-                end={portfolioConfig.stats.projectsCompleted}
+                end={statistics.projectsCompleted}
                 suffix="+"
                 duration={2.5}
                 className="font-black text-[var(--icon-purple)]"
@@ -329,7 +328,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
             <span className="text-disabled">•</span>
             <div className="flex items-center gap-1">
               <AnimatedCounter
-                end={portfolioConfig.stats.techStackSize}
+                end={statistics.techStackSize}
                 suffix="+"
                 duration={3}
                 className="font-black text-[var(--icon-green)]"
@@ -357,7 +356,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
             }}
           >
             <AnimatedCounter
-              end={portfolioConfig.stats.yearsOfExperience}
+              end={statistics.yearsOfExperience}
               suffix="+"
               duration={2}
               className="text-2xl lg:text-3xl xl:text-4xl font-black text-[var(--icon-blue)]"
@@ -385,7 +384,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
             }}
           >
             <AnimatedCounter
-              end={portfolioConfig.stats.projectsCompleted}
+              end={statistics.projectsCompleted}
               suffix="+"
               duration={2.5}
               className="text-2xl lg:text-3xl xl:text-4xl font-black text-[var(--icon-purple)]"
@@ -413,7 +412,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onProfileClick }) => {
             }}
           >
             <AnimatedCounter
-              end={portfolioConfig.stats.techStackSize}
+              end={statistics.techStackSize}
               suffix="+"
               duration={3}
               className="text-2xl lg:text-3xl xl:text-4xl font-black text-[var(--icon-green)]"

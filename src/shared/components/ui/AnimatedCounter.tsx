@@ -8,6 +8,7 @@ interface AnimatedCounterProps {
   prefix?: string;
   suffix?: string;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
@@ -16,6 +17,7 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
   prefix = '',
   suffix = '',
   className = '',
+  style,
 }) => {
   const [count, setCount] = useState(0);
   const ref = useRef(null);
@@ -47,6 +49,7 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
     <motion.span
       ref={ref}
       className={className}
+      style={style}
       initial={{ opacity: 0, scale: 0.5 }}
       animate={isInView ? { opacity: 1, scale: 1 } : {}}
       transition={{ duration: 0.5 }}

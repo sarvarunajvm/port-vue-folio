@@ -158,7 +158,7 @@ const UnifiedClickHint = memo<{
           <span
             className={`text-xs font-semibold whitespace-nowrap ${isDark ? 'text-black' : 'text-white'}`}
           >
-            {hintText || 'Click to explore'}
+            {hintText}
           </span>
         </div>
       </motion.div>

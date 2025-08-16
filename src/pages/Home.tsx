@@ -3,6 +3,7 @@ import React, { Suspense, lazy, useCallback, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 
 import { portfolioConfig } from '../config/portfolio.config';
+import { personalInfo, uiContent } from '../data';
 import { HeroSection } from '../features/hero';
 import { Modal, NavigationCard } from '../shared/components/ui';
 import { containerVariants } from '../shared/constants/animations';
@@ -21,44 +22,11 @@ const SkillsBento = lazy(() =>
   import('../features/skills').then((m) => ({ default: m.SkillsBento }))
 );
 
-const NAVIGATION_CARDS: NavigationCardData[] = [
-  {
-    id: 'experience' as ModalType,
-    emoji: '💼',
-    color: 'blue',
-    hintEmoji: '✨',
-    hintText: 'View my journey',
-    title: portfolioConfig.sections.experience.title,
-    subtitle: portfolioConfig.sections.experience.subtitle,
-  },
-  {
-    id: 'projects' as ModalType,
-    emoji: '🚀',
-    color: 'purple',
-    hintEmoji: '☕',
-    hintText: 'Explore my work',
-    title: portfolioConfig.sections.projects.title,
-    subtitle: portfolioConfig.sections.projects.subtitle,
-  },
-  {
-    id: 'skills' as ModalType,
-    emoji: '💻',
-    color: 'green',
-    hintEmoji: '✨',
-    hintText: 'See my expertise',
-    title: portfolioConfig.sections.skills.title,
-    subtitle: portfolioConfig.sections.skills.subtitle,
-  },
-  {
-    id: 'contact' as ModalType,
-    emoji: '📄',
-    color: 'red',
-    hintEmoji: '📥',
-    hintText: 'Download resume',
-    title: 'Download Resume',
-    subtitle: 'Get my latest CV',
-  },
-] as const;
+const NAVIGATION_CARDS: NavigationCardData[] = uiContent.navigation.cards.map((card) => ({
+  ...card,
+  id: card.id as ModalType,
+  color: card.color as 'blue' | 'purple' | 'green' | 'red',
+}));
 
 const MODAL_COMPONENTS = {
   about: AboutBento,
@@ -72,8 +40,8 @@ export const Home: React.FC = () => {
 
   const handleResumeDownload = useCallback(() => {
     const link = document.createElement('a');
-    link.href = portfolioConfig.resume.path;
-    link.download = portfolioConfig.resume.downloadName;
+    link.href = personalInfo.resume.path;
+    link.download = personalInfo.resume.downloadName;
     link.click();
   }, []);
 

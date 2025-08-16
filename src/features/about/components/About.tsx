@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 
 import { motion } from 'framer-motion';
 
+import { educationData, emojiMappings, personalInfo, uiContent } from '../../../data';
 import { SPRING_CONFIG, hoverVariants } from '../../../shared/constants/animations';
-import { formatYearsOfExperience } from '../../../shared/utils/experience';
 import { calculateYearsSinceEducation } from '../../../shared/utils/statistics';
-import { educationData, personalInfo } from '../data/about';
 
 const About: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +16,7 @@ const About: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const mailtoLink = `mailto:${personalInfo.email}?subject=${encodeURIComponent(
-      'Contact from Portfolio'
+      uiContent.about.contactForm.emailSubject
     )}&body=${encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     )}`;
@@ -74,7 +73,9 @@ const About: React.FC = () => {
                         className="w-2 h-2 rounded-full animate-pulse"
                         style={{ backgroundColor: 'var(--icon-green)' }}
                       />
-                      <span className="text-sm md:text-base text-secondary">Available</span>
+                      <span className="text-sm md:text-base text-secondary">
+                        {personalInfo.availability.status}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -83,9 +84,7 @@ const About: React.FC = () => {
               {/* Professional Summary */}
               <div className="mb-4">
                 <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-secondary">
-                  Results-oriented software engineer with {formatYearsOfExperience()} years in Java
-                  development and full-stack expertise. Passionate about building scalable
-                  enterprise applications and contributing to open-source projects.
+                  {personalInfo.bio}
                 </p>
               </div>
 
@@ -108,14 +107,16 @@ const About: React.FC = () => {
                           className="text-lg md:text-xl lg:text-2xl font-bold"
                           style={{ color: 'var(--accent)' }}
                         >
-                          Contact Info
+                          {uiContent.about.sections.contact.title}
                         </h4>
                       </div>
                       <div className="space-y-3">
                         <div className="flex items-start gap-2">
                           <span className="text-lg md:text-xl flex-shrink-0 mt-1">📧</span>
                           <div className="flex-1">
-                            <p className="text-sm font-medium text-muted mb-1">Email</p>
+                            <p className="text-sm font-medium text-muted mb-1">
+                              {uiContent.about.sections.contact.emailLabel}
+                            </p>
                             <p className="text-sm md:text-base font-medium text-secondary break-all">
                               {personalInfo.email}
                             </p>
@@ -124,7 +125,9 @@ const About: React.FC = () => {
                         <div className="flex items-start gap-2">
                           <span className="text-lg md:text-xl flex-shrink-0 mt-1">📱</span>
                           <div className="flex-1">
-                            <p className="text-sm font-medium text-muted mb-1">Phone</p>
+                            <p className="text-sm font-medium text-muted mb-1">
+                              {uiContent.about.sections.contact.phoneLabel}
+                            </p>
                             <p className="text-sm md:text-base font-medium text-secondary">
                               {personalInfo.phone}
                             </p>
@@ -133,9 +136,11 @@ const About: React.FC = () => {
                         <div className="flex items-start gap-2">
                           <span className="text-lg md:text-xl flex-shrink-0 mt-1">📍</span>
                           <div className="flex-1">
-                            <p className="text-sm font-medium text-muted mb-1">Location</p>
+                            <p className="text-sm font-medium text-muted mb-1">
+                              {uiContent.about.sections.contact.locationLabel}
+                            </p>
                             <p className="text-sm md:text-base font-medium text-secondary">
-                              Chennai, India
+                              {personalInfo.location.city}, {personalInfo.location.country}
                             </p>
                           </div>
                         </div>
@@ -150,12 +155,12 @@ const About: React.FC = () => {
                           className="text-lg md:text-xl lg:text-2xl font-bold"
                           style={{ color: 'var(--accent)' }}
                         >
-                          Send Message
+                          {uiContent.about.contactForm.title}
                         </h4>
                       </div>
                       <div className="flex-1">
                         <p className="text-sm md:text-base text-secondary mb-3">
-                          Have a project in mind? Let&apos;s connect!
+                          {uiContent.about.contactForm.subtitle}
                         </p>
                         <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
                           <input
@@ -165,7 +170,7 @@ const About: React.FC = () => {
                             onChange={handleChange}
                             required
                             className="neu-pressed-sm px-3 py-2 rounded-lg text-sm md:text-base bg-transparent"
-                            placeholder="Your Name"
+                            placeholder={uiContent.about.contactForm.namePlaceholder}
                           />
                           <input
                             type="email"
@@ -174,7 +179,7 @@ const About: React.FC = () => {
                             onChange={handleChange}
                             required
                             className="neu-pressed-sm px-3 py-2 rounded-lg text-sm md:text-base bg-transparent"
-                            placeholder="Your Email"
+                            placeholder={uiContent.about.contactForm.emailPlaceholder}
                           />
                           <textarea
                             name="message"
@@ -182,14 +187,18 @@ const About: React.FC = () => {
                             onChange={handleChange}
                             required
                             className="neu-pressed-sm px-3 py-2 rounded-lg text-xs md:text-sm bg-transparent resize-none min-h-[80px]"
-                            placeholder="Your Message..."
+                            placeholder={uiContent.about.contactForm.messagePlaceholder}
                           />
                           <button
                             type="submit"
-                            className="neu-pressed px-4 py-2 font-medium rounded-lg hover:scale-105 transition-all inline-flex items-center justify-center gap-2 text-sm md:text-base w-full"
+                            className="px-4 py-2 font-semibold rounded-lg hover:scale-105 transition-all inline-flex items-center justify-center gap-2 text-sm md:text-base w-full text-white"
+                            style={{
+                              background: 'var(--accent)',
+                              boxShadow: '0 4px 14px 0 rgba(184, 115, 51, 0.4)',
+                            }}
                           >
-                            <span className="text-base">🚀</span>
-                            Send
+                            <span className="text-base">{emojiMappings.sections.send}</span>
+                            {uiContent.about.contactForm.sendButton}
                           </button>
                         </form>
                       </div>
@@ -266,19 +275,19 @@ const About: React.FC = () => {
                         {/* Degree & College */}
                         <h5 className="font-bold text-base md:text-lg mb-2">{edu.degree}</h5>
                         <p className="text-sm md:text-base text-secondary mb-3 font-medium">
-                          {edu.college}
+                          {edu.institution}
                         </p>
 
                         {/* Achievement Points */}
                         <div className="space-y-2">
-                          {edu.points.map((point) => (
-                            <div key={point.id} className="flex items-start gap-2">
+                          {edu.achievements.map((achievement, index) => (
+                            <div key={index} className="flex items-start gap-2">
                               <div
                                 className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0"
                                 style={{ backgroundColor: 'var(--icon-blue)' }}
                               ></div>
                               <span className="text-sm md:text-base text-secondary leading-relaxed">
-                                {point.value}
+                                {achievement}
                               </span>
                             </div>
                           ))}

@@ -2,23 +2,18 @@ import React, { useEffect, useState } from 'react';
 
 import { motion } from 'framer-motion';
 
+import { emojiMappings, experienceData, statistics, uiContent } from '../../../data';
 import { calculateYearsOfExperience } from '../../../shared/utils/experience';
 import {
   calculateCompanyCount,
   calculateCurrentJobDuration,
-  getFormattedPeriodWithDuration,
 } from '../../../shared/utils/statistics';
-import { experienceData } from '../data/experience';
 
 const getEmoji = (iconName?: string) => {
-  const emojiMap: { [key: string]: string } = {
-    CreditCard: '💳',
-    TrendingUp: '📈',
-    Code2: '💻',
-    Network: '🌐',
-    Briefcase: '💼',
-  };
-  return emojiMap[iconName || 'Briefcase'] || '💼';
+  return (
+    emojiMappings.icons[iconName as keyof typeof emojiMappings.icons] ||
+    emojiMappings.icons.Briefcase
+  );
 };
 
 const Experience: React.FC = () => {
@@ -27,6 +22,47 @@ const Experience: React.FC = () => {
   const totalYears = calculateYearsOfExperience();
   const companyCount = calculateCompanyCount();
   const currentJobDuration = calculateCurrentJobDuration();
+
+  // Helper function to calculate duration with years and months
+  const calculateDuration = (period: string) => {
+    const [start, end] = period.split(' - ');
+    const parseDate = (dateStr: string) => {
+      const [month, year] = dateStr.split(' ');
+      const monthMap: { [key: string]: number } = {
+        Jan: 0,
+        Feb: 1,
+        Mar: 2,
+        Apr: 3,
+        May: 4,
+        Jun: 5,
+        Jul: 6,
+        Aug: 7,
+        Sep: 8,
+        Oct: 9,
+        Nov: 10,
+        Dec: 11,
+      };
+      return new Date(parseInt(year), monthMap[month] || 0, 1);
+    };
+
+    const startDate = parseDate(start);
+    const endDate = end === 'Present' ? new Date() : parseDate(end);
+
+    const totalMonths =
+      (endDate.getFullYear() - startDate.getFullYear()) * 12 +
+      (endDate.getMonth() - startDate.getMonth());
+
+    const years = Math.floor(totalMonths / 12);
+    const months = totalMonths % 12;
+
+    if (years > 0 && months > 0) {
+      return `${years} year${years !== 1 ? 's' : ''} ${months} month${months !== 1 ? 's' : ''}`;
+    } else if (years > 0) {
+      return `${years} year${years !== 1 ? 's' : ''}`;
+    } else {
+      return `${months} month${months !== 1 ? 's' : ''}`;
+    }
+  };
 
   useEffect(() => {
     const checkDarkMode = () => {
@@ -62,21 +98,27 @@ const Experience: React.FC = () => {
                   <p className="text-4xl md:text-5xl font-bold" style={{ color: 'var(--accent)' }}>
                     {totalYears}+
                   </p>
-                  <p className="text-lg font-medium text-muted">Years</p>
+                  <p className="text-lg font-medium text-muted">
+                    {uiContent.experience.yearsLabel}
+                  </p>
                 </div>
                 <div className="w-px h-10 sm:h-12 md:h-14 bg-gray-300 dark:bg-gray-700"></div>
                 <div>
                   <p className="text-4xl md:text-5xl font-bold" style={{ color: 'var(--accent)' }}>
                     {companyCount}
                   </p>
-                  <p className="text-lg font-medium text-muted">Companies</p>
+                  <p className="text-lg font-medium text-muted">
+                    {uiContent.experience.companiesLabel}
+                  </p>
                 </div>
                 <div className="w-px h-10 sm:h-12 md:h-14 bg-gray-300 dark:bg-gray-700"></div>
                 <div>
                   <p className="text-4xl md:text-5xl font-bold" style={{ color: 'var(--accent)' }}>
                     15+
                   </p>
-                  <p className="text-lg font-medium text-muted">Career Projects</p>
+                  <p className="text-lg font-medium text-muted">
+                    {uiContent.experience.projectsLabel}
+                  </p>
                 </div>
               </div>
             </div>
@@ -134,7 +176,7 @@ const Experience: React.FC = () => {
                         }}
                         title={currentJobDuration.formatted}
                       >
-                        Current • {currentJobDuration.years}+ years
+                        {uiContent.experience.current} • {currentJobDuration.years}+ years
                       </span>
                     </div>
                   </div>
@@ -145,7 +187,9 @@ const Experience: React.FC = () => {
               <div className="mb-4">
                 <h4 className="text-xl lg:text-2xl font-bold mb-3 flex items-center gap-2">
                   <span className="text-2xl">🎯</span>
-                  <span style={{ color: 'var(--accent)' }}>Key Achievements</span>
+                  <span style={{ color: 'var(--accent)' }}>
+                    {uiContent.experience.keyAchievements}
+                  </span>
                 </h4>
                 <div className="space-y-2">
                   {currentJob.achievements.slice(0, 6).map((achievement, i) => (
@@ -214,8 +258,8 @@ const Experience: React.FC = () => {
                   : 'inset 6px 6px 12px rgba(139, 90, 43, 0.12), inset -6px -6px 12px rgba(244, 232, 225, 0.75), 0 0 0 1px rgba(184, 115, 51, 0.1)',
               }}
             >
-              <h4 className="text-xl font-semibold mb-3 uppercase tracking-wider text-muted">
-                Previous Roles
+              <h4 className="text-2xl font-semibold mb-4 uppercase tracking-wider text-muted">
+                {uiContent.experience.previousRoles}
               </h4>
               <div className="space-y-3 lg:space-y-3 overflow-y-auto lg:overflow-y-visible flex-1">
                 {experienceData.slice(1).map((exp, index) => {
@@ -227,7 +271,7 @@ const Experience: React.FC = () => {
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                      className="relative pl-6 md:pl-8 lg:pl-10 border-l-2 border-gray-300 dark:border-gray-700"
+                      className="relative pl-8 md:pl-10 lg:pl-12 border-l-2 border-gray-300 dark:border-gray-700"
                     >
                       {/* Timeline Dot */}
                       <div
@@ -246,20 +290,25 @@ const Experience: React.FC = () => {
                       <div className="mb-2 md:mb-3">
                         <div className="flex items-start justify-between">
                           <div className="flex items-start gap-2 md:gap-3">
-                            <span className="text-2xl lg:text-3xl">{emoji}</span>
+                            <span className="text-3xl lg:text-4xl">{emoji}</span>
                             <div>
-                              <h3 className="font-semibold text-lg lg:text-xl">
+                              <h3 className="font-semibold text-xl lg:text-2xl">
                                 {exp.designation}
                               </h3>
-                              <p className="text-base lg:text-lg font-medium text-secondary">
+                              <p className="text-lg lg:text-xl font-medium text-secondary">
                                 {exp.company}
                               </p>
-                              <p
-                                className="text-sm lg:text-base font-medium text-muted"
-                                title={getFormattedPeriodWithDuration(exp.period)}
-                              >
-                                {exp.period}
-                              </p>
+                              <div className="flex flex-col gap-0.5">
+                                <p className="text-base lg:text-lg font-medium text-muted">
+                                  {exp.period}
+                                </p>
+                                <p
+                                  className="text-sm lg:text-base font-medium"
+                                  style={{ color: 'var(--accent)' }}
+                                >
+                                  {calculateDuration(exp.period)}
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -269,10 +318,7 @@ const Experience: React.FC = () => {
                       <div className="space-y-1 mb-2">
                         {exp.achievements.slice(0, 2).map((achievement, i) => (
                           <div key={i} className="flex items-start gap-2">
-                            <span
-                              className="text-base mt-0.5"
-                              style={{ color: 'var(--icon-green)' }}
-                            >
+                            <span className="text-lg mt-0.5" style={{ color: 'var(--icon-green)' }}>
                               •
                             </span>
                             <span className="text-base lg:text-lg leading-relaxed">

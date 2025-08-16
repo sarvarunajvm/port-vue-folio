@@ -290,19 +290,9 @@ export const PROJECT_DATES = {
  * @returns Total number of skills across all categories
  */
 export const calculateTotalSkills = (): number => {
-  // Import skills data to get actual count
-  // Using dynamic import to avoid circular dependency issues
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { skillsData } = require('../../features/skills/data/skills');
-    return skillsData.reduce(
-      (acc: number, category: { skills: unknown[] }) => acc + category.skills.length,
-      0
-    );
-  } catch {
-    // Fallback to estimated count if import fails
-    return 50; // Updated estimate based on actual data
-  }
+  // Return estimated count to avoid circular dependencies
+  // This can be updated manually when skills data changes
+  return 50; // Total skills across all categories
 };
 
 /**
@@ -311,32 +301,12 @@ export const calculateTotalSkills = (): number => {
  * @returns Object with counts per proficiency level
  */
 export const calculateSkillsByProficiency = () => {
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const { skillsData } = require('../../features/skills/data/skills');
-    const counts = {
-      expert: 0,
-      advanced: 0,
-      intermediate: 0,
-      beginner: 0,
-    };
-
-    skillsData.forEach((category: { skills: Array<{ proficiency?: string }> }) => {
-      category.skills.forEach((skill: { proficiency?: string }) => {
-        if (skill.proficiency && Object.prototype.hasOwnProperty.call(counts, skill.proficiency)) {
-          counts[skill.proficiency as keyof typeof counts]++;
-        }
-      });
-    });
-
-    return counts;
-  } catch {
-    // Fallback to estimated counts if import fails
-    return {
-      expert: 12,
-      advanced: 18,
-      intermediate: 12,
-      beginner: 8,
-    };
-  }
+  // Return estimated counts to avoid circular dependencies
+  // This can be updated manually when skills data changes
+  return {
+    expert: 12,
+    advanced: 18,
+    intermediate: 12,
+    beginner: 8,
+  };
 };
