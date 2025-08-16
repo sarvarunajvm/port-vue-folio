@@ -4,143 +4,203 @@ import { motion } from 'framer-motion';
 
 import { projects } from '../data/projects';
 
-const getEmoji = (iconName?: string) => {
-  const emojiMap: { [key: string]: string } = {
-    Code2: '💻',
-    Network: '🌐',
-    Package: '📦',
-  };
-  return emojiMap[iconName || 'Code2'] || '💻';
-};
-
 const Projects: React.FC = () => {
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="text-center mb-2">
-        <p
-          className="text-sm sm:text-base md:text-lg font-medium"
-          style={{ color: 'var(--muted)' }}
-        >
-          Building tools that make a difference
-        </p>
-      </div>
-
-      {/* Single Row Layout with Stats Card on Left and Projects on Right */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-1 sm:gap-1.5 md:gap-2 flex-1">
-        {/* Stats Card - First Column */}
+      {/* Full width project showcase */}
+      <div className="flex flex-col gap-2 sm:gap-3 md:gap-4 flex-1">
+        {/* Featured Project - Utils Commons */}
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="neu-pressed rounded-lg md:rounded-2xl p-2 sm:p-3 md:p-4 flex flex-col justify-center"
+          className="neu-pressed rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5"
         >
-          <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-center">
-            Project Stats
-          </h3>
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-2 sm:gap-3">
-              <div className="inline-flex p-3 rounded-lg bg-gradient-to-br from-blue-500/20 to-indigo-500/20">
-                <span className="text-2xl sm:text-3xl md:text-4xl">👥</span>
+          <div className="flex flex-col md:flex-row gap-3 md:gap-4">
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-2">
+                <div className="p-2 rounded-lg bg-gradient-to-br from-amber-500/20 to-orange-500/20">
+                  <span className="text-2xl">☕</span>
+                </div>
+                <div>
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold">Utils-Commons</h3>
+                  <p className="text-sm sm:text-base font-medium" style={{ color: 'var(--muted)' }}>
+                    Java • Inspired by Apache Commons IO
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-2xl sm:text-3xl md:text-4xl font-bold">270+</p>
-                <p className="text-xs sm:text-sm font-medium" style={{ color: 'var(--muted)' }}>
-                  Weekly Downloads
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2 sm:gap-3">
-              <div className="inline-flex p-3 rounded-lg bg-gradient-to-br from-orange-600/20 to-orange-700/20">
-                <span className="text-2xl sm:text-3xl md:text-4xl">⭐</span>
-              </div>
-              <div>
-                <p className="text-2xl sm:text-3xl md:text-4xl font-bold">15+</p>
-                <p className="text-xs sm:text-sm font-medium" style={{ color: 'var(--muted)' }}>
-                  GitHub Stars
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2 sm:gap-3">
-              <div className="inline-flex p-3 rounded-lg bg-gradient-to-br from-green-500/20 to-emerald-500/20">
-                <span className="text-2xl sm:text-3xl md:text-4xl">🌿</span>
-              </div>
-              <div>
-                <p className="text-2xl sm:text-3xl md:text-4xl font-bold">5+</p>
-                <p className="text-xs sm:text-sm font-medium" style={{ color: 'var(--muted)' }}>
-                  Open Source Projects
-                </p>
+              <p className="text-base sm:text-lg mb-3 font-medium">
+                Comprehensive utility library providing essential tools for String, Number, Date,
+                Set, List, BLOB, and Zip operations.
+              </p>
+              <div className="flex items-center gap-4 text-sm sm:text-base">
+                <span className="flex items-center gap-1">
+                  <span>⭐</span>
+                  <span className="font-semibold">Production Ready</span>
+                </span>
+                <span className="flex items-center gap-1">
+                  <span>🔧</span>
+                  <span className="font-semibold">7 Utility Modules</span>
+                </span>
               </div>
             </div>
-            <p className="text-sm sm:text-base md:text-lg text-center font-medium mt-2">
-              Contributing to the open source community
-            </p>
+            <div className="flex md:flex-col gap-2">
+              <a
+                href={projects[0].url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="neu-pressed-sm px-4 py-2 text-sm sm:text-base font-semibold soft-hover soft-press focus-ring rounded-lg inline-flex items-center gap-1 whitespace-nowrap"
+              >
+                <span>🌿</span>
+                View on GitHub
+              </a>
+            </div>
           </div>
         </motion.div>
 
-        {/* Projects Column - Second Column with 3 Projects */}
-        <div className="flex flex-col gap-1 sm:gap-1.5 md:gap-2">
-          {projects.slice(0, 3).map((project, index) => {
-            const emoji = getEmoji(project.icon);
+        {/* Two column layout for remaining projects */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 sm:gap-3 md:gap-4 flex-1">
+          {/* Port Advancer */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="neu-pressed rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 flex flex-col"
+          >
+            <div className="flex items-start gap-2 mb-2">
+              <div className="p-2 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20">
+                <span className="text-xl">🔌</span>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold">Port-Advancer</h3>
+                <p className="text-sm sm:text-base font-medium" style={{ color: 'var(--muted)' }}>
+                  NodeJS • Network Security Tool
+                </p>
+              </div>
+            </div>
 
-            return (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                className="neu-pressed rounded-lg md:rounded-2xl p-2 sm:p-3 md:p-4 flex flex-col flex-1"
+            <p className="text-base sm:text-lg mb-3 flex-1 font-medium">
+              Enterprise tool enabling secure port forwarding and reverse proxying within restricted
+              networks.
+            </p>
+
+            <div className="space-y-2 mb-3">
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">👥</span>
+                <div>
+                  <p className="text-xl sm:text-2xl font-bold">60+</p>
+                  <p className="text-sm font-medium" style={{ color: 'var(--muted)' }}>
+                    Active Users
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 text-sm sm:text-base">
+                <span>🏢</span>
+                <span className="font-medium">Enterprise Production</span>
+              </div>
+            </div>
+
+            <a
+              href={projects[1].url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="neu-pressed-sm px-3 py-2 text-sm sm:text-base font-semibold soft-hover soft-press focus-ring rounded-lg inline-flex items-center gap-1 self-start"
+            >
+              <span>🌿</span>
+              View Source
+            </a>
+          </motion.div>
+
+          {/* Vue Embed Gist */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="neu-pressed rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-5 flex flex-col"
+          >
+            <div className="flex items-start gap-2 mb-2">
+              <div className="p-2 rounded-lg bg-gradient-to-br from-green-500/20 to-emerald-500/20">
+                <span className="text-xl">📦</span>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg sm:text-xl md:text-2xl font-bold">vue-embed-gist</h3>
+                <p className="text-sm sm:text-base font-medium" style={{ color: 'var(--muted)' }}>
+                  Vue.js • NPM Package
+                </p>
+              </div>
+            </div>
+
+            <p className="text-base sm:text-lg mb-3 flex-1 font-medium">
+              Vue component for embedding GitHub Gists - contributing to the Vue ecosystem.
+            </p>
+
+            <div className="space-y-2 mb-3">
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">📊</span>
+                <div>
+                  <p className="text-xl sm:text-2xl font-bold">270+</p>
+                  <p className="text-sm font-medium" style={{ color: 'var(--muted)' }}>
+                    Weekly Downloads
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 text-sm sm:text-base">
+                <span>🌟</span>
+                <span className="font-medium">Active Open Source</span>
+              </div>
+            </div>
+
+            <div className="flex gap-2">
+              <a
+                href={projects[2].url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="neu-pressed-sm px-3 py-2 text-sm sm:text-base font-semibold soft-hover soft-press focus-ring rounded-lg inline-flex items-center gap-1"
               >
-                <div className="flex items-start gap-2 sm:gap-3 mb-1 sm:mb-2">
-                  <div className="p-1.5 sm:p-2 rounded-lg bg-gradient-to-br from-purple-500/20 to-pink-500/20">
-                    <span className="text-lg">{emoji}</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-sm sm:text-base md:text-lg font-bold">{project.title}</h3>
-                    <p className="text-xs sm:text-sm font-medium" style={{ color: 'var(--muted)' }}>
-                      {project.language}
-                    </p>
-                  </div>
-                </div>
-
-                <p className="text-xs sm:text-sm mb-2 flex-1 font-medium">{project.description}</p>
-
-                <div className="flex flex-wrap gap-1 mb-2">
-                  {project.technologies.slice(0, 3).map((tech) => (
-                    <span
-                      key={tech}
-                      className="neu-pressed-sm px-2 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-semibold rounded"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex gap-1">
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="neu-pressed-sm px-2.5 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-2 text-[10px] sm:text-xs font-semibold soft-hover soft-press focus-ring rounded-lg inline-flex items-center gap-0.5 sm:gap-1"
-                  >
-                    <span className="text-sm">🌿</span>
-                    Code
-                  </a>
-                  {project.npmLink && (
-                    <a
-                      href={project.npmLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="neu-pressed-sm px-2.5 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-2 text-[10px] sm:text-xs font-semibold soft-hover soft-press focus-ring rounded-lg inline-flex items-center gap-0.5 sm:gap-1"
-                    >
-                      <span className="text-sm">📦</span>
-                      NPM
-                    </a>
-                  )}
-                </div>
-              </motion.div>
-            );
-          })}
+                <span>🌿</span>
+                PR
+              </a>
+              <a
+                href={projects[2].npmLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="neu-pressed-sm px-3 py-2 text-sm sm:text-base font-semibold soft-hover soft-press focus-ring rounded-lg inline-flex items-center gap-1"
+              >
+                <span>📦</span>
+                NPM
+              </a>
+            </div>
+          </motion.div>
         </div>
+
+        {/* Bottom Impact Summary */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="neu-pressed rounded-lg md:rounded-xl p-2 sm:p-3 md:p-4"
+        >
+          <div className="flex flex-wrap justify-center gap-3 sm:gap-4 md:gap-6 text-center">
+            <div>
+              <p className="text-xl sm:text-2xl md:text-3xl font-bold">3+</p>
+              <p className="text-sm sm:text-base font-medium" style={{ color: 'var(--muted)' }}>
+                Open Source Projects
+              </p>
+            </div>
+            <div>
+              <p className="text-xl sm:text-2xl md:text-3xl font-bold">330+</p>
+              <p className="text-sm sm:text-base font-medium" style={{ color: 'var(--muted)' }}>
+                Weekly Impact
+              </p>
+            </div>
+            <div>
+              <p className="text-xl sm:text-2xl md:text-3xl font-bold">60+</p>
+              <p className="text-sm sm:text-base font-medium" style={{ color: 'var(--muted)' }}>
+                Enterprise Users
+              </p>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </div>
   );

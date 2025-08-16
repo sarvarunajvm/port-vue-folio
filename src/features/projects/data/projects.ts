@@ -47,7 +47,7 @@ export const projects: Project[] = [
     language: 'JavaScript/Vue',
     technologies: ['Vue.js', 'JavaScript', 'NPM'],
     url: 'https://github.com/sudhanshu-15/vue-embed-gist/pull/13',
-    npmLink: 'https://www.npmjs.com/package/vue-embed-gist',
+    npmLink: 'http://goo.gl/Hjkx2j',
     description: 'Contributed to an open-source project that averages 270 downloads per week.',
     highlights: [
       '270 downloads per week average',
