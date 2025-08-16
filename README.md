@@ -80,11 +80,11 @@ port-vue-folio/
 │   │   ├── Modal.tsx             # Reusable modal component
 │   │   ├── FloatingThemeToggle.tsx
 │   │   └── sections/             # Content sections
-│   │       ├── AboutBento.tsx
+│   │       ├── About.tsx
 │   │       ├── ContactBento.tsx
-│   │       ├── ExperienceBento.tsx
-│   │       ├── ProjectsBento.tsx
-│   │       └── SkillsBento.tsx
+│   │       ├── Experience.tsx
+│   │       ├── Projects.tsx
+│   │       └── Skills.tsx
 │   ├── contexts/
 │   │   └── ThemeContext.tsx     # Theme management
 │   ├── hooks/

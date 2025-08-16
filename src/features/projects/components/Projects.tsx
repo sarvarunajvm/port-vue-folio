@@ -13,7 +13,7 @@ const getEmoji = (iconName?: string) => {
   return emojiMap[iconName || 'Code2'] || '💻';
 };
 
-const ProjectsBento: React.FC = () => {
+const Projects: React.FC = () => {
   return (
     <div className="w-full h-full flex flex-col">
       <div className="text-center mb-2">
@@ -146,4 +146,4 @@ const ProjectsBento: React.FC = () => {
   );
 };
 
-export default ProjectsBento;
+export default Projects;

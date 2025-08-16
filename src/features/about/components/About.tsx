@@ -3,10 +3,9 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 import { SPRING_CONFIG, hoverVariants } from '../../../shared/constants/animations';
-import { educationData } from '../../education/data/education';
-import { personalInfo } from '../data/about';
+import { educationData, personalInfo } from '../data/about';
 
-const AboutBento: React.FC = () => {
+const About: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,10 +31,10 @@ const AboutBento: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-full flex items-center justify-center p-2 sm:p-3 md:p-4 lg:p-6">
-      <div className="w-full max-w-[1400px] mx-auto">
+    <div className="w-full h-full flex flex-col md:flex-row md:items-center md:justify-center p-4 md:p-6 lg:p-8 overflow-y-auto md:overflow-hidden">
+      <div className="w-full max-w-[1400px] h-auto md:h-[85vh] md:flex md:items-center">
         {/* Optimized Bento Grid Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
           {/* Profile & Summary Card - Left column */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -291,4 +290,4 @@ const AboutBento: React.FC = () => {
   );
 };
 
-export default AboutBento;
+export default About;

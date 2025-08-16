@@ -15,7 +15,7 @@ const getEmoji = (iconName?: string) => {
   return emojiMap[iconName || 'Briefcase'] || '💼';
 };
 
-const ExperienceBento: React.FC = () => {
+const Experience: React.FC = () => {
   const currentJob = experienceData[0]; // PayPal - current position
 
   return (
@@ -222,4 +222,4 @@ const ExperienceBento: React.FC = () => {
   );
 };
 
-export default ExperienceBento;
+export default Experience;
