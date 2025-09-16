@@ -18,7 +18,7 @@
     "vue-page-transition": "^0.2.2",
     "vue-router": "^4.5.1",
     "vue-typer": "^1.2.0",
-    "vuetify": "^2.6.10"
+    "vuetify": "^3.10.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~5.0.8",
