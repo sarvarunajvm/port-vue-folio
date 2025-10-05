@@ -1,18 +1,18 @@
-import Vue from "vue";
+import { createApp } from "vue";
 import App from "./App.vue";
-import VuePageTransition from "vue-page-transition";
-import vuetify from "./plugins/vuetify";
 import router from "./router";
-import VueTyperPlugin from "vue-typer";
+import vuetify from "./plugins/vuetify";
+import mitt from "mitt";
+import "vuetify/styles";
+import "@mdi/font/css/materialdesignicons.css";
 
-Vue.config.productionTip = false;
+const app = createApp(App);
 
-export const bus = new Vue();
-Vue.use(VuePageTransition);
-Vue.use(VueTyperPlugin);
+// Simple event bus using mitt
+const bus = mitt();
+app.provide("bus", bus);
+app.config.globalProperties.$bus = bus;
 
-new Vue({
-  router,
-  vuetify,
-  render: (h) => h(App),
-}).$mount("#app");
+app.use(router);
+app.use(vuetify);
+app.mount("#app");

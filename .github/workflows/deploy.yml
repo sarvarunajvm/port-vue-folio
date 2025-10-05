@@ -22,6 +22,7 @@ jobs:
     env:
       CI: "true"
       HUSKY: "0"
+      GITHUB_PAGES: "true"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -51,16 +52,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - name: Install dependencies
+      - name: Install dependencies (no lockfile)
         run: pnpm install --no-frozen-lockfile
 
       - name: Build
         env:
           NODE_ENV: production
-          BASE_URL: /port-vue-folio/
-        run: |
-          pnpm run build
-          cp dist/index.html dist/404.html
+        run: pnpm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

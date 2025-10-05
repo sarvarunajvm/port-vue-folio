@@ -1,13 +1,8 @@
 <template>
-  <vue-page-transition name="fade-in-up">
-    <router-view />
-  </vue-page-transition>
+  <router-view />
 </template>
 
-<script>
-export default {
-  name: "App",
-};
+<script setup>
 </script>
 <style>
 html {
@@ -19,16 +14,16 @@ html {
   background: transparent; /* make scrollbar transparent */
 }
 #app {
-  font-family: "Kanit" !important;
+  font-family: "Kanit", sans-serif !important;
 }
 .myFont {
-  font-family: "Kanit" !important;
+  font-family: "Kanit", sans-serif !important;
 }
 .h1 {
   font-size: 6rem !important;
   font-weight: 300;
   line-height: 6rem;
-  letter-spacing: -0.015625em !important;
+  letter-spacing: -0.015625em;
 }
 .h2 {
   font-weight: 300;
@@ -46,7 +41,7 @@ html {
   font-weight: 400;
   font-size: 2.125rem !important;
   line-height: 2.5rem;
-  letter-spacing: 0.0073529412em !important;
+  letter-spacing: 0.0073529412em;
 }
 .h5 {
   font-size: 1.5rem !important;
@@ -70,7 +65,7 @@ html {
   font-size: 1rem !important;
   font-weight: 400;
   line-height: 1.5rem;
-  letter-spacing: 0.03125em !important;
+  letter-spacing: 0.03125em;
 }
 .body2 {
   font-size: 0.875rem !important;

@@ -1,64 +1,63 @@
-import Vue from "vue";
-import Router from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 
-Vue.use(Router);
+const routes = [
+  {
+    path: "/home",
+    component: () => import("@/views/index.vue"),
+    children: [
+      {
+        name: "Home",
+        path: "",
+        component: () => import("@/views/pages/Home.vue"),
+      },
+      {
+        name: "Experience",
+        path: "experience",
+        component: () => import("@/views/pages/Experience.vue"),
+      },
+      {
+        name: "Education",
+        path: "education",
+        component: () => import("@/views/pages/Education.vue"),
+      },
+      {
+        name: "Projects",
+        path: "projects",
+        component: () => import("@/views/pages/Project.vue"),
+      },
+      {
+        name: "Skills",
+        path: "skills",
+        component: () => import("@/views/pages/Skills.vue"),
+      },
+      {
+        name: "Resume",
+        path: "resume",
+        component: () => import("@/views/pages/Resume.vue"),
+      },
+    ],
+  },
+  // Redirect legacy top-level paths to nested layout paths
+  { path: "/projects", redirect: "/home/projects" },
+  { path: "/experience", redirect: "/home/experience" },
+  { path: "/education", redirect: "/home/education" },
+  { path: "/skills", redirect: "/home/skills" },
+  { path: "/resume", redirect: "/home/resume" },
+  {
+    name: "Start",
+    path: "/",
+    component: () => import("@/views/Start.vue"),
+  },
+  {
+    name: "UnderConstruction",
+    path: "/:pathMatch(.*)*",
+    component: () => import("@/views/404.vue"),
+  },
+];
 
-export default new Router({
-  //mode: 'hash',
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: "/home",
-      component: () => import("@/views/index.vue"),
-      children: [
-        // Home
-        {
-          name: "Home",
-          path: "",
-          component: () => import("@/views/pages/Home.vue"),
-        },
-        //Experience
-        {
-          name: "Experience",
-          path: "/experience",
-          component: () => import("@/views/pages/Experience.vue"),
-        },
-        //Education
-        {
-          name: "Education",
-          path: "/education",
-          component: () => import("@/views/pages/Education.vue"),
-        },
-        //Projects
-        {
-          name: "Projects",
-          path: "/projects",
-          component: () => import("@/views/pages/Project.vue"),
-        },
-        //Skills
-        {
-          name: "Skills",
-          path: "/skills",
-          component: () => import("@/views/pages/Skills.vue"),
-        },
-        //Resume
-        {
-          name: "Resume",
-          path: "/resume",
-          component: () => import("@/views/pages/Resume.vue"),
-        },
-      ],
-    },
-    {
-      name: "UnderConstruction",
-      path: "*",
-      component: () => import("@/views/404.vue"),
-    },
-    {
-      name: "Start",
-      path: "/",
-      component: () => import("@/views/Start.vue"),
-    },
-  ],
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes,
 });
+
+export default router;

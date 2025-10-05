@@ -1,36 +1,47 @@
 <template>
   <v-container>
-    <v-row align="center" align-content="center" justify="center">
-      <v-col cols="6" sm="6" md="4" lg="4" xl="3" align-self="center">
-        <div>
+    <v-row
+      align="center"
+      align-content="center"
+      justify="center"
+    >
+      <v-col
+        cols="6"
+        sm="6"
+        md="4"
+        lg="4"
+        xl="3"
+        align-self="center"
+      >
+        <div class="loader-host">
           <div class="loading">
             <div class="finger finger-1">
               <div class="finger-item">
-                <span></span>
-                <i></i>
+                <span />
+                <i />
               </div>
             </div>
             <div class="finger finger-2">
               <div class="finger-item">
-                <span></span>
-                <i></i>
+                <span />
+                <i />
               </div>
             </div>
             <div class="finger finger-3">
               <div class="finger-item">
-                <span></span>
-                <i></i>
+                <span />
+                <i />
               </div>
             </div>
             <div class="finger finger-4">
               <div class="finger-item">
-                <span></span>
-                <i></i>
+                <span />
+                <i />
               </div>
             </div>
             <div class="last-finger">
               <div class="last-finger-item">
-                <i></i>
+                <i />
               </div>
             </div>
           </div>
@@ -45,14 +56,17 @@ export default {};
 </script>
 
 <style scoped>
+.loader-host {
+  position: relative;
+  min-height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .loading {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin: -35px 0 0 -56px;
+  position: relative;
   width: 112px;
   height: 70px;
-  *zoom: 1;
 }
 .loading:before,
 .loading:after {
@@ -126,7 +140,7 @@ export default {};
   -moz-background-clip: padding;
   border-radius: 6px 6px 8px 8px;
   background-clip: padding-box;
-  background: var(--v-secondary-base);
+  background: rgb(var(--v-theme-secondary));
 }
 .loading .finger-item span {
   position: absolute;
@@ -144,7 +158,7 @@ export default {};
   margin: 0 0 2px 0;
   width: 100%;
   height: 2px;
-  background: var(--v-primary-base);
+  background: rgb(var(--v-theme-primary));
 }
 .loading .finger-item i {
   position: absolute;
@@ -158,7 +172,7 @@ export default {};
   -moz-background-clip: padding;
   border-radius: 10px 10px 7px 7px;
   background-clip: padding-box;
-  background: var(--v-primary-base);
+  background: rgb(var(--v-theme-primary));
 }
 .loading .last-finger {
   position: relative;
@@ -179,7 +193,7 @@ export default {};
   -moz-background-clip: padding;
   border-radius: 0 5px 14px 0;
   background-clip: padding-box;
-  background: var(--v-secondary-base);
+  background: rgb(var(--v-theme-secondary));
   -webkit-animation: finger-5-animation 2s infinite linear;
   animation: finger-5-animation 2s infinite linear;
 }
@@ -189,7 +203,7 @@ export default {};
   top: -8px;
   width: 22px;
   height: 8px;
-  background: var(--v-secondary-base);
+  background: rgb(var(--v-theme-secondary));
   overflow: hidden;
 }
 .loading .last-finger-item i:after {
@@ -205,7 +219,7 @@ export default {};
   -moz-background-clip: padding;
   border-radius: 0 0 15px 15px;
   background-clip: padding-box;
-  background: var(--v-primary-base);
+  background: rgb(var(--v-theme-primary));
 }
 @-webkit-keyframes finger-1-animation {
   0% {

@@ -1,21 +1,25 @@
 <template>
   <v-app class="myFont">
-    <core-navigation />
-    <core-drawer />
-    <core-view />
+    <CoreNavigation />
+    <CoreDrawer />
+    <CoreView />
   </v-app>
 </template>
 <script>
+import CoreDrawer from "./components/core/Drawer.vue";
+import CoreNavigation from "./components/core/NavBar.vue";
+import CoreView from "./components/core/View.vue";
+
 export default {
   name: "CoreIndex",
-
   components: {
-    CoreDrawer: () => import("./components/core/Drawer"),
-    CoreNavigation: () => import("./components/core/NavBar"),
-    CoreView: () => import("./components/core/View"),
+    CoreDrawer,
+    CoreNavigation,
+    CoreView,
   },
-
-  data: () => ({}),
+  data() {
+    return {};
+  },
 };
 </script>
 <style>

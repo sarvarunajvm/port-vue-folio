@@ -21,4 +21,8 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
+dev-server.log
+
 package-lock.json
+pnpm-lock.yaml
+yarn.lock

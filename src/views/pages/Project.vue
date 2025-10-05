@@ -1,76 +1,82 @@
 <template>
-  <v-container class="pa-0 ma-0 background" id="project" tag="section" fluid fill-height>
-    <v-row align="center" justify="center" align-content="center">
-      <v-col cols="auto" align-self="center">
+  <v-container
+    id="project"
+    class="pa-4 ma-0 background"
+    tag="section"
+    fluid
+    fill-height
+  >
+    <v-row
+      align="center"
+      justify="center"
+      align-content="center"
+    >
+      <v-col
+        cols="auto"
+        align-self="center"
+      >
         <div class="d-flex flex-column justify-center">
           <v-row class="ma-5">
-            <v-col cols="12" class="ma-5">
-              <v-row align="center" justify="center">
-                <p class="myFont h2 accent--text pr-4">Lets See Some Of My 🔨</p>
+            <v-col
+              cols="12"
+              class="ma-5"
+            >
+              <v-row
+                align="center"
+                justify="center"
+              >
+                <p class="myFont h2 accent--text pr-4">
+                  Lets See Some Of My 🔨
+                </p>
               </v-row>
             </v-col>
           </v-row>
         </div>
         <div>
-          <grid-layout
-            :layout.sync="layout"
-            :col-num="6"
-            :row-height="50"
-            :is-draggable="draggable"
-            :is-resizable="resizable"
-            :responsive="responsive"
-            :vertical-compact="true"
-            :use-css-transforms="true"
-          >
-            <grid-item
+          <div class="bento-grid">
+            <div
               v-for="item in layout"
               :key="item.i"
-              :x="item.x"
-              :y="item.y"
-              :w="item.w"
-              :h="item.h"
-              :i="item.i"
+              class="bento-item"
+              :style="gridStyle(item)"
             >
-              <gist-card :width="item.w" :height="item.h" :item="item.snip"></gist-card>
-            </grid-item>
-          </grid-layout>
+              <gist-card :item="item.snip" />
+            </div>
+          </div>
         </div>
       </v-col>
     </v-row>
   </v-container>
+  
 </template>
 <script>
 import GistCard from "../../components/GistCard.vue";
-import { GridLayout, GridItem } from "vue-grid-layout";
 import axios from "axios";
 import aboutJson from "../../data/about.json";
 export default {
   components: {
-    GridLayout,
-    GridItem,
     GistCard,
   },
   data: () => ({
     about: aboutJson,
     dialog: false,
     sample: [
-      { x: 2, y: 0, w: 6, h: 6 },
-      { x: 2, y: 0, w: 6, h: 6 },
-      { x: 2, y: 0, w: 6, h: 6 },
-      { x: 2, y: 0, w: 6, h: 6 },
-      { x: 2, y: 0, w: 6, h: 6 },
-      { x: 2, y: 0, w: 6, h: 6 },
-      { x: 2, y: 0, w: 6, h: 6 },
-      { x: 2, y: 0, w: 6, h: 6 },
-      { x: 2, y: 0, w: 6, h: 6 },
-      { x: 2, y: 0, w: 6, h: 6 },
+      { w: 2, h: 2 },
+      { w: 2, h: 1 },
+      { w: 1, h: 2 },
+      { w: 1, h: 1 },
     ],
     layout: [],
-    draggable: true,
-    resizable: true,
-    responsive: true,
   }),
+  created() {
+    this.getGistInfos();
+  },
   methods: {
+    gridStyle(item) {
+      const col = item.w || 1;
+      const row = item.h || 1;
+      return { gridColumn: `span ${col}`, gridRow: `span ${row}` };
+    },
     getGistInfos() {
       var self = this;
 
@@ -87,12 +93,8 @@ export default {
               snip.description = element.description;
               snip.title = files.filename;
               snip.language = files.language;
-              let layoutEle = JSON.parse(
-                JSON.stringify(self.sample[Math.floor(Math.random() * 10)])
-              );
-              layoutEle.y = ind * 5;
-              layoutEle.i = ind.toString();
-              layoutEle.snip = snip;
+              const pick = self.sample[Math.floor(Math.random() * self.sample.length)];
+              const layoutEle = { w: pick.w, h: pick.h, i: ind.toString(), snip };
               self.layout.push(layoutEle);
               ind++;
             }
@@ -103,13 +105,41 @@ export default {
         });
     },
   },
-  created() {
-    this.getGistInfos();
-  },
 };
 </script>
 <style scoped>
-.scroll {
-  overflow-y: scroll;
+#project {
+  /* Mobile-first padding */
+  padding: 16px;
 }
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-auto-rows: 180px;
+  /* Mobile-first spacing */
+  gap: 12px;
+  margin: 8px;
+  padding: 8px;
+}
+
+/* Tablet */
+@media (min-width: 600px) {
+  #project { padding: 24px; }
+  .bento-grid {
+    gap: 20px;
+    margin: 16px;
+    padding: 12px;
+  }
+}
+
+/* Desktop and up */
+@media (min-width: 960px) {
+  #project { padding: 32px; }
+  .bento-grid {
+    gap: 32px;
+    margin: 24px;
+    padding: 16px;
+  }
+}
+.bento-item { width: 100%; height: 100%; }
 </style>

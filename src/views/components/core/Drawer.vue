@@ -1,114 +1,123 @@
 <template>
   <v-navigation-drawer
-    color="accent"
     id="navigation-drawer"
-    v-model="drawer"
-    :mini-variant.sync="mini"
-    mini-variant-width="64"
-    mobile-breakpoint="600"
+    v-model="state.drawer"
+    color="accent"
+    :rail="state.mini"
     app
-    bottom
-    light
     height="100vh"
   >
-    <v-layout
-      fill-height
-      class="d-flex flex-column align-center align-content-center align-self-center justify-center"
-    >
-      <v-avatar size="164">
-        <v-img src="../../../assets/me.jpg"></v-img>
+    <div class="d-flex flex-column align-center align-content-center align-self-center justify-center fill-height">
+      <v-avatar :size="avatarSize">
+        <v-img src="../../../assets/me.jpg" />
       </v-avatar>
-      <v-list rounded>
-        <v-list-item-group light v-model="selected" active-class="border">
-          <v-list-item
-            v-for="(item, i) in items"
-            :key="i"
-            :to="item.link"
-            exact
-            exact-active-class="border"
-          >
-            <v-list-item-icon v-if="mini">
-              <v-icon v-text="item.icon"></v-icon>
-            </v-list-item-icon>
-            <v-list-item-content v-else>
-              <v-list-item-title v-text="item.title"></v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-item-group>
+      <v-list
+        nav
+        rounded
+      >
+        <v-list-item
+          v-for="(item, i) in state.items"
+          :key="i"
+          :to="item.link"
+          :title="state.mini ? '' : item.title"
+          :prepend-icon="state.mini ? item.icon : undefined"
+          active-class="border"
+        />
       </v-list>
-    </v-layout>
+    </div>
 
-    <template v-slot:append>
+    <template #append>
       <v-row justify="center">
-        <v-icon
+        <v-btn
+          icon
           class="pa-5"
-          color="primary"
-          x-large
-          @click="$vuetify.theme.dark = !$vuetify.theme.dark"
+          @click="toggleTheme"
         >
-          {{
-          $vuetify.theme.dark ? "mdi-weather-sunny" : "mdi-weather-night"
-          }}
-        </v-icon>
+          <v-icon
+            color="primary"
+            size="x-large"
+          >
+            {{ isDark ? "mdi-weather-sunny" : "mdi-weather-night" }}
+          </v-icon>
+        </v-btn>
       </v-row>
     </template>
   </v-navigation-drawer>
 </template>
-<script>
-import { bus } from "../../../main";
+<script setup>
+import { inject, onMounted, onBeforeUnmount, reactive, computed } from "vue";
+import { useDisplay, useTheme } from "vuetify";
 
-export default {
-  data() {
-    return {
-      selected: 0,
-      drawer: true,
-      mini: false,
-      items: [
-        { title: "About Me", icon: "mdi-account-tie-outline", link: "home" },
-        { title: "Experience", icon: "mdi-chart-line", link: "experience" },
-        { title: "Projects", icon: "mdi-view-list-outline", link: "projects" },
-        { title: "Skills", icon: "mdi-chart-bar", link: "skills" },
-        { title: "Education", icon: "mdi-school-outline", link: "education" },
-        { title: "Resume", icon: "mdi-clipboard-text-outline", link: "resume" },
-      ],
-      right: null,
-    };
-  },
+const bus = inject("bus");
+const theme = useTheme();
+const display = useDisplay();
+const avatarSize = computed(() => {
+  const bp = display.name.value;
+  if (bp === 'xs') return 96;
+  if (bp === 'sm') return 128;
+  return 164;
+});
 
-  beforeDestroy() {
-    if (typeof window !== "undefined") {
-      window.removeEventListener("resize", this.onResize, { passive: true });
+const state = reactive({
+  selected: 0,
+  drawer: true,
+  mini: false,
+  items: [
+    { title: "About Me", icon: "mdi-account-tie-outline", link: "home" },
+    { title: "Experience", icon: "mdi-chart-line", link: "experience" },
+    { title: "Projects", icon: "mdi-view-list-outline", link: "projects" },
+    { title: "Skills", icon: "mdi-chart-bar", link: "skills" },
+    { title: "Education", icon: "mdi-school-outline", link: "education" },
+    { title: "Resume", icon: "mdi-clipboard-text-outline", link: "resume" },
+  ],
+});
+
+const isDark = computed(() => theme.global.current.value.dark);
+function applyTheme(name) {
+  if (typeof theme.change === "function") theme.change(name);
+  else theme.global.name.value = name;
+}
+function toggleTheme() {
+  const next = isDark.value ? "light" : "dark";
+  applyTheme(next);
+  try { localStorage.setItem("theme", next); } catch (e) {}
+}
+
+function onResize() {
+  const bp = display.name.value;
+  if (bp === "sm") {
+    state.mini = true;
+  } else if (bp === "xs") {
+    state.mini = false;
+    bus?.emit("nav", true);
+  } else {
+    state.mini = false;
+    bus?.emit("nav", false);
+  }
+}
+
+onMounted(() => {
+  // apply saved theme preference
+  try {
+    const saved = localStorage.getItem("theme");
+    if (saved === "light" || saved === "dark") {
+      applyTheme(saved);
     }
-  },
+  } catch (e) {}
+  onResize();
+  window.addEventListener("resize", onResize, { passive: true });
+  bus?.on("drawer", () => {
+    state.drawer = !state.drawer;
+  });
+});
 
-  mounted() {
-    this.onResize();
-    window.addEventListener("resize", this.onResize, { passive: true });
-  },
-
-  methods: {
-    onResize() {
-      if (this.$vuetify.breakpoint.name === "sm") {
-        this.mini = true;
-      } else if (this.$vuetify.breakpoint.name === "xs") {
-        this.mini = false;
-        bus.$emit("nav", true);
-      } else {
-        this.mini = false;
-        bus.$emit("nav", false);
-      }
-    },
-  },
-  beforeMount() {
-    bus.$on("drawer", () => {
-      this.$data.drawer = !this.$data.drawer;
-    });
-  },
-};
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", onResize, { passive: true });
+});
 </script>
 <style scoped>
 .border {
-  color: var(--v-background-base);
-  background-color: var(--v-tertiary-base);
+  color: rgb(var(--v-theme-background));
+  background-color: rgb(var(--v-theme-tertiary));
 }
 </style>
