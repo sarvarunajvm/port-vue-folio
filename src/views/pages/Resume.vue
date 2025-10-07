@@ -39,18 +39,12 @@
                   <v-btn
                     color="primary"
                     elevation="2"
-                    fab
-                    large
-                    bottom
-                    right
-                    class="v-btn--example"
+                    size="large"
+                    rounded="circle"
+                    icon
                     @click="downloadPDf"
                   >
                     <v-icon>mdi-download</v-icon>
-                    <a
-                      href="../../assets/Resume.pdf"
-                      download
-                    />
                   </v-btn>
                 </v-fab-transition>
               </v-row>

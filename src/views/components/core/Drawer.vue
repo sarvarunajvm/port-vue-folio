@@ -4,6 +4,7 @@
     v-model="state.drawer"
     color="accent"
     :rail="state.mini"
+    :temporary="isMobile"
     app
     height="100vh"
   >
@@ -72,6 +73,7 @@ const state = reactive({
   ],
 });
 
+const isMobile = computed(() => display.name.value === 'xs');
 const isDark = computed(() => theme.global.current.value.dark);
 function applyTheme(name) {
   if (typeof theme.change === "function") theme.change(name);
@@ -89,11 +91,15 @@ function onResize() {
   const bp = display.name.value;
   if (bp === "sm") {
     state.mini = true;
+    state.drawer = true;
+    bus?.emit("nav", false);
   } else if (bp === "xs") {
     state.mini = false;
+    state.drawer = false;
     bus?.emit("nav", true);
   } else {
     state.mini = false;
+    state.drawer = true;
     bus?.emit("nav", false);
   }
 }

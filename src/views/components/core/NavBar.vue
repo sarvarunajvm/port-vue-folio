@@ -47,7 +47,9 @@ function openDrawer() {
 .fab-floating {
   position: fixed;
   right: 16px;
-  bottom: calc(env(safe-area-inset-bottom) + var(--nav-height) + 12px);
+  bottom: calc(env(safe-area-inset-bottom) + var(--nav-height) + 16px);
   z-index: 1100;
+  /* Ensure FAB is fully visible */
+  margin-bottom: 0;
 }
 </style>
