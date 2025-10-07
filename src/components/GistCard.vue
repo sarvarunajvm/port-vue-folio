@@ -70,9 +70,11 @@
 </template>
 <script setup>
 import GistEmbed from "./GistEmbed.vue";
-const props = defineProps({
+import { ref } from "vue";
+
+defineProps({
   item: Object,
 });
-import { ref } from "vue";
+
 const dialog = ref(false);
 </script>

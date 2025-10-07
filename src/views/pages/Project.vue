@@ -100,8 +100,8 @@ export default {
             }
           });
         })
-        .catch(function (error) {
-          console.error(error);
+        .catch(function (err) {
+          console.error(err);
         });
     },
   },

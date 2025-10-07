@@ -49,10 +49,10 @@ onMounted(async () => {
     try {
       const res = hljs.highlight(raw, { language: lang });
       content.value = res.value;
-    } catch (e) {
+    } catch {
       content.value = raw;
     }
-  } catch (e) {
+  } catch {
     error.value = 'Failed to load gist';
   } finally {
     loading.value = false;

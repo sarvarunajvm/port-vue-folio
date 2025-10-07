@@ -80,7 +80,9 @@ function applyTheme(name) {
 function toggleTheme() {
   const next = isDark.value ? "light" : "dark";
   applyTheme(next);
-  try { localStorage.setItem("theme", next); } catch (e) {}
+  try { localStorage.setItem("theme", next); } catch {
+    // Ignore storage errors
+  }
 }
 
 function onResize() {
@@ -103,7 +105,9 @@ onMounted(() => {
     if (saved === "light" || saved === "dark") {
       applyTheme(saved);
     }
-  } catch (e) {}
+  } catch {
+    // Ignore storage errors
+  }
   onResize();
   window.addEventListener("resize", onResize, { passive: true });
   bus?.on("drawer", () => {
