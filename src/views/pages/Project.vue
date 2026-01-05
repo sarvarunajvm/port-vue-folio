@@ -1,58 +1,45 @@
 <template>
   <v-container
     id="project"
-    class="pa-4 ma-0 background"
+    class="pa-4 pa-md-12 background"
     tag="section"
     fluid
     fill-height
   >
+    <div class="background-overlay"></div>
     <v-row
-      align="center"
       justify="center"
-      align-content="center"
+      class="fill-height position-relative"
+      style="z-index: 1;"
     >
-      <v-col
-        cols="auto"
-        align-self="center"
-      >
-        <div class="d-flex flex-column justify-center">
-          <v-row class="ma-5">
-            <v-col
-              cols="12"
-              class="ma-5"
-            >
-              <v-row
-                align="center"
-                justify="center"
-              >
-                <p class="myFont h2 accent--text pr-4">
-                  Lets See Some Of My 🔨
-                </p>
-              </v-row>
-            </v-col>
-          </v-row>
+      <v-col cols="12" md="10" lg="8">
+        <div class="text-center mb-12 slide-up-item" style="animation-delay: 0.1s">
+          <h2 class="h2 accent--text mb-4">
+            Projects <span class="emoji">🔨</span>
+          </h2>
+          <div class="divider mx-auto primary"></div>
         </div>
-        <div>
-          <div class="bento-grid">
-            <div
-              v-for="item in layout"
-              :key="item.i"
-              class="bento-item"
-              :style="gridStyle(item)"
-            >
-              <gist-card :item="item.snip" />
-            </div>
+        
+        <div class="bento-grid">
+          <div
+            v-for="(item, index) in layout"
+            :key="item.i"
+            class="bento-item slide-up-item"
+            :style="{ ...gridStyle(item), animationDelay: (index + 2) * 0.1 + 's' }"
+          >
+            <gist-card :item="item.snip" />
           </div>
         </div>
       </v-col>
     </v-row>
   </v-container>
-  
 </template>
+
 <script>
 import GistCard from "../../components/GistCard.vue";
 import axios from "axios";
 import aboutJson from "../../data/about.json";
+
 export default {
   components: {
     GistCard,
@@ -79,7 +66,6 @@ export default {
     },
     getGistInfos() {
       var self = this;
-
       axios
         .get("https://api.github.com/users/" + self.about.username + "/gists")
         .then(function (response) {
@@ -107,39 +93,63 @@ export default {
   },
 };
 </script>
+
 <style scoped>
-#project {
-  /* Mobile-first padding */
-  padding: 16px;
+.background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle at 90% 10%, rgba(127, 90, 240, 0.05) 0%, transparent 40%);
+  pointer-events: none;
 }
+
+.divider {
+  width: 60px;
+  height: 4px;
+  background-color: var(--v-primary-base);
+  border-radius: 2px;
+}
+
+.emoji {
+  display: inline-block;
+  animation: hammer 2s infinite;
+  transform-origin: 50% 100%;
+}
+
+@keyframes hammer {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(-20deg); }
+  20% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
 .bento-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  grid-auto-rows: 180px;
-  /* Mobile-first spacing */
-  gap: 12px;
-  margin: 8px;
-  padding: 8px;
+  grid-auto-rows: 200px;
+  gap: 24px;
 }
 
-/* Tablet */
-@media (min-width: 600px) {
-  #project { padding: 24px; }
-  .bento-grid {
-    gap: 20px;
-    margin: 16px;
-    padding: 12px;
+.bento-item {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* Desktop and up */
-@media (min-width: 960px) {
-  #project { padding: 32px; }
-  .bento-grid {
-    gap: 32px;
-    margin: 24px;
-    padding: 16px;
-  }
+.slide-up-item {
+  animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
 }
-.bento-item { width: 100%; height: 100%; }
 </style>

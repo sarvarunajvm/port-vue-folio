@@ -65,22 +65,19 @@ export default {};
 }
 .loading {
   position: relative;
-  width: 112px;
+  width: auto;
+  min-width: 120px;
   height: 70px;
-}
-.loading:before,
-.loading:after {
-  display: table;
-  content: "";
-}
-.loading:after {
-  clear: both;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: nowrap;
 }
 .loading .finger {
-  float: left;
   margin: 0 2px 0 0;
   width: 20px;
   height: 100%;
+  flex-shrink: 0;
 }
 .loading .finger-1 {
   -webkit-animation: finger-1-animation 2s infinite ease-out;
@@ -176,10 +173,10 @@ export default {};
 }
 .loading .last-finger {
   position: relative;
-  float: left;
   width: 24px;
   height: 100%;
   overflow: hidden;
+  flex-shrink: 0;
 }
 .loading .last-finger-item {
   position: absolute;

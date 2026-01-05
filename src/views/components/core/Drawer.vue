@@ -2,132 +2,244 @@
   <v-navigation-drawer
     id="navigation-drawer"
     v-model="state.drawer"
-    color="accent"
     :rail="state.mini"
     :temporary="isMobile"
     app
-    height="100vh"
+    color="primary"
+    class="glass-drawer"
+    width="260"
+    :elevation="isMobile ? 10 : 0"
   >
-    <div class="d-flex flex-column align-center align-content-center align-self-center justify-center fill-height">
-      <v-avatar :size="avatarSize">
-        <v-img src="../../../assets/me.jpg" />
-      </v-avatar>
-      <v-list
-        nav
-        rounded
-      >
+    <!-- Background Gradient/Pattern -->
+    <div class="drawer-bg"></div>
+
+    <div class="d-flex flex-column fill-height pa-4 position-relative" style="z-index: 1;">
+      <!-- Profile Section -->
+      <div class="d-flex flex-column align-center my-8">
+        <v-avatar 
+          :size="state.mini ? 48 : 120" 
+          class="profile-avatar mb-4"
+          :class="{ 'avatar-mini': state.mini }"
+        >
+          <v-img 
+            src="../../../assets/me.jpg" 
+            alt="Profile Picture"
+            cover
+          ></v-img>
+        </v-avatar>
+        
+        <div v-if="!state.mini" class="text-center fade-transition">
+
+        </div>
+      </div>
+
+      <v-divider class="mb-4 opacity-20"></v-divider>
+
+      <!-- Navigation Links -->
+      <v-list nav density="compact" class="flex-grow-1 bg-transparent">
         <v-list-item
           v-for="(item, i) in state.items"
           :key="i"
-          :to="item.link"
-          :title="state.mini ? '' : item.title"
-          :prepend-icon="state.mini ? item.icon : undefined"
-          active-class="border"
-        />
+          :to="{ name: item.routeName }"
+          :value="item.routeName"
+          :exact="item.routeName === 'Home'"
+          rounded="lg"
+          class="mb-2 nav-item"
+          active-class="nav-item-active"
+        >
+          <template v-slot:prepend>
+            <v-icon :icon="item.icon" class="nav-icon"></v-icon>
+          </template>
+          <v-list-item-title class="font-weight-medium nav-title">
+            {{ item.title }}
+          </v-list-item-title>
+        </v-list-item>
       </v-list>
-    </div>
 
-    <template #append>
-      <v-row justify="center">
+      <!-- Footer / Theme Toggle -->
+      <div class="mt-auto pt-4">
         <v-btn
-          icon
-          class="pa-5"
+          block
+          variant="text"
+          class="theme-toggle-btn"
+          :class="{ 'justify-center': state.mini, 'justify-start pl-4': !state.mini }"
+          height="48"
           @click="toggleTheme"
         >
           <v-icon
-            color="primary"
-            size="x-large"
+            :class="{ 'mr-3': !state.mini }"
+            size="24"
+            color="white"
           >
-            {{ isDark ? "mdi-weather-sunny" : "mdi-weather-night" }}
+            {{ isDark ? "mdi-weather-night" : "mdi-weather-sunny" }}
           </v-icon>
+          <span v-if="!state.mini" class="font-weight-medium text-white">
+            {{ isDark ? "Dark Mode" : "Light Mode" }}
+          </span>
         </v-btn>
-      </v-row>
-    </template>
+      </div>
+    </div>
   </v-navigation-drawer>
 </template>
+
 <script setup>
-import { inject, onMounted, onBeforeUnmount, reactive, computed } from "vue";
+import { inject, onMounted, onBeforeUnmount, reactive, computed, watch } from "vue";
 import { useDisplay, useTheme } from "vuetify";
 
 const bus = inject("bus");
 const theme = useTheme();
 const display = useDisplay();
-const avatarSize = computed(() => {
-  const bp = display.name.value;
-  if (bp === 'xs') return 96;
-  if (bp === 'sm') return 128;
-  return 164;
-});
 
 const state = reactive({
-  selected: 0,
   drawer: true,
   mini: false,
   items: [
-    { title: "About Me", icon: "mdi-account-tie-outline", link: "home" },
-    { title: "Experience", icon: "mdi-chart-line", link: "experience" },
-    { title: "Projects", icon: "mdi-view-list-outline", link: "projects" },
-    { title: "Skills", icon: "mdi-chart-bar", link: "skills" },
-    { title: "Education", icon: "mdi-school-outline", link: "education" },
-    { title: "Resume", icon: "mdi-clipboard-text-outline", link: "resume" },
+    { title: "About Me", icon: "mdi-account-tie-outline", routeName: "Home" },
+    { title: "Experience", icon: "mdi-briefcase-outline", routeName: "Experience" },
+    { title: "Projects", icon: "mdi-rocket-launch-outline", routeName: "Projects" },
+    { title: "Skills", icon: "mdi-lightning-bolt-outline", routeName: "Skills" },
+    { title: "Education", icon: "mdi-school-outline", routeName: "Education" },
+    { title: "Resume", icon: "mdi-file-document-outline", routeName: "Resume" },
   ],
 });
 
-const isMobile = computed(() => display.name.value === 'xs');
+const isMobile = computed(() => display.mobile.value);
 const isDark = computed(() => theme.global.current.value.dark);
+
 function applyTheme(name) {
-  if (typeof theme.change === "function") theme.change(name);
-  else theme.global.name.value = name;
+  theme.global.name.value = name;
 }
+
 function toggleTheme() {
   const next = isDark.value ? "light" : "dark";
   applyTheme(next);
-  try { localStorage.setItem("theme", next); } catch {
-    // Ignore storage errors
-  }
+  try { localStorage.setItem("theme", next); } catch (e) { /* ignore */ }
 }
 
-function onResize() {
-  const bp = display.name.value;
-  if (bp === "sm") {
-    state.mini = true;
-    state.drawer = true;
-    bus?.emit("nav", false);
-  } else if (bp === "xs") {
+function updateLayout() {
+  if (display.mdAndDown.value) {
     state.mini = false;
-    state.drawer = false;
-    bus?.emit("nav", true);
+    // On mobile/tablet, drawer is temporary and hidden by default unless toggled
+    // We rely on the bus event or initial state
   } else {
-    state.mini = false;
+    // Desktop
     state.drawer = true;
-    bus?.emit("nav", false);
+    state.mini = false; // or true if you want mini sidebar on desktop
   }
+  
+  // Update bus so NavBar knows if it should show the toggle button
+  bus?.emit("nav", isMobile.value);
 }
+
+// Watch for breakpoint changes
+watch(display.name, updateLayout);
 
 onMounted(() => {
-  // apply saved theme preference
+  // Theme init
   try {
     const saved = localStorage.getItem("theme");
-    if (saved === "light" || saved === "dark") {
-      applyTheme(saved);
-    }
-  } catch {
-    // Ignore storage errors
+    if (saved) applyTheme(saved);
+  } catch (e) { /* ignore */ }
+
+  // Initial layout set
+  updateLayout();
+  
+  // If mobile, start closed
+  if (isMobile.value) {
+    state.drawer = false;
   }
-  onResize();
-  window.addEventListener("resize", onResize, { passive: true });
+
   bus?.on("drawer", () => {
     state.drawer = !state.drawer;
   });
 });
-
-onBeforeUnmount(() => {
-  window.removeEventListener("resize", onResize, { passive: true });
-});
 </script>
+
 <style scoped>
-.border {
-  color: rgb(var(--v-theme-background));
-  background-color: rgb(var(--v-theme-tertiary));
+.glass-drawer {
+  /* We override the background prop slightly to add backdrop filter if supported, 
+     but keeping the base color */
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.drawer-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    180deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+}
+
+.profile-avatar {
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  padding: 2px;
+  background-clip: content-box;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.profile-avatar:hover {
+  border-color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.02);
+}
+
+.avatar-mini {
+  border-width: 1px;
+  padding: 1px;
+}
+
+.title-text {
+  color: white; /* Since bg is primary, text should be white or high contrast */
+  letter-spacing: -0.5px;
+}
+
+.subtitle-text {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.nav-item {
+  transition: all 0.2s ease;
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.nav-item:hover {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-item-active {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  font-weight: 600;
+}
+
+.nav-item-active .nav-icon {
+  color: white !important;
+}
+
+.theme-toggle-btn {
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.2s;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.opacity-80 { opacity: 0.8; }
+.opacity-20 { opacity: 0.2; }
+.fade-transition { transition: opacity 0.2s ease; }
+
+/* Override list background since we are setting it on drawer */
+.bg-transparent {
+  background: transparent !important;
 }
 </style>

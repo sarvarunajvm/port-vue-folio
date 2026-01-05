@@ -1,102 +1,162 @@
 <template>
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <transition name="fade" mode="out-in">
+      <component :is="Component" />
+    </transition>
+  </router-view>
 </template>
 
 <script setup>
 </script>
-<style>
+
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap');
+
+:root {
+  --primary-font: 'Kanit', sans-serif;
+  --transition-speed: 0.3s;
+}
+
 html {
-  overflow: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 0px;
-  background: transparent; /* make scrollbar transparent */
+  width: 8px;
 }
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  
+  &:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
 #app {
-  font-family: "Kanit", sans-serif !important;
+  font-family: var(--primary-font) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Typography Improvements */
 .myFont {
-  font-family: "Kanit", sans-serif !important;
+  font-family: var(--primary-font) !important;
 }
+
+// fluid typography mixin could be used here, but keeping it simple with clamp
 .h1 {
-  font-size: 6rem !important;
+  font-size: clamp(3rem, 5vw, 6rem) !important;
   font-weight: 300;
-  line-height: 6rem;
-  letter-spacing: -0.015625em;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
+
 .h2 {
+  font-size: clamp(2.5rem, 4vw, 3.75rem) !important;
   font-weight: 300;
-  font-size: 3.75rem !important;
-  line-height: 3.75rem;
-  letter-spacing: -0.0083333333em !important;
+  line-height: 1.2;
+  letter-spacing: -0.01em !important;
 }
+
 .h3 {
+  font-size: clamp(2rem, 3vw, 3rem) !important;
   font-weight: 400;
-  font-size: 3rem !important;
-  line-height: 3.125rem;
-  letter-spacing: normal !important;
+  line-height: 1.25;
 }
+
 .h4 {
+  font-size: clamp(1.5rem, 2.5vw, 2.125rem) !important;
   font-weight: 400;
-  font-size: 2.125rem !important;
-  line-height: 2.5rem;
-  letter-spacing: 0.0073529412em;
+  line-height: 1.4;
 }
+
 .h5 {
   font-size: 1.5rem !important;
   font-weight: 400;
-  line-height: 2rem;
-  letter-spacing: normal !important;
+  line-height: 1.5;
 }
+
 .subtitle1 {
-  font-size: 1rem !important;
+  font-size: 1.125rem !important;
   font-weight: 400;
-  line-height: 1.75rem;
-  letter-spacing: 0.009375em !important;
+  line-height: 1.6;
+  opacity: 0.9;
 }
+
 .subtitle2 {
   font-size: 0.875rem !important;
   font-weight: 500;
-  line-height: 1.375rem;
-  letter-spacing: 0.0071428571em !important;
+  line-height: 1.5;
+  opacity: 0.8;
 }
+
 .body1 {
   font-size: 1rem !important;
   font-weight: 400;
-  line-height: 1.5rem;
-  letter-spacing: 0.03125em;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
 }
+
 .body2 {
-  font-size: 0.875rem !important;
+  font-size: 0.95rem !important;
   font-weight: 400;
-  line-height: 1.25rem;
-  letter-spacing: 0.0178571429em !important;
+  line-height: 1.6;
+  opacity: 0.85;
 }
-.button {
-  font-size: 0.875rem !important;
-  font-weight: 500;
-  line-height: 2.25rem;
-  letter-spacing: 0.0892857143em !important;
-  text-transform: uppercase !important;
+
+/* Page Transitions */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
 }
-.caption {
-  font-size: 0.75rem !important;
-  font-weight: 400;
-  line-height: 1.25rem;
-  letter-spacing: 0.0333333333em !important;
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
-.ovrline {
-  font-size: 0.75rem !important;
-  font-weight: 500;
-  line-height: 2rem;
-  letter-spacing: 0.1666666667em !important;
-  text-transform: uppercase !important;
+
+/* Slide Up Utility */
+.slide-up-enter-active {
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.hdline {
-  font-size: 1.5rem !important;
-  font-weight: 700;
-  line-height: 2rem;
-  letter-spacing: initial !important;
+.slide-up-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.slide-up-enter-to {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Utility Classes */
+.gap-2 { gap: 0.5rem; }
+.gap-4 { gap: 1rem; }
+.gap-6 { gap: 1.5rem; }
+
+/* Interactive Elements */
+a {
+  transition: color 0.2s ease;
+  text-decoration: none;
+  
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.v-icon {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  
+  &:hover {
+    transform: scale(1.2);
+  }
 }
 </style>
