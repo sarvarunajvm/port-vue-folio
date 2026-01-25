@@ -10,10 +10,10 @@
         </h3>
         <v-chip
           v-if="item.language"
-          size="x-small"
+          size="small"
           color="tertiary"
           variant="flat"
-          class="font-weight-bold"
+          class="standard-chip font-weight-bold"
         >
           {{ item.language }}
         </v-chip>
@@ -84,17 +84,48 @@ const dialog = ref(false);
 
 <style scoped>
 .gist-card {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(var(--v-theme-background), 0.9);
   backdrop-filter: blur(10px);
-  border-color: rgba(0, 0, 0, 0.08);
+  border-color: rgba(var(--v-theme-primary), 0.2);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   height: 100%;
 }
 
+/* Light mode specific adjustments */
+.v-theme--light .gist-card {
+  background: rgba(255, 255, 255, 0.95) !important; /* Clean white for better contrast */
+  border-color: rgba(var(--v-theme-primary), 0.25) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Dark mode specific adjustments */
+.v-theme--dark .gist-card {
+  background: rgba(12, 53, 80, 0.6) !important; /* Lighter ocean blue for visibility */
+  border-color: rgba(var(--v-theme-primary), 0.3) !important;
+}
+
 .gist-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.1);
-  border-color: rgba(var(--v-theme-primary), 0.3);
+  box-shadow: 0 12px 24px -10px rgba(var(--v-theme-primary), 0.25);
+  border-color: rgba(var(--v-theme-primary), 0.5);
+}
+
+/* Ensure text is readable in light mode */
+.v-theme--light .secondary--text {
+  color: rgba(var(--v-theme-secondary), 0.85) !important;
+}
+
+.v-theme--light .gist-card h3 {
+  color: rgb(var(--v-theme-accent)) !important;
+}
+
+/* Ensure text is readable in dark mode */
+.v-theme--dark .secondary--text {
+  color: rgba(var(--v-theme-accent), 0.9) !important;
+}
+
+.v-theme--dark .gist-card h3 {
+  color: rgb(var(--v-theme-accent)) !important;
 }
 
 .line-clamp-3 {
@@ -110,5 +141,13 @@ const dialog = ref(false);
 
 .opacity-10 {
   opacity: 0.1;
+}
+
+/* Standardized chip styling */
+.standard-chip {
+  font-size: 0.75rem !important;
+  letter-spacing: 0.02em;
+  min-height: 24px !important;
+  padding: 4px 12px !important;
 }
 </style>

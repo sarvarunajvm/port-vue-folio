@@ -17,12 +17,12 @@
       <!-- Profile Section -->
       <div class="d-flex flex-column align-center my-8">
         <v-avatar 
-          :size="state.mini ? 48 : 120" 
+          :size="state.mini ? 64 : 160" 
           class="profile-avatar mb-4"
           :class="{ 'avatar-mini': state.mini }"
         >
           <v-img 
-            src="../../../assets/me.jpg" 
+            src="../../../assets/me.png" 
             alt="Profile Picture"
             cover
           ></v-img>
@@ -47,7 +47,7 @@
           class="mb-2 nav-item"
           active-class="nav-item-active"
         >
-          <template v-slot:prepend>
+          <template #prepend>
             <v-icon :icon="item.icon" class="nav-icon"></v-icon>
           </template>
           <v-list-item-title class="font-weight-medium nav-title">
@@ -57,25 +57,20 @@
       </v-list>
 
       <!-- Footer / Theme Toggle -->
-      <div class="mt-auto pt-4">
+      <div class="mt-auto pt-4 d-flex justify-center">
         <v-btn
-          block
+          icon
           variant="text"
           class="theme-toggle-btn"
-          :class="{ 'justify-center': state.mini, 'justify-start pl-4': !state.mini }"
-          height="48"
+          size="large"
           @click="toggleTheme"
         >
           <v-icon
-            :class="{ 'mr-3': !state.mini }"
             size="24"
             color="white"
           >
             {{ isDark ? "mdi-weather-night" : "mdi-weather-sunny" }}
           </v-icon>
-          <span v-if="!state.mini" class="font-weight-medium text-white">
-            {{ isDark ? "Dark Mode" : "Light Mode" }}
-          </span>
         </v-btn>
       </div>
     </div>
@@ -83,7 +78,7 @@
 </template>
 
 <script setup>
-import { inject, onMounted, onBeforeUnmount, reactive, computed, watch } from "vue";
+import { inject, onMounted, reactive, computed, watch } from "vue";
 import { useDisplay, useTheme } from "vuetify";
 
 const bus = inject("bus");
@@ -113,7 +108,7 @@ function applyTheme(name) {
 function toggleTheme() {
   const next = isDark.value ? "light" : "dark";
   applyTheme(next);
-  try { localStorage.setItem("theme", next); } catch (e) { /* ignore */ }
+  try { localStorage.setItem("theme", next); } catch { /* ignore */ }
 }
 
 function updateLayout() {
@@ -139,7 +134,7 @@ onMounted(() => {
   try {
     const saved = localStorage.getItem("theme");
     if (saved) applyTheme(saved);
-  } catch (e) { /* ignore */ }
+  } catch { /* ignore */ }
 
   // Initial layout set
   updateLayout();
@@ -181,7 +176,7 @@ onMounted(() => {
   padding: 2px;
   background-clip: content-box;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .profile-avatar:hover {
@@ -195,7 +190,7 @@ onMounted(() => {
 }
 
 .title-text {
-  color: white; /* Since bg is primary, text should be white or high contrast */
+  color: white;
   letter-spacing: -0.5px;
 }
 
@@ -224,14 +219,18 @@ onMounted(() => {
 }
 
 .theme-toggle-btn {
-  border-radius: 8px;
+  border-radius: 50% !important;
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
   color: rgba(255, 255, 255, 0.8);
   transition: all 0.2s;
 }
 
 .theme-toggle-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15) !important;
   color: white;
+  transform: scale(1.1);
 }
 
 .opacity-80 { opacity: 0.8; }

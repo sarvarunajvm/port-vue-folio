@@ -34,17 +34,21 @@
                 <h3 class="h4 anchor--text font-weight-medium mb-1">
                   {{ experience.designation }}
                 </h3>
-                <div class="d-flex align-center text-primary subtitle1 font-weight-medium">
+                <div class="d-flex align-center text-primary subtitle1 font-weight-medium mb-1">
                   <v-icon size="small" class="mr-2">mdi-domain</v-icon>
                   {{ experience.company }}
+                </div>
+                <div v-if="experience.location" class="d-flex align-center text-accent body2">
+                  <v-icon size="x-small" class="mr-1">mdi-map-marker</v-icon>
+                  {{ experience.location }}
                 </div>
               </div>
               <div class="mt-2 mt-md-0 text-right-md">
                 <v-chip
                   color="tertiary"
-                  variant="outlined"
+                  variant="flat"
                   size="small"
-                  class="font-weight-bold"
+                  class="standard-chip font-weight-bold"
                 >
                   {{ experience.period }}
                 </v-chip>
@@ -55,11 +59,24 @@
               <div
                 v-for="point in experience.points"
                 :key="point.id"
-                class="body2 secondary--text mb-2 d-flex align-start"
+                class="body2 text-accent mb-2 d-flex align-start"
               >
                 <span class="mr-2 mt-1 bullet">•</span>
                 <span v-html="point.value"></span>
               </div>
+            </div>
+            
+            <div v-if="experience.tags && experience.tags.length > 0" class="d-flex flex-wrap gap-2 mt-4 pt-3" style="border-top: 1px solid rgba(var(--v-theme-primary), 0.1);">
+              <v-chip
+                v-for="tag in experience.tags"
+                :key="tag"
+                color="tertiary"
+                variant="flat"
+                size="small"
+                class="standard-chip font-weight-bold"
+              >
+                {{ tag }}
+              </v-chip>
             </div>
           </v-card>
         </div>
@@ -84,28 +101,51 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: radial-gradient(circle at 10% 10%, rgba(61, 169, 252, 0.03) 0%, transparent 40%);
+  background-image: radial-gradient(circle at 10% 10%, rgba(var(--v-theme-tertiary), 0.03) 0%, transparent 40%);
   pointer-events: none;
 }
 
 .divider {
   width: 60px;
   height: 4px;
-  background-color: var(--v-primary-base);
+  background-color: rgb(var(--v-theme-primary));
   border-radius: 2px;
 }
 
 .experience-card {
-  border-color: rgba(0, 0, 0, 0.05);
-  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(var(--v-theme-primary), 0.2);
+  background: rgba(var(--v-theme-background), 0.9);
   backdrop-filter: blur(10px);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+/* Light mode specific adjustments */
+.v-theme--light .experience-card {
+  background: rgba(255, 255, 255, 0.95) !important; /* Clean white for better contrast */
+  border-color: rgba(var(--v-theme-primary), 0.25) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Dark mode specific adjustments */
+.v-theme--dark .experience-card {
+  background: rgba(12, 53, 80, 0.6) !important; /* Lighter ocean blue for visibility */
+  border-color: rgba(var(--v-theme-primary), 0.3) !important;
+}
+
 .experience-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 20px -10px rgba(0, 0, 0, 0.1) !important;
-  border-color: rgba(61, 169, 252, 0.3);
+  box-shadow: 0 12px 20px -10px rgba(var(--v-theme-primary), 0.25) !important;
+  border-color: rgba(var(--v-theme-primary), 0.5);
+}
+
+/* Ensure text is readable in light mode */
+.v-theme--light .secondary--text {
+  color: rgba(var(--v-theme-secondary), 0.85) !important;
+}
+
+/* Ensure text is readable in dark mode */
+.v-theme--dark .secondary--text {
+  color: rgba(var(--v-theme-accent), 0.9) !important;
 }
 
 .bullet {
@@ -144,5 +184,13 @@ export default {
 .slide-up-item {
   animation: slideUpFade 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
+}
+
+/* Standardized chip styling */
+.standard-chip {
+  font-size: 0.75rem !important;
+  letter-spacing: 0.02em;
+  min-height: 24px !important;
+  padding: 4px 12px !important;
 }
 </style>

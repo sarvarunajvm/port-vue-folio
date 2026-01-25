@@ -1,102 +1,114 @@
 [
   {
     "id": 1,
-    "designation": "Software Engineer",
-    "company": "AssetPulse, LLC",
-    "period": "October 2019 - Present",
+    "designation": "Sr Software Engineer",
+    "company": "PayPal",
+    "period": "2021 - Present",
+    "location": "Remote",
     "points": [
       {
         "id": 1,
-        "value": "->Hands-on experience in Spring-Web, Spring-JPA, Rest-Api's, WebSockets, Gradle, NPM."
+        "value": "Closed webhook product gap → adopted by 10% of merchants"
       },
       {
         "id": 2,
-        "value": " -> Involved in re-architecture of the existing product."
+        "value": "Built near real-time analytics → +0.01% revenue impact"
       },
       {
         "id": 3,
-        "value": "-> Integrating and implementing third-party libraries such as VlcJ, Lombok, JEasy."
+        "value": "Reduced spam to below 2% with effective solutions"
       },
       {
         "id": 4,
-        "value": " -> Wrote Junit efficiently can cover up to 96% of the lines."
+        "value": "Optimized API performance → 1.5× faster response"
       },
       {
         "id": 5,
-        "value": "-> Doing peer-level code review to reduce the code redundancy and improve performance."
+        "value": "Achieved 95% on-time completion across all initiatives"
       },
       {
         "id": 6,
-        "value": "-> Having a deep understanding and the importance of code quality,<br/> continuously using the SonarQube to reduce cognitive complexity and code smell."
+        "value": "Reached 70% code coverage with JUnit 5 upgrade"
       },
       {
         "id": 7,
-        "value": "-> Solved many challenging problems and added intuitive and smart features."
+        "value": "Served as Scrum Master → 90% Say-Do ratio"
       }
-    ]
+    ],
+    "tags": ["Java", "Spring Boot", "Kafka", "Datadog", "BigQuery"]
   },
   {
     "id": 2,
-    "designation": "Software Developer",
-    "company": "Wellspring Software Labs",
-    "period": "Feb 2018 - Sep 2019",
+    "designation": "Software Engineer",
+    "company": "Assetpulse",
+    "period": "2019 - 2021",
+    "location": "Chennai",
     "points": [
       {
         "id": 1,
-        "value": "-> Proficiently implemented Design patterns, data structures, and algorithms."
+        "value": "Revitalized legacy product with REST API → +2% engagement"
       },
       {
         "id": 2,
-        "value": "-> Developed many features using only core java and service locator design pattern."
+        "value": "Migrated RFID to BLE → 33% cost reduction"
       },
       {
         "id": 3,
-        "value": "-> Involved in design and development for validating/save master data."
+        "value": "Enhanced triangulation with WebSocket → +5% conversions"
       },
       {
         "id": 4,
-        "value": " -> Involved in process improvements."
+        "value": "Implemented comprehensive tests → 68% coverage"
       },
       {
         "id": 5,
-        "value": "-> Involved in writing tests to log metrics for performance improvements."
-      },
-      {
-        "id": 6,
-        "value": "-> Worte and delivered code on time with 92% of efficiency."
-      },
-      {
-        "id": 7,
-        "value": "-> Worked in China(Shenzhen) for 2 months and provided deployment support."
+        "value": "Reduced technical debt by 30 days"
       }
-    ]
+    ],
+    "tags": ["Java", "Spring", "WebSocket", "BLE", "PostgreSQL"]
   },
   {
     "id": 3,
-    "designation": "Software Engineer",
-    "company": "CoreNett Limited",
-    "period": "Jun 2016 - Dec 2017",
+    "designation": "Software Developer",
+    "company": "Wellspring Software Labs",
+    "period": "2018 - 2019",
+    "location": "Chennai",
     "points": [
       {
         "id": 1,
-        "value": "-> Involved in the design and implementation using  Java, <br/> J2EE 1.4[Servlets, JSP, EJB, DAO, Action] JavaScript1.2, HTML, CSS."
+        "value": "Configurable service locator → 10% reduction in API designs"
       },
       {
         "id": 2,
-        "value": "-> Implement the change requests, along with the application development."
+        "value": "C4 diagrams → 25% faster stakeholder alignment"
       },
       {
         "id": 3,
-        "value": "-> Individually worked on Operations Module. It’s used for ASM, TSO, <br/> Distributor, Retailer, Transaction, and Registration."
+        "value": "Optimized storage → response time 1200ms → 700ms"
       },
       {
         "id": 4,
-        "value": " -> Also individually worked on the Reports and Map module too. <br/> It Contains reports on every master programs."
+        "value": "Received client recognition for live demo problem-solving"
+      }
+    ],
+    "tags": ["Java", "PostgreSQL", "Architecture", "C4"]
+  },
+  {
+    "id": 4,
+    "designation": "Software Engineer",
+    "company": "CoreNett Technologies",
+    "period": "2016 - 2017",
+    "location": "Chennai",
+    "points": [
+      {
+        "id": 1,
+        "value": "Built configurable backends → 10% RTB reduction"
       },
       {
-        "id": 5,
-        "value": "-> Involved in Unit testing."
+        "id": 2,
+        "value": "Auto-paginated reports → 30% performance boost"
       }
-    ]
+    ],
+    "tags": ["Java", "Spring", "Oracle"]
   }
 ]

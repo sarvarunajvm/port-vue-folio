@@ -25,12 +25,12 @@
              <!-- Preview Section -->
             <v-card class="resume-preview-card pa-2" elevation="4">
               <v-img
-                src="../../../assets/Resume.gif"
+                src="../../assets/Resume.gif"
                 alt="Resume Preview"
                 cover
                 class="resume-image rounded"
               >
-                <template v-slot:placeholder>
+                <template #placeholder>
                   <div class="d-flex align-center justify-center fill-height">
                     <v-progress-circular indeterminate color="primary"></v-progress-circular>
                   </div>
@@ -58,9 +58,9 @@
                 size="x-large"
                 class="px-8 font-weight-bold download-btn"
                 elevation="4"
-                rounded="pill"
-                @click="downloadPDF"
+                rounded="0"
                 :loading="loading"
+                @click="downloadPDF"
               >
                 <v-icon start class="mr-2">mdi-download</v-icon>
                 Download PDF
@@ -78,7 +78,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   data: () => ({
     loading: false
@@ -109,28 +108,51 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: radial-gradient(circle at 50% 50%, rgba(44, 182, 125, 0.05) 0%, transparent 50%);
+  background-image: radial-gradient(circle at 50% 50%, rgba(var(--v-theme-tertiary), 0.05) 0%, transparent 50%);
   pointer-events: none;
 }
 
 .divider {
   width: 60px;
   height: 4px;
-  background-color: var(--v-primary-base);
+  background-color: rgb(var(--v-theme-primary));
   border-radius: 2px;
 }
 
 .resume-card {
-  border-color: rgba(0, 0, 0, 0.05);
-  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(var(--v-theme-primary), 0.2);
+  background: rgba(var(--v-theme-background), 0.9);
   backdrop-filter: blur(10px);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+/* Light mode specific adjustments */
+.v-theme--light .resume-card {
+  background: rgba(255, 255, 255, 0.95) !important; /* Clean white for better contrast */
+  border-color: rgba(var(--v-theme-primary), 0.25) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Dark mode specific adjustments */
+.v-theme--dark .resume-card {
+  background: rgba(12, 53, 80, 0.6) !important; /* Lighter ocean blue for visibility */
+  border-color: rgba(var(--v-theme-primary), 0.3) !important;
+}
+
 .resume-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.1);
-  border-color: rgba(var(--v-theme-accent), 0.3);
+  box-shadow: 0 12px 30px -10px rgba(var(--v-theme-primary), 0.25);
+  border-color: rgba(var(--v-theme-primary), 0.5);
+}
+
+/* Ensure text is readable in light mode */
+.v-theme--light .secondary--text {
+  color: rgba(var(--v-theme-secondary), 0.85) !important;
+}
+
+/* Ensure text is readable in dark mode */
+.v-theme--dark .secondary--text {
+  color: rgba(var(--v-theme-accent), 0.9) !important;
 }
 
 .resume-preview-card {

@@ -29,15 +29,15 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(var(--v-theme-secondary), 0.05);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(var(--v-theme-primary), 0.3);
   border-radius: 4px;
   
   &:hover {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(var(--v-theme-primary), 0.5);
   }
 }
 

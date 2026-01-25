@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "title": "Coding Languages",
+    "title": "Backend",
     "points": [
       {
         "id": 1,
@@ -10,173 +10,228 @@
       },
       {
         "id": 2,
-        "value": "mdi-language-javascript",
-        "name": "JavaScript"
+        "value": "mdi-leaf",
+        "name": "Spring Boot"
       },
       {
         "id": 3,
-        "value": "mdi-code-json",
-        "name": "JSON"
-      },
-      {
-        "id": 4,
-        "value": "mdi-xml",
-        "name": "XML"
-      },
-      {
-        "id": 5,
         "value": "mdi-language-python",
         "name": "Python"
       },
       {
+        "id": 4,
+        "value": "mdi-api",
+        "name": "FastAPI"
+      },
+      {
+        "id": 5,
+        "value": "mdi-code-braces",
+        "name": "Elixir"
+      },
+      {
         "id": 6,
-        "value": "mdi-language-html5",
-        "name": "HTML5"
+        "value": "mdi-fire",
+        "name": "Phoenix"
       },
       {
         "id": 7,
-        "value": "mdi-language-css3",
-        "name": "CSS"
+        "value": "mdi-api",
+        "name": "REST APIs"
+      },
+      {
+        "id": 8,
+        "value": "mdi-message-processing",
+        "name": "Kafka"
+      },
+      {
+        "id": 9,
+        "value": "mdi-web-sync",
+        "name": "WebSockets"
       }
     ]
   },
   {
     "id": 2,
-    "title": "Frameworks",
+    "title": "Frontend",
     "points": [
       {
         "id": 1,
-        "value": "mdi-leaf",
-        "name": "Spring"
+        "value": "mdi-react",
+        "name": "React"
       },
       {
         "id": 2,
-        "value": "mdi-database",
-        "name": "JPA"
+        "value": "mdi-vuejs",
+        "name": "Vue.js"
       },
       {
         "id": 3,
-        "value": "mdi-vuejs",
-        "name": "Vue"
+        "value": "mdi-language-typescript",
+        "name": "TypeScript"
       },
       {
         "id": 4,
-        "value": "mdi-vuetify",
-        "name": "Vuetify"
+        "value": "mdi-lightning-bolt",
+        "name": "LiveView"
       },
       {
         "id": 5,
-        "value": "mdi-numeric-5-circle",
-        "name": "Junit5"
+        "value": "mdi-electron-framework",
+        "name": "Electron"
       },
       {
         "id": 6,
         "value": "mdi-nodejs",
-        "name": "NodeJS"
+        "name": "Node.js"
+      },
+      {
+        "id": 7,
+        "value": "mdi-language-html5",
+        "name": "HTML5/CSS3"
       }
     ]
   },
   {
     "id": 3,
-    "title": "Build Tools",
+    "title": "Databases",
     "points": [
       {
         "id": 1,
-        "value": "mdi-elephant",
-        "name": "Gradle"
+        "value": "mdi-database",
+        "name": "PostgreSQL"
       },
       {
         "id": 2,
-        "value": "mdi-npm",
-        "name": "NPM"
+        "value": "mdi-alpha-s-box-outline",
+        "name": "SQLite"
       },
       {
         "id": 3,
-        "value": "mdi-feather",
-        "name": "Maven"
+        "value": "mdi-alpha-o-box-outline",
+        "name": "Oracle"
+      },
+      {
+        "id": 4,
+        "value": "mdi-database-search",
+        "name": "Redis"
+      },
+      {
+        "id": 5,
+        "value": "mdi-cloud-search",
+        "name": "BigQuery"
+      },
+      {
+        "id": 6,
+        "value": "mdi-table-large",
+        "name": "BigTable"
       }
     ]
   },
   {
     "id": 4,
-    "title": "Source Control Systems",
+    "title": "AI & ML",
     "points": [
       {
         "id": 1,
-        "value": "mdi-git",
-        "name": "Git"
+        "value": "mdi-robot",
+        "name": "OpenAI CLIP"
       },
       {
         "id": 2,
-        "value": "mdi-github",
-        "name": "GitHub"
+        "value": "mdi-brain",
+        "name": "PyTorch"
       },
       {
         "id": 3,
-        "value": "mdi-gitlab",
-        "name": "GitLab"
+        "value": "mdi-face-recognition",
+        "name": "InsightFace"
+      },
+      {
+        "id": 4,
+        "value": "mdi-text-recognition",
+        "name": "Tesseract OCR"
+      },
+      {
+        "id": 5,
+        "value": "mdi-connection",
+        "name": "MCP"
       }
     ]
   },
   {
     "id": 5,
-    "title": "Databases",
+    "title": "DevOps",
     "points": [
       {
         "id": 1,
-        "value": "mdi-alpha-o-box-outline",
-        "name": "Oracle"
+        "value": "mdi-docker",
+        "name": "Docker"
       },
       {
         "id": 2,
-        "value": "mdi-alpha-h-box-outline",
-        "name": "H2"
+        "value": "mdi-jenkins",
+        "name": "Jenkins"
       },
       {
         "id": 3,
-        "value": "mdi-evernote",
-        "name": "PostgreSQl"
+        "value": "mdi-github",
+        "name": "GitHub Actions"
       },
       {
         "id": 4,
-        "value": "mdi-decagram",
-        "name": "MYSQL"
+        "value": "mdi-google-cloud",
+        "name": "GCP"
       },
       {
         "id": 5,
-        "value": "mdi-alpha-s-box-outline",
-        "name": "SQLite"
+        "value": "mdi-aws",
+        "name": "AWS"
+      },
+      {
+        "id": 6,
+        "value": "mdi-chart-line",
+        "name": "Datadog"
+      },
+      {
+        "id": 7,
+        "value": "mdi-chart-timeline-variant",
+        "name": "Splunk"
       }
     ]
   },
   {
     "id": 6,
-    "title": "IDE's and Operating Systems",
+    "title": "Practices",
     "points": [
       {
         "id": 1,
-        "value": "mdi-microsoft-windows",
-        "name": "Windows"
+        "value": "mdi-view-grid",
+        "name": "Microservices"
       },
       {
         "id": 2,
-        "value": "mdi-microsoft-visual-studio-code",
-        "name": "VSCode"
+        "value": "mdi-test-tube",
+        "name": "TDD"
       },
       {
         "id": 3,
-        "value": "mdi-ubuntu",
-        "name": "Linux"
+        "value": "mdi-shape",
+        "name": "SOLID"
       },
       {
         "id": 4,
-        "value": "mdi-alpha-j-box-outline",
-        "name": "IntelliJ"
+        "value": "mdi-pattern",
+        "name": "Design Patterns"
       },
       {
         "id": 5,
-        "value": "mdi-alpha-e-box-outline",
-        "name": "Eclipse"
+        "value": "mdi-broadcast",
+        "name": "Event-Driven"
+      },
+      {
+        "id": 6,
+        "value": "mdi-account-group",
+        "name": "Agile/Scrum"
       }
     ]
   }

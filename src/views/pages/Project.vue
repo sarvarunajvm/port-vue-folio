@@ -101,14 +101,14 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: radial-gradient(circle at 90% 10%, rgba(127, 90, 240, 0.05) 0%, transparent 40%);
+  background-image: radial-gradient(circle at 90% 10%, rgba(var(--v-theme-primary), 0.05) 0%, transparent 40%);
   pointer-events: none;
 }
 
 .divider {
   width: 60px;
   height: 4px;
-  background-color: var(--v-primary-base);
+  background-color: rgb(var(--v-theme-primary));
   border-radius: 2px;
 }
 

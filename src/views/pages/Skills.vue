@@ -35,7 +35,7 @@
             >
               <div class="d-flex align-center mb-4">
                 <v-icon color="primary" class="mr-3">mdi-code-braces</v-icon>
-                <h3 class="h5 font-weight-bold mb-0">
+                <h3 class="h5 font-weight-bold mb-0 skill-title">
                   {{ skill.title }}
                 </h3>
               </div>
@@ -44,10 +44,10 @@
                 <v-chip
                   v-for="point in skill.points"
                   :key="point.id"
-                  color="secondary"
-                  variant="tonal"
-                  class="font-weight-medium skill-chip"
-                  size="default"
+                  color="tertiary"
+                  variant="flat"
+                  class="standard-chip font-weight-bold skill-chip"
+                  size="small"
                 >
                   <v-icon start size="small" class="mr-1">
                     {{ point.value }}
@@ -79,39 +79,50 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: radial-gradient(circle at 20% 80%, rgba(127, 90, 240, 0.05) 0%, transparent 40%);
+  background-image: radial-gradient(circle at 20% 80%, rgba(var(--v-theme-primary), 0.05) 0%, transparent 40%);
   pointer-events: none;
 }
 
 .divider {
   width: 60px;
   height: 4px;
-  background-color: var(--v-primary-base);
+  background-color: rgb(var(--v-theme-primary));
   border-radius: 2px;
 }
 
 .skill-card {
-  border-color: rgba(0, 0, 0, 0.05);
-  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(var(--v-theme-primary), 0.2);
+  background: rgba(var(--v-theme-background), 0.9);
   backdrop-filter: blur(10px);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+/* Light mode specific adjustments */
+.v-theme--light .skill-card {
+  background: rgba(255, 255, 255, 0.95) !important; /* Clean white for better contrast */
+  border-color: rgba(var(--v-theme-primary), 0.25) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Dark mode specific adjustments */
+.v-theme--dark .skill-card {
+  background: rgba(12, 53, 80, 0.6) !important; /* Lighter ocean blue for visibility */
+  border-color: rgba(var(--v-theme-primary), 0.3) !important;
+}
+
 .skill-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px -10px rgba(0, 0, 0, 0.1);
-  border-color: rgba(var(--v-theme-primary), 0.3);
+  box-shadow: 0 8px 24px -10px rgba(var(--v-theme-primary), 0.25);
+  border-color: rgba(var(--v-theme-primary), 0.5);
 }
 
 .skill-chip {
   transition: all 0.2s ease;
-  background-color: rgba(var(--v-theme-secondary), 0.1);
 }
 
 .skill-chip:hover {
   transform: scale(1.05);
-  background-color: rgba(var(--v-theme-primary), 0.15);
-  color: rgb(var(--v-theme-primary)) !important;
+  opacity: 0.9;
 }
 
 .emoji {
@@ -128,6 +139,21 @@ export default {
 .gap-2 {
   gap: 0.75rem;
 }
+
+.skill-title {
+  color: rgb(var(--v-theme-on-background)) !important;
+}
+
+/* Standardized chip styling */
+.standard-chip {
+  font-size: 0.75rem !important;
+  letter-spacing: 0.02em;
+  min-height: 24px !important;
+  padding: 4px 12px !important;
+}
+
+/* Skill chips now use tertiary color with flat variant - Vuetify handles styling */
+/* Hover effect is handled by the .skill-chip:hover rule above */
 
 @keyframes slideUpFade {
   from {

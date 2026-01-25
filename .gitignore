@@ -26,3 +26,5 @@ dev-server.log
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
+
+/.playwright-mcp

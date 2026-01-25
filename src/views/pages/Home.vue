@@ -129,8 +129,8 @@ function popup(url) {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: radial-gradient(circle at 20% 20%, rgba(61, 169, 252, 0.05) 0%, transparent 50%),
-                    radial-gradient(circle at 80% 80%, rgba(239, 69, 101, 0.05) 0%, transparent 50%);
+  background-image: radial-gradient(circle at 20% 20%, rgba(var(--v-theme-primary), 0.05) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(var(--v-theme-tertiary), 0.05) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -176,5 +176,15 @@ function popup(url) {
 .slide-up-enter-active {
   animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0; /* Start hidden */
+}
+
+/* Ensure text is readable in light mode */
+.v-theme--light .secondary--text {
+  color: rgba(var(--v-theme-secondary), 0.85) !important;
+}
+
+/* Ensure text is readable in dark mode */
+.v-theme--dark .secondary--text {
+  color: rgba(var(--v-theme-accent), 0.9) !important;
 }
 </style>

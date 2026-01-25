@@ -14,7 +14,7 @@ Hi! I'm a **Fellow Developer** and i designed this in such a way everyonce can u
 - [x] Fork the respository.
 - [x] Change the Resume.pdf in public/files. 
 - [x] Change the Resume.gif in src/assets.
-- [x] Change the me.jpg in src/assets.
+- [x] Change the me.png in src/assets.
 - [x] Change the necessory details in json in src/data folders.
 
 ## Project setup
