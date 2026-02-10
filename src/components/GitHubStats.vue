@@ -174,29 +174,37 @@ onMounted(() => {
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
+  gap: 0.75rem;
   margin-bottom: 1.5rem;
+  overflow: hidden;
 }
 
 .stat-item {
   text-align: center;
   animation: fadeSlideUp 0.6s ease-out forwards;
   opacity: 0;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .stat-value {
   display: block;
-  font-size: 1.75rem;
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
   font-weight: 600;
   color: rgb(var(--v-theme-primary));
   line-height: 1.2;
+  white-space: nowrap;
 }
 
 .stat-label {
-  font-size: 0.75rem;
+  display: block;
+  font-size: 0.7rem;
   opacity: 0.6;
   text-transform: uppercase;
   letter-spacing: 0.03em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .contribution-graph {
@@ -269,6 +277,10 @@ onMounted(() => {
 
 /* Responsive */
 @media (max-width: 600px) {
+  .github-stats {
+    padding: 1rem;
+  }
+
   .graph-cell {
     width: 8px;
     height: 8px;
@@ -279,7 +291,12 @@ onMounted(() => {
   }
   
   .stat-value {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.01em;
   }
 }
 </style>
