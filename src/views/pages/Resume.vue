@@ -4,184 +4,424 @@
     class="pa-4 pa-md-12 background"
     tag="section"
     fluid
-    fill-height
   >
+    <!-- Background Pattern -->
     <div class="background-overlay"></div>
-    <v-row
-      justify="center"
-      class="fill-height position-relative"
-      style="z-index: 1;"
-    >
+    
+    <v-row justify="center" class="position-relative" style="z-index: 1;">
       <v-col cols="12" md="10" lg="8">
-        <div class="text-center mb-12 slide-up-item" style="animation-delay: 0.1s">
-          <h2 class="h2 accent--text mb-4">
-            Resume <span class="emoji">📄</span>
+        
+        <!-- Header -->
+        <div class="page-header slide-up-item" style="animation-delay: 0.1s">
+          <h2 class="page-title">
+            Resume <span class="title-emoji">📋</span>
           </h2>
-          <div class="divider mx-auto primary"></div>
+          <p class="page-subtitle">
+            Download my resume to learn more about my experience
+          </p>
+          <div class="divider"></div>
         </div>
 
-        <v-row class="justify-center align-start">
-          <v-col cols="12" md="6" class="slide-up-item" style="animation-delay: 0.2s">
-             <!-- Preview Section -->
-            <v-card class="resume-preview-card pa-2" elevation="4">
-              <v-img
-                src="../../assets/Resume.gif"
-                alt="Resume Preview"
-                cover
-                class="resume-image rounded"
-              >
-                <template #placeholder>
-                  <div class="d-flex align-center justify-center fill-height">
-                    <v-progress-circular indeterminate color="primary"></v-progress-circular>
-                  </div>
-                </template>
-              </v-img>
-            </v-card>
-          </v-col>
+        <!-- Resume Content -->
+        <div class="resume-container">
+          <v-row align="stretch" class="justify-center">
+            <!-- Preview Section -->
+            <v-col cols="12" md="6" class="slide-up-item" style="animation-delay: 0.2s">
+              <div class="preview-card">
+                <div class="preview-header">
+                  <v-icon size="18">mdi-eye</v-icon>
+                  <span>Preview</span>
+                </div>
+                <div class="preview-content">
+                  <v-img
+                    src="../../assets/Resume.gif"
+                    alt="Resume Preview"
+                    cover
+                    class="resume-preview"
+                  >
+                    <template #placeholder>
+                      <div class="d-flex align-center justify-center fill-height">
+                        <v-progress-circular 
+                          indeterminate 
+                          color="primary"
+                          size="32"
+                          width="2"
+                        ></v-progress-circular>
+                      </div>
+                    </template>
+                  </v-img>
+                </div>
+              </div>
+            </v-col>
 
-          <v-col cols="12" md="5" class="d-flex flex-column justify-center slide-up-item" style="animation-delay: 0.3s">
-            <v-card
-              class="resume-card pa-8 text-center"
-              variant="outlined"
-              width="100%"
-            >
-              <div class="mb-8">
-                <v-icon size="64" color="accent" class="mb-4">mdi-file-document-outline</v-icon>
-                <h3 class="h4 font-weight-bold mb-2">Download My Resume</h3>
-                <p class="body1 secondary--text">
-                  Get a copy of my resume in PDF format to view offline or share.
+            <!-- Download Section -->
+            <v-col cols="12" md="5" class="d-flex slide-up-item" style="animation-delay: 0.3s">
+              <div class="download-card">
+                <div class="download-icon">
+                  <v-icon size="48">mdi-file-document-outline</v-icon>
+                </div>
+
+                <h3 class="download-title">Get My Resume</h3>
+                <p class="download-description">
+                  Download a PDF copy of my resume to review my experience, 
+                  skills, and qualifications in detail.
                 </p>
-              </div>
 
-              <v-btn
-                color="accent"
-                size="x-large"
-                class="px-8 font-weight-bold download-btn"
-                elevation="4"
-                rounded="0"
-                :loading="loading"
-                @click="downloadPDF"
-              >
-                <v-icon start class="mr-2">mdi-download</v-icon>
-                Download PDF
-              </v-btn>
-              
-              <div class="mt-8 pt-8 border-top opacity-50">
-                <p class="caption text-uppercase letter-spacing-2">Updated Recently</p>
+                <div class="download-features">
+                  <div class="feature-item">
+                    <v-icon size="16">mdi-check</v-icon>
+                    <span>10+ Years Experience</span>
+                  </div>
+                  <div class="feature-item">
+                    <v-icon size="16">mdi-check</v-icon>
+                    <span>Full Stack Development</span>
+                  </div>
+                  <div class="feature-item">
+                    <v-icon size="16">mdi-check</v-icon>
+                    <span>Enterprise Scale Systems</span>
+                  </div>
+                </div>
+
+                <button 
+                  class="download-btn"
+                  :class="{ loading: loading }"
+                  :disabled="loading"
+                  @click="downloadPDF"
+                >
+                  <v-icon size="20" class="btn-icon">
+                    {{ loading ? 'mdi-loading' : 'mdi-download' }}
+                  </v-icon>
+                  <span>{{ loading ? 'Downloading...' : 'Download PDF' }}</span>
+                </button>
+
+                <div class="download-meta">
+                  <span class="meta-item">
+                    <v-icon size="12">mdi-file-pdf-box</v-icon>
+                    PDF Format
+                  </span>
+                  <span class="meta-item">
+                    <v-icon size="12">mdi-update</v-icon>
+                    Recently Updated
+                  </span>
+                </div>
               </div>
-            </v-card>
-          </v-col>
-        </v-row>
+            </v-col>
+          </v-row>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="quick-stats slide-up-item" style="animation-delay: 0.4s">
+          <div class="stat-item">
+            <span class="stat-value">10+</span>
+            <span class="stat-label">Years</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-value">4</span>
+            <span class="stat-label">Companies</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-value">8+</span>
+            <span class="stat-label">Projects</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-value">15+</span>
+            <span class="stat-label">Technologies</span>
+          </div>
+        </div>
+
       </v-col>
     </v-row>
   </v-container>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    loading: false
-  }),
-  methods: {
-    downloadPDF() {
-      this.loading = true;
-      // Using direct link download instead of blob for better compatibility
-      const link = document.createElement("a");
-      link.href = "/files/Resume.pdf"; // Path relative to public
-      link.download = "Saravanan_Resume.pdf";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      setTimeout(() => {
-        this.loading = false;
-      }, 1000);
-    },
-  },
-};
+<script setup>
+import { ref } from 'vue';
+
+const loading = ref(false);
+
+function downloadPDF() {
+  loading.value = true;
+  
+  const link = document.createElement("a");
+  link.href = "/files/Resume.pdf";
+  link.download = "Saravanan_Kalimuthu_Resume.pdf";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  
+  setTimeout(() => {
+    loading.value = false;
+  }, 1500);
+}
 </script>
 
 <style scoped>
+/* ========================================
+   BACKGROUND
+======================================== */
 .background-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: radial-gradient(circle at 50% 50%, rgba(var(--v-theme-tertiary), 0.05) 0%, transparent 50%);
+  background-image: 
+    radial-gradient(circle at 50% 30%, rgba(var(--v-theme-primary), 0.06) 0%, transparent 50%);
   pointer-events: none;
+  z-index: 0;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.page-title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: rgb(var(--v-theme-accent));
+  margin-bottom: 0.75rem;
+}
+
+.title-emoji {
+  display: inline-block;
+  animation: wave 2s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-10deg); }
+  75% { transform: rotate(10deg); }
+}
+
+.page-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.7;
+  max-width: 400px;
+  margin: 0 auto 1.5rem;
 }
 
 .divider {
   width: 60px;
   height: 4px;
-  background-color: rgb(var(--v-theme-primary));
+  background: linear-gradient(90deg, rgb(var(--v-theme-primary)), rgb(var(--v-theme-tertiary)));
   border-radius: 2px;
+  margin: 0 auto;
 }
 
-.resume-card {
-  border-color: rgba(var(--v-theme-primary), 0.2);
-  background: rgba(var(--v-theme-background), 0.9);
-  backdrop-filter: blur(10px);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+/* ========================================
+   RESUME CONTAINER
+======================================== */
+.resume-container {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-/* Light mode specific adjustments */
-.v-theme--light .resume-card {
-  background: rgba(255, 255, 255, 0.95) !important; /* Clean white for better contrast */
-  border-color: rgba(var(--v-theme-primary), 0.25) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
-}
-
-/* Dark mode specific adjustments */
-.v-theme--dark .resume-card {
-  background: rgba(12, 53, 80, 0.6) !important; /* Lighter ocean blue for visibility */
-  border-color: rgba(var(--v-theme-primary), 0.3) !important;
-}
-
-.resume-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px -10px rgba(var(--v-theme-primary), 0.25);
-  border-color: rgba(var(--v-theme-primary), 0.5);
-}
-
-/* Ensure text is readable in light mode */
-.v-theme--light .secondary--text {
-  color: rgba(var(--v-theme-secondary), 0.85) !important;
-}
-
-/* Ensure text is readable in dark mode */
-.v-theme--dark .secondary--text {
-  color: rgba(var(--v-theme-accent), 0.9) !important;
-}
-
-.resume-preview-card {
-  transition: transform 0.3s ease;
+/* Preview Card */
+.preview-card {
+  height: 100%;
+  border-radius: 20px;
   overflow: hidden;
+  background: rgba(var(--v-theme-primary), 0.02);
+  border: 1px solid rgba(var(--v-theme-primary), 0.08);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.resume-preview-card:hover {
-  transform: scale(1.02);
+.preview-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(var(--v-theme-primary), 0.2);
+  box-shadow: 0 16px 40px rgba(var(--v-theme-primary), 0.1);
 }
 
+.preview-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(var(--v-theme-primary), 0.05);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+.preview-content {
+  padding: 1rem;
+}
+
+.resume-preview {
+  border-radius: 12px;
+  aspect-ratio: 8.5 / 11;
+}
+
+/* Download Card */
+.download-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 20px;
+  background: rgba(var(--v-theme-primary), 0.02);
+  border: 1px solid rgba(var(--v-theme-primary), 0.08);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.download-card:hover {
+  border-color: rgba(var(--v-theme-primary), 0.2);
+  box-shadow: 0 16px 40px rgba(var(--v-theme-primary), 0.1);
+}
+
+.download-icon {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background: rgba(var(--v-theme-primary), 0.1);
+  color: rgb(var(--v-theme-primary));
+  margin-bottom: 1.5rem;
+}
+
+.download-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgb(var(--v-theme-accent));
+  margin-bottom: 0.75rem;
+}
+
+.download-description {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+  max-width: 280px;
+}
+
+.download-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: rgb(var(--v-theme-success));
+}
+
+/* Download Button */
 .download-btn {
-  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1rem 2rem;
+  background: rgb(var(--v-theme-primary));
+  color: rgb(var(--v-theme-background));
+  border: none;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.download-btn:hover {
-  transform: scale(1.05);
+.download-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(var(--v-theme-primary), 0.3);
 }
 
-.emoji {
-  display: inline-block;
-  animation: float 3s ease-in-out infinite;
+.download-btn:active:not(:disabled) {
+  transform: translateY(0);
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+.download-btn:disabled {
+  opacity: 0.7;
+  cursor: wait;
 }
 
+.download-btn.loading .btn-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.download-meta {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(var(--v-theme-primary), 0.06);
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  opacity: 0.5;
+}
+
+/* ========================================
+   QUICK STATS
+======================================== */
+.quick-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  margin-top: 3rem;
+  background: rgba(var(--v-theme-primary), 0.02);
+  border: 1px solid rgba(var(--v-theme-primary), 0.06);
+  border-radius: 16px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: rgb(var(--v-theme-primary));
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(var(--v-theme-primary), 0.1);
+}
+
+/* ========================================
+   ANIMATIONS
+======================================== */
 @keyframes slideUpFade {
   from {
     opacity: 0;
@@ -198,11 +438,32 @@ export default {
   opacity: 0;
 }
 
-.border-top {
-  border-top: 1px solid currentColor;
+/* ========================================
+   RESPONSIVE
+======================================== */
+@media (max-width: 960px) {
+  .resume-container {
+    padding: 0 1rem;
+  }
 }
 
-.letter-spacing-2 {
-  letter-spacing: 0.15em;
+@media (max-width: 600px) {
+  .quick-stats {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  
+  .stat-divider {
+    display: none;
+  }
+  
+  .stat-item {
+    flex: 1 1 40%;
+  }
+  
+  .download-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 }
 </style>

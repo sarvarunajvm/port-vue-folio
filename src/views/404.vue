@@ -17,10 +17,10 @@
             >
               <v-col cols="10">
                 <div>
-                  <p class="myFont h2 text-center my-0 py-0">
+                  <p class="text-center my-0 py-0 text-h4">
                     Comming Soon...
                   </p>
-                  <p class="myFont ovrline text-center my-0 py-0">
+                  <p class="text-center my-0 py-0 text-body-2">
                     Website is currently undergoing development.Should be up
                     shortly.
                   </p>

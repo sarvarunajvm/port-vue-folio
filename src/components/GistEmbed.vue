@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div v-if="loading" class="myFont body2">Loading gist...</div>
-    <div v-else-if="error" class="myFont body2 tertiary--text">{{ error }}</div>
+    <div v-if="loading" class="body2">Loading gist...</div>
+    <div v-else-if="error" class="body2 text-error">{{ error }}</div>
     <div v-else>
-      <pre class="myFont body2" style="white-space: pre-wrap; overflow-x: auto;">
+      <pre class="body2" style="white-space: pre-wrap; overflow-x: auto;">
         <code v-html="content"></code>
       </pre>
     </div>

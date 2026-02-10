@@ -28,6 +28,8 @@ module.exports = [
         sessionStorage: 'readonly',
         Blob: 'readonly',
         URL: 'readonly',
+        fetch: 'readonly',
+        performance: 'readonly',
         // Node.js globals (for config files)
         process: 'readonly',
         __dirname: 'readonly',

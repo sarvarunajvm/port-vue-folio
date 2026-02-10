@@ -1,0 +1,45 @@
+name: Dependabot Auto-approve and Merge
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-approve-and-merge:
+    runs-on: ubuntu-latest
+    # Only run for dependabot PRs
+    if: github.actor == 'dependabot[bot]'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Wait for CI checks
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          check-regexp: '^CI$|^build$'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 10
+          allowed-conclusions: success,skipped
+
+      - name: Auto-approve PR
+        uses: tibdex/auto-approve-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          review-message: '🤖 Auto-approved by Dependabot auto-merge workflow'
+
+      - name: Enable auto-merge
+        uses: pascalgn/automerge-action@v0.16.2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MERGE_METHOD: squash
+          MERGE_COMMIT_MESSAGE: 'fix: merge dependabot PR #${{ github.event.pull_request.number }}'
+          MERGE_LABELS: dependencies
+          MERGE_FILTER_AUTHOR: dependabot[bot]
+          MERGE_DELETE_BRANCH: true
+

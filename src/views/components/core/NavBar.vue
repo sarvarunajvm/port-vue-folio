@@ -2,7 +2,6 @@
   <div v-if="showNav">
     <v-scale-transition origin="center center">
       <v-btn
-        v-show="true"
         class="fab-menu"
         color="primary"
         size="large"

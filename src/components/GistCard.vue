@@ -1,44 +1,33 @@
 <template>
-  <v-card
-    class="gist-card d-flex flex-column h-100"
-    variant="outlined"
-  >
-    <div class="d-flex flex-column flex-grow-1 pa-4">
-      <div class="d-flex justify-space-between align-start mb-2">
-        <h3 class="subtitle1 font-weight-bold text-truncate pr-2 mb-0" style="color: var(--v-theme-accent)">
-          {{ item.title }}
-        </h3>
+  <div class="gist-card" @click="dialog = true">
+    <div class="card-content">
+      <div class="card-header">
+        <div class="gist-icon">
+          <v-icon size="20">mdi-code-braces</v-icon>
+        </div>
         <v-chip
           v-if="item.language"
           size="small"
-          color="tertiary"
-          variant="flat"
-          class="standard-chip font-weight-bold"
+          class="language-chip"
         >
           {{ item.language }}
         </v-chip>
       </div>
       
-      <p class="body2 secondary--text mb-0 line-clamp-3">
+      <h3 class="gist-title">{{ item.title }}</h3>
+      <p class="gist-description">
         {{ item.description || 'No description available' }}
       </p>
     </div>
 
-    <v-divider class="mx-4 opacity-10"></v-divider>
-
-    <div class="pa-2 d-flex justify-end">
-      <v-btn
-        variant="text"
-        color="primary"
-        size="small"
-        class="font-weight-bold letter-spacing-1"
-        @click="dialog = true"
-      >
-        VIEW CODE
-        <v-icon end size="small">mdi-arrow-right</v-icon>
-      </v-btn>
+    <div class="card-footer">
+      <span class="view-link">
+        View Code
+        <v-icon size="14" class="ml-1">mdi-arrow-right</v-icon>
+      </span>
     </div>
 
+    <!-- Dialog for viewing gist -->
     <v-dialog
       v-model="dialog"
       fullscreen
@@ -55,7 +44,7 @@
             icon
             variant="text"
             color="white"
-            @click="dialog = false"
+            @click.stop="dialog = false"
           >
             <v-icon>mdi-close</v-icon>
           </v-btn>
@@ -68,7 +57,7 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-  </v-card>
+  </div>
 </template>
 
 <script setup>
@@ -84,70 +73,102 @@ const dialog = ref(false);
 
 <style scoped>
 .gist-card {
-  background: rgba(var(--v-theme-background), 0.9);
-  backdrop-filter: blur(10px);
-  border-color: rgba(var(--v-theme-primary), 0.2);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
   height: 100%;
-}
-
-/* Light mode specific adjustments */
-.v-theme--light .gist-card {
-  background: rgba(255, 255, 255, 0.95) !important; /* Clean white for better contrast */
-  border-color: rgba(var(--v-theme-primary), 0.25) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
-}
-
-/* Dark mode specific adjustments */
-.v-theme--dark .gist-card {
-  background: rgba(12, 53, 80, 0.6) !important; /* Lighter ocean blue for visibility */
-  border-color: rgba(var(--v-theme-primary), 0.3) !important;
+  padding: 1.25rem;
+  background: rgba(var(--v-theme-primary), 0.02);
+  border: 1px solid rgba(var(--v-theme-primary), 0.08);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .gist-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px -10px rgba(var(--v-theme-primary), 0.25);
-  border-color: rgba(var(--v-theme-primary), 0.5);
+  border-color: rgba(var(--v-theme-primary), 0.2);
+  box-shadow: 0 12px 30px rgba(var(--v-theme-primary), 0.1);
 }
 
-/* Ensure text is readable in light mode */
-.v-theme--light .secondary--text {
-  color: rgba(var(--v-theme-secondary), 0.85) !important;
+.gist-card:hover .view-link {
+  color: rgb(var(--v-theme-primary));
 }
 
-.v-theme--light .gist-card h3 {
-  color: rgb(var(--v-theme-accent)) !important;
+.gist-card:hover .view-link .v-icon {
+  transform: translateX(4px);
 }
 
-/* Ensure text is readable in dark mode */
-.v-theme--dark .secondary--text {
-  color: rgba(var(--v-theme-accent), 0.9) !important;
+.card-content {
+  flex: 1;
 }
 
-.v-theme--dark .gist-card h3 {
-  color: rgb(var(--v-theme-accent)) !important;
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
 }
 
-.line-clamp-3 {
+.gist-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(var(--v-theme-primary), 0.1);
+  color: rgb(var(--v-theme-primary));
+}
+
+.language-chip {
+  font-size: 0.7rem !important;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.2rem 0.6rem !important;
+  background: rgba(var(--v-theme-tertiary), 0.12) !important;
+  color: rgb(var(--v-theme-tertiary)) !important;
+  border-radius: 6px;
+}
+
+.gist-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgb(var(--v-theme-accent));
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.letter-spacing-1 {
-  letter-spacing: 0.05em;
+.gist-description {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  opacity: 0.7;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
 }
 
-.opacity-10 {
-  opacity: 0.1;
+.card-footer {
+  padding-top: 1rem;
+  margin-top: auto;
+  border-top: 1px solid rgba(var(--v-theme-primary), 0.06);
 }
 
-/* Standardized chip styling */
-.standard-chip {
-  font-size: 0.75rem !important;
-  letter-spacing: 0.02em;
-  min-height: 24px !important;
-  padding: 4px 12px !important;
+.view-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(var(--v-theme-accent), 0.6);
+  transition: color 0.2s ease;
+}
+
+.view-link .v-icon {
+  transition: transform 0.2s ease;
 }
 </style>

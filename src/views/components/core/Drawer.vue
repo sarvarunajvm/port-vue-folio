@@ -189,15 +189,6 @@ onMounted(() => {
   padding: 1px;
 }
 
-.title-text {
-  color: white;
-  letter-spacing: -0.5px;
-}
-
-.subtitle-text {
-  color: rgba(255, 255, 255, 0.9);
-}
-
 .nav-item {
   transition: all 0.2s ease;
   color: rgba(255, 255, 255, 0.8) !important;
@@ -233,7 +224,6 @@ onMounted(() => {
   transform: scale(1.1);
 }
 
-.opacity-80 { opacity: 0.8; }
 .opacity-20 { opacity: 0.2; }
 .fade-transition { transition: opacity 0.2s ease; }
 

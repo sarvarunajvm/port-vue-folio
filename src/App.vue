@@ -1,122 +1,126 @@
 <template>
   <router-view v-slot="{ Component }">
-    <transition name="fade" mode="out-in">
+    <transition name="page-fade" mode="out-in">
       <component :is="Component" />
     </transition>
   </router-view>
 </template>
 
-<script setup>
-</script>
-
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;700&display=swap');
+// ========================================
+// FONT IMPORT - JetBrains Mono + Outfit
+// ========================================
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
+// ========================================
+// CSS VARIABLES
+// ========================================
 :root {
-  --primary-font: 'Kanit', sans-serif;
-  --transition-speed: 0.3s;
+  --font-primary: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.25s ease;
+  --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 16px;
+  --border-radius-xl: 24px;
+}
+
+// ========================================
+// GLOBAL RESET & BASE STYLES
+// ========================================
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 html {
   overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(var(--v-theme-secondary), 0.05);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(var(--v-theme-primary), 0.3);
-  border-radius: 4px;
-  
-  &:hover {
-    background: rgba(var(--v-theme-primary), 0.5);
-  }
-}
-
-#app {
-  font-family: var(--primary-font) !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Typography Improvements */
-.myFont {
-  font-family: var(--primary-font) !important;
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
 }
 
-// fluid typography mixin could be used here, but keeping it simple with clamp
-.h1 {
-  font-size: clamp(3rem, 5vw, 6rem) !important;
-  font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+// ========================================
+// CUSTOM SCROLLBAR
+// ========================================
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-.h2 {
-  font-size: clamp(2.5rem, 4vw, 3.75rem) !important;
-  font-weight: 300;
-  line-height: 1.2;
-  letter-spacing: -0.01em !important;
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.h3 {
-  font-size: clamp(2rem, 3vw, 3rem) !important;
-  font-weight: 400;
-  line-height: 1.25;
+::-webkit-scrollbar-thumb {
+  background: rgba(var(--v-theme-primary), 0.2);
+  border-radius: 3px;
+  
+  &:hover {
+    background: rgba(var(--v-theme-primary), 0.35);
+  }
 }
 
-.h4 {
-  font-size: clamp(1.5rem, 2.5vw, 2.125rem) !important;
-  font-weight: 400;
-  line-height: 1.4;
+// Firefox scrollbar
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--v-theme-primary), 0.2) transparent;
 }
 
-.h5 {
-  font-size: 1.5rem !important;
-  font-weight: 400;
-  line-height: 1.5;
+// ========================================
+// APP CONTAINER
+// ========================================
+#app {
+  font-family: var(--font-primary);
+  min-height: 100vh;
 }
 
+// ========================================
+// TYPOGRAPHY SCALE
+// ========================================
 .subtitle1 {
-  font-size: 1.125rem !important;
-  font-weight: 400;
-  line-height: 1.6;
-  opacity: 0.9;
-}
-
-.subtitle2 {
-  font-size: 0.875rem !important;
-  font-weight: 500;
-  line-height: 1.5;
-  opacity: 0.8;
-}
-
-.body1 {
-  font-size: 1rem !important;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.6;
   letter-spacing: 0.01em;
 }
 
 .body2 {
-  font-size: 0.95rem !important;
+  font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.6;
-  opacity: 0.85;
 }
 
-/* Page Transitions */
+// ========================================
+// PAGE TRANSITIONS
+// ========================================
+.page-fade-enter-active,
+.page-fade-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.page-fade-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+// Legacy fade transition (for compatibility)
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.25s ease;
 }
 
 .fade-enter-from,
@@ -124,39 +128,109 @@ html {
   opacity: 0;
 }
 
-/* Slide Up Utility */
-.slide-up-enter-active {
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.slide-up-enter-from {
-  opacity: 0;
-  transform: translateY(20px);
-}
-.slide-up-enter-to {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Utility Classes */
-.gap-2 { gap: 0.5rem; }
-.gap-4 { gap: 1rem; }
-.gap-6 { gap: 1.5rem; }
-
-/* Interactive Elements */
+// ========================================
+// INTERACTIVE ELEMENTS
+// ========================================
 a {
-  transition: color 0.2s ease;
+  color: inherit;
   text-decoration: none;
+  transition: color var(--transition-fast), opacity var(--transition-fast);
   
   &:hover {
-    opacity: 0.8;
+    opacity: 0.85;
   }
 }
 
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+// ========================================
+// VUETIFY OVERRIDES
+// ========================================
+.v-btn {
+  font-family: var(--font-primary);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.v-card {
+  border-radius: var(--border-radius-lg) !important;
+}
+
+.v-chip {
+  font-family: var(--font-primary);
+  font-weight: 500;
+}
+
+// Icon hover effect
 .v-icon {
-  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+// Interactive icon buttons
+.v-btn--icon:hover .v-icon {
+  transform: scale(1.15);
+}
+
+// List items
+.v-list-item {
+  font-family: var(--font-primary);
+}
+
+// Navigation drawer
+.v-navigation-drawer {
+  font-family: var(--font-primary);
+}
+
+// ========================================
+// SELECTION STYLES
+// ========================================
+::selection {
+  background: rgba(var(--v-theme-primary), 0.2);
+  color: rgb(var(--v-theme-primary));
+}
+
+// ========================================
+// FOCUS STYLES (ACCESSIBILITY)
+// ========================================
+:focus-visible {
+  outline: 2px solid rgb(var(--v-theme-primary));
+  outline-offset: 2px;
+}
+
+// Remove outline for mouse users
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+// ========================================
+// THEME-SPECIFIC ADJUSTMENTS
+// ========================================
+.v-theme--light {
+  --text-opacity: 0.87;
+  --text-secondary-opacity: 0.6;
+}
+
+.v-theme--dark {
+  --text-opacity: 0.95;
+  --text-secondary-opacity: 0.7;
+}
+
+// ========================================
+// PRINT STYLES
+// ========================================
+@media print {
+  .v-navigation-drawer,
+  .v-app-bar {
+    display: none !important;
+  }
   
-  &:hover {
-    transform: scale(1.2);
+  body {
+    background: white !important;
+    color: black !important;
   }
 }
 </style>
