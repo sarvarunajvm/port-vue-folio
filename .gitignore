@@ -28,3 +28,4 @@ pnpm-lock.yaml
 yarn.lock
 
 /.playwright-mcp
+.claude/settings.json

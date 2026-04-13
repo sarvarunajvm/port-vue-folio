@@ -30,6 +30,8 @@ module.exports = [
         URL: 'readonly',
         fetch: 'readonly',
         performance: 'readonly',
+        IntersectionObserver: 'readonly',
+        navigator: 'readonly',
         // Node.js globals (for config files)
         process: 'readonly',
         __dirname: 'readonly',
