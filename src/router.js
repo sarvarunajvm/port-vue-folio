@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import about from '@/data/about.json'
+import projects from '@/data/projects.json'
 
 const routes = [
   {
@@ -35,6 +37,23 @@ const router = createRouter({
     }
     return { top: 0, behavior: 'smooth' }
   },
+})
+
+const fullName = `${about.firstname} ${about.lastname}`
+
+router.afterEach((to) => {
+  if (to.name === 'Home') {
+    document.title = `${fullName} — ${about.titles[0]}`
+    return
+  }
+  if (to.name === 'CaseStudy') {
+    const project = projects.find((p) => p.id === to.params.slug)
+    document.title = project ? `${project.title} — ${fullName}` : `Not Found — ${fullName}`
+    return
+  }
+  if (to.name === 'NotFound') {
+    document.title = `Page not found — ${fullName}`
+  }
 })
 
 export default router

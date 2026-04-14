@@ -30,7 +30,7 @@ const copyEmail = async () => {
 <template>
   <section id="contact" ref="contactRef" class="section contact">
     <div class="container">
-      <h2 class="contact-heading text-h1" :style="headingStyle">Let's connect.</h2>
+      <h2 class="contact-heading text-display" :style="headingStyle">Let's connect.</h2>
 
       <p class="contact-description reveal reveal-delay-1">
         I'm always open to conversations about engineering at scale,
@@ -86,6 +86,7 @@ const copyEmail = async () => {
 .contact-heading {
   margin-bottom: var(--space-lg);
   will-change: transform, opacity;
+  font-size: clamp(36px, 7vw, 64px);
 }
 
 .contact-description {
@@ -139,7 +140,7 @@ const copyEmail = async () => {
   &.copied {
     border-color: var(--success);
     color: var(--success);
-    background: rgba(52, 211, 153, 0.08);
+    background: rgba(var(--success-rgb), 0.1);
   }
 }
 

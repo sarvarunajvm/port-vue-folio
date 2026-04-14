@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting…</title>
+    <script>
+      // GitHub Pages SPA redirect — stores the path and redirects to index.html
+      sessionStorage.redirect = location.href;
+      var base = '/port-vue-folio/';
+      location.replace(location.origin + base);
+    </script>
+  </head>
+  <body></body>
+</html>

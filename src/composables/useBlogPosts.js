@@ -1,5 +1,4 @@
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
 
 export function useBlogPosts(username = 'sarvarunajvm', limit = 3) {
   const posts = ref([])
@@ -7,9 +6,9 @@ export function useBlogPosts(username = 'sarvarunajvm', limit = 3) {
 
   onMounted(async () => {
     try {
-      const { data } = await axios.get(
-        `https://dev.to/api/articles?username=${username}&per_page=${limit}`
-      )
+      const response = await fetch(`https://dev.to/api/articles?username=${username}&per_page=${limit}`)
+      if (!response.ok) throw new Error('Network response was not ok')
+      const data = await response.json()
       posts.value = data.map((post) => ({
         id: post.id,
         title: post.title,

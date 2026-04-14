@@ -27,7 +27,7 @@ const commands = computed(() => {
     { id: 'nav-top', label: 'Back to Top', group: 'Navigate', icon: ArrowDown, action: () => { window.scrollTo({ top: 0, behavior: 'smooth' }) } },
 
     // Projects
-    ...projects.filter(p => p.featured).map(p => ({
+    ...projects.map(p => ({
       id: `project-${p.id}`,
       label: p.title,
       group: 'Projects',
@@ -154,7 +154,7 @@ onUnmounted(() => {
 
 <template>
   <!-- Keyboard hint in bottom-right -->
-  <button class="cmd-hint" aria-label="Open command palette" @click="open">
+  <button class="cmd-hint" aria-label="Open command palette (⌘K)" @click="open">
     <Sparkles :size="14" />
     <kbd>⌘K</kbd>
   </button>
@@ -167,6 +167,7 @@ onUnmounted(() => {
           <div class="palette-input-wrap">
             <Search :size="16" class="palette-search-icon" />
             <input
+              id="palette-search"
               ref="inputRef"
               v-model="query"
               class="palette-input"
@@ -222,9 +223,9 @@ onUnmounted(() => {
   cursor: pointer;
 
   &:hover {
-    border-color: var(--accent);
+    border-color: rgba(var(--accent-rgb), 0.5);
     color: var(--accent);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.1);
+    box-shadow: 0 4px 16px rgba(var(--accent-rgb), 0.1);
   }
 
   kbd {

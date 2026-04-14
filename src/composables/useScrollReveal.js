@@ -1,7 +1,14 @@
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, nextTick } from 'vue'
 
 export function useScrollReveal() {
   let observer = null
+  let mutationObserver = null
+
+  function observeElements() {
+    document.querySelectorAll('.reveal:not(.revealed)').forEach((el) => {
+      observer.observe(el)
+    })
+  }
 
   onMounted(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -28,14 +35,22 @@ export function useScrollReveal() {
       }
     )
 
-    document.querySelectorAll('.reveal').forEach((el) => {
-      observer.observe(el)
+    nextTick(() => {
+      observeElements()
+
+      // Watch for dynamically added .reveal elements (e.g. async components)
+      mutationObserver = new MutationObserver(() => {
+        observeElements()
+      })
+      mutationObserver.observe(document.body, {
+        childList: true,
+        subtree: true,
+      })
     })
   })
 
   onUnmounted(() => {
-    if (observer) {
-      observer.disconnect()
-    }
+    if (observer) observer.disconnect()
+    if (mutationObserver) mutationObserver.disconnect()
   })
 }

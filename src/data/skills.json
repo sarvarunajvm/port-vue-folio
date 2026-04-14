@@ -1,238 +1,90 @@
 [
   {
     "id": 1,
-    "title": "Backend",
+    "title": "Back-end",
     "points": [
-      {
-        "id": 1,
-        "value": "mdi-language-java",
-        "name": "Java"
-      },
-      {
-        "id": 2,
-        "value": "mdi-leaf",
-        "name": "Spring Boot"
-      },
-      {
-        "id": 3,
-        "value": "mdi-language-python",
-        "name": "Python"
-      },
-      {
-        "id": 4,
-        "value": "mdi-api",
-        "name": "FastAPI"
-      },
-      {
-        "id": 5,
-        "value": "mdi-code-braces",
-        "name": "Elixir"
-      },
-      {
-        "id": 6,
-        "value": "mdi-fire",
-        "name": "Phoenix"
-      },
-      {
-        "id": 7,
-        "value": "mdi-api",
-        "name": "REST APIs"
-      },
-      {
-        "id": 8,
-        "value": "mdi-message-processing",
-        "name": "Kafka"
-      },
-      {
-        "id": 9,
-        "value": "mdi-web-sync",
-        "name": "WebSockets"
-      }
+      { "id": 1, "value": "mdi-language-java", "name": "Java" },
+      { "id": 2, "value": "mdi-leaf", "name": "Spring Boot" },
+      { "id": 3, "value": "mdi-security", "name": "Spring Security" },
+      { "id": 4, "value": "mdi-api", "name": "JAX-RS" },
+      { "id": 5, "value": "mdi-web-sync", "name": "WebSockets" },
+      { "id": 6, "value": "mdi-database", "name": "Hibernate/JPA" },
+      { "id": 7, "value": "mdi-language-python", "name": "Python" },
+      { "id": 8, "value": "mdi-api", "name": "FastAPI" },
+      { "id": 9, "value": "mdi-test-tube", "name": "JUnit 5" }
     ]
   },
   {
     "id": 2,
-    "title": "Frontend",
+    "title": "Front-end",
     "points": [
-      {
-        "id": 1,
-        "value": "mdi-react",
-        "name": "React"
-      },
-      {
-        "id": 2,
-        "value": "mdi-vuejs",
-        "name": "Vue.js"
-      },
-      {
-        "id": 3,
-        "value": "mdi-language-typescript",
-        "name": "TypeScript"
-      },
-      {
-        "id": 4,
-        "value": "mdi-lightning-bolt",
-        "name": "LiveView"
-      },
-      {
-        "id": 5,
-        "value": "mdi-electron-framework",
-        "name": "Electron"
-      },
-      {
-        "id": 6,
-        "value": "mdi-nodejs",
-        "name": "Node.js"
-      },
-      {
-        "id": 7,
-        "value": "mdi-language-html5",
-        "name": "HTML5/CSS3"
-      }
+      { "id": 1, "value": "mdi-react", "name": "React" },
+      { "id": 2, "value": "mdi-language-typescript", "name": "TypeScript" },
+      { "id": 3, "value": "mdi-vuejs", "name": "Vue.js" },
+      { "id": 4, "value": "mdi-nodejs", "name": "Node.js" },
+      { "id": 5, "value": "mdi-redux", "name": "Redux" },
+      { "id": 6, "value": "mdi-tailwind", "name": "TailwindCSS" },
+      { "id": 7, "value": "mdi-flash", "name": "Vite" },
+      { "id": 8, "value": "mdi-test-tube", "name": "Jest / Cypress" }
     ]
   },
   {
     "id": 3,
-    "title": "Databases",
+    "title": "Data & Messaging",
     "points": [
-      {
-        "id": 1,
-        "value": "mdi-database",
-        "name": "PostgreSQL"
-      },
-      {
-        "id": 2,
-        "value": "mdi-alpha-s-box-outline",
-        "name": "SQLite"
-      },
-      {
-        "id": 3,
-        "value": "mdi-alpha-o-box-outline",
-        "name": "Oracle"
-      },
-      {
-        "id": 4,
-        "value": "mdi-database-search",
-        "name": "Redis"
-      },
-      {
-        "id": 5,
-        "value": "mdi-cloud-search",
-        "name": "BigQuery"
-      },
-      {
-        "id": 6,
-        "value": "mdi-table-large",
-        "name": "BigTable"
-      }
+      { "id": 1, "value": "mdi-alpha-o-box-outline", "name": "Oracle" },
+      { "id": 2, "value": "mdi-database", "name": "PostgreSQL" },
+      { "id": 3, "value": "mdi-database-search", "name": "Redis" },
+      { "id": 4, "value": "mdi-alpha-s-box-outline", "name": "SQLite" },
+      { "id": 5, "value": "mdi-cloud-search", "name": "BigQuery" },
+      { "id": 6, "value": "mdi-message-processing", "name": "Kafka" },
+      { "id": 7, "value": "mdi-message-text", "name": "AMQ" },
+      { "id": 8, "value": "mdi-api", "name": "REST / OpenAPI" },
+      { "id": 9, "value": "mdi-shield-key", "name": "OAuth2 / JWT" }
     ]
   },
   {
     "id": 4,
-    "title": "AI & ML",
+    "title": "Cloud & DevOps",
     "points": [
-      {
-        "id": 1,
-        "value": "mdi-robot",
-        "name": "OpenAI CLIP"
-      },
-      {
-        "id": 2,
-        "value": "mdi-brain",
-        "name": "PyTorch"
-      },
-      {
-        "id": 3,
-        "value": "mdi-face-recognition",
-        "name": "InsightFace"
-      },
-      {
-        "id": 4,
-        "value": "mdi-text-recognition",
-        "name": "Tesseract OCR"
-      },
-      {
-        "id": 5,
-        "value": "mdi-connection",
-        "name": "MCP"
-      }
+      { "id": 1, "value": "mdi-aws", "name": "AWS" },
+      { "id": 2, "value": "mdi-google-cloud", "name": "GCP" },
+      { "id": 3, "value": "mdi-docker", "name": "Docker" },
+      { "id": 4, "value": "mdi-electron-framework", "name": "Electron" },
+      { "id": 5, "value": "mdi-jenkins", "name": "Jenkins" },
+      { "id": 6, "value": "mdi-github", "name": "GitHub Actions" },
+      { "id": 7, "value": "mdi-chart-line", "name": "Datadog" },
+      { "id": 8, "value": "mdi-chart-timeline-variant", "name": "Splunk" },
+      { "id": 9, "value": "mdi-monitor", "name": "OpenTelemetry" },
+      { "id": 10, "value": "mdi-speedometer", "name": "Micrometer" }
     ]
   },
   {
     "id": 5,
-    "title": "DevOps",
+    "title": "AI & ML",
     "points": [
-      {
-        "id": 1,
-        "value": "mdi-docker",
-        "name": "Docker"
-      },
-      {
-        "id": 2,
-        "value": "mdi-jenkins",
-        "name": "Jenkins"
-      },
-      {
-        "id": 3,
-        "value": "mdi-github",
-        "name": "GitHub Actions"
-      },
-      {
-        "id": 4,
-        "value": "mdi-google-cloud",
-        "name": "GCP"
-      },
-      {
-        "id": 5,
-        "value": "mdi-aws",
-        "name": "AWS"
-      },
-      {
-        "id": 6,
-        "value": "mdi-chart-line",
-        "name": "Datadog"
-      },
-      {
-        "id": 7,
-        "value": "mdi-chart-timeline-variant",
-        "name": "Splunk"
-      }
+      { "id": 1, "value": "mdi-brain", "name": "PyTorch" },
+      { "id": 2, "value": "mdi-robot", "name": "CLIP" },
+      { "id": 3, "value": "mdi-face-recognition", "name": "InsightFace" },
+      { "id": 4, "value": "mdi-text-recognition", "name": "Tesseract OCR" },
+      { "id": 5, "value": "mdi-robot-outline", "name": "OpenAI API" },
+      { "id": 6, "value": "mdi-robot-outline", "name": "Claude API" },
+      { "id": 7, "value": "mdi-brain", "name": "LLM Agents" },
+      { "id": 8, "value": "mdi-workflow", "name": "n8n" }
     ]
   },
   {
     "id": 6,
-    "title": "Practices",
+    "title": "Practices & Security",
     "points": [
-      {
-        "id": 1,
-        "value": "mdi-view-grid",
-        "name": "Microservices"
-      },
-      {
-        "id": 2,
-        "value": "mdi-test-tube",
-        "name": "TDD"
-      },
-      {
-        "id": 3,
-        "value": "mdi-shape",
-        "name": "SOLID"
-      },
-      {
-        "id": 4,
-        "value": "mdi-pattern",
-        "name": "Design Patterns"
-      },
-      {
-        "id": 5,
-        "value": "mdi-broadcast",
-        "name": "Event-Driven"
-      },
-      {
-        "id": 6,
-        "value": "mdi-account-group",
-        "name": "Agile/Scrum"
-      }
+      { "id": 1, "value": "mdi-server-network", "name": "System Design" },
+      { "id": 2, "value": "mdi-view-grid", "name": "Microservices" },
+      { "id": 3, "value": "mdi-broadcast", "name": "Event-Driven" },
+      { "id": 4, "value": "mdi-test-tube", "name": "TDD" },
+      { "id": 5, "value": "mdi-shape", "name": "SOLID" },
+      { "id": 6, "value": "mdi-rocket", "name": "Phased Rollout" },
+      { "id": 7, "value": "mdi-shield-bug", "name": "OWASP" },
+      { "id": 8, "value": "mdi-shield-check", "name": "SonarQube" }
     ]
   }
 ]

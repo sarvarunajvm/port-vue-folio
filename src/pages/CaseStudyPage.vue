@@ -1,9 +1,11 @@
 <script setup>
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { ArrowLeft, ArrowUpRight } from 'lucide-vue-next'
+import { ArrowLeft } from 'lucide-vue-next'
 import { useScrollReveal } from '@/composables/useScrollReveal'
 import Tag from '@/components/shared/Tag.vue'
+import CaseStudyFlowDiagram from '@/components/svg/CaseStudyFlowDiagram.vue'
+import SvgCtaArrow from '@/components/svg/SvgCtaArrow.vue'
 import projects from '@/data/projects.json'
 
 useScrollReveal()
@@ -63,6 +65,8 @@ const goBack = () => {
         </div>
       </div>
 
+      <CaseStudyFlowDiagram :tags="project.tags || []" />
+
       <!-- Description -->
       <div class="case-body reveal reveal-delay-3">
         <h2 class="text-h2">About this project</h2>
@@ -83,27 +87,27 @@ const goBack = () => {
           :href="project.links.github"
           target="_blank"
           rel="noopener noreferrer"
-          class="case-link-btn"
+          class="case-link-btn svg-cta"
         >
-          View on GitHub <ArrowUpRight :size="14" />
+          View on GitHub <SvgCtaArrow />
         </a>
         <a
           v-if="project.links.npm"
           :href="project.links.npm"
           target="_blank"
           rel="noopener noreferrer"
-          class="case-link-btn"
+          class="case-link-btn svg-cta"
         >
-          View on npm <ArrowUpRight :size="14" />
+          View on npm <SvgCtaArrow />
         </a>
         <a
           v-if="project.links.demo"
           :href="project.links.demo"
           target="_blank"
           rel="noopener noreferrer"
-          class="case-link-btn"
+          class="case-link-btn svg-cta"
         >
-          Live Demo <ArrowUpRight :size="14" />
+          Live Demo <SvgCtaArrow />
         </a>
       </div>
     </div>
@@ -274,13 +278,13 @@ const goBack = () => {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   color: var(--text-primary);
-  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: all 0.35s var(--dramatic);
 
   &:hover {
-    border-color: var(--accent);
+    border-color: rgba(var(--accent-rgb), 0.5);
     color: var(--accent);
-    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.1);
-    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(var(--accent-rgb), 0.1);
+    transform: translateY(-2px);
     opacity: 1;
   }
 

@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { Download } from 'lucide-vue-next'
 import SectionHeading from '@/components/shared/SectionHeading.vue'
 import { useScrollEntrance } from '@/composables/useScrollEntrance'
+import TimelineSpine from '@/components/svg/TimelineSpine.vue'
 import experience from '@/data/experience.json'
 
 const timelineRef = ref(null)
@@ -15,6 +16,7 @@ useScrollEntrance(timelineRef, { distance: 600 })
       <SectionHeading title="Experience" />
 
       <div ref="timelineRef" class="timeline">
+        <TimelineSpine :milestones="experience.length" />
         <div
           v-for="(job, index) in experience"
           :key="job.id"
@@ -54,21 +56,6 @@ useScrollEntrance(timelineRef, { distance: 600 })
   flex-direction: column;
   gap: var(--space-xl);
   position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    left: 172px;
-    top: 0;
-    width: 1px;
-    height: calc(var(--entrance-progress, 0) * 100%);
-    background: rgba(99, 102, 241, 0.15);
-    pointer-events: none;
-
-    @media (max-width: 768px) {
-      display: none;
-    }
-  }
 }
 
 .timeline-item {

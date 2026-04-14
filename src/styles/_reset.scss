@@ -12,6 +12,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  font-feature-settings: 'ss01', 'ss02';
 }
 
 body {
@@ -21,7 +22,8 @@ body {
   font-family: var(--font-primary);
   font-size: 17px;
   line-height: 1.7;
-  transition: background-color var(--transition-base), color var(--transition-base);
+  letter-spacing: -0.006em;
+  transition: background-color 0.5s var(--dramatic), color 0.3s var(--dramatic);
 }
 
 img, picture, video, canvas, svg {
@@ -60,6 +62,10 @@ p, h1, h2, h3, h4, h5, h6 {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  .reveal, .reveal-left, .reveal-scale {
+    filter: none !important;
+  }
 }
 
 // Focus styles
@@ -72,16 +78,16 @@ p, h1, h2, h3, h4, h5, h6 {
   outline: none;
 }
 
-// Selection
+// Selection — warm accent highlight
 ::selection {
-  background: var(--accent-subtle);
-  color: var(--accent);
+  background: var(--accent-muted);
+  color: var(--text-primary);
 }
 
-// Scrollbar
+// Scrollbar — refined thin track
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -89,15 +95,15 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--border);
+  background: rgba(var(--accent-rgb), 0.2);
   border-radius: 3px;
 
   &:hover {
-    background: var(--text-secondary);
+    background: rgba(var(--accent-rgb), 0.4);
   }
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
+  scrollbar-color: rgba(var(--accent-rgb), 0.2) transparent;
 }

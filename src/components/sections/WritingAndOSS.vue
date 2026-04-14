@@ -29,7 +29,7 @@ const ossProjects = projects
             </div>
           </div>
 
-          <div v-else class="posts-list">
+          <div v-else-if="posts.length" class="posts-list">
             <a
               v-for="post in posts"
               :key="post.id"
@@ -42,6 +42,10 @@ const ossProjects = projects
               <span class="post-title">{{ post.title }}</span>
               <ArrowUpRight :size="14" class="post-arrow" />
             </a>
+          </div>
+
+          <div v-else class="posts-empty">
+            <p class="posts-empty-text">Articles coming soon. In the meantime, check out my open-source work.</p>
           </div>
 
           <a
@@ -204,6 +208,19 @@ const ossProjects = projects
   50% { opacity: 0.7; }
 }
 
+.posts-empty {
+  padding: var(--space-lg) var(--space-md);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+}
+
+.posts-empty-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
 // Open Source
 .oss-list {
   display: flex;
@@ -216,14 +233,14 @@ const ossProjects = projects
   padding: var(--space-md);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  transition: border-color 0.3s ease,
-              box-shadow 0.3s ease,
-              transform 0.2s ease;
+  transition: border-color 0.35s var(--dramatic),
+              box-shadow 0.35s var(--dramatic),
+              transform 0.3s var(--spring);
 
   &:hover {
-    border-color: var(--accent);
-    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.06);
-    transform: translateY(-1px);
+    border-color: rgba(var(--accent-rgb), 0.4);
+    box-shadow: 0 6px 20px rgba(var(--accent-rgb), 0.06);
+    transform: translateY(-2px);
     opacity: 1;
   }
 }

@@ -11,7 +11,7 @@ module.exports = [
   {
     files: ['**/*.vue', '**/*.js'],
     languageOptions: {
-      ecmaVersion: 2021,
+      ecmaVersion: 'latest',
       sourceType: 'module',
       globals: {
         // Browser globals
@@ -31,6 +31,7 @@ module.exports = [
         fetch: 'readonly',
         performance: 'readonly',
         IntersectionObserver: 'readonly',
+        MutationObserver: 'readonly',
         navigator: 'readonly',
         // Node.js globals (for config files)
         process: 'readonly',

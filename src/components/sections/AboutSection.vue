@@ -1,5 +1,7 @@
 <script setup>
 import SectionHeading from '@/components/shared/SectionHeading.vue'
+import about from '@/data/about.json'
+import education from '@/data/education.json'
 </script>
 
 <template>
@@ -9,23 +11,10 @@ import SectionHeading from '@/components/shared/SectionHeading.vue'
 
       <div class="about-content">
         <p class="reveal reveal-delay-1">
-          With over a decade in software engineering, I specialize in building
-          resilient backend systems, developer-facing tools, and cross-functional
-          platform features. At PayPal, I've led initiatives spanning
-          <span class="about-keyword">webhook infrastructure</span>,
-          <span class="about-keyword">near real-time analytics</span>, and
-          <span class="about-keyword">spam prevention systems</span>
-          that serve millions of merchants.
+          {{ about.summary }}
         </p>
-        <p class="reveal reveal-delay-2">
-          Previously at AssetPulse, Wellspring Software Labs, and CoreNett
-          Technologies — shipping production systems since 2014. I care about
-          <span class="about-keyword">developer experience</span>,
-          <span class="about-keyword">system reliability</span>, and building things that
-          last.
-        </p>
-        <p class="about-education reveal reveal-delay-3">
-          M.C.A &amp; B.C.A in Computer Applications — University of Madras &amp; Gurunanak College.
+        <p v-for="edu in education" :key="edu.id" class="about-education reveal reveal-delay-3">
+          {{ edu.degree }} in Computer Applications — {{ edu.college }}<span v-if="edu.cgpa" class="about-edu-meta"> · CGPA {{ edu.cgpa }}</span>
         </p>
       </div>
     </div>
@@ -49,19 +38,15 @@ import SectionHeading from '@/components/shared/SectionHeading.vue'
 }
 
 .about-education {
-  font-size: 15px !important;
-  color: var(--text-secondary);
-  opacity: 0.7;
+  font-size: 14px !important;
+  color: var(--text-primary);
+  opacity: 0.85;
+  margin-top: var(--space-md);
 }
 
-.about-keyword {
+.about-edu-meta {
+  font-family: var(--font-mono);
+  font-size: 12px;
   color: var(--text-secondary);
-  transition: color 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: 0.4s;
-
-  .revealed & {
-    color: var(--text-primary);
-    font-weight: 500;
-  }
 }
 </style>

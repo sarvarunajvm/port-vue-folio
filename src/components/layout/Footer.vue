@@ -1,5 +1,7 @@
 <script setup>
 import { Github } from 'lucide-vue-next'
+import FooterSignalBeacon from '@/components/svg/FooterSignalBeacon.vue'
+import about from '@/data/about.json'
 </script>
 
 <template>
@@ -9,7 +11,7 @@ import { Github } from 'lucide-vue-next'
         Built with Vue 3
         <span class="separator">&middot;</span>
         <a
-          href="https://github.com/sarvarunajvm/port-vue-folio"
+          :href="about.social.github"
           target="_blank"
           rel="noopener noreferrer"
           class="footer-link"
@@ -18,8 +20,11 @@ import { Github } from 'lucide-vue-next'
           Source
         </a>
       </p>
-      <p class="footer-text">
-        &copy; {{ new Date().getFullYear() }} Saravanan Kalimuthu
+      <p class="footer-text footer-status">
+        <FooterSignalBeacon />
+        <span class="status-text">Signal online</span>
+        <span class="separator">&middot;</span>
+        &copy; {{ new Date().getFullYear() }} {{ about.firstname }} {{ about.lastname }}
       </p>
     </div>
   </footer>
@@ -48,6 +53,18 @@ import { Github } from 'lucide-vue-next'
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+}
+
+.footer-status {
+  gap: 6px;
+}
+
+.status-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
 }
 
 .separator {

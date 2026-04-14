@@ -13,5 +13,5 @@ export default defineConfig({
     host: true,
     port: 5173,
   },
-  base: process.env.NODE_ENV === 'production' ? '/port-vue-folio' : '/',
+  base: process.env.GITHUB_PAGES ? '/port-vue-folio/' : '/',
 })

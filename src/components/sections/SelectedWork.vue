@@ -1,15 +1,17 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { ArrowRight } from 'lucide-vue-next'
 import { useRouter } from 'vue-router'
 import SectionHeading from '@/components/shared/SectionHeading.vue'
 import Tag from '@/components/shared/Tag.vue'
 import { useScrollEntrance } from '@/composables/useScrollEntrance'
+import ProjectTopologyDiagram from '@/components/svg/ProjectTopologyDiagram.vue'
+import SvgCtaArrow from '@/components/svg/SvgCtaArrow.vue'
 import projects from '@/data/projects.json'
 
 const router = useRouter()
 const featured = projects.filter((p) => p.featured).slice(0, 4)
 const workListRef = ref(null)
+const activeCard = ref(null)
 const { progress } = useScrollEntrance(workListRef, { distance: 500 })
 
 function clamp(val, min, max) {
@@ -48,6 +50,10 @@ const navigateToCase = (slug) => {
           role="link"
           @click="navigateToCase(project.id)"
           @keydown.enter="navigateToCase(project.id)"
+          @mouseenter="activeCard = project.id"
+          @mouseleave="activeCard = null"
+          @focus="activeCard = project.id"
+          @blur="activeCard = null"
         >
           <div class="work-card-inner">
             <div class="work-card-accent" aria-hidden="true" />
@@ -57,6 +63,7 @@ const navigateToCase = (slug) => {
                 {{ project.category === 'professional' ? project.tags?.[0] || 'Professional' : 'Open Source' }}
                 &middot; {{ project.year }}
               </span>
+              <ProjectTopologyDiagram :variant="index" :active="activeCard === project.id" />
             </div>
 
             <h3 class="work-title text-h3">{{ project.title }}</h3>
@@ -73,8 +80,8 @@ const navigateToCase = (slug) => {
               <div class="work-tags">
                 <Tag v-for="tag in project.tags?.slice(0, 4)" :key="tag" :text="tag" />
               </div>
-              <span class="work-cta">
-                Read more <ArrowRight :size="14" />
+              <span class="work-cta svg-cta">
+                Read more <SvgCtaArrow />
               </span>
             </div>
           </div>
@@ -99,20 +106,22 @@ const navigateToCase = (slug) => {
   cursor: pointer;
   overflow: hidden;
   will-change: transform, opacity;
-  transition: border-color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: border-color 0.4s var(--dramatic),
+              box-shadow 0.4s var(--dramatic),
+              transform 0.4s var(--spring);
 
   &:hover,
   &:focus-visible {
-    border-color: rgba(99, 102, 241, 0.4);
-    box-shadow: 0 8px 32px rgba(99, 102, 241, 0.08),
-                0 0 0 1px rgba(99, 102, 241, 0.1);
-    transform: translateY(-2px);
+    border-color: rgba(var(--accent-rgb), 0.4);
+    box-shadow:
+      0 12px 40px rgba(var(--accent-rgb), 0.1),
+      0 0 0 1px rgba(var(--accent-rgb), 0.12);
+    transform: translateY(-3px);
     outline: none;
   }
 
   &:active {
-    transform: translateY(0);
+    transform: translateY(-1px);
     transition-duration: 100ms;
   }
 
@@ -131,17 +140,16 @@ const navigateToCase = (slug) => {
   }
 }
 
-// Subtle accent line on left edge, reveals on hover
 .work-card-accent {
   position: absolute;
   top: 0;
   left: 0;
   width: 3px;
   height: 100%;
-  background: var(--accent);
+  background: linear-gradient(180deg, var(--accent), var(--accent-hover));
   transform: scaleY(0);
   transform-origin: bottom;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.5s var(--dramatic);
 
   .work-card:hover & {
     transform: scaleY(1);
@@ -151,8 +159,15 @@ const navigateToCase = (slug) => {
 
 .work-label {
   color: var(--text-secondary);
-  margin-bottom: var(--space-md);
   display: block;
+}
+
+.work-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
 }
 
 .work-title {
@@ -213,10 +228,11 @@ const navigateToCase = (slug) => {
   font-size: 14px;
   font-weight: 500;
   color: var(--accent);
-  transition: gap 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: gap 0.4s var(--spring), color 0.3s ease;
 
   .work-card:hover & {
-    gap: 10px;
+    gap: 12px;
+    color: var(--accent-hover);
   }
 }
 </style>

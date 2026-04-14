@@ -8,6 +8,7 @@ import ExperienceTimeline from '@/components/sections/ExperienceTimeline.vue'
 import EngineeringImpact from '@/components/sections/EngineeringImpact.vue'
 import WritingAndOSS from '@/components/sections/WritingAndOSS.vue'
 import ContactSection from '@/components/sections/ContactSection.vue'
+import SectionTransitionLine from '@/components/svg/SectionTransitionLine.vue'
 
 useScrollReveal()
 </script>
@@ -15,12 +16,19 @@ useScrollReveal()
 <template>
   <main>
     <MissionControlHero />
+    <SectionTransitionLine />
     <AboutSection />
+    <SectionTransitionLine />
     <NowSection />
+    <SectionTransitionLine />
     <SelectedWork />
+    <SectionTransitionLine />
     <ExperienceTimeline />
+    <SectionTransitionLine />
     <EngineeringImpact />
+    <SectionTransitionLine />
     <WritingAndOSS />
+    <SectionTransitionLine />
     <ContactSection />
   </main>
 </template>

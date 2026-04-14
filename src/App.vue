@@ -13,24 +13,29 @@ import CommandPalette from '@/components/shared/CommandPalette.vue'
   </router-view>
   <Footer />
   <CommandPalette />
+  <div class="noise-overlay" aria-hidden="true" />
 </template>
 
 <style lang="scss">
 @use '@/styles/main.scss';
 
-// Page transitions
 .page-fade-enter-active,
 .page-fade-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.4s var(--dramatic),
+    transform 0.4s var(--dramatic),
+    filter 0.4s var(--dramatic);
 }
 
 .page-fade-enter-from {
   opacity: 0;
-  transform: translateY(8px);
+  transform: translateY(12px);
+  filter: blur(4px);
 }
 
 .page-fade-leave-to {
   opacity: 0;
   transform: translateY(-8px);
+  filter: blur(2px);
 }
 </style>

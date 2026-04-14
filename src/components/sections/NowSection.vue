@@ -1,12 +1,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { Sparkles, ArrowUpRight } from 'lucide-vue-next'
+import about from '@/data/about.json'
 
-const items = [
-  { text: 'Exploring LLM-assisted code review at PayPal', link: null },
-  { text: 'Contributing to Vue ecosystem tooling', link: null },
-  { text: 'Writing about event-driven architectures', link: 'https://dev.to/sarvarunajvm' },
-]
+const items = about.now
 
 // Rotating status indicator
 const statusDot = ref(null)
@@ -118,11 +115,11 @@ onUnmounted(() => {
 @keyframes pulse-dot {
   0%, 100% {
     opacity: 1;
-    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4);
+    box-shadow: 0 0 0 0 rgba(var(--success-rgb), 0.5);
   }
   50% {
     opacity: 0.8;
-    box-shadow: 0 0 0 4px rgba(52, 211, 153, 0);
+    box-shadow: 0 0 0 5px rgba(var(--success-rgb), 0);
   }
 }
 

@@ -1,7 +1,9 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { Sun, Moon, Download, Menu, X } from 'lucide-vue-next'
 import { useTheme } from '@/composables/useTheme'
+import AnimatedMonogram from '@/components/svg/AnimatedMonogram.vue'
+import about from '@/data/about.json'
 
 const { theme, toggleTheme } = useTheme()
 const scrolled = ref(false)
@@ -9,6 +11,11 @@ const scrollProgress = ref(0)
 const mobileMenuOpen = ref(false)
 const isToggling = ref(false)
 const navRef = ref(null)
+const activeSection = ref('')
+
+const initials = computed(() => {
+  return `${about.firstname.charAt(0)}${about.lastname.charAt(0)}`
+})
 
 const navLinks = [
   { label: 'Work', href: '#work' },
@@ -17,6 +24,8 @@ const navLinks = [
   { label: 'Contact', href: '#contact' },
 ]
 
+const sectionIds = navLinks.map(l => l.href.slice(1))
+
 const handleScroll = () => {
   scrolled.value = window.scrollY > 20
   const totalScroll = document.documentElement.scrollHeight - window.innerHeight
@@ -24,10 +33,30 @@ const handleScroll = () => {
   if (navRef.value) {
     navRef.value.style.setProperty('--page-progress', scrollProgress.value)
   }
+
+  const offset = 120
+  let current = ''
+
+  const atBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 50)
+  if (atBottom) {
+    current = sectionIds[sectionIds.length - 1]
+  } else {
+    for (const id of sectionIds) {
+      const el = document.getElementById(id)
+      if (el && el.getBoundingClientRect().top <= offset) {
+        current = id
+      }
+    }
+  }
+  activeSection.value = current
 }
 
 const scrollTo = (href) => {
   mobileMenuOpen.value = false
+  if (href === '#') {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    return
+  }
   const el = document.querySelector(href)
   if (el) {
     const offset = 80
@@ -52,8 +81,9 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 <template>
   <nav ref="navRef" :class="['navbar', { scrolled }]">
     <div class="navbar-inner container">
-      <a href="#" class="nav-logo" @click.prevent="window.scrollTo({ top: 0, behavior: 'smooth' })">
-        SK
+      <a href="#" class="nav-logo" @click.prevent="scrollTo('#')">
+        <AnimatedMonogram class="nav-logo-mark" :size="34" />
+        <span class="nav-logo-label">{{ initials }}</span>
       </a>
 
       <div class="nav-links">
@@ -61,7 +91,7 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
           v-for="link in navLinks"
           :key="link.href"
           :href="link.href"
-          class="nav-link"
+          :class="['nav-link', { active: activeSection === link.href.slice(1) }]"
           @click.prevent="scrollTo(link.href)"
         >
           {{ link.label }}
@@ -125,9 +155,9 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   transition: background-color var(--transition-base), border-color var(--transition-base), backdrop-filter var(--transition-base);
 
   &.scrolled {
-    background-color: rgba(var(--bg-rgb, 10, 10, 11), 0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
+    background-color: rgba(var(--bg-rgb), 0.88);
+    backdrop-filter: blur(16px) saturate(1.2);
+    border-bottom: 1px solid rgba(var(--accent-rgb), 0.06);
   }
 
   &::after {
@@ -137,14 +167,15 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
     left: 0;
     height: 2px;
     width: calc(var(--page-progress, 0) * 100%);
-    background: var(--accent);
-    opacity: 0.4;
+    background: linear-gradient(90deg, var(--accent), var(--accent-hover), var(--warm));
+    opacity: 0.5;
     pointer-events: none;
+    transition: opacity 0.3s ease;
   }
 }
 
 [data-theme="light"] .navbar.scrolled {
-  background-color: rgba(250, 250, 250, 0.85);
+  background-color: rgba(var(--bg-rgb), 0.88);
 }
 
 .navbar-inner {
@@ -155,16 +186,36 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 }
 
 .nav-logo {
-  font-family: var(--font-mono);
-  font-size: 18px;
-  font-weight: 600;
   color: var(--text-primary);
-  letter-spacing: -0.02em;
-  transition: color var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: color var(--transition-fast), transform var(--transition-fast);
 
   &:hover {
     color: var(--accent);
     opacity: 1;
+    transform: translateY(-1px);
+  }
+}
+
+.nav-logo-mark {
+  transition: transform 0.35s var(--mc-ease);
+}
+
+.nav-logo:hover .nav-logo-mark {
+  transform: rotate(-3deg) scale(1.03);
+}
+
+.nav-logo-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+
+  @media (max-width: 480px) {
+    display: none;
   }
 }
 
@@ -181,10 +232,11 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   font-size: 14px;
   font-weight: 500;
   color: var(--text-secondary);
-  transition: color var(--transition-fast);
+  transition: color 0.3s var(--dramatic);
   position: relative;
 
-  &:hover {
+  &:hover,
+  &.active {
     color: var(--text-primary);
     opacity: 1;
   }
@@ -195,12 +247,14 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
     bottom: -4px;
     left: 0;
     width: 0;
-    height: 1px;
-    background: var(--accent);
-    transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    height: 1.5px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+    transition: width 0.4s var(--dramatic);
+    border-radius: 1px;
   }
 
-  &:hover::after {
+  &:hover::after,
+  &.active::after {
     width: 100%;
   }
 }
@@ -221,11 +275,12 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   color: var(--text-primary);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  transition: all var(--transition-fast);
+  transition: all 0.35s var(--dramatic);
 
   &:hover {
-    border-color: var(--accent);
+    border-color: rgba(var(--accent-rgb), 0.5);
     color: var(--accent);
+    box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.06);
     opacity: 1;
   }
 

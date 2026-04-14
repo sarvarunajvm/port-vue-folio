@@ -1,37 +1,31 @@
 [
   {
     "id": 1,
-    "degree": "Master Of Computer Applications",
+    "degree": "MCA",
     "college": "University of Madras",
     "period": "2016 - 2019",
+    "cgpa": "6.48",
     "points": [
       {
         "id": 1,
-        "value": "-> Graduated with 6.48 CGPA."
+        "value": "CGPA 6.48"
       },
       {
         "id": 2,
-        "value": " -> Designed and developed a cloud-based service that allows users to authenticate and <br/> make their data secure in the cloud using double encryption with the safe key."
+        "value": "Thesis: Cloud-based secure data storage with double-key encryption"
       }
     ]
   },
   {
     "id": 2,
-    "degree": "Bachelor Of Computer Applications",
+    "degree": "BCA",
     "college": "Gurunanak College",
     "period": "2011 - 2014",
+    "cgpa": "6.24",
     "points": [
       {
         "id": 1,
-        "value": "-> Graduated with 6.24 CGPA."
-      },
-      {
-        "id": 2,
-        "value": " -> Member of the National Honor Society."
-      },
-      {
-        "id": 3,
-        "value": "-> Designed and developed a webpage for internal exams."
+        "value": "CGPA 6.24"
       }
     ]
   }

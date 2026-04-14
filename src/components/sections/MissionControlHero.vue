@@ -1,43 +1,30 @@
 <script setup>
 import { computed, ref } from 'vue'
-import { ArrowDown, Linkedin, Github } from 'lucide-vue-next'
+import { Linkedin, Github } from 'lucide-vue-next'
 import { useScrollProgress } from '@/composables/useScrollProgress'
 import { useBlogPosts } from '@/composables/useBlogPosts'
 import about from '@/data/about.json'
+import skillsData from '@/data/skills.json'
 import IconLink from '@/components/shared/IconLink.vue'
+import HeroCircuitScene from '@/components/svg/HeroCircuitScene.vue'
+import SvgCtaArrow from '@/components/svg/SvgCtaArrow.vue'
 
 const heroRef = ref(null)
 const { progress } = useScrollProgress(heroRef)
-const { posts, loading: postsLoading } = useBlogPosts('sarvarunajvm', 4)
+const { posts, loading: postsLoading } = useBlogPosts(about.username, 4)
 
 // --- Data ---
-const services = [
-  { name: 'payment-gateway', status: 'Running' },
-  { name: 'webhook-service', status: 'Running' },
-  { name: 'merchant-api', status: 'Running' },
-  { name: 'fraud-detection', status: 'Running' },
-  { name: 'notification-svc', status: 'Running' },
-  { name: 'analytics-pipeline', status: 'Running' },
-]
+const services = about.hero.services
 
-const metrics = [
-  { value: '10+', label: 'Years' },
-  { value: '4', label: 'Companies' },
-  { value: '95%', label: 'On-Time' },
-  { value: '1.5x', label: 'API Perf' },
-]
+const metrics = about.metrics
 
-const techStack = [
-  'Java', 'Spring Boot', 'Vue.js', 'Python', 'Kafka', 'PostgreSQL', 'Docker', 'GCP',
-]
+// Extract top skills for tech stack strip
+const techStack = skillsData
+  .flatMap(group => group.points)
+  .slice(0, 8)
+  .map(point => point.name)
 
-const terminalLines = [
-  'NAME                          READY   STATUS    RESTARTS   AGE',
-  'gateway-7d4b8c6f9-x2k4m      1/1     Running   0          3d',
-  'gateway-7d4b8c6f9-p8n1q      1/1     Running   0          3d',
-  'gateway-7d4b8c6f9-w5j7r      1/1     Running   0          3d',
-  'gateway-7d4b8c6f9-a9c3s      1/1     Running   0          3d',
-]
+const terminalLines = about.hero.terminalLines
 
 // --- Utility ---
 function clamp(val, min, max) {
@@ -157,6 +144,8 @@ const scrollToWork = () => {
 <template>
   <section ref="heroRef" class="mission-control">
     <div class="mission-control__sticky">
+      <HeroCircuitScene :progress="progress" />
+
       <!-- Header -->
       <header class="mc-header" :style="headerStyle">
         <span class="mc-identity">
@@ -246,17 +235,9 @@ const scrollToWork = () => {
               </li>
             </template>
             <template v-else>
-              <li class="activity-item">
+              <li v-for="item in about.now" :key="item.text" class="activity-item">
                 <span class="activity-dot"></span>
-                <span class="activity-text">Exploring LLM-assisted code review</span>
-              </li>
-              <li class="activity-item">
-                <span class="activity-dot"></span>
-                <span class="activity-text">Contributing to Vue ecosystem tooling</span>
-              </li>
-              <li class="activity-item">
-                <span class="activity-dot"></span>
-                <span class="activity-text">Writing about event-driven architectures</span>
+                <span class="activity-text">{{ item.text }}</span>
               </li>
             </template>
           </ul>
@@ -266,22 +247,23 @@ const scrollToWork = () => {
       <!-- CTA -->
       <div class="mc-actions" :style="ctaStyle">
         <button
-          class="btn btn-primary"
+          class="btn btn-primary svg-cta"
           :class="{ 'visually-hidden-interactive': ctaHidden }"
           :tabindex="ctaHidden ? -1 : 0"
           @click="scrollToWork"
         >
           View Selected Work
-          <ArrowDown :size="16" class="btn-icon" />
+          <SvgCtaArrow class="btn-svg-arrow" />
         </button>
         <a
           href="/files/Resume.pdf"
           download
-          class="btn btn-secondary"
+          class="btn btn-secondary svg-cta"
           :class="{ 'visually-hidden-interactive': ctaHidden }"
           :tabindex="ctaHidden ? -1 : 0"
         >
           Download Resume
+          <SvgCtaArrow class="btn-svg-arrow" />
         </a>
         <div class="mc-social" :class="{ 'visually-hidden-interactive': ctaHidden }">
           <IconLink :href="about.social.linkedin" label="LinkedIn" :tabindex="ctaHidden ? -1 : 0">
@@ -341,6 +323,8 @@ const scrollToWork = () => {
   text-align: center;
   margin-bottom: var(--space-sm);
   will-change: transform, opacity;
+  position: relative;
+  z-index: 2;
 
   @media (max-width: 768px) {
     opacity: 1 !important;
@@ -369,6 +353,8 @@ const scrollToWork = () => {
   flex-wrap: wrap;
   margin-bottom: var(--space-md);
   will-change: opacity;
+  position: relative;
+  z-index: 2;
 
   @media (max-width: 768px) {
     opacity: 1 !important;
@@ -397,6 +383,8 @@ const scrollToWork = () => {
   flex: 1;
   min-height: 0;
   max-height: calc(100vh - 280px);
+  position: relative;
+  z-index: 2;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -416,6 +404,12 @@ const scrollToWork = () => {
   will-change: transform, opacity;
   display: flex;
   flex-direction: column;
+  transition: border-color 0.4s var(--dramatic), box-shadow 0.4s var(--dramatic);
+
+  &:hover {
+    border-color: rgba(var(--accent-rgb), 0.2);
+    box-shadow: 0 4px 24px rgba(var(--accent-rgb), 0.04);
+  }
 
   @media (max-width: 768px) {
     opacity: 1 !important;
@@ -445,9 +439,9 @@ const scrollToWork = () => {
   font-size: 10px;
   color: var(--success);
   padding: 2px 8px;
-  border: 1px solid rgba(52, 211, 153, 0.2);
+  border: 1px solid rgba(var(--success-rgb), 0.25);
   border-radius: var(--radius-sm);
-  background: rgba(52, 211, 153, 0.06);
+  background: rgba(var(--success-rgb), 0.08);
 }
 
 // ---- Terminal Panel ----
@@ -521,7 +515,7 @@ const scrollToWork = () => {
   overflow: hidden;
   white-space: nowrap;
   width: 0;
-  border-right: 2px solid var(--accent);
+  border-right: 2px solid var(--success);
   animation: mc-typing 2s steps(44) 0.8s forwards, mc-blink 0.8s step-end infinite;
 
   @media (max-width: 768px) {
@@ -614,10 +608,10 @@ const scrollToWork = () => {
 
 @keyframes mc-dot-pulse {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4);
+    box-shadow: 0 0 0 0 rgba(var(--success-rgb), 0.5);
   }
   50% {
-    box-shadow: 0 0 0 3px rgba(52, 211, 153, 0);
+    box-shadow: 0 0 0 4px rgba(var(--success-rgb), 0);
   }
 }
 
@@ -744,6 +738,8 @@ const scrollToWork = () => {
   flex-wrap: wrap;
   justify-content: center;
   will-change: transform, opacity;
+  position: relative;
+  z-index: 2;
 
   @media (max-width: 768px) {
     opacity: 1 !important;
@@ -801,24 +797,47 @@ const scrollToWork = () => {
   }
 }
 
+.btn-svg-arrow {
+  color: currentColor;
+}
+
 .btn-primary {
   background: var(--accent);
   color: #fff;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.12) 50%, transparent 60%);
+    transform: translateX(-100%);
+    transition: transform 0.6s var(--dramatic);
+  }
 
   &:hover {
     background: var(--accent-hover);
-    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+    box-shadow:
+      0 6px 20px rgba(var(--accent-rgb), 0.3),
+      0 0 40px rgba(var(--accent-rgb), 0.1);
     opacity: 1;
+
+    &::before {
+      transform: translateX(100%);
+    }
   }
 }
 
 .btn-secondary {
   border: 1px solid var(--border);
   color: var(--text-primary);
+  transition: all 0.35s var(--dramatic);
 
   &:hover {
-    border-color: var(--accent);
+    border-color: rgba(var(--accent-rgb), 0.5);
     color: var(--accent);
+    box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.06);
     opacity: 1;
   }
 }

@@ -51,50 +51,60 @@
 .gap-xl { gap: var(--space-xl); }
 
 // ========================================
-// SCROLL REVEAL ANIMATION
+// SCROLL REVEAL — cinematic blur-in
 // ========================================
 .reveal {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(24px);
+  filter: blur(6px);
+  transition:
+    opacity 0.7s var(--dramatic),
+    transform 0.7s var(--dramatic),
+    filter 0.7s var(--dramatic);
 
   &.revealed {
     opacity: 1;
     transform: translateY(0);
+    filter: blur(0);
   }
 }
 
-// Slide-in from left variant
 .reveal-left {
   opacity: 0;
-  transform: translateX(-30px);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateX(-32px);
+  filter: blur(4px);
+  transition:
+    opacity 0.7s var(--dramatic),
+    transform 0.7s var(--dramatic),
+    filter 0.7s var(--dramatic);
 
   &.revealed {
     opacity: 1;
     transform: translateX(0);
+    filter: blur(0);
   }
 }
 
-// Scale-up variant (for metrics, cards)
 .reveal-scale {
   opacity: 0;
-  transform: scale(0.95);
-  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: scale(0.92);
+  filter: blur(4px);
+  transition:
+    opacity 0.6s var(--dramatic),
+    transform 0.6s var(--dramatic),
+    filter 0.6s var(--dramatic);
 
   &.revealed {
     opacity: 1;
     transform: scale(1);
+    filter: blur(0);
   }
 }
 
-// Stagger delays for child elements
+// Stagger delays
 @for $i from 1 through 8 {
   .reveal-delay-#{$i} {
-    transition-delay: #{$i * 0.1}s;
+    transition-delay: #{$i * 0.08}s;
   }
 }
 
@@ -102,29 +112,34 @@
 // MICRO-INTERACTION UTILITIES
 // ========================================
 
-// Magnetic hover lift for interactive cards
+// Magnetic hover lift with warm glow
 .hover-lift {
-  transition: transform var(--transition-base),
-              box-shadow var(--transition-base),
-              border-color var(--transition-base);
+  transition:
+    transform 0.35s var(--spring),
+    box-shadow 0.35s var(--dramatic),
+    border-color 0.35s var(--dramatic);
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-3px);
+    box-shadow:
+      0 12px 32px rgba(var(--accent-rgb), 0.08),
+      0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
   &:active {
-    transform: translateY(0);
+    transform: translateY(-1px);
     transition-duration: 100ms;
   }
 }
 
-// Subtle glow on hover for accent elements
+// Ember glow on hover
 .hover-glow {
-  transition: box-shadow var(--transition-base);
+  transition: box-shadow 0.4s var(--dramatic);
 
   &:hover {
-    box-shadow: 0 0 20px rgba(99, 102, 241, 0.15);
+    box-shadow:
+      0 0 24px rgba(var(--accent-rgb), 0.12),
+      0 0 48px rgba(var(--accent-rgb), 0.06);
   }
 }
 
@@ -140,8 +155,8 @@
     left: 0;
     width: 0;
     height: 1.5px;
-    background: var(--accent);
-    transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+    transition: width 0.4s var(--dramatic);
   }
 
   &:hover::after {
@@ -149,16 +164,16 @@
   }
 }
 
-// Arrow nudge on hover (for CTAs with arrow icons)
+// Arrow nudge on hover
 .hover-arrow {
-  transition: gap var(--transition-fast);
+  transition: gap 0.3s var(--spring);
 
   &:hover {
     gap: var(--space-md);
   }
 }
 
-// Focus ring for keyboard navigation
+// Focus ring
 .focus-ring {
   &:focus-visible {
     outline: 2px solid var(--accent);
@@ -168,10 +183,84 @@
 }
 
 // ========================================
+// GLOW & SHIMMER EFFECTS
+// ========================================
+
+// Animated border gradient for cards on hover
+.border-glow {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(var(--accent-rgb), 0.3),
+      transparent 40%,
+      transparent 60%,
+      rgba(var(--accent-rgb), 0.15)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s var(--dramatic);
+    pointer-events: none;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+// Pulse ring for live indicators
+.pulse-ring {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid rgba(var(--success-rgb), 0.4);
+    animation: pulse-expand 2s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse-expand {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+// ========================================
+// NOISE TEXTURE OVERLAY
+// ========================================
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+// ========================================
 // PRINT
 // ========================================
 @media print {
-  nav, .theme-toggle {
+  nav, .theme-toggle, .noise-overlay {
     display: none !important;
   }
 
