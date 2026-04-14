@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /private/
+Disallow: /admin/
+
+# Crawl-delay for bots
+Crawl-delay: 10
+
+# Sitemap location
+Sitemap: https://sarvarunajvm.github.io/sitemap.xml
+
+# Host
+Host: https://sarvarunajvm.github.io/

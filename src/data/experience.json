@@ -3,92 +3,68 @@
     "id": 1,
     "designation": "Sr Software Engineer",
     "company": "PayPal",
-    "period": "2021 - Present",
+    "period": "May 2021 - Present",
     "location": "Remote",
     "points": [
       {
         "id": 1,
-        "value": "Closed webhook product gap → adopted by 10% of merchants"
+        "value": "Automated observability pipeline (daily digest: error rates, FCIs, DLQ depth) eliminated manual triage — service availability 99.56% → 99.96% (~20 hours recovered annually)."
       },
       {
         "id": 2,
-        "value": "Built near real-time analytics → +0.01% revenue impact"
+        "value": "Owned solution discovery for merchant custom sender domain (billing@acme.com): evaluated 3 hosting approaches, authored ADR, designed DKIM/SPF/DMARC verification layer & bounce-visibility pipeline across 4 teams."
       },
       {
         "id": 3,
-        "value": "Reduced spam to below 2% with effective solutions"
+        "value": "Designed invoice aggregation end-to-end: parent-child data model, feature-flag rollout (5%→50%→GA), rollback triggers and DLQ alerting — zero P1 incidents."
       },
       {
         "id": 4,
-        "value": "Optimized API performance → 1.5× faster response"
+        "value": "Architected progressive API access ramp with phased gating, fraud-signal integration, and automated rollback; designed multi-layer spam detection — spam reduced to <2%."
       },
       {
         "id": 5,
-        "value": "Achieved 95% on-time completion across all initiatives"
+        "value": "Webhook delivery architecture (at-least-once guarantees, deduplication, fan-out); adopted by 10% of merchants. Resolved N+1 bottleneck via Redis caching layer — p99 latency improved 1.5×."
       },
       {
         "id": 6,
-        "value": "Reached 70% code coverage with JUnit 5 upgrade"
-      },
-      {
-        "id": 7,
-        "value": "Served as Scrum Master → 90% Say-Do ratio"
+        "value": "Test architecture migration: contract tests + mutation testing, coverage 40%→70%. Scrum Master (1 quarter) — 90% Say-Do ratio."
       }
     ],
-    "tags": ["Java", "Spring Boot", "Kafka", "Datadog", "BigQuery"]
+    "tags": ["Java", "Spring Boot", "Kafka", "Datadog", "BigQuery", "Redis", "Distributed Systems"]
   },
   {
     "id": 2,
     "designation": "Software Engineer",
-    "company": "Assetpulse",
-    "period": "2019 - 2021",
+    "company": "Assetpulse, Inc",
+    "period": "Oct 2019 - May 2021",
     "location": "Chennai",
     "points": [
       {
         "id": 1,
-        "value": "Revitalized legacy product with REST API → +2% engagement"
+        "value": "Evaluated BLE vs RFID trade-offs (range, power, cost, SDK maturity); led migration decision — reduced hardware cost 33%. Designed adapter architecture: Impinj RFID readers → Chronicle Queue → Drools rule engine (runtime-configurable, no redeployment)."
       },
       {
         "id": 2,
-        "value": "Migrated RFID to BLE → 33% cost reduction"
-      },
-      {
-        "id": 3,
-        "value": "Enhanced triangulation with WebSocket → +5% conversions"
-      },
-      {
-        "id": 4,
-        "value": "Implemented comprehensive tests → 68% coverage"
-      },
-      {
-        "id": 5,
-        "value": "Reduced technical debt by 30 days"
+        "value": "Designed spatial data model (zones, reader positions, asset coordinates) + real-time WebSocket location pipeline with interactive floor-plan visualization. Plugin architecture for extensible hardware integrations; 68% CI coverage on event-processing paths."
       }
     ],
-    "tags": ["Java", "Spring", "WebSocket", "BLE", "PostgreSQL"]
+    "tags": ["Java", "Spring", "WebSocket", "BLE", "PostgreSQL", "Chronicle Queue", "Drools"]
   },
   {
     "id": 3,
     "designation": "Software Developer",
     "company": "Wellspring Software Labs",
-    "period": "2018 - 2019",
+    "period": "Feb 2018 - Sep 2019",
     "location": "Chennai",
     "points": [
       {
         "id": 1,
-        "value": "Configurable service locator → 10% reduction in API designs"
+        "value": "Diagnosed data access bottleneck across 20-module ERP; redesigned query batching — API response 1200ms → 700ms."
       },
       {
         "id": 2,
-        "value": "C4 diagrams → 25% faster stakeholder alignment"
-      },
-      {
-        "id": 3,
-        "value": "Optimized storage → response time 1200ms → 700ms"
-      },
-      {
-        "id": 4,
-        "value": "Received client recognition for live demo problem-solving"
+        "value": "Configurable service-locator pattern; C4 diagrams reduced design review cycle 25%."
       }
     ],
     "tags": ["Java", "PostgreSQL", "Architecture", "C4"]
@@ -97,16 +73,16 @@
     "id": 4,
     "designation": "Software Engineer",
     "company": "CoreNett Technologies",
-    "period": "2016 - 2017",
+    "period": "Jun 2016 - Dec 2017",
     "location": "Chennai",
     "points": [
       {
         "id": 1,
-        "value": "Built configurable backends → 10% RTB reduction"
+        "value": "Configurable backend routing reducing RTB overhead 10%."
       },
       {
         "id": 2,
-        "value": "Auto-paginated reports → 30% performance boost"
+        "value": "Auto-pagination — 30% query performance gain."
       }
     ],
     "tags": ["Java", "Spring", "Oracle"]

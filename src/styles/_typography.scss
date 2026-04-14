@@ -1,0 +1,143 @@
+// ========================================
+// FONT LOADING
+// ========================================
+
+// Space Grotesk — geometric sans with distinctive character shapes
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/spacegrotesk/v16/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+// Instrument Serif — elegant editorial display face
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/instrumentserif/v5/jizBRFtNs2ka5fXjeivQ4LroWlx-6zUTjg.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://fonts.gstatic.com/s/instrumentserif/v5/jizHRFtNs2ka5fXjeivQ4LroWlx-6zAjjH7M.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+// JetBrains Mono — technical monospace
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/gh/JetBrains/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2') format('woff2');
+}
+
+// ========================================
+// TYPE SCALE
+// ========================================
+
+// Display — editorial serif for maximum impact
+.text-display {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(44px, 9vw, 80px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.0;
+}
+
+// Heading 1 — large geometric sans
+.text-h1 {
+  font-family: var(--font-primary);
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+// Heading 2
+.text-h2 {
+  font-family: var(--font-primary);
+  font-size: clamp(24px, 3.5vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+// Heading 3
+.text-h3 {
+  font-family: var(--font-primary);
+  font-size: clamp(20px, 2.5vw, 24px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+}
+
+// Body
+.text-body {
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: -0.006em;
+}
+
+// Small
+.text-small {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+// Label — mono uppercase for tags & metadata
+.text-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+// Utility classes
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+// Gradient text shimmer for accent headings
+.text-shimmer {
+  background: linear-gradient(
+    135deg,
+    var(--accent) 0%,
+    var(--warm) 50%,
+    var(--accent) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-flow 4s ease-in-out infinite;
+}
+
+@keyframes shimmer-flow {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 200% center; }
+}

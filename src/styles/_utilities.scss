@@ -1,0 +1,271 @@
+// ========================================
+// LAYOUT UTILITIES
+// ========================================
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+
+  @media (max-width: 768px) {
+    padding: 0 var(--space-md);
+  }
+}
+
+.section {
+  padding: var(--space-3xl) 0;
+
+  @media (max-width: 768px) {
+    padding: var(--space-2xl) 0;
+  }
+}
+
+// ========================================
+// FLEX / GRID HELPERS
+// ========================================
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gap-xs { gap: var(--space-xs); }
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+.gap-lg { gap: var(--space-lg); }
+.gap-xl { gap: var(--space-xl); }
+
+// ========================================
+// SCROLL REVEAL — cinematic blur-in
+// ========================================
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(6px);
+  transition:
+    opacity 0.7s var(--dramatic),
+    transform 0.7s var(--dramatic),
+    filter 0.7s var(--dramatic);
+
+  &.revealed {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  filter: blur(4px);
+  transition:
+    opacity 0.7s var(--dramatic),
+    transform 0.7s var(--dramatic),
+    filter 0.7s var(--dramatic);
+
+  &.revealed {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  filter: blur(4px);
+  transition:
+    opacity 0.6s var(--dramatic),
+    transform 0.6s var(--dramatic),
+    filter 0.6s var(--dramatic);
+
+  &.revealed {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+// Stagger delays
+@for $i from 1 through 8 {
+  .reveal-delay-#{$i} {
+    transition-delay: #{$i * 0.08}s;
+  }
+}
+
+// ========================================
+// MICRO-INTERACTION UTILITIES
+// ========================================
+
+// Magnetic hover lift with warm glow
+.hover-lift {
+  transition:
+    transform 0.35s var(--spring),
+    box-shadow 0.35s var(--dramatic),
+    border-color 0.35s var(--dramatic);
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 12px 32px rgba(var(--accent-rgb), 0.08),
+      0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+    transition-duration: 100ms;
+  }
+}
+
+// Ember glow on hover
+.hover-glow {
+  transition: box-shadow 0.4s var(--dramatic);
+
+  &:hover {
+    box-shadow:
+      0 0 24px rgba(var(--accent-rgb), 0.12),
+      0 0 48px rgba(var(--accent-rgb), 0.06);
+  }
+}
+
+// Link underline draw animation
+.link-draw {
+  position: relative;
+  display: inline-block;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+    transition: width 0.4s var(--dramatic);
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}
+
+// Arrow nudge on hover
+.hover-arrow {
+  transition: gap 0.3s var(--spring);
+
+  &:hover {
+    gap: var(--space-md);
+  }
+}
+
+// Focus ring
+.focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+}
+
+// ========================================
+// GLOW & SHIMMER EFFECTS
+// ========================================
+
+// Animated border gradient for cards on hover
+.border-glow {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(var(--accent-rgb), 0.3),
+      transparent 40%,
+      transparent 60%,
+      rgba(var(--accent-rgb), 0.15)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s var(--dramatic);
+    pointer-events: none;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+// Pulse ring for live indicators
+.pulse-ring {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid rgba(var(--success-rgb), 0.4);
+    animation: pulse-expand 2s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse-expand {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+// ========================================
+// NOISE TEXTURE OVERLAY
+// ========================================
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+// ========================================
+// PRINT
+// ========================================
+@media print {
+  nav, .theme-toggle, .noise-overlay {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}

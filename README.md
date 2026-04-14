@@ -1,45 +1,82 @@
 # Port-Vue-Folio
 
-Hi! I'm a **Fellow Developer** and i designed this in such a way everyonce can use. If you want to use this portfolio please follow the below steps and enjoy. And if you want any help please feel free to contact me.
+A lightweight, data-driven developer portfolio built with **Vue 3**, **Vite**, and a custom **SVG motion system**. All content lives in JSON files — fork it, swap your data, and deploy.
 
-## ScreenShots
-### Dark Theme
-![Dark](images/Dark.png)
-### Light Theme
-![Light](images/Light.png)
-
-## Files you need to change/modify
-> Note: Please do not change the file name
-
-- [x] Fork the respository.
-- [x] Change the Resume.pdf in public/files. 
-- [x] Change the Resume.gif in src/assets.
-- [x] Change the me.png in src/assets.
-- [x] Change the necessory details in json in src/data folders.
-
-## Project setup
-
-> npm install
-
-### Compiles and hot-reloads for development
-
-> npm run serve
-
-### Compiles and minifies for production
-
-> npm run build
-
-### Lints and fixes files
-
-> npm run lint
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-[![Deploy to Github Pages](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/gh-pages-deploy.yml/badge.svg?branch=master)](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/gh-pages-deploy.yml)
-
-[![CodeQL](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/codeql-analysis.yml/badge.svg?branch=master)](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/codeql-analysis.yml)
-
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b1e1a4ffddff424e8682f847c5a5a01a)](https://app.codacy.com/gh/sarvarunajvm/port-vue-folio?utm_source=github.com&utm_medium=referral&utm_content=sarvarunajvm/port-vue-folio&utm_campaign=Badge_Grade_Settings)
-
+[![Deploy](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/deploy.yml)
+[![CI](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Quick Start
+
+```bash
+pnpm install
+pnpm dev          # http://localhost:5173
+pnpm build        # production bundle in dist/
+pnpm preview      # preview the build locally
+pnpm lint         # eslint check
+```
+
+## Make It Yours
+
+1. Fork the repository.
+2. Edit the JSON files in `src/data/`:
+   - `about.json` — name, titles, summary, social links, hero content, metrics
+   - `experience.json` — work history
+   - `education.json` — degrees
+   - `projects.json` — portfolio projects and case studies
+   - `skills.json` — technical skill groups
+3. Drop your resume at `public/files/Resume.pdf`.
+4. Replace favicons in `public/` and update `public/manifest.json`.
+5. Deploy — GitHub Pages workflow is included (push a `v*` tag).
+
+## SVG Motion System
+
+SVG is used as a first-class visual language throughout the site:
+
+| Component | Where |
+|---|---|
+| Animated monogram | Navbar logo |
+| Circuit scene | Hero background |
+| Transition lines | Between sections |
+| Topology diagrams | Project cards |
+| Flow diagrams | Case study pages |
+| CTA arrows | Buttons |
+| Timeline spine | Experience section |
+| Skill constellation | Strengths grid |
+| Metric waveforms | Impact cards |
+| Signal beacon | Footer |
+
+### Design Principles
+
+- **CSS-first animation** — `stroke-dasharray`, `transform`, `opacity`; no runtime JS animation library required.
+- **Theme-aware** — SVG tokens (`--svg-stroke`, `--svg-glow`, etc.) adapt to dark/light mode via `_variables.scss`.
+- **Accessibility** — all non-essential motion is disabled when `prefers-reduced-motion: reduce` is active.
+- **Scroll-driven reveals** — `IntersectionObserver` composables trigger draw-on-enter effects.
+
+## Tech Stack
+
+| Layer | Choice |
+|---|---|
+| Framework | Vue 3.5.32 (Composition API) |
+| Build | Vite 8 |
+| Styling | SCSS 1.99 + CSS custom properties |
+| Icons | Lucide Vue Next 1.0 |
+| Routing | Vue Router 5 |
+| Linting | ESLint 10 + Vue Plugin 10 |
+| CI/CD | GitHub Actions → GitHub Pages |
+| Package manager | pnpm 10 |
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── layout/      # NavBar, Footer
+│   ├── sections/    # Hero, Work, Timeline, Impact, About, Contact …
+│   ├── shared/      # SectionHeading, Tag, IconLink, CommandPalette
+│   └── svg/         # All SVG animation components
+├── composables/     # useTheme, useScrollReveal, useScrollEntrance …
+├── data/            # JSON content files
+├── pages/           # HomePage, CaseStudyPage, NotFound
+└── styles/          # SCSS partials (_variables, _typography, _utilities)
+```

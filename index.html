@@ -1,24 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="HandheldFriendly" content="true" />
-    <meta http-equiv="Cache-control" content="no-cache" />
-    <meta http-equiv="Expires" content="-1" />
-    <title>Portfolio</title>
+
+    <!-- Primary Meta Tags -->
+    <title>Saravanan Kalimuthu — Senior Software Engineer</title>
+    <meta name="title" content="Saravanan Kalimuthu — Senior Software Engineer" />
+    <meta name="description" content="Senior Software Engineer with 9+ years owning distributed systems across fintech and IoT. Building payment systems, AI workflow automation, and platform infrastructure at PayPal." />
+    <meta name="author" content="Saravanan Kalimuthu" />
+    <meta name="keywords" content="Senior Software Engineer, Distributed Systems, Platform Engineering, PayPal, Java, Spring Boot, React, Vue.js, Node.js, Microservices, API Design, Cloud Infrastructure, AI Workflow Automation, LLM Agents, Python, FastAPI" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://sarvarunajvm.github.io/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sarvarunajvm.github.io/" />
+    <meta property="og:title" content="Saravanan Kalimuthu — Senior Software Engineer" />
+    <meta property="og:description" content="Senior Software Engineer with 9+ years owning distributed systems across fintech and IoT. Building payment systems, AI workflow automation, and platform infrastructure at PayPal." />
+    <meta property="og:image" content="https://sarvarunajvm.github.io/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Saravanan Kalimuthu - Senior Software Engineer" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Saravanan Kalimuthu Portfolio" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://sarvarunajvm.github.io/" />
+    <meta property="twitter:title" content="Saravanan Kalimuthu — Senior Software Engineer" />
+    <meta property="twitter:description" content="Senior Software Engineer with 9+ years owning distributed systems across fintech and IoT. Building payment systems, AI workflow automation, and platform infrastructure at PayPal." />
+    <meta property="twitter:image" content="https://sarvarunajvm.github.io/og-image.png" />
+    <meta property="twitter:image:alt" content="Saravanan Kalimuthu - Senior Software Engineer" />
+    <meta name="twitter:creator" content="@sarvarunajvm" />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0a0a0f" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)" />
+
+    <!-- Favicons -->
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/manifest.json" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://dev.to" crossorigin />
+    <link rel="preconnect" href="https://github.com" crossorigin />
+    <link rel="preconnect" href="https://linkedin.com" crossorigin />
+
+    <!-- DNS Prefetch for external resources -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+    <!-- Inline dark mode to prevent flash + GitHub Pages SPA redirect -->
+    <script>
+      (function() {
+        var theme = localStorage.getItem('portfolio-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+
+        // Restore SPA route from 404.html redirect
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect !== location.href) {
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
+
+    <!-- Structured Data / JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Saravanan Kalimuthu",
+        "jobTitle": "Senior Software Engineer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "PayPal"
+        },
+        "description": "Senior Software Engineer with 9+ years owning distributed systems across fintech and IoT.",
+        "url": "https://sarvarunajvm.github.io/",
+        "sameAs": [
+          "https://github.com/sarvarunajvm",
+          "https://linkedin.com/in/saravanan-kalimuthu-01a0a9113",
+          "https://dev.to/sarvarunajvm",
+          "https://stackoverflow.com/users/12595188/saravanan-kalimuthu"
+        ],
+        "knowsAbout": [
+          "Distributed Systems",
+          "Microservices",
+          "Java",
+          "Spring Boot",
+          "React",
+          "Vue.js",
+          "Node.js",
+          "API Design",
+          "Cloud Infrastructure",
+          "Platform Engineering"
+        ]
+      }
+    }
+    </script>
   </head>
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>
-  </html>
-
+</html>

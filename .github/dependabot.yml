@@ -16,7 +16,7 @@ updates:
     # Apply default reviewer and label to created
     # pull requests
     assignees:
-      - "Saravanan Kalimuthu"
+      - "sarvarunajvm"
     labels:
       - "dependencies"
     # Allow up to 10 open pull requests for pip dependencies
