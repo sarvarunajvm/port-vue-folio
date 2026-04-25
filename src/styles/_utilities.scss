@@ -216,6 +216,41 @@
   }
 }
 
+// Pointer-follow highlight for interactive surfaces. Enabled by v-glow-follow.
+.glow-follow {
+  --glow-x: 50%;
+  --glow-y: 50%;
+
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background:
+      radial-gradient(
+        220px circle at var(--glow-x) var(--glow-y),
+        rgba(var(--accent-rgb), 0.16),
+        rgba(var(--accent-rgb), 0.05) 34%,
+        transparent 68%
+      );
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s var(--dramatic);
+    z-index: 0;
+  }
+
+  &.is-glow-active::before {
+    opacity: 1;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
 // Pulse ring for live indicators
 .pulse-ring {
   position: relative;

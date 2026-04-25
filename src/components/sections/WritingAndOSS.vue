@@ -1,25 +1,47 @@
 <script setup>
+import { ref } from 'vue'
 import { ArrowUpRight, Github } from 'lucide-vue-next'
 import SectionHeading from '@/components/shared/SectionHeading.vue'
 import { useBlogPosts } from '@/composables/useBlogPosts'
+import { useScrollEntrance } from '@/composables/useScrollEntrance'
+import { interpolate, timelineProgress } from '@/composables/useTimelineMotion'
 import projects from '@/data/projects.json'
 import about from '@/data/about.json'
 
 const { posts, loading } = useBlogPosts()
+const writingRef = ref(null)
+const { progress } = useScrollEntrance(writingRef, { distance: 620 })
 
 const ossProjects = projects
   .filter((p) => p.category === 'opensource' && p.links?.github)
   .slice(0, 3)
+
+const columnStyle = (index) => {
+  const p = timelineProgress(progress.value, index * 0.14, 0.48 + index * 0.14)
+  return {
+    opacity: p,
+    transform: `translate3d(${interpolate(p, [0, 1], [index === 0 ? -28 : 28, 0])}px, ${interpolate(p, [0, 1], [24, 0])}px, 0)`,
+    filter: `blur(${interpolate(p, [0, 1], [7, 0])}px)`,
+  }
+}
+
+const itemStyle = (index, offset = 0.2) => {
+  const p = timelineProgress(progress.value, offset + index * 0.08, offset + 0.34 + index * 0.08)
+  return {
+    opacity: p,
+    '--item-y': `${interpolate(p, [0, 1], [16, 0])}px`,
+  }
+}
 </script>
 
 <template>
-  <section id="writing" class="section">
+  <section id="writing" ref="writingRef" class="section">
     <div class="container">
       <SectionHeading title="Writing & Open Source" />
 
       <div class="writing-grid">
         <!-- Blog Posts -->
-        <div class="writing-col reveal">
+        <div class="writing-col" :style="columnStyle(0)">
           <h3 class="col-heading">Latest Articles</h3>
 
           <div v-if="loading" class="loading-skeleton">
@@ -31,12 +53,14 @@ const ossProjects = projects
 
           <div v-else-if="posts.length" class="posts-list">
             <a
-              v-for="post in posts"
+              v-for="(post, index) in posts"
               :key="post.id"
+              v-glow-follow
               :href="post.url"
               target="_blank"
               rel="noopener noreferrer"
               class="post-item"
+              :style="itemStyle(index)"
             >
               <span class="post-meta text-label">Dev.to &middot; {{ post.readingTime }} min read</span>
               <span class="post-title">{{ post.title }}</span>
@@ -59,17 +83,19 @@ const ossProjects = projects
         </div>
 
         <!-- Open Source -->
-        <div class="writing-col reveal reveal-delay-1">
+        <div class="writing-col" :style="columnStyle(1)">
           <h3 class="col-heading">Open Source</h3>
 
           <div class="oss-list">
             <a
-              v-for="project in ossProjects"
+              v-for="(project, index) in ossProjects"
               :key="project.id"
+              v-glow-follow
               :href="project.links.github"
               target="_blank"
               rel="noopener noreferrer"
               class="oss-item"
+              :style="itemStyle(index, 0.28)"
             >
               <div class="oss-header">
                 <Github :size="16" />
@@ -109,6 +135,10 @@ const ossProjects = projects
   }
 }
 
+.writing-col {
+  will-change: opacity, filter, transform;
+}
+
 .col-heading {
   font-size: 16px;
   font-weight: 600;
@@ -127,19 +157,23 @@ const ossProjects = projects
 }
 
 .post-item {
+  --item-y: 0px;
+
   display: flex;
   flex-direction: column;
   gap: 4px;
   padding: var(--space-md);
   border-radius: var(--radius-md);
   position: relative;
+  transform: translate3d(0, var(--item-y), 0);
+  will-change: opacity, transform;
   transition: background-color var(--transition-fast),
               transform 0.2s ease;
 
   &:hover {
     background: var(--surface);
     opacity: 1;
-    transform: translateX(4px);
+    transform: translate3d(4px, var(--item-y), 0);
   }
 }
 
@@ -230,9 +264,13 @@ const ossProjects = projects
 }
 
 .oss-item {
+  --item-y: 0px;
+
   padding: var(--space-md);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
+  transform: translate3d(0, var(--item-y), 0);
+  will-change: opacity, transform;
   transition: border-color 0.35s var(--dramatic),
               box-shadow 0.35s var(--dramatic),
               transform 0.3s var(--spring);
@@ -240,7 +278,7 @@ const ossProjects = projects
   &:hover {
     border-color: rgba(var(--accent-rgb), 0.4);
     box-shadow: 0 6px 20px rgba(var(--accent-rgb), 0.06);
-    transform: translateY(-2px);
+    transform: translate3d(0, calc(var(--item-y) - 2px), 0);
     opacity: 1;
   }
 }

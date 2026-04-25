@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import { Linkedin, Github } from 'lucide-vue-next'
 import { useScrollProgress } from '@/composables/useScrollProgress'
 import { useBlogPosts } from '@/composables/useBlogPosts'
+import { smoothScrollToElement } from '@/composables/useSmoothScrollTo'
 import about from '@/data/about.json'
 import skillsData from '@/data/skills.json'
 import IconLink from '@/components/shared/IconLink.vue'
@@ -39,17 +40,15 @@ function lerp(start, end, t) {
 // Terminal: visible from 0, fills screen in phase 1, shrinks to cell in phase 2, dissolves in phase 5
 const terminalStyle = computed(() => {
   const p = progress.value
-  // Scale: 1.6 at p=0 → 1.0 at p=0.25
-  const scaleProgress = clamp(p / 0.25, 0, 1)
-  const scale = lerp(1.6, 1, scaleProgress)
-  // Translate: offset at p=0, centered at p=0.25
-  const tx = lerp(15, 0, scaleProgress)
-  const ty = lerp(15, 0, scaleProgress)
-  // Dissolve: 1.0 until p=0.90, 0 at p=1.0
-  const dissolve = 1 - clamp((p - 0.90) / 0.10, 0, 1)
+  // Scale: oversized opening card, then slowly settles into the dashboard grid.
+  const scaleProgress = clamp(p / 0.46, 0, 1)
+  const scale = lerp(1.72, 1, scaleProgress)
+  const tx = lerp(8, 0, scaleProgress)
+  const ty = lerp(10, 0, scaleProgress)
+  const dissolve = 1 - clamp((p - 0.96) / 0.04, 0, 1)
   return {
     opacity: dissolve,
-    transform: `scale(${scale}) translate(${tx}%, ${ty}%)`,
+    transform: `scale(${scale}) translate3d(${tx}%, ${ty}%, 0)`,
     transformOrigin: 'top left',
   }
 })
@@ -57,8 +56,8 @@ const terminalStyle = computed(() => {
 // Status panel: slides in from right during phase 2
 const statusStyle = computed(() => {
   const p = progress.value
-  const appear = clamp((p - 0.25) / 0.20, 0, 1)
-  const dissolve = 1 - clamp((p - 0.91) / 0.09, 0, 1)
+  const appear = clamp((p - 0.36) / 0.18, 0, 1)
+  const dissolve = 1 - clamp((p - 0.97) / 0.03, 0, 1)
   const offset = (1 - appear) * 40
   return {
     opacity: Math.min(appear, dissolve),
@@ -69,8 +68,8 @@ const statusStyle = computed(() => {
 // Metrics panel: slides in from bottom during phase 2
 const metricsStyle = computed(() => {
   const p = progress.value
-  const appear = clamp((p - 0.28) / 0.20, 0, 1)
-  const dissolve = 1 - clamp((p - 0.92) / 0.08, 0, 1)
+  const appear = clamp((p - 0.40) / 0.18, 0, 1)
+  const dissolve = 1 - clamp((p - 0.97) / 0.03, 0, 1)
   const offset = (1 - appear) * 40
   return {
     opacity: Math.min(appear, dissolve),
@@ -81,8 +80,8 @@ const metricsStyle = computed(() => {
 // Activity panel: slides in from right during phase 2–3
 const activityStyle = computed(() => {
   const p = progress.value
-  const appear = clamp((p - 0.30) / 0.20, 0, 1)
-  const dissolve = 1 - clamp((p - 0.93) / 0.07, 0, 1)
+  const appear = clamp((p - 0.44) / 0.18, 0, 1)
+  const dissolve = 1 - clamp((p - 0.97) / 0.03, 0, 1)
   const offset = (1 - appear) * 40
   return {
     opacity: Math.min(appear, dissolve),
@@ -93,8 +92,8 @@ const activityStyle = computed(() => {
 // Header: appears in phase 3
 const headerStyle = computed(() => {
   const p = progress.value
-  const appear = clamp((p - 0.50) / 0.15, 0, 1)
-  const dissolve = 1 - clamp((p - 0.90) / 0.10, 0, 1)
+  const appear = clamp((p - 0.56) / 0.14, 0, 1)
+  const dissolve = 1 - clamp((p - 0.96) / 0.04, 0, 1)
   return {
     opacity: Math.min(appear, dissolve),
     transform: `translateY(${(1 - appear) * -20}px)`,
@@ -104,8 +103,8 @@ const headerStyle = computed(() => {
 // Tech strip: appears in phase 3
 const techStripStyle = computed(() => {
   const p = progress.value
-  const appear = clamp((p - 0.55) / 0.15, 0, 1)
-  const dissolve = 1 - clamp((p - 0.90) / 0.10, 0, 1)
+  const appear = clamp((p - 0.60) / 0.14, 0, 1)
+  const dissolve = 1 - clamp((p - 0.96) / 0.04, 0, 1)
   return {
     opacity: Math.min(appear, dissolve),
   }
@@ -114,8 +113,8 @@ const techStripStyle = computed(() => {
 // CTA: appears in phase 4
 const ctaStyle = computed(() => {
   const p = progress.value
-  const appear = clamp((p - 0.75) / 0.10, 0, 1)
-  const dissolve = 1 - clamp((p - 0.92) / 0.08, 0, 1)
+  const appear = clamp((p - 0.76) / 0.10, 0, 1)
+  const dissolve = 1 - clamp((p - 0.98) / 0.02, 0, 1)
   return {
     opacity: Math.min(appear, dissolve),
     transform: `translateY(${(1 - appear) * 20}px)`,
@@ -123,7 +122,7 @@ const ctaStyle = computed(() => {
 })
 
 // CTA buttons should be hidden from focus when not visible
-const ctaHidden = computed(() => progress.value < 0.73 || progress.value > 0.98)
+const ctaHidden = computed(() => progress.value < 0.73 || progress.value > 0.995)
 
 // Status dots animate one-by-one in phase 3
 function dotDelay(index) {
@@ -133,11 +132,7 @@ function dotDelay(index) {
 const dotsActive = computed(() => progress.value >= 0.50)
 
 const scrollToWork = () => {
-  const el = document.querySelector('#work')
-  if (el) {
-    const y = el.getBoundingClientRect().top + window.scrollY - 80
-    window.scrollTo({ top: y, behavior: 'smooth' })
-  }
+  smoothScrollToElement('#work', { offset: 80, duration: 900 })
 }
 </script>
 
@@ -161,7 +156,7 @@ const scrollToWork = () => {
       <!-- Dashboard Grid -->
       <div class="mc-grid">
         <!-- Terminal Panel -->
-        <div class="mc-panel mc-panel--terminal" :style="terminalStyle" role="img" aria-label="Terminal showing Kubernetes pod status for payment gateway service">
+        <div v-glow-follow class="mc-panel mc-panel--terminal" :style="terminalStyle" role="img" aria-label="Terminal showing Kubernetes pod status for payment gateway service">
           <div class="terminal-chrome">
             <span class="terminal-dot terminal-dot--red"></span>
             <span class="terminal-dot terminal-dot--yellow"></span>
@@ -185,7 +180,7 @@ const scrollToWork = () => {
         </div>
 
         <!-- Status Panel -->
-        <div class="mc-panel mc-panel--status" :style="statusStyle" aria-hidden="true">
+        <div v-glow-follow class="mc-panel mc-panel--status" :style="statusStyle" aria-hidden="true">
           <div class="panel-header">
             <span class="panel-title">Services</span>
             <span class="panel-badge">All Healthy</span>
@@ -203,7 +198,7 @@ const scrollToWork = () => {
         </div>
 
         <!-- Metrics Panel -->
-        <div class="mc-panel mc-panel--metrics" :style="metricsStyle" aria-hidden="true">
+        <div v-glow-follow class="mc-panel mc-panel--metrics" :style="metricsStyle" aria-hidden="true">
           <div class="panel-header">
             <span class="panel-title">Metrics</span>
           </div>
@@ -216,7 +211,7 @@ const scrollToWork = () => {
         </div>
 
         <!-- Activity Panel -->
-        <div class="mc-panel mc-panel--activity" :style="activityStyle" aria-hidden="true">
+        <div v-glow-follow class="mc-panel mc-panel--activity" :style="activityStyle" aria-hidden="true">
           <div class="panel-header">
             <span class="panel-title">Recent Activity</span>
           </div>
@@ -256,6 +251,7 @@ const scrollToWork = () => {
           <SvgCtaArrow class="btn-svg-arrow" />
         </button>
         <a
+          v-glow-follow
           href="/files/Resume.pdf"
           download
           class="btn btn-secondary svg-cta"
@@ -291,10 +287,10 @@ const scrollToWork = () => {
 // ========================================
 
 .mission-control {
-  height: 400vh;
+  height: 320vh;
   position: relative;
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     height: auto;
   }
 }
@@ -310,7 +306,7 @@ const scrollToWork = () => {
   padding: var(--nav-height) var(--space-lg) var(--space-lg);
   overflow: hidden;
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     position: relative;
     height: auto;
     min-height: 100vh;
@@ -326,7 +322,7 @@ const scrollToWork = () => {
   position: relative;
   z-index: 2;
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     opacity: 1 !important;
     transform: none !important;
     margin-bottom: var(--space-md);
@@ -356,7 +352,7 @@ const scrollToWork = () => {
   position: relative;
   z-index: 2;
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     opacity: 1 !important;
     margin-bottom: var(--space-lg);
   }
@@ -382,11 +378,16 @@ const scrollToWork = () => {
   max-width: 960px;
   flex: 1;
   min-height: 0;
-  max-height: calc(100vh - 280px);
+  max-height: calc(100vh - 230px);
   position: relative;
   z-index: 2;
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
+    max-width: 760px;
+    max-height: calc(100vh - 220px);
+  }
+
+  @media (max-width: 640px) {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     max-height: none;
@@ -411,7 +412,7 @@ const scrollToWork = () => {
     box-shadow: 0 4px 24px rgba(var(--accent-rgb), 0.04);
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     opacity: 1 !important;
     transform: none !important;
     will-change: auto;
@@ -448,9 +449,13 @@ const scrollToWork = () => {
 .mc-panel--terminal {
   z-index: 2;
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     z-index: auto;
   }
+}
+
+.mc-panel--status {
+  min-height: 260px;
 }
 
 .terminal-chrome {
@@ -511,14 +516,18 @@ const scrollToWork = () => {
 }
 
 .terminal-command {
+  --terminal-command-width: 36ch;
+
+  display: inline-block;
   color: var(--text-primary);
   overflow: hidden;
   white-space: nowrap;
-  width: 0;
+  width: var(--terminal-command-width);
+  max-width: 100%;
   border-right: 2px solid var(--success);
-  animation: mc-typing 2s steps(44) 0.8s forwards, mc-blink 0.8s step-end infinite;
+  animation: mc-blink 0.8s step-end infinite;
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     width: auto;
     border-right: none;
     animation: none;
@@ -527,7 +536,7 @@ const scrollToWork = () => {
 
 @keyframes mc-typing {
   from { width: 0; }
-  to { width: 100%; }
+  to { width: var(--terminal-command-width); }
 }
 
 @keyframes mc-blink {
@@ -542,8 +551,8 @@ const scrollToWork = () => {
 }
 
 .terminal-line {
-  opacity: 0;
-  animation: mc-line-appear 0.3s ease forwards;
+  opacity: 1;
+  animation: mc-line-appear 0.35s var(--dramatic) forwards;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -553,7 +562,7 @@ const scrollToWork = () => {
     font-weight: 500;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     opacity: 1;
     animation: none;
   }
@@ -574,8 +583,10 @@ const scrollToWork = () => {
 .status-list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: 2px;
   flex: 1;
+  justify-content: space-between;
+  min-height: 0;
 }
 
 .status-item {
@@ -583,8 +594,9 @@ const scrollToWork = () => {
   align-items: center;
   gap: var(--space-sm);
   font-family: var(--font-mono);
-  font-size: 12px;
-  padding: 4px 0;
+  font-size: 11px;
+  padding: 2px 0;
+  line-height: 1.35;
 }
 
 .status-dot {
@@ -600,7 +612,7 @@ const scrollToWork = () => {
     animation: mc-dot-pulse 2s ease-in-out infinite;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     background: var(--success);
     animation: mc-dot-pulse 2s ease-in-out infinite;
   }
@@ -741,7 +753,7 @@ const scrollToWork = () => {
   position: relative;
   z-index: 2;
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     opacity: 1 !important;
     transform: none !important;
     flex-direction: column;
@@ -755,7 +767,7 @@ const scrollToWork = () => {
   gap: var(--space-md);
   margin-left: var(--space-md);
 
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     margin-left: 0;
     margin-top: var(--space-sm);
   }

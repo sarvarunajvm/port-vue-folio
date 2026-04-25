@@ -7,9 +7,9 @@ export function useScrollProgress(elementRef, offset = 64) {
 
   onMounted(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const isMobile = window.matchMedia('(max-width: 768px)').matches
+    const isCompactPhone = window.matchMedia('(max-width: 640px)').matches
 
-    if (prefersReducedMotion || isMobile) {
+    if (prefersReducedMotion || isCompactPhone) {
       progress.value = 0.75
       return
     }

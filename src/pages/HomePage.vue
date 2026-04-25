@@ -16,8 +16,8 @@ useScrollReveal()
 <template>
   <main>
     <MissionControlHero />
-    <SectionTransitionLine />
-    <AboutSection />
+    <SectionTransitionLine class="hero-about-transition" />
+    <AboutSection class="about-after-hero" />
     <SectionTransitionLine />
     <NowSection />
     <SectionTransitionLine />
@@ -32,3 +32,21 @@ useScrollReveal()
     <ContactSection />
   </main>
 </template>
+
+<style lang="scss" scoped>
+.hero-about-transition {
+  margin-top: -28px;
+  margin-bottom: -24px;
+}
+
+.about-after-hero {
+  padding-top: var(--space-xl);
+}
+
+@media (max-width: 768px) {
+  .hero-about-transition {
+    margin-top: -12px;
+    margin-bottom: -16px;
+  }
+}
+</style>

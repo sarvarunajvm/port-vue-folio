@@ -1,30 +1,40 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { computed, ref } from 'vue'
 import { Sparkles, ArrowUpRight } from 'lucide-vue-next'
+import { interpolate, timelineProgress } from '@/composables/useTimelineMotion'
+import { useScrollEntrance } from '@/composables/useScrollEntrance'
 import about from '@/data/about.json'
 
 const items = about.now
+const nowRef = ref(null)
+const { progress } = useScrollEntrance(nowRef, { distance: 420 })
 
-// Rotating status indicator
-const statusDot = ref(null)
-let pulseInterval = null
-
-onMounted(() => {
-  // Pulse animation is CSS-driven, no JS needed
+const cardStyle = computed(() => {
+  const p = timelineProgress(progress.value, 0, 0.68)
+  return {
+    opacity: p,
+    transform: `translate3d(0, ${interpolate(p, [0, 1], [26, 0])}px, 0) scale(${interpolate(p, [0, 1], [0.97, 1])})`,
+    filter: `blur(${interpolate(p, [0, 1], [8, 0])}px)`,
+  }
 })
 
-onUnmounted(() => {
-  if (pulseInterval) clearInterval(pulseInterval)
-})
+const itemStyles = computed(() => items.map((_, index) => {
+  const p = timelineProgress(progress.value, 0.18 + index * 0.1, 0.56 + index * 0.1)
+  return {
+    opacity: p,
+    transform: `translateX(${interpolate(p, [0, 1], [-18, 0])}px)`,
+    '--arrow-scale': interpolate(p, [0, 1], [0.45, 1]),
+  }
+}))
 </script>
 
 <template>
-  <section class="now-section">
+  <section ref="nowRef" class="now-section">
     <div class="container">
-      <div class="now-card reveal">
+      <div v-glow-follow class="now-card" :style="cardStyle">
         <div class="now-header">
           <div class="now-status">
-            <span ref="statusDot" class="status-dot" />
+            <span class="status-dot" />
             <span class="now-label text-label">
               <Sparkles :size="12" />
               Currently Focused On
@@ -33,7 +43,7 @@ onUnmounted(() => {
         </div>
 
         <ul class="now-list">
-          <li v-for="(item, i) in items" :key="i" class="now-item" :style="{ animationDelay: `${i * 0.15}s` }">
+          <li v-for="(item, i) in items" :key="i" class="now-item" :style="itemStyles[i]">
             <span class="now-arrow">→</span>
             <component
               :is="item.link ? 'a' : 'span'"
@@ -65,9 +75,10 @@ onUnmounted(() => {
   background: var(--surface);
   position: relative;
   overflow: hidden;
+  will-change: opacity, filter, transform;
 
   // Subtle animated gradient border glow
-  &::before {
+  &::after {
     content: '';
     position: absolute;
     top: 0;
@@ -82,6 +93,7 @@ onUnmounted(() => {
     );
     opacity: 0.5;
     animation: shimmer 3s ease-in-out infinite;
+    z-index: 2;
   }
 }
 
@@ -137,10 +149,13 @@ onUnmounted(() => {
 }
 
 .now-item {
+  --arrow-scale: 1;
+
   display: flex;
   align-items: flex-start;
   gap: var(--space-sm);
   padding: var(--space-xs) 0;
+  will-change: opacity, transform;
 }
 
 .now-arrow {
@@ -148,6 +163,9 @@ onUnmounted(() => {
   font-size: 14px;
   flex-shrink: 0;
   margin-top: 2px;
+  transform: scale(var(--arrow-scale));
+  transform-origin: center;
+  transition: transform 0.3s var(--dramatic);
 }
 
 .now-text {
@@ -174,7 +192,7 @@ onUnmounted(() => {
     animation: none;
   }
 
-  .now-card::before {
+  .now-card::after {
     animation: none;
     transform: none;
     opacity: 0.3;

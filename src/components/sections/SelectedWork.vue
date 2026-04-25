@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import SectionHeading from '@/components/shared/SectionHeading.vue'
 import Tag from '@/components/shared/Tag.vue'
 import { useScrollEntrance } from '@/composables/useScrollEntrance'
+import { interpolate, timelineProgress } from '@/composables/useTimelineMotion'
 import ProjectTopologyDiagram from '@/components/svg/ProjectTopologyDiagram.vue'
 import SvgCtaArrow from '@/components/svg/SvgCtaArrow.vue'
 import projects from '@/data/projects.json'
@@ -14,16 +15,15 @@ const workListRef = ref(null)
 const activeCard = ref(null)
 const { progress } = useScrollEntrance(workListRef, { distance: 500 })
 
-function clamp(val, min, max) {
-  return Math.max(min, Math.min(max, val))
-}
-
 const cardStyle = (index) => {
   return computed(() => {
-    const p = clamp((progress.value - index * 0.15) / 0.25, 0, 1)
+    const p = timelineProgress(progress.value, index * 0.12, index * 0.12 + 0.34)
+    const angle = interpolate(p, [0, 1], [index % 2 === 0 ? -1.2 : 1.2, 0])
     return {
       opacity: p,
-      transform: `translateY(${(1 - p) * 40}px)`,
+      filter: `blur(${interpolate(p, [0, 1], [8, 0])}px)`,
+      transform: `translate3d(0, ${interpolate(p, [0, 1], [46, 0])}px, 0) rotate(${angle}deg) scale(${interpolate(p, [0, 1], [0.98, 1])})`,
+      '--accent-scale': p,
     }
   })
 }
@@ -44,6 +44,7 @@ const navigateToCase = (slug) => {
         <article
           v-for="(project, index) in featured"
           :key="project.id"
+          v-glow-follow
           class="work-card"
           :style="cardStyles[index].value"
           tabindex="0"
@@ -99,6 +100,8 @@ const navigateToCase = (slug) => {
 }
 
 .work-card {
+  --accent-scale: 0;
+
   position: relative;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -147,7 +150,7 @@ const navigateToCase = (slug) => {
   width: 3px;
   height: 100%;
   background: linear-gradient(180deg, var(--accent), var(--accent-hover));
-  transform: scaleY(0);
+  transform: scaleY(var(--accent-scale));
   transform-origin: bottom;
   transition: transform 0.5s var(--dramatic);
 

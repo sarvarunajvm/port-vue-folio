@@ -1,11 +1,9 @@
 <script setup>
-import { ref, watchEffect, onMounted } from 'vue'
+import { computed, ref, watchEffect, onMounted } from 'vue'
 import SectionHeading from '@/components/shared/SectionHeading.vue'
 import { useScrollEntrance } from '@/composables/useScrollEntrance'
-import SkillConstellation from '@/components/svg/SkillConstellation.vue'
+import { interpolate, timelineProgress, dramaticEase } from '@/composables/useTimelineMotion'
 import MetricWaveform from '@/components/svg/MetricWaveform.vue'
-
-import skillsData from '@/data/skills.json'
 
 const metricsRevealed = ref(false)
 
@@ -16,25 +14,50 @@ const metrics = [
   { value: '1.5x', numericPart: 1.5, suffix: 'x', label: 'API performance improvement' },
 ]
 
-const strengths = skillsData.map(group => ({
-  title: group.title,
-  items: group.points.map(p => p.name)
-}))
+const impactSequence = [
+  {
+    label: 'Reliability',
+    title: 'Moved availability from 99.56% to 99.96%',
+    detail: 'Automated the daily operational digest for error rates, FCIs, and DLQ depth so triage moved from manual checks to a predictable review loop.',
+    proof: '~20 hours recovered annually',
+  },
+  {
+    label: 'Delivery Control',
+    title: 'Shipped high-risk changes with phased rollouts',
+    detail: 'Designed feature flags, rollback triggers, DLQ alerts, and progressive access gates for merchant-facing invoicing and API workflows.',
+    proof: 'Zero P1 incidents on invoice aggregation',
+  },
+  {
+    label: 'Merchant Outcomes',
+    title: 'Connected architecture decisions to adoption',
+    detail: 'Improved webhook delivery with at-least-once guarantees, deduplication, fan-out, and p99 latency work that removed scaling friction.',
+    proof: '10% merchant adoption',
+  },
+]
 
 // Scroll-driven count-up
 const displayValues = ref(metrics.map(() => '0'))
 const metricsRef = ref(null)
-const strengthsGridRef = ref(null)
+const reelRef = ref(null)
 const { progress } = useScrollEntrance(metricsRef, { distance: 400 })
-const activeStrengthGroup = ref('')
-const strengthsRevealed = ref(false)
+const { progress: reelProgress } = useScrollEntrance(reelRef, { distance: 620 })
 
-function easeOutCubic(t) {
-  return 1 - Math.pow(1 - t, 3)
-}
+const cardStyles = computed(() => impactSequence.map((_, index) => {
+  const start = index * 0.16
+  const frameProgress = timelineProgress(reelProgress.value, start, start + 0.42, dramaticEase)
+  const direction = index % 2 === 0 ? -1 : 1
+
+  return {
+    '--frame-opacity': frameProgress,
+    '--frame-x': `${interpolate(frameProgress, [0, 1], [direction * 34, 0])}px`,
+    '--frame-y': `${interpolate(frameProgress, [0, 1], [30, 0])}px`,
+    '--frame-blur': `${interpolate(frameProgress, [0, 1], [7, 0])}px`,
+    '--frame-line-scale': frameProgress,
+  }
+}))
 
 watchEffect(() => {
-  const eased = easeOutCubic(progress.value)
+  const eased = dramaticEase(progress.value)
   displayValues.value = metrics.map((m) => {
     const current = eased * m.numericPart
     const decimals = (m.numericPart.toString().split('.')[1] || '').length
@@ -61,16 +84,6 @@ onMounted(() => {
   }
 
   watchReveal(metricsRef, metricsRevealed)
-
-  const strengthObs = new IntersectionObserver((entries) => {
-    if (entries.some(e => e.isIntersecting)) {
-      strengthsRevealed.value = true
-      strengthObs.disconnect()
-    }
-  }, { threshold: 0.1 })
-  if (strengthsGridRef.value) {
-    strengthObs.observe(strengthsGridRef.value)
-  }
 })
 </script>
 
@@ -92,27 +105,22 @@ onMounted(() => {
         </div>
       </div>
 
-      <h3 class="strengths-heading text-h2 reveal">Technical Strengths</h3>
-      <SkillConstellation :active-group="activeStrengthGroup" />
-
-      <div ref="strengthsGridRef" class="strengths-grid">
-        <div
-          v-for="(group, index) in strengths"
-          :key="group.title"
-          :class="['strength-group', 'reveal', `reveal-delay-${index + 1}`, { 'is-active': activeStrengthGroup === group.title, 'revealed': strengthsRevealed }]"
-          tabindex="0"
-          @mouseenter="activeStrengthGroup = group.title"
-          @mouseleave="activeStrengthGroup = ''"
-          @focus="activeStrengthGroup = group.title"
-          @blur="activeStrengthGroup = ''"
+      <div ref="reelRef" class="impact-reel" aria-label="Engineering impact highlights">
+        <article
+          v-for="(item, index) in impactSequence"
+          :key="item.label"
+          v-glow-follow
+          class="impact-frame"
+          :style="cardStyles[index]"
         >
-          <h4 class="strength-title">{{ group.title }}</h4>
-          <div class="strength-items">
-            <span v-for="item in group.items" :key="item" class="strength-item">
-              {{ item }}
-            </span>
+          <span class="impact-frame__index">{{ String(index + 1).padStart(2, '0') }}</span>
+          <div class="impact-frame__copy">
+            <span class="impact-frame__label">{{ item.label }}</span>
+            <h3 class="impact-frame__title">{{ item.title }}</h3>
+            <p class="impact-frame__detail">{{ item.detail }}</p>
           </div>
-        </div>
+          <strong class="impact-frame__proof">{{ item.proof }}</strong>
+        </article>
       </div>
     </div>
   </section>
@@ -173,64 +181,113 @@ onMounted(() => {
   line-height: 1.4;
 }
 
-.strengths-heading {
-  margin-bottom: var(--space-xl);
-}
-
-.strengths-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.impact-reel {
+  display: flex;
+  flex-direction: column;
   gap: var(--space-lg);
-
-  @media (max-width: 900px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-  }
 }
 
-.strength-group {
+.impact-frame {
+  --frame-opacity: 0;
+  --frame-x: 0px;
+  --frame-y: 30px;
+  --frame-blur: 7px;
+  --frame-line-scale: 0;
+
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) minmax(160px, auto);
+  align-items: center;
+  gap: var(--space-lg);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: var(--space-md);
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  padding: var(--space-lg);
+  background:
+    linear-gradient(90deg, rgba(var(--accent-rgb), 0.08), transparent 36%),
+    var(--surface);
+  overflow: hidden;
+  position: relative;
+  opacity: var(--frame-opacity);
+  filter: blur(var(--frame-blur));
+  transform: translate3d(var(--frame-x), var(--frame-y), 0);
+  will-change: opacity, filter, transform;
+  transition:
+    border-color 0.35s var(--dramatic),
+    box-shadow 0.35s var(--dramatic),
+    transform 0.35s var(--spring);
 
-  &.is-active {
-    border-color: color-mix(in srgb, var(--svg-stroke-strong) 56%, transparent);
-    box-shadow: 0 10px 24px color-mix(in srgb, var(--svg-glow) 45%, transparent);
+  &::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), 0.45), transparent);
+    transform: scaleX(var(--frame-line-scale));
+    transform-origin: left;
+    transition: transform 0.7s var(--dramatic);
+  }
+
+  &:hover,
+  &:focus-within {
+    border-color: rgba(var(--accent-rgb), 0.32);
+    box-shadow:
+      0 12px 34px rgba(var(--accent-rgb), 0.08),
+      0 0 0 1px rgba(var(--accent-rgb), 0.08);
+    transform: translate3d(var(--frame-x), calc(var(--frame-y) - 2px), 0);
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+
+  @media (max-width: 760px) {
+    grid-template-columns: 1fr;
+    align-items: flex-start;
   }
 }
 
-.strength-title {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: var(--space-md);
-  padding-bottom: var(--space-sm);
-  border-bottom: 1px solid var(--border);
+.impact-frame__index {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent);
+  align-self: flex-start;
 }
 
-.strength-items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
+.impact-frame__copy {
+  min-width: 0;
 }
 
-.strength-item {
-  font-size: 14px;
+.impact-frame__label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
   color: var(--text-secondary);
-  transition: color var(--transition-fast);
+  margin-bottom: var(--space-xs);
+  text-transform: uppercase;
+}
 
-  &:hover {
-    color: var(--text-primary);
-  }
+.impact-frame__title {
+  font-size: clamp(18px, 2vw, 24px);
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+  line-height: 1.2;
+}
 
-  &:not(:last-child)::after {
-    content: ' ·';
-    opacity: 0.4;
-    margin-left: var(--space-sm);
+.impact-frame__detail {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 720px;
+}
+
+.impact-frame__proof {
+  justify-self: end;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--accent);
+  text-align: right;
+
+  @media (max-width: 760px) {
+    justify-self: start;
+    text-align: left;
   }
 }
 </style>

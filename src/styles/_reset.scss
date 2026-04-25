@@ -9,10 +9,12 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-height) + var(--space-lg));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-feature-settings: 'ss01', 'ss02';
+  overscroll-behavior-y: contain;
 }
 
 body {
@@ -24,6 +26,7 @@ body {
   line-height: 1.7;
   letter-spacing: -0.006em;
   transition: background-color 0.5s var(--dramatic), color 0.3s var(--dramatic);
+  overflow-x: hidden;
 }
 
 img, picture, video, canvas, svg {

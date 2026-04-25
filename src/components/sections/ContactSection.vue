@@ -4,16 +4,37 @@ import { Linkedin, Github, Mail, Copy, Check } from 'lucide-vue-next'
 import about from '@/data/about.json'
 import IconLink from '@/components/shared/IconLink.vue'
 import { useScrollEntrance } from '@/composables/useScrollEntrance'
+import { interpolate, timelineProgress } from '@/composables/useTimelineMotion'
 
 const copied = ref(false)
 const contactRef = ref(null)
 const { progress } = useScrollEntrance(contactRef, { distance: 300 })
 
-const headingStyle = computed(() => ({
-  opacity: progress.value,
-  transform: `scale(${0.92 + 0.08 * progress.value})`,
-  transformOrigin: 'left center',
-}))
+const headingStyle = computed(() => {
+  const p = timelineProgress(progress.value, 0, 0.72)
+  return {
+    opacity: p,
+    transform: `translateY(${interpolate(p, [0, 1], [24, 0])}px) scale(${interpolate(p, [0, 1], [0.9, 1])})`,
+    filter: `blur(${interpolate(p, [0, 1], [8, 0])}px)`,
+    transformOrigin: 'left center',
+  }
+})
+
+const emailRowStyle = computed(() => {
+  const p = timelineProgress(progress.value, 0.18, 0.82)
+  return {
+    opacity: p,
+    transform: `translateX(${interpolate(p, [0, 1], [-20, 0])}px)`,
+  }
+})
+
+const socialStyle = computed(() => {
+  const p = timelineProgress(progress.value, 0.32, 1)
+  return {
+    opacity: p,
+    transform: `translateY(${interpolate(p, [0, 1], [18, 0])}px)`,
+  }
+})
 
 const copyEmail = async () => {
   try {
@@ -37,12 +58,13 @@ const copyEmail = async () => {
         developer tools, or interesting problems.
       </p>
 
-      <div class="contact-email-row reveal reveal-delay-2">
+      <div class="contact-email-row" :style="emailRowStyle">
         <a :href="`mailto:${about.email}`" class="contact-email">
           <Mail :size="20" />
           {{ about.email }}
         </a>
         <button
+          v-glow-follow
           :class="['copy-btn', { copied }]"
           :aria-label="copied ? 'Email copied' : 'Copy email address'"
           @click="copyEmail"
@@ -55,7 +77,7 @@ const copyEmail = async () => {
         </button>
       </div>
 
-      <div class="contact-social reveal reveal-delay-3">
+      <div class="contact-social" :style="socialStyle">
         <IconLink :href="about.social.linkedin" label="LinkedIn">
           <Linkedin :size="18" />
           <template #text>LinkedIn</template>
@@ -102,6 +124,7 @@ const copyEmail = async () => {
   gap: var(--space-sm);
   margin-bottom: var(--space-xl);
   flex-wrap: wrap;
+  will-change: opacity, transform;
 }
 
 .contact-email {
@@ -169,6 +192,7 @@ const copyEmail = async () => {
   align-items: center;
   gap: var(--space-md);
   flex-wrap: wrap;
+  will-change: opacity, transform;
 }
 
 .dot {

@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { Sun, Moon, Download, Menu, X } from 'lucide-vue-next'
 import { useTheme } from '@/composables/useTheme'
+import { smoothScrollTo, smoothScrollToElement } from '@/composables/useSmoothScrollTo'
 import AnimatedMonogram from '@/components/svg/AnimatedMonogram.vue'
 import about from '@/data/about.json'
 
@@ -54,15 +55,10 @@ const handleScroll = () => {
 const scrollTo = (href) => {
   mobileMenuOpen.value = false
   if (href === '#') {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    smoothScrollTo(0, { duration: 840 })
     return
   }
-  const el = document.querySelector(href)
-  if (el) {
-    const offset = 80
-    const y = el.getBoundingClientRect().top + window.scrollY - offset
-    window.scrollTo({ top: y, behavior: 'smooth' })
-  }
+  smoothScrollToElement(href, { offset: 80, duration: 840 })
 }
 
 const handleToggleTheme = () => {
@@ -232,13 +228,14 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   font-size: 14px;
   font-weight: 500;
   color: var(--text-secondary);
-  transition: color 0.3s var(--dramatic);
+  transition: color 0.3s var(--dramatic), transform 0.28s var(--dramatic);
   position: relative;
 
   &:hover,
   &.active {
     color: var(--text-primary);
     opacity: 1;
+    transform: translateY(-1px);
   }
 
   &::after {
@@ -256,6 +253,26 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   &:hover::after,
   &.active::after {
     width: 100%;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -11px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 14px rgba(var(--accent-rgb), 0.55);
+    opacity: 0;
+    transform: translateX(-50%) scale(0.4);
+    transition: opacity 0.35s var(--dramatic), transform 0.35s var(--spring);
+  }
+
+  &.active::before {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
   }
 }
 
@@ -276,12 +293,27 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   transition: all 0.35s var(--dramatic);
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent, rgba(var(--accent-rgb), 0.16), transparent);
+    transform: translateX(-120%);
+    transition: transform 0.55s var(--dramatic);
+  }
 
   &:hover {
     border-color: rgba(var(--accent-rgb), 0.5);
     color: var(--accent);
     box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.06);
     opacity: 1;
+
+    &::after {
+      transform: translateX(120%);
+    }
   }
 
   @media (max-width: 768px) {
