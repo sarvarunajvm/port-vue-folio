@@ -3,14 +3,17 @@ import { dramaticEase } from '@/composables/useTimelineMotion'
 let activeAnimation = 0
 
 export function smoothScrollTo(targetY, { duration = 760 } = {}) {
+  const maxY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight)
+  const destination = Math.max(0, Math.min(maxY, targetY))
+
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    window.scrollTo(0, targetY)
+    window.scrollTo(0, destination)
     return
   }
 
   const animationId = ++activeAnimation
   const startY = window.scrollY
-  const distance = targetY - startY
+  const distance = destination - startY
   const startTime = performance.now()
 
   const step = (now) => {

@@ -13,6 +13,7 @@ onMounted(() => {
 
   let ticking = false
   let lastY = window.scrollY
+  let settleTimer = null
 
   const updateAmbient = (x, y) => {
     el.style.setProperty('--ambient-x', `${x}px`)
@@ -31,6 +32,11 @@ onMounted(() => {
       el.style.setProperty('--scroll-energy', delta.toFixed(2))
       lastY = window.scrollY
       ticking = false
+
+      if (settleTimer) window.clearTimeout(settleTimer)
+      settleTimer = window.setTimeout(() => {
+        el.style.setProperty('--scroll-energy', '0')
+      }, 120)
     })
   }
 
@@ -40,11 +46,13 @@ onMounted(() => {
   removeListeners = () => {
     window.removeEventListener('pointermove', onPointerMove)
     window.removeEventListener('scroll', onScroll)
+    if (settleTimer) window.clearTimeout(settleTimer)
   }
 })
 
 onUnmounted(() => {
   removeListeners?.()
+  removeListeners = null
 })
 </script>
 
@@ -103,7 +111,8 @@ onUnmounted(() => {
   opacity: 0.8;
 }
 
-#app > :not(.ambient-pointer):not(.noise-overlay) {
+#app > main,
+#app > footer {
   position: relative;
   z-index: 1;
 }

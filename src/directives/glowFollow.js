@@ -31,6 +31,7 @@ export const glowFollow = {
 
   unmounted(el) {
     el.__glowFollowCleanup?.()
+    el.classList.remove('glow-follow', 'is-glow-active')
     delete el.__glowFollowCleanup
   },
 }

@@ -1,6 +1,6 @@
-# Port-Vue-Folio
+# Port Vue Folio
 
-A lightweight, data-driven developer portfolio built with **Vue 3**, **Vite**, and a custom **SVG motion system**. All content lives in JSON files — fork it, swap your data, and deploy.
+A lightweight, data-driven developer portfolio built with **Vue 3**, **Vite**, and a custom **SVG + timeline motion system**. Content lives in JSON files, while the interface focuses on cinematic scroll choreography, responsive cards, and small interaction details without adding a runtime animation library.
 
 [![Deploy](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/deploy.yml)
 [![CI](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/sarvarunajvm/port-vue-folio/actions/workflows/ci.yml)
@@ -29,26 +29,30 @@ pnpm lint         # eslint check
 4. Replace favicons in `public/` and update `public/manifest.json`.
 5. Deploy — GitHub Pages workflow is included (push a `v*` tag).
 
-## SVG Motion System
+## Motion System
 
-SVG is used as a first-class visual language throughout the site:
+SVG, CSS custom properties, and small Vue composables are used as the visual language throughout the site:
 
 | Component | Where |
 |---|---|
 | Animated monogram | Navbar logo |
+| Mission-control terminal | Cinematic hero |
 | Circuit scene | Hero background |
 | Transition lines | Between sections |
 | Topology diagrams | Project cards |
 | Flow diagrams | Case study pages |
 | CTA arrows | Buttons |
 | Timeline spine | Experience section |
-| Skill constellation | Strengths grid |
 | Metric waveforms | Impact cards |
 | Signal beacon | Footer |
+| Pointer-follow glow | Interactive cards and controls |
 
 ### Design Principles
 
 - **CSS-first animation** — `stroke-dasharray`, `transform`, `opacity`; no runtime JS animation library required.
+- **Timeline helpers** — `useTimelineMotion.js` centralizes clamp/interpolate/easing behavior for scroll-driven sections.
+- **Smooth section navigation** — `useSmoothScrollTo.js` provides consistent eased scrolling for nav and hero CTAs.
+- **Micro-interactions** — `v-glow-follow` adds pointer-aware highlights to cards, panels, and controls.
 - **Theme-aware** — SVG tokens (`--svg-stroke`, `--svg-glow`, etc.) adapt to dark/light mode via `_variables.scss`.
 - **Accessibility** — all non-essential motion is disabled when `prefers-reduced-motion: reduce` is active.
 - **Scroll-driven reveals** — `IntersectionObserver` composables trigger draw-on-enter effects.
@@ -75,8 +79,9 @@ src/
 │   ├── sections/    # Hero, Work, Timeline, Impact, About, Contact …
 │   ├── shared/      # SectionHeading, Tag, IconLink, CommandPalette
 │   └── svg/         # All SVG animation components
-├── composables/     # useTheme, useScrollReveal, useScrollEntrance …
+├── composables/     # Theme, reveal, scroll, timeline, and smooth-scroll helpers
 ├── data/            # JSON content files
+├── directives/      # Pointer-follow interaction directives
 ├── pages/           # HomePage, CaseStudyPage, NotFound
 └── styles/          # SCSS partials (_variables, _typography, _utilities)
 ```

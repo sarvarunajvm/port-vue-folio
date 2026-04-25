@@ -5,6 +5,8 @@ export function clamp(value, min = 0, max = 1) {
 export function interpolate(value, inputRange, outputRange) {
   const [inputMin, inputMax] = inputRange
   const [outputMin, outputMax] = outputRange
+  if (inputMax === inputMin) return outputMax
+
   const progress = clamp((value - inputMin) / (inputMax - inputMin))
 
   return outputMin + (outputMax - outputMin) * progress

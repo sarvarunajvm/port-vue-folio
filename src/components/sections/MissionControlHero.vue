@@ -534,11 +534,6 @@ const scrollToWork = () => {
   }
 }
 
-@keyframes mc-typing {
-  from { width: 0; }
-  to { width: var(--terminal-command-width); }
-}
-
 @keyframes mc-blink {
   50% { border-color: transparent; }
 }
